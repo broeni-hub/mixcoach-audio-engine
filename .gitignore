@@ -36,6 +36,11 @@ daten/library/lm/
 audio-engine/mixcoach-audio-engine/datasets/synthetic/*/mixes/
 audio-engine/mixcoach-audio-engine/sample_audio/
 
+# --- Merkmals-Cache fuer die Blend-Onset-Experimente ---------------------
+# ~230 MB, in 5 Minuten aus dem Set-Audio neu erzeugbar:
+#   python -m tools.blend_onset_cache
+audio-engine/mixcoach-audio-engine/.cache/
+
 # --- Laufzeit-Logs --------------------------------------------------------
 audio-engine/mixcoach-audio-engine/dd/*.log
 audio-engine/mixcoach-audio-engine/dd/*_log.txt
