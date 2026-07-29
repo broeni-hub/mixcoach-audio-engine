@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000132",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:26:55.061380Z",
+ "sample_rate": 22050,
+ "duration_seconds": 991.82,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LoneAirglow Fires6Reality Testing.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 259.99,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Super Flu\\10 - Mine_You.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 259.99,
+   "end_in_mix": 487.13,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\06. donal tierney - text xxx.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 487.13,
+   "end_in_mix": 759.05,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Jackie Queens, VeneiGretteMwanangu (Enoo Napa Remix)0Black Coffee Ibiza 17 Appreciation Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 759.05,
+   "end_in_mix": 991.82,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 227.3,
+   "overlap_end": 259.99,
+   "center_time": 243.65,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 486.11,
+   "overlap_end": 487.13,
+   "center_time": 486.62,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 743.45,
+   "overlap_end": 759.05,
+   "center_time": 751.25,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

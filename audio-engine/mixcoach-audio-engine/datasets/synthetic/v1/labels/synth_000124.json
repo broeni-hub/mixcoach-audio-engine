@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000124",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:23:47.231638Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1362.05,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Yesca - Are They Staring at Me_ (Original Mix) [Y4 Collective].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 256.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\01 Hiccups.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 256.0,
+   "end_in_mix": 510.07,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Lekan BabalolaOya - Le Pico Chillout Remix9.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 510.07,
+   "end_in_mix": 765.19,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\DauwdJean Rouch5Psssh 001.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 765.19,
+   "end_in_mix": 1013.6,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\23 Plasticman - Unhappy Shopper.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 1013.6,
+   "end_in_mix": 1120.15,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\DJ Sprinter - DJ Sprinter Vol.2 (EP) - 03 Cube 11.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 1120.15,
+   "end_in_mix": 1362.05,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 252.28,
+   "overlap_end": 256.0,
+   "center_time": 254.14,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 10.0,
+   "beat_offset_ms": 95.6,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 506.36,
+   "overlap_end": 510.07,
+   "center_time": 508.22,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 750.33,
+   "overlap_end": 765.19,
+   "center_time": 757.76,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 1012.67,
+   "overlap_end": 1013.6,
+   "center_time": 1013.13,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 4,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 1119.71,
+   "overlap_end": 1120.15,
+   "center_time": 1119.93,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  }
+ ]
+}

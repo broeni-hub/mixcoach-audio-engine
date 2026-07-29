@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000129",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:25:19.210248Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1228.64,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Floating Points\\084 - Floating Points - Del Oro.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 246.46,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoGoldene Kugel15Mosaik.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 246.46,
+   "end_in_mix": 495.07,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Fredfades,Jawn Rice,Javonntte,Byron the AquariusLuv Neva Fades1Serotonin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G# Major",
+   "camelot": "4B",
+   "start_in_mix": 495.07,
+   "end_in_mix": 736.63,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Clara Hill,AtjazzNowhere (I can go)3All I Can Provide.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 736.63,
+   "end_in_mix": 972.54,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Sam Irl\\Sam IrlMove On8Raw Land.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 972.54,
+   "end_in_mix": 1228.64,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 239.03,
+   "overlap_end": 246.46,
+   "center_time": 242.74,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 494.61,
+   "overlap_end": 495.07,
+   "center_time": 494.84,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 729.2,
+   "overlap_end": 736.63,
+   "center_time": 732.91,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 9.0,
+   "beat_offset_ms": -298.7,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 968.64,
+   "overlap_end": 972.54,
+   "center_time": 970.59,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

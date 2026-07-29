@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000050",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:25:12.147286Z",
+ "sample_rate": 22050,
+ "duration_seconds": 981.26,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\Four Tet\\Feelings - KH.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 246.81,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\Stefan Ringer\\01-stefan_ringer-hypnosis-e10936f5.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 246.81,
+   "end_in_mix": 491.91,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\20 - Sebastien Leger - Little Bug.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 491.91,
+   "end_in_mix": 722.19,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Magda - She's a Dancing Machine\\09 Bodyslip Julia-Stacks and Stacks-Edamame-Kalk-Kapelle-Poisoned.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 722.19,
+   "end_in_mix": 981.26,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 239.37,
+   "overlap_end": 246.81,
+   "center_time": 243.09,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 462.19,
+   "overlap_end": 491.91,
+   "center_time": 477.05,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 721.26,
+   "overlap_end": 722.19,
+   "center_time": 721.73,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  }
+ ]
+}

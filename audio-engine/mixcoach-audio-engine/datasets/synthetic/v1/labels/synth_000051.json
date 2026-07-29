@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000051",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:26:18.317361Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1199.27,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Daphni\\Daphni - 02 - Face To Face.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 257.28,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Harvey Sutherland\\Harvey SutherlandBamboo3Brothers.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 257.28,
+   "end_in_mix": 476.31,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Black Coffee, Rampa, Adam Port, &MEMuyè (Black Coffee Remix)0Sónar 25 An advanced music mixtape by Black Coffee.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 476.31,
+   "end_in_mix": 733.96,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt - Extra Welt Hits [CORLP048DIGITAL]\\Extrawelt - Drehfehler (Original Mix) [Cocoon Recordings].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 733.96,
+   "end_in_mix": 978.4,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\House Gospel ChoirMost Precious Love1Serotonin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 978.4,
+   "end_in_mix": 1199.27,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 224.58,
+   "overlap_end": 257.28,
+   "center_time": 240.93,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 474.27,
+   "overlap_end": 476.31,
+   "center_time": 475.29,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 717.61,
+   "overlap_end": 733.96,
+   "center_time": 725.79,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": -163.7,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 974.5,
+   "overlap_end": 978.4,
+   "center_time": 976.45,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000172",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:42:19.503232Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1184.53,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\10 Digital Mystikz - Heartless Ninja.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 105.88,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Polo & PanFeel Good1Serotonin.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 105.88,
+   "end_in_mix": 329.19,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoLeftovers6Enthusiast (Album Sampler).mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 329.19,
+   "end_in_mix": 478.96,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\27 - Nuts.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 478.96,
+   "end_in_mix": 722.56,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - my dog eats beats.mp3",
+   "bpm_original": 89.1,
+   "bpm_in_mix": 95.7,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 722.56,
+   "end_in_mix": 956.78,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\01 - She's Hard To Work With.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 89.1,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 956.78,
+   "end_in_mix": 1184.53,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 103.37,
+   "overlap_end": 105.88,
+   "center_time": 104.63,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 327.94,
+   "overlap_end": 329.19,
+   "center_time": 328.56,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 473.94,
+   "overlap_end": 478.96,
+   "center_time": 476.45,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 720.05,
+   "overlap_end": 722.56,
+   "center_time": 721.31,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 916.65,
+   "overlap_end": 956.78,
+   "center_time": 936.72,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  }
+ ]
+}

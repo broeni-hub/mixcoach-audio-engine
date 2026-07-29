@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000113",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:20:38.959177Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1123.43,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LoneAlpha Wheel1Levitate.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 182.09,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\05 - ramadanman - bass drums.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 99.38,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 182.09,
+   "end_in_mix": 407.42,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Question\\QuestionConte5Study Guide.mp3",
+   "bpm_original": 89.1,
+   "bpm_in_mix": 92.29,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 407.42,
+   "end_in_mix": 541.56,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Tuesday BornKwabena0Kwabena.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 89.1,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 541.56,
+   "end_in_mix": 753.09,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\4hero - play with the changes - 2007\\02_4hero-take_my_time_(feat._jack_davey).mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 92.29,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 753.09,
+   "end_in_mix": 994.76,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoWow - Modeselektor Edit6Allthegirls.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 95.7,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 994.76,
+   "end_in_mix": 1123.43,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 180.88,
+   "overlap_end": 182.09,
+   "center_time": 181.49,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 368.78,
+   "overlap_end": 407.42,
+   "center_time": 388.1,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 531.16,
+   "overlap_end": 541.56,
+   "center_time": 536.36,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 750.4,
+   "overlap_end": 753.09,
+   "center_time": 751.75,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 953.16,
+   "overlap_end": 994.76,
+   "center_time": 973.96,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

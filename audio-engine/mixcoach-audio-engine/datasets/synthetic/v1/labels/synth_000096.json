@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000096",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:14:36.410721Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1482.97,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt-Schone_Neue_Extrawelt-(CORCD019)-CD-2008-OBC\\12-extrawelt-homing.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 247.85,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Gui Boratto\\Gui Boratto - Chromophobia\\05. Gui Boratto - Shebang.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C# Major",
+   "camelot": "3B",
+   "start_in_mix": 247.85,
+   "end_in_mix": 495.79,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Fouk,Detroit SwindleNeed My Space - Detroit Swindle Remix1Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 495.79,
+   "end_in_mix": 744.36,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\VA_-_Stephan_Bodzin_vs_Marc_Romboy_-_Luna-(Retail_Boxset)-READNFO-3CD-2011-iFPD\\308-stephan_bodzin_vs_marc_romboy-luna_(mutant_clan_remix)-ifpd.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 744.36,
+   "end_in_mix": 991.24,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\Stephan Bodzin - Liebe Ist... (2007)\\07 Stephan Bodzin - Kerosene.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 991.24,
+   "end_in_mix": 1226.36,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Floating Points\\05 - Fast Forward.flac",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "D Major",
+   "camelot": "10B",
+   "start_in_mix": 1226.36,
+   "end_in_mix": 1482.97,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 246.87,
+   "overlap_end": 247.85,
+   "center_time": 247.36,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 493.84,
+   "overlap_end": 495.79,
+   "center_time": 494.82,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 742.41,
+   "overlap_end": 744.36,
+   "center_time": 743.39,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 975.63,
+   "overlap_end": 991.24,
+   "center_time": 983.43,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 1210.76,
+   "overlap_end": 1226.36,
+   "center_time": 1218.56,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": -163.8,
+   "key_compatibility_camelot_distance": 7,
+   "expected_quality_label": 1
+  }
+ ]
+}

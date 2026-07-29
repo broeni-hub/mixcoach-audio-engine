@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000055",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:33:16.431254Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1009.91,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Axel Boman\\55. Axel Boman - Purple Drank.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 247.04,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\02-gideon-ritmo.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 247.04,
+   "end_in_mix": 509.93,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\11 - kraak & smaak - echo park (fatnotronic & emmo remix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 509.93,
+   "end_in_mix": 739.55,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Makadem,Behr,Modified ManNyako - Modified Man Remix0Nyako.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 739.55,
+   "end_in_mix": 1009.91,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 242.95,
+   "overlap_end": 247.04,
+   "center_time": 244.99,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 493.59,
+   "overlap_end": 509.93,
+   "center_time": 501.76,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 737.6,
+   "overlap_end": 739.55,
+   "center_time": 738.58,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 3
+  }
+ ]
+}

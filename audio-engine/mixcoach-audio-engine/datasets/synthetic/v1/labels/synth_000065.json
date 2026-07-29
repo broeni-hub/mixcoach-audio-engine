@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000065",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:44:58.810389Z",
+ "sample_rate": 22050,
+ "duration_seconds": 815.51,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\VA-4hero_Present_Brazilika_Vol_2-(FAROCD109)-2006-JUST\\01-milton_nascimento-bicho_homem.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 135.47,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\FoukArrakis4.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 135.47,
+   "end_in_mix": 366.02,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Domu\\Take,Lukid,Domu,Ras G,DaedelusBee Sting - Remix4This Is Domu.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 366.02,
+   "end_in_mix": 584.75,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleKetama Gold1Heist Recordings Releases.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 584.75,
+   "end_in_mix": 815.51,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 133.51,
+   "overlap_end": 135.47,
+   "center_time": 134.49,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 350.41,
+   "overlap_end": 366.02,
+   "center_time": 358.21,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -160.3,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 583.73,
+   "overlap_end": 584.75,
+   "center_time": 584.24,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  }
+ ]
+}

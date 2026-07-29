@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000015",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T11:05:44.538462Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1119.33,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\A. John Talabot - The Strange Silence.flac",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\2fox,Afronaut Zu,AMOInner Drum1Serotonin.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 260.0,
+   "end_in_mix": 477.59,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Owiny Sigoma Band - Nyiduonge Drums.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 477.59,
+   "end_in_mix": 721.25,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\K15\\04 - Shahada (feat. Henry Wu).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 721.25,
+   "end_in_mix": 881.19,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Robert_Babicz-A_Cheerful_Temper-SYST00062-ADVANCE_CD-2007-BPM\\06-robert_babicz-sin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 881.19,
+   "end_in_mix": 1119.33,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 243.65,
+   "overlap_end": 260.0,
+   "center_time": 251.83,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 461.25,
+   "overlap_end": 477.59,
+   "center_time": 469.42,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 720.23,
+   "overlap_end": 721.25,
+   "center_time": 720.74,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 848.49,
+   "overlap_end": 881.19,
+   "center_time": 864.84,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 120.2,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  }
+ ]
+}

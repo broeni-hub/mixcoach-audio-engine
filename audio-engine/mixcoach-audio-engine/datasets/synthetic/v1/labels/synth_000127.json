@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000127",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:24:29.764658Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1195.09,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LoneCutched Under12Reality Testing.mp3",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 152.0,
+   "key": "G Major",
+   "camelot": "9B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 247.55,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Jessy LanzaAnyone Around1Serotonin.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 152.0,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 247.55,
+   "end_in_mix": 382.34,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\Sammy Virji - Dance Flaw.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 382.34,
+   "end_in_mix": 554.54,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\SBTRKT\\02 - BACK ON.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 554.54,
+   "end_in_mix": 730.64,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\LxuryJ.A.W.S6J.A.W.S.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 730.64,
+   "end_in_mix": 964.82,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\Mouse on Mars\\mouse on mars - radical connector\\04 - send me shivers.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 964.82,
+   "end_in_mix": 1195.09,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 222.28,
+   "overlap_end": 247.55,
+   "center_time": 234.92,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 369.71,
+   "overlap_end": 382.34,
+   "center_time": 376.02,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 552.87,
+   "overlap_end": 554.54,
+   "center_time": 553.7,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 716.52,
+   "overlap_end": 730.64,
+   "center_time": 723.58,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -233.4,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 935.09,
+   "overlap_end": 964.82,
+   "center_time": 949.96,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 3
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000005",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T10:17:27.884466Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1004.69,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Techno\\02-Sascha Funke-I Just Can't Wait To See You.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 254.49,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\VA_-_Stephan_Bodzin_vs_Marc_Romboy_-_Luna-(Retail_Boxset)-READNFO-3CD-2011-iFPD\\211-stephan_bodzin_s_marc_romboy-triton-ifpd.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 254.49,
+   "end_in_mix": 523.77,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Havana Cultura Band - 09 - Orisa Atjazz Love Soul Remix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 523.77,
+   "end_in_mix": 759.55,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleCut U Loose9Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 759.55,
+   "end_in_mix": 1004.69,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 252.54,
+   "overlap_end": 254.49,
+   "center_time": 253.52,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 521.82,
+   "overlap_end": 523.77,
+   "center_time": 522.8,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 744.69,
+   "overlap_end": 759.55,
+   "center_time": 752.12,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

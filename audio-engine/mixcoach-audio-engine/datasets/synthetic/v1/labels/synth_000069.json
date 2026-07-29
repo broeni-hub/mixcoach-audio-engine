@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000069",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:49:24.180043Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1092.63,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Henrik SchwarzTake Words In Return (Jimi Jules Remix)0Black Coffee Ibiza 17 Appreciation Mix_0.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 253.79,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\Dego,Sarina LeahThey Never Know6A Wha' Him Deh Pon.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 253.79,
+   "end_in_mix": 366.15,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\Leon Vynehall - Rojus (Designed To Dance)\\Leon VynehallGoodthing2Electronica Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 366.15,
+   "end_in_mix": 599.82,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Domu\\Domu,Jesse RoseKnock  Knock1This Is Domu.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 599.82,
+   "end_in_mix": 852.4,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\loco dice\\06-loco_dice-tight_laces.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 852.4,
+   "end_in_mix": 1092.63,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 222.59,
+   "overlap_end": 253.79,
+   "center_time": 238.19,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 334.95,
+   "overlap_end": 366.15,
+   "center_time": 350.55,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 598.79,
+   "overlap_end": 599.82,
+   "center_time": 599.31,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 821.2,
+   "overlap_end": 852.4,
+   "center_time": 836.8,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,430 @@
+set_id;file_name;transition_center_time;human_rating;rater;verdict_info;engine_quality_score;phrase_beats_off;engine_label;comment;time_mmss;quelle
+0b292660-9d0c-407d-b09a-13331d388298;(Ergebnis-JSON fehlt);219.0;;sebro;timing_off (Engine: 263.0s -> korrigiert);;;;;03:39;nur_ground_truth
+0b292660-9d0c-407d-b09a-13331d388298;(Ergebnis-JSON fehlt);1468.5;;sebro;timing_off (Engine: 1484.0s -> korrigiert);;;;;24:29:00;nur_ground_truth
+0b292660-9d0c-407d-b09a-13331d388298;(Ergebnis-JSON fehlt);381.1;;sebro;missed (von dir markiert);;;;;06:21;missed
+0b292660-9d0c-407d-b09a-13331d388298;(Ergebnis-JSON fehlt);594.9;;sebro;missed (von dir markiert);;;;;09:55;missed
+0b292660-9d0c-407d-b09a-13331d388298;(Ergebnis-JSON fehlt);926.8;;sebro;missed (von dir markiert);;;;;15:27;missed
+0b292660-9d0c-407d-b09a-13331d388298;(Ergebnis-JSON fehlt);1125.0;;sebro;missed (von dir markiert);;;;;18:45;missed
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);178.2;;sebro;timing_off (Engine: 188.0s -> korrigiert);;;;;02:58;nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);323.0;;sebro;correct;;;;;05:23;nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);503.0;;sebro;correct;;;;;08:23;nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);756.0;;sebro;correct;;;;;12:36;nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);1058.2;;sebro;timing_off (Engine: 1091.0s -> korrigiert);;;;;17:38;nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);1709.2;;sebro;timing_off (Engine: 1685.0s -> korrigiert);;;;;28:29:00;nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b;(Ergebnis-JSON fehlt);1410.8;;sebro;missed (von dir markiert);;;;;23:31;missed
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);204.6;;sebro;timing_off (Engine: 246.0s -> korrigiert);;;;;03:25;nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);486.0;;sebro;correct;;;;;08:06;nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);620.9;;sebro;timing_off (Engine: 638.0s -> korrigiert);;;;;10:21;nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);780.7;;sebro;timing_off (Engine: 782.0s -> korrigiert);;;;;13:01;nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);1706.0;;sebro;timing_off (Engine: 1742.0s -> korrigiert);;;;;28:26:00;nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);340.4;;sebro;missed (von dir markiert);;;;;05:40;missed
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);1076.2;;sebro;missed (von dir markiert);;;;;17:56;missed
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);1160.5;;sebro;missed (von dir markiert);;;;;19:20;missed
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);1319.3;;sebro;missed (von dir markiert);;;;;21:59;missed
+54258d74-025e-4433-9d88-2b6233d69c4e;(Ergebnis-JSON fehlt);1536.8;;sebro;missed (von dir markiert);;;;;25:37:00;missed
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);201.9;;sebro;timing_off (Engine: 278.0s -> korrigiert);;;;;03:22;nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);486.0;;sebro;correct;;;;;08:06;nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);619.5;;sebro;timing_off (Engine: 638.0s -> korrigiert);;;;;10:19;nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);782.0;;sebro;correct;;;;;13:02;nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);1707.5;;sebro;timing_off (Engine: 1742.0s -> korrigiert);;;;;28:28:00;nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);340.8;;sebro;missed (von dir markiert);;;;;05:41;missed
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);1072.8;;sebro;missed (von dir markiert);;;;;17:53;missed
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);1175.1;;sebro;missed (von dir markiert);;;;;19:35;missed
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);1322.3;;sebro;missed (von dir markiert);;;;;22:02;missed
+5995866f-03a5-4850-ad04-3f91d944cf60;(Ergebnis-JSON fehlt);1539.4;;sebro;missed (von dir markiert);;;;;25:39:00;missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);32.7;;sebro;timing_off (Engine: 44.0s -> korrigiert);;;;;00:33;nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);260.6;;sebro;timing_off (Engine: 181.0s -> korrigiert);;;;;04:21;nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);437.6;;sebro;timing_off (Engine: 273.0s -> korrigiert);;;;;07:18;nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);560.0;;sebro;correct;;;;;09:20;nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);1434.2;;sebro;timing_off (Engine: 1421.0s -> korrigiert);;;;;23:54;nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);749.4;;sebro;missed (von dir markiert);;;;;12:29;missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);1067.9;;sebro;missed (von dir markiert);;;;;17:48;missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);1211.1;;sebro;missed (von dir markiert);;;;;20:11;missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346;(Ergebnis-JSON fehlt);1673.2;;sebro;missed (von dir markiert);;;;;27:53:00;missed
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);466.7;;sebro;timing_off (Engine: 488.0s -> korrigiert);;;;;07:47;nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);701.5;;sebro;timing_off (Engine: 693.0s -> korrigiert);;;;;11:41;nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);908.3;;sebro;timing_off (Engine: 916.0s -> korrigiert);;;;;15:08;nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);1541.9;;sebro;timing_off (Engine: 1596.0s -> korrigiert);;;;;25:42:00;nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);1763.7;;sebro;timing_off (Engine: 1794.0s -> korrigiert);;;;;29:24:00;nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);231.5;;sebro;missed (von dir markiert);;;;;03:52;missed
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);1048.7;;sebro;missed (von dir markiert);;;;;17:29;missed
+908733b4-5e11-4d90-8ff0-7c4e968d53f9;(Ergebnis-JSON fehlt);1275.8;;sebro;missed (von dir markiert);;;;;21:16;missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);215.0;;sebro;correct;;;;;03:35;nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);474.6;;sebro;timing_off (Engine: 490.0s -> korrigiert);;;;;07:55;nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);786.0;;sebro;correct;;;;;13:06;nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);903.0;;sebro;correct;;;;;15:03;nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);575.0;;sebro;missed (von dir markiert);;;;;09:35;missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);1246.1;;sebro;missed (von dir markiert);;;;;20:46;missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);1412.7;;sebro;missed (von dir markiert);;;;;23:33;missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5;(Ergebnis-JSON fehlt);1585.7;;sebro;missed (von dir markiert);;;;;26:26:00;missed
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);191.3;;sebro;timing_off (Engine: 96.0s -> korrigiert);;;;;03:11;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);480.8;;sebro;timing_off (Engine: 490.0s -> korrigiert);;;;;08:01;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);579.2;;sebro;timing_off (Engine: 786.0s -> korrigiert);;;;;09:39;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);766.4;;sebro;timing_off (Engine: 903.0s -> korrigiert);;;;;12:46;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);939.4;;sebro;timing_off (Engine: 1025.0s -> korrigiert);;;;;15:39;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);1246.7;;sebro;timing_off (Engine: 1124.0s -> korrigiert);;;;;20:47;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);1415.1;;sebro;timing_off (Engine: 1324.0s -> korrigiert);;;;;23:35;nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c;(Ergebnis-JSON fehlt);1578.5;;sebro;missed (von dir markiert);;;;;26:19:00;missed
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;397.7;5;sebro;timing_off (Engine: 481.6s -> korrigiert);68;10. Nov;neutral;perfekte Harmonie und gutes Zusammenspiel der Tiefen;06:38;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;600.8;5;sebro;timing_off (Engine: 712.1s -> korrigiert);58;14.92;neutral;gute Transition Dauer, perfekter Beat Fade In;10:01;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;1086.4;5;sebro;correct;55;Nov 74;neutral;perfekte Harmonie, sehr gutes Beat Matching, Rhythmus Wechsel;18:06;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;1685.1;5;sebro;correct;80;Mai 13;smooth;sehr Harmonisches Zusammenspiel, gutes Volume Management;28:05:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;2079.3;5;sebro;correct;66;05. Sep;neutral;Beat Wechsel, perfektes Timing;34:39:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;2262.1;5;sebro;correct;81;Jul 86;smooth;Sehr entspannt und harmonisch;37:42:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;3065.0;5;sebro;timing_off (Engine: 3189.7s -> korrigiert);71;Jun 93;neutral;Ruhiger 躡ergang, l鋝st sich Zeit, sehr gutes Beat Matching;51:05:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;3677.4;5;sebro;correct;71;Jul 99;neutral;Perfekte Passung der H鰄en, keine st鰎enden 躡erlappungen;61:17:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;4152.1;5;sebro;correct;97;0.94;smooth;Langer 躡ergang, gutes Timing bei Rausnahme der Tiefen, Fokus auf den 躡ergang, sehr harmonisch;69:12:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;4333.6;5;sebro;correct;98;1.0;smooth;Key Matching, sehr gutes Volume Matching trotz komplexer Melodie;72:14:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;4797.7;5;sebro;correct;70;9.0;neutral;Melodie des neuen Tracks sehr gut abgestimmt auf den Beat;79:58:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;5373.9;5;sebro;correct;71;Mai 95;neutral;Energie rausgenommen, variabler Wechsel, sehr gutes Matching, kein Overlap;89:34:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;5701.2;5;sebro;timing_off (Engine: 5840.9s -> korrigiert);66;14.99;neutral;Gutes Fade Out der Vocals, gute Harmonie;95:01:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;6255.9;5;sebro;correct;47;13.72;rough;Langer 躡ergang, viel Matching, Ernergie wird erst runtergenommen und dann langsam wieder reingegeben, viel Zeit um sich an neuen Rhythmus zu gew鰄nen;104:16:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;6609.6;5;sebro;correct;68;Apr 24;neutral;passende Keys;110:10:00;erkannt
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;720.1;5;sebro;missed (von dir markiert);;;;;12:00;missed
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a;Be Svendsen live at Mount Nemrut, in T眉rkiye for Cercle.mp3;794.0;5;sebro;missed (von dir markiert);;;;;13:14;missed
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;290.0;5;sebro;correct;89;1.0;smooth;Sch鰊es Beat Matching, sanfter 躡ergang, melodisch ansprechend, passender Spin auf dem Drop;04:50;erkannt
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;976.5;5;sebro;timing_off (Engine: 1043.6s -> korrigiert);66;07. Jan;neutral;Beat Matching passt, bei ruhiger Stelle in der Transition evtl rausgehen, guter Drop Moment;16:16;erkannt
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;1266.7;3;sebro;timing_off (Engine: 1221.0s -> korrigiert);70;15. Feb;neutral;Guter Fade In, Spannungsaufbau, Beat Intro bei Track 2  bessser mit weniger aus Track 1, Track 1 fr黨er raus;21:07;erkannt
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;1432.6;4;sebro;timing_off (Engine: 1530.0s -> korrigiert);85;Jan 95;smooth;Beat rein in Transition gut, Bass inbei Track 2 zu fr黨, etwas l鋘gerer 躡ergang w鋜e gut gewesen, Tempo leicht in Transition gedrosselt;23:53;erkannt
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;1724.9;3;sebro;timing_off (Engine: 1739.6s -> korrigiert);75;02. Sep;smooth;Beat Overlap etwas holprig, neuer Track zu einfach zu spotten, kein dezenter 躡ergang;28:45:00;erkannt
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;453.0;4;sebro;missed (von dir markiert);;;;Sehr sanfter 躡ergang, melodisch passend, Track harmonie aber evtl zu verbessern;07:33;missed
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;612.5;5;sebro;missed (von dir markiert);;;;Sch鰊er 躡ergang, gutes Timing der Tracks, wirkt abgestimmt;10:12;missed
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;790.5;4;sebro;missed (von dir markiert);;;;Fliesst gut ineinander, gutes Timing, Harmoisch nicht ganz on point aber gut;13:11;missed
+9af411b6-6abc-499c-9447-c4742fd90995;Dec25.WAV;1969.0;4;sebro;missed (von dir markiert);;;;Mittlerer Teil der Transition evtl etwas lang, Track 1 etwas zu lange in der Transition, nicht ganz auf dem Drop;32:49:00;missed
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;290.0;5;sebro;;89;1.0;smooth;Sch鰊es Beat Matching, sanfter 躡ergang, melodisch ansprechend, passender Spin auf dem Drop;04:50;erkannt
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;361.0;0;sebro;;87;01. Sep;smooth;keine Transition;06:01;erkannt
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;734.5;0;sebro;;79;Feb 48;smooth;keine Transition;12:14;erkannt
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;1043.6;5;sebro;;66;07. Jan;neutral;Beat Matching passt, bei ruhiger Stelle in der Transition evtl rausgehen, guter Drop Moment;17:24;erkannt
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;1221.0;3;sebro;;70;15. Feb;neutral;Guter Fade In, Spannungsaufbau, Beat Intro bei Track 2  bessser mit weniger aus Track 1, Track 1 fr黨er raus;20:21;erkannt
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;1530.0;4;sebro;;85;Jan 95;smooth;Beat rein in Transition gut, Bass inbei Track 2 zu fr黨, etwas l鋘gerer 躡ergang w鋜e gut gewesen, Tempo leicht in Transition gedrosselt;25:30:00;erkannt
+c1476fee-08ba-40a1-b707-58614085ed12;Dec25.WAV;1739.6;3;sebro;;75;02. Sep;smooth;Beat Overlap etwas holprig, neuer Track zu einfach zu spotten, kein dezenter 躡ergang;29:00:00;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;290.0;5;sebro;;89;1.0;smooth;Sch鰊es Beat Matching, sanfter 躡ergang, melodisch ansprechend, passender Spin auf dem Drop;04:50;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;361.0;0;sebro;;87;01. Sep;smooth;keine Transition;06:01;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;734.5;0;sebro;;79;Feb 48;smooth;keine Transition;12:14;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;1043.6;5;sebro;;66;07. Jan;neutral;Beat Matching passt, bei ruhiger Stelle in der Transition evtl rausgehen, guter Drop Moment;17:24;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;1221.0;3;sebro;;70;15. Feb;neutral;Guter Fade In, Spannungsaufbau, Beat Intro bei Track 2  bessser mit weniger aus Track 1, Track 1 fr黨er raus;20:21;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;1530.0;4;sebro;;85;Jan 95;smooth;Beat rein in Transition gut, Bass inbei Track 2 zu fr黨, etwas l鋘gerer 躡ergang w鋜e gut gewesen, Tempo leicht in Transition gedrosselt;25:30:00;erkannt
+caa1a114-2221-4ee4-a0a1-a1b55a52527f;Dec25.WAV;1739.6;3;sebro;;75;02. Sep;smooth;Beat Overlap etwas holprig, neuer Track zu einfach zu spotten, kein dezenter 躡ergang;29:00:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;203.7;5;sebro;missed (von dir markiert);;;;Sehr weicher 躡ergnag, super timing, Drop auf dem Punkt, sehr harmonisch;03:24;missed
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;387.4;5;sebro;missed (von dir markiert);;;;Perfektes Timing auf den Drop, sehr harmonisch;06:27;missed
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;586.3;5;sebro;timing_off (Engine: 610.8s -> korrigiert);74;Jul 94;neutral;Sehr sch鰊er 躡ergang, klingt wie ein einizer Track, Transition kaum erkennbar;09:46;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;813.0;5;sebro;correct;85;Jan 95;smooth;Lange aber extrem stimmige Transition, tiefen perfekt aufeinander abgestimmt;13:33;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;875.5;5;sebro;timing_off (Engine: 969.6s -> korrigiert);79;3.0;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;14:36;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;1105.5;5;sebro;timing_off (Engine: 1138.5s -> korrigiert);66;04. Aug;neutral;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;18:26;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;1246.0;5;sebro;timing_off (Engine: 1330.0s -> korrigiert);79;3.0;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;20:46;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;1297.4;5;sebro;timing_off (Engine: 1269.5s -> korrigiert);71;14.88;neutral;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;21:37;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;1608.0;5;sebro;timing_off (Engine: 1629.8s -> korrigiert);71;Sep 94;neutral;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;26:48:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;1719.7;5;sebro;missed (von dir markiert);;;;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;28:40:00;missed
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;1857.6;5;sebro;timing_off (Engine: 1906.6s -> korrigiert);71;Apr 94;neutral;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;30:58:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;2154.1;5;sebro;timing_off (Engine: 2187.1s -> korrigiert);79;3.0;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;35:54:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;2523.6;5;sebro;timing_off (Engine: 2601.6s -> korrigiert);58;Aug 96;neutral;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;42:04:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;2719.0;5;sebro;timing_off (Engine: 2730.3s -> korrigiert);71;09. Sep;neutral;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;45:19:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;2853.2;5;sebro;correct;90;Feb 95;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;47:33:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;3125.6;5;sebro;timing_off (Engine: 3069.9s -> korrigiert);89;Feb 95;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;52:06:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;3257.3;5;sebro;timing_off (Engine: 3287.2s -> korrigiert);96;01. Aug;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;54:17:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;3441.8;5;sebro;;85;Jan 99;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;57:22:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;3598.4;5;sebro;missed (von dir markiert);;;;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;59:58:00;missed
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;4072.9;5;sebro;timing_off (Engine: 3967.2s -> korrigiert);79;Mrz 73;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;67:53:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;4310.1;5;sebro;correct;79;Feb 95;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;71:50:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;4558.2;5;sebro;correct;96;0.0;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;75:58:00;erkannt
+2d77d3fc-2c42-4242-812b-738f9fa28467;Dixon at Cercle Festival 2024 (Ariane Stage).mp3;4837.9;5;sebro;correct;89;0.43;smooth;perfektes Timing, sehr harmonisch, sehr guter Drop getroffen, perfektes Beat Macthing;80:38:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;619.6;4;sebro;correct;71;Nov 84;neutral;Sauberer Fade in, Gute Energie und Transition;10:20;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;788.3;5;sebro;correct;90;02. Jan;smooth;Perfekt auf den Beat, Intro mit outro gut getroffen;13:08;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;999.6;5;sebro;correct;58;08. Sep;neutral;Perfekt auf den Beat, Vocals 黚erlappen nicht, guter Spannugnsbogen;16:40;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;1148.6;5;sebro;correct;71;09. Sep;neutral;sehr sauber, guter Einsatz von H鰄en und Mitten;19:09;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;1250.4;4;sebro;correct;71;13.0;neutral;sehr harmonischer 躡ergang;20:50;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;1372.3;5;sebro;correct;96;Jan 98;smooth;Perfekter Einsatz von Pausen und FX Color;22:52;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;1541.7;5;sebro;correct;100;0.02;smooth;guter Fade in, guter Spannungsbogen zum n鋍hsten Track, nicht zu abrupt;25:42:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;1857.6;5;sebro;timing_off (Engine: 1909.9s -> korrigiert);85;Jan 99;smooth;perfekter Timing, langsamer Beat Fade in vom n鋍hsten Track;30:58:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;2109.1;5;sebro;correct;73;02. Jun;neutral;sehr harmonisch und perfekt auf den Beat;35:09:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;2232.5;0;sebro;correct;100;0.0;smooth;keine Transition;37:13:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;2305.6;5;sebro;timing_off (Engine: 2386.2s -> korrigiert);99;0.98;smooth;gute Tiefen rausgenommen;38:26:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;2374.7;5;sebro;timing_off (Engine: 2450.5s -> korrigiert);81;Mai 91;smooth;perfekter Aufbau der B鋝se, sehr smooth, sehr gutes Timing;39:35:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;2692.4;5;sebro;timing_off (Engine: 2718.8s -> korrigiert);61;13.78;neutral;sehr gutes Beat Matching und Timing;44:52:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;2983.5;5;sebro;timing_off (Engine: 3029.9s -> korrigiert);61;14.83;neutral;sehr harmonisch, guter Energie Aufbau;49:43:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3046.6;5;sebro;timing_off (Engine: 3092.8s -> korrigiert);85;Jan 95;smooth;perfekte Key Passung, sehr harmonisch;50:47:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3330.4;5;sebro;correct;71;13.78;neutral;perfekter Beat Drop;55:30:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3393.2;0;sebro;correct;78;2.0;smooth;keine Transition;56:33:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3586.2;5;sebro;timing_off (Engine: 3605.7s -> korrigiert);71;08. Jun;neutral;sehr guter 躡ergang mit Pause um sich an den n鋍hsten Track zu gew鰄nen;59:46:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3653.4;5;sebro;timing_off (Engine: 3690.9s -> korrigiert);70;14.89;neutral;sehr guter 躡ergang mit Pause um sich an den n鋍hsten Track zu gew鰄nen;60:53:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3881.9;5;sebro;correct;71;Dez 78;neutral;perfektes Timing, sehr harmonisch;64:42:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;3956.8;5;sebro;timing_off (Engine: 4004.8s -> korrigiert);89;0.0;smooth;keys perfekt aufeinander abgestimmt, sehr gutes Timing der Transition;65:57:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;4122.9;5;sebro;timing_off (Engine: 4243.2s -> korrigiert);70;Okt 87;neutral;guter Beat Drop;68:43:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;4368.0;0;sebro;correct;89;02. Jan;smooth;keine Transition;72:48:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;4337.7;0;sebro;timing_off (Engine: 4455.1s -> korrigiert);61;11. Sep;neutral;keine Transition;72:18:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;4713.2;5;sebro;correct;72;Jul 98;neutral;sehr gutes Beatmatching;78:33:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;5300.0;5;sebro;timing_off (Engine: 5309.6s -> korrigiert);71;Jun 93;neutral;Sehr gutes Vocal Timing;88:20:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;5484.4;0;sebro;correct;65;Okt 82;neutral;keine Transition;91:24:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;5789.4;5;sebro;timing_off (Engine: 5804.9s -> korrigiert);71;Jun 98;neutral;sehr guter Loop, perfektes Beatmatching, sehr guter Match von Intro und Outro;96:29:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;5976.9;5;sebro;timing_off (Engine: 6049.7s -> korrigiert);90;Mrz 47;smooth;perfekter Fade In;99:37:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;6150.3;5;sebro;timing_off (Engine: 6310.8s -> korrigiert);79;03. Mai;smooth;sehr smooth;102:30:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;6565.3;5;sebro;timing_off (Engine: 6628.9s -> korrigiert);64;Okt 83;neutral;h鰄en und tiefen sehr gut aufeinander abgestimmt der beiden Tracks, sehr gutes Timing, keine Vocal Overlapping;109:25:00;erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;183.7;5;sebro;missed (von dir markiert);;;;Perfekte Rausnahme von Energie und Fade Out;03:04;missed
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;221.8;0;sebro;missed (von dir markiert);;;;keine Transition;03:42;missed
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;305.0;5;sebro;missed (von dir markiert);;;;perfektes Timing, sehr harmonisch;05:05;missed
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;6837.3;5;sebro;missed (von dir markiert);;;;Guter Energieaufbau;113:57:00;missed
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;7015.6;5;sebro;missed (von dir markiert);;;;;116:56:00;missed
+04804f27-2755-4db3-8f0b-f57d3315737c;Dixon WE2  Tomorrowland 2025.mp3;7167.2;5;sebro;missed (von dir markiert);;;;Sehr smoothes Intro, passender Loop;119:27:00;missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;135.5;5;sebro;timing_off (Engine: 169.6s -> korrigiert);61;Nov 14;neutral;Sanftes Intro, Sch鰊e mit FX rausgefaded;02:16;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;522.5;5;sebro;timing_off (Engine: 550.2s -> korrigiert);71;06. Sep;neutral;Sehr gutes Timing bei Beat intro, perfekte Harmonie ;08:42;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;860.4;5;sebro;correct;61;15.16;neutral;Perfektes Timing, gute Energie黚ergabe auf neuen Track;14:20;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;1178.6;5;sebro;timing_off (Engine: 1231.8s -> korrigiert);61;11. Aug;neutral;Super Einsatz von FX Filter, guter Spannugnsaufbau;19:39;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;1363.0;5;sebro;timing_off (Engine: 1480.7s -> korrigiert);75;13. Feb;smooth;Harmonisch abgestimmt, mit FX Filter Spannung erzeugt, perfektes Timing ;22:43;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;1645.5;5;sebro;timing_off (Engine: 1669.6s -> korrigiert);61;14.13;neutral;Beat aus Track perfekt via Filter rausgefaded, Lyrics passen sehr gut, nit ganz Tempo rausgenommen;27:26:00;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;1837.0;5;sebro;correct;78;05. Mai;smooth;Wieder sehr guter Einsatz von Filter, Transition klingt nahtlos, sehr gutes Out des ersten Tracks;30:37:00;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;2135.8;5;sebro;correct;90;Jan 98;smooth;Perfektes Timing, sehr stimmig;35:36:00;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;2388.3;5;sebro;timing_off (Engine: 2423.4s -> korrigiert);81;07. Jan;smooth;tolle Harmonie, Beat passen sehr gut 黚ereinander;39:48:00;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;2771.3;5;sebro;missed (von dir markiert);;;;Vocals sehr sch鰊 getroffen vom Timing;46:11:00;missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;3079.6;5;sebro;;69;Jul 96;neutral;Sanfter Fade In vom Beat, Transition mit perfekter L鋘ge;51:20:00;erkannt
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;3290.7;5;sebro;missed (von dir markiert);;;;Timing sehr gut;54:51:00;missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;3566.6;5;sebro;missed (von dir markiert);;;;Guter Drop;59:27:00;missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;3780.1;5;sebro;missed (von dir markiert);;;;;63:00:00;missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef;Four Tet - S贸nar 2025 - ARTE Concert.mp3;3971.8;5;sebro;missed (von dir markiert);;;;;66:12:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;215.9;5;sebro;correct;74;Feb 98;neutral;;03:36;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;360.0;5;sebro;correct;71;10. Apr;neutral;;06:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;655.6;5;sebro;correct;90;0.0;smooth;;10:56;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;742.4;5;sebro;correct;58;14. Mai;neutral;;12:22;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;856.9;5;sebro;correct;61;13.92;neutral;;14:17;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;897.7;5;sebro;timing_off (Engine: 955.3s -> korrigiert);70;11.0;neutral;;14:58;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;1231.3;5;sebro;timing_off (Engine: 1260.3s -> korrigiert);74;Jul 97;neutral;;20:31;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;1488.3;5;sebro;timing_off (Engine: 1589.6s -> korrigiert);69;15. Feb;neutral;;24:48:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;1662.7;5;sebro;timing_off (Engine: 1754.4s -> korrigiert);81;8.0;smooth;;27:43:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;1810.5;5;sebro;timing_off (Engine: 1875.9s -> korrigiert);84;1.0;smooth;;30:11:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;1941.4;5;sebro;timing_off (Engine: 2037.1s -> korrigiert);85;2.0;smooth;;32:21:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2277.9;5;sebro;correct;89;0.51;smooth;;37:58:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2507.2;5;sebro;correct;79;4.0;smooth;;41:47:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2582.4;5;sebro;correct;61;Dez 93;neutral;;43:02:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2601.2;5;sebro;timing_off (Engine: 2699.2s -> korrigiert);58;09. Jul;neutral;;43:21:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2844.7;5;sebro;correct;67;05. Apr;neutral;;47:25:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2842.7;5;sebro;timing_off (Engine: 2980.0s -> korrigiert);73;3.0;neutral;;47:23:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3070.9;5;sebro;timing_off (Engine: 3163.2s -> korrigiert);70;Okt 97;neutral;;51:11:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3284.4;5;sebro;correct;85;2.0;smooth;;54:44:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3469.9;5;sebro;correct;71;04. Apr;neutral;;57:50:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3541.6;5;sebro;timing_off (Engine: 3643.3s -> korrigiert);84;0.41;smooth;;59:02:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3683.7;5;sebro;timing_off (Engine: 3819.2s -> korrigiert);68;Jun 94;neutral;;61:24:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4370.0;5;sebro;correct;61;Okt 44;neutral;;72:50:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4723.0;5;sebro;correct;58;13.0;neutral;;78:43:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4810.2;5;sebro;correct;71;15.0;neutral;;80:10:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4958.0;5;sebro;correct;93;0.05;smooth;;82:38:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;5117.8;5;sebro;correct;90;Mrz 69;smooth;;85:18:00;erkannt
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;521.4;5;sebro;missed (von dir markiert);;;;;08:41;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;1007.2;5;sebro;missed (von dir markiert);;;;;16:47;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2313.5;5;sebro;missed (von dir markiert);;;;;38:34:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2371.0;5;sebro;missed (von dir markiert);;;;;39:31:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2684.8;5;sebro;missed (von dir markiert);;;;;44:45:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;2979.0;5;sebro;missed (von dir markiert);;;;;49:39:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3817.8;5;sebro;missed (von dir markiert);;;;;63:38:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;3904.7;5;sebro;missed (von dir markiert);;;;;65:05:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4030.3;5;sebro;missed (von dir markiert);;;;;67:10:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4146.7;5;sebro;missed (von dir markiert);;;;;69:07:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4254.5;5;sebro;missed (von dir markiert);;;;;70:54:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4495.9;5;sebro;missed (von dir markiert);;;;;74:56:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;4580.3;5;sebro;missed (von dir markiert);;;;;76:20:00;missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383;Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3;5399.9;5;sebro;missed (von dir markiert);;;;;90:00:00;missed
+11da05af-edee-47c2-9b12-3972ab10448a;mix.wav;113.0;0;sebro;;70;15. Aug;neutral;keine Transition;01:53;erkannt
+5b51fd6a-5f79-4afc-82fb-c2c2e5008e3b;mix.wav;113.0;;sebro;;70;15. Aug;neutral;;01:53;erkannt
+eee0b095-3932-44fb-8b6d-373722aff4ac;mix.wav;113.0;;sebro;;70;15. Aug;neutral;;01:53;erkannt
+fdc53ee6-9fe5-4990-88d6-03dbcd511f66;mix.wav;113.0;;sebro;;70;15. Aug;neutral;;01:53;erkannt
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;209.0;4;sebro;correct;95;01. Mrz;smooth;Harmonisch gut, Keys passend, gute Lautst鋜ke;03:29;erkannt
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;416.9;3;sebro;correct;96;2.0;smooth;Zu schnell Fade In, harmonisch, zu schneller fadeout am ende der Transition;06:57;erkannt
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;1030.6;4;sebro;timing_off (Engine: 1034.0s -> korrigiert);85;01. Mai;smooth;Guter Fade in, Harmonie kollidiert leicht;17:11;erkannt
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;1587.4;3;sebro;timing_off (Engine: 1614.8s -> korrigiert);61;13.38;neutral;melodie 黚erlappen leicht, zu schnell fade out. ;26:27:00;erkannt
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;120.3;3;sebro;missed (von dir markiert);;;;Timing nicht gut, Volume auch nicht, Transition nicht harmonisch;02:00;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;305.9;4;sebro;missed (von dir markiert);;;;gutes Fade In, Tonleitern harmonisch, Timing gut;05:06;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;554.5;3;sebro;missed (von dir markiert);;;;ZU wilder Beat in der Transtion, zu schnell in der Transition;09:15;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;684.6;4;sebro;missed (von dir markiert);;;;Sehr harmonisch, leicht neben dem Beat, guter Fade out ;11:25;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;809.8;4;sebro;missed (von dir markiert);;;;gutes Beatmatching, harmonischer Sound;13:30;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;963.5;4;sebro;missed (von dir markiert);;;;harmonisch, auf dem Beat, nicht gleiche Keys;16:04;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;1202.7;4;sebro;missed (von dir markiert);;;;harmonisch, Timing nicht ganz passend da Melodie leicht kollidiert;20:03;missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776;MixCoach1.WAV;1341.8;5;sebro;missed (von dir markiert);;;;Gutes Timing, Beat und Tiefen mit gutem Timing. ;22:22;missed
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;589.1;5;sebro;timing_off (Engine: 555.8s -> korrigiert);81;Jul 25;smooth;;09:49;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;966.7;5;sebro;timing_off (Engine: 983.2s -> korrigiert);89;3.0;smooth;;16:07;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;1160.0;5;sebro;timing_off (Engine: 1139.3s -> korrigiert);87;0.0;smooth;;19:20;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;1381.5;5;sebro;correct;66;13.51;neutral;;23:02;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;1704.0;5;sebro;timing_off (Engine: 1730.4s -> korrigiert);61;15.88;neutral;;28:24:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;1872.3;5;sebro;timing_off (Engine: 1888.2s -> korrigiert);74;Mai 95;neutral;;31:12:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;2047.2;5;sebro;timing_off (Engine: 2020.0s -> korrigiert);61;15.51;neutral;;34:07:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;2468.1;5;sebro;correct;90;1.0;smooth;;41:08:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;2819.2;5;sebro;timing_off (Engine: 2823.5s -> korrigiert);66;Jun 95;neutral;;46:59:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;3109.9;5;sebro;correct;58;15.84;neutral;;51:50:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;3326.3;5;sebro;correct;82;1.0;smooth;;55:26:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;4093.7;5;sebro;correct;73;14.89;neutral;;68:14:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;4372.0;5;sebro;correct;92;Jan 96;smooth;;72:52:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;4692.5;5;sebro;timing_off (Engine: 4704.9s -> korrigiert);63;15.84;neutral;;78:12:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;4964.9;5;sebro;timing_off (Engine: 5070.0s -> korrigiert);70;12. Sep;neutral;;82:45:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;5370.5;5;sebro;timing_off (Engine: 5401.6s -> korrigiert);71;Jul 95;neutral;;89:30:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;5591.2;5;sebro;correct;73;Jul 94;neutral;;93:11:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;5751.3;5;sebro;correct;61;09. Sep;neutral;;95:51:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;5997.1;5;sebro;correct;61;14.89;neutral;;99:57:00;erkannt
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;352.6;5;sebro;missed (von dir markiert);;;;;05:53;missed
+9330c3ec-a245-4f04-8c87-aba07d29afd5;R脺F脺S DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3;3662.0;5;sebro;missed (von dir markiert);;;;;61:02:00;missed
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;175.3;2;sebro;;98;1.0;smooth;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:55;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;398.3;3;sebro;;85;2.0;smooth;zu wenig Spiel in der Transition;06:38;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;560.0;2;sebro;;71;06. Apr;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;09:20;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;843.2;2;sebro;;81;04. Jan;smooth;vocals 黚erlappen;14:03;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;1015.0;2;sebro;;66;Apr 93;neutral;zu abrupt es Ende des vorherigen Tracks;16:55;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;1126.1;0;sebro;;92;0.17;smooth;keine Transition;18:46;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;1230.0;3;sebro;;58;14.17;neutral;fade in ok, aber wenig harmonisch;20:30;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;1378.3;3;sebro;;71;Nov 18;neutral;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;22:58;erkannt
+01b605f1-8f9e-4385-97da-4811fd42621b;REC001.WAV;1687.9;4;sebro;;61;15. Nov;neutral;guter fade in, engerie gut rausgenommen vor transition;28:08:00;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;163.0;2;sebro;;74;07. Aug;neutral;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:43;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;229.0;3;sebro;;75;Mai 34;smooth;zu wenig Spiel in der Transition;03:49;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;363.0;2;sebro;;63;14. Sep;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;06:03;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;584.0;2;sebro;;73;02. Jun;neutral;vocals 黚erlappen;09:44;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;828.0;2;sebro;;69;Dez 56;neutral;zu abrupt es Ende des vorherigen Tracks;13:48;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;1031.0;0;sebro;;66;05. Jul;neutral;keine Transition;17:11;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;1189.0;3;sebro;;80;Feb 26;smooth;fade in ok, aber wenig harmonisch;19:49;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;1381.0;3;sebro;;86;Mrz 41;smooth;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;23:01;erkannt
+14ce6088-f73c-437c-83ff-14b8a3efecb4;REC001.WAV;1704.0;4;sebro;;58;Dez 66;neutral;guter fade in, engerie gut rausgenommen vor transition;28:24:00;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;175.3;2;sebro;;98;1.0;smooth;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:55;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;398.3;3;sebro;;85;2.0;smooth;zu wenig Spiel in der Transition;06:38;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;560.0;2;sebro;;71;06. Apr;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;09:20;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;843.2;2;sebro;;81;04. Jan;smooth;vocals 黚erlappen;14:03;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;1015.0;2;sebro;;66;Apr 93;neutral;zu abrupt es Ende des vorherigen Tracks;16:55;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;1181.7;0;sebro;;61;16.15;neutral;keine Transition;19:42;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;1378.3;3;sebro;;71;Dez 18;neutral;fade in ok, aber wenig harmonisch;22:58;erkannt
+2d1e54b9-da08-4fbb-b389-8e76f5d8d826;REC001.WAV;1687.9;3;sebro;;61;15. Nov;neutral;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;28:08:00;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;175.3;2;sebro;;98;1.0;smooth;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:55;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;398.3;3;sebro;correct;85;2.0;smooth;zu wenig Spiel in der Transition;06:38;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;560.0;2;sebro;;71;06. Apr;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;09:20;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;843.2;2;sebro;;81;04. Jan;smooth;vocals 黚erlappen;14:03;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;1126.1;2;sebro;correct;92;0.17;smooth;zu abrupt es Ende des vorherigen Tracks;18:46;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;1378.3;0;sebro;correct;71;Nov 18;neutral;keine Transition;22:58;erkannt
+4d427732-3536-4b45-b542-a3f1cfd44b81;REC001.WAV;1673.8;3;sebro;timing_off (Engine: 1687.9s -> korrigiert);61;15. Nov;neutral;fade in ok, aber wenig harmonisch;27:54:00;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;163.0;3;sebro;;74;07. Aug;neutral;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:43;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;229.0;4;sebro;;75;Mai 34;smooth;zu wenig Spiel in der Transition;03:49;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;363.0;2;sebro;;63;14. Sep;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;06:03;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;584.0;3;sebro;;73;02. Jun;neutral;vocals 黚erlappen;09:44;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;828.0;2;sebro;;69;Dez 56;neutral;zu abrupt es Ende des vorherigen Tracks;13:48;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;1031.0;0;sebro;;66;05. Jul;neutral;keine Transition;17:11;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;1189.0;2;sebro;;80;Feb 26;smooth;fade in ok, aber wenig harmonisch;19:49;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;1381.0;3;sebro;;86;Mrz 41;smooth;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;23:01;erkannt
+53b0a8a3-1338-4dc4-a8a7-2014363b4dcb;REC001.WAV;1704.0;3;sebro;;58;Dez 66;neutral;fade in ok, aber wenig harmonisch;28:24:00;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;199.4;2;sebro;;69;14.61;neutral;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;03:19;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;398.3;3;sebro;;61;15.21;neutral;zu wenig Spiel in der Transition;06:38;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;560.0;2;sebro;;71;06. Apr;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;09:20;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;843.2;2;sebro;;81;04. Jan;smooth;vocals 黚erlappen;14:03;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;1015.0;2;sebro;;66;Apr 93;neutral;zu abrupt es Ende des vorherigen Tracks;16:55;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;1230.0;0;sebro;;58;14.14;neutral;keine Transition;20:30;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;1378.3;3;sebro;;71;Nov 18;neutral;fade in ok, aber wenig harmonisch;22:58;erkannt
+68d08250-5234-4f4a-aa2d-b3b49bb9896d;REC001.WAV;1687.9;3;sebro;;61;15. Nov;neutral;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;28:08:00;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;163.0;3;sebro;;74;07. Aug;neutral;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:43;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;229.0;4;sebro;;75;Mai 34;smooth;zu wenig Spiel in der Transition;03:49;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;363.0;2;sebro;;63;14. Sep;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;06:03;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;584.0;3;sebro;;73;02. Jun;neutral;vocals 黚erlappen;09:44;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;828.0;2;sebro;;69;Dez 56;neutral;zu abrupt es Ende des vorherigen Tracks;13:48;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;1031.0;0;sebro;;66;05. Jul;neutral;keine Transition;17:11;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;1189.0;3;sebro;;80;Feb 26;smooth;fade in ok, aber wenig harmonisch;19:49;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;1381.0;3;sebro;;86;Mrz 41;smooth;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;23:01;erkannt
+823b0f49-cc54-4646-bb2c-4f560947adba;REC001.WAV;1704.0;4;sebro;;58;Dez 66;neutral;fade in ok, aber wenig harmonisch;28:24:00;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;175.3;2;sebro;correct;98;1.0;smooth;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:55;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;375.3;3;sebro;timing_off (Engine: 398.3s -> korrigiert);85;2.0;smooth;zu wenig Spiel in der Transition;06:15;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;560.0;2;sebro;correct;71;06. Apr;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;09:20;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;843.2;2;sebro;correct;81;04. Jan;smooth;vocals 黚erlappen;14:03;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;952.0;2;sebro;timing_off (Engine: 1015.0s -> korrigiert);66;Apr 93;neutral;zu abrupt es Ende des vorherigen Tracks;15:52;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;1126.1;0;sebro;correct;92;0.17;smooth;keine Transition;18:46;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;1185.5;3;sebro;timing_off (Engine: 1230.0s -> korrigiert);58;14.17;neutral;fade in ok, aber wenig harmonisch;19:46;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;1378.3;3;sebro;correct;71;Nov 18;neutral;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;22:58;erkannt
+8ad069d6-d387-45da-abf0-a7461e07acb8;REC001.WAV;1674.0;4;sebro;timing_off (Engine: 1687.9s -> korrigiert);61;15. Nov;neutral;fade in ok, aber wenig harmonisch;27:54:00;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;163.0;2;sebro;;74;07. Aug;neutral;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:43;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;229.0;3;sebro;;75;Mai 34;smooth;zu wenig Spiel in der Transition;03:49;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;363.0;2;sebro;;63;14. Sep;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;06:03;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;584.0;2;sebro;;73;02. Jun;neutral;vocals 黚erlappen;09:44;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;828.0;2;sebro;;69;Dez 56;neutral;zu abrupt es Ende des vorherigen Tracks;13:48;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;1031.0;0;sebro;;66;05. Jul;neutral;keine Transition;17:11;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;1189.0;3;sebro;;80;Feb 26;smooth;fade in ok, aber wenig harmonisch;19:49;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;1381.0;3;sebro;;86;Mrz 41;smooth;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;23:01;erkannt
+90964e92-db1f-4e90-b9cf-b4b06175e4e5;REC001.WAV;1704.0;4;sebro;;58;Dez 66;neutral;fade in ok, aber wenig harmonisch;28:24:00;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;163.0;2;sebro;;74;07. Aug;neutral;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:43;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;229.0;3;sebro;;75;Mai 34;smooth;zu wenig Spiel in der Transition;03:49;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;363.0;2;sebro;;63;14. Sep;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;06:03;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;584.0;2;sebro;;73;02. Jun;neutral;vocals 黚erlappen;09:44;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;828.0;2;sebro;;69;Dez 56;neutral;zu abrupt es Ende des vorherigen Tracks;13:48;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;1031.0;0;sebro;;66;05. Jul;neutral;keine Transition;17:11;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;1189.0;3;sebro;;80;Feb 26;smooth;fade in ok, aber wenig harmonisch;19:49;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;1381.0;3;sebro;;86;Mrz 41;smooth;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;23:01;erkannt
+cb40456a-3696-41f7-9f10-ca3f1c663662;REC001.WAV;1704.0;4;sebro;;58;Dez 66;neutral;fade in ok, aber wenig harmonisch;28:24:00;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;175.3;2;sebro;correct;98;1.0;smooth;Harmony 黚erlappt, am Ende der Transition leich neben dem Beat;02:55;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;376.7;3;sebro;timing_off (Engine: 398.3s -> korrigiert);85;2.0;smooth;zu wenig Spiel in der Transition;06:17;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;560.0;2;sebro;;71;06. Apr;neutral;zu sp鋞 au dem vorherigen Track raus, nicht harmonisch;09:20;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;843.2;2;sebro;correct;81;04. Jan;smooth;vocals 黚erlappen;14:03;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;952.6;2;sebro;timing_off (Engine: 1015.0s -> korrigiert);66;Apr 93;neutral;zu abrupt es Ende des vorherigen Tracks;15:53;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;1135.9;0;sebro;timing_off (Engine: 1181.7s -> korrigiert);61;16.15;neutral;keine Transition;18:56;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;1378.3;3;sebro;correct;71;Dez 18;neutral;fade in ok, aber wenig harmonisch;22:58;erkannt
+d684297d-f39e-4daa-8879-7b213dfa4272;REC001.WAV;1673.9;3;sebro;timing_off (Engine: 1687.9s -> korrigiert);61;15. Nov;neutral;vorheriger Track zu sp鋞 raus, beat nicht ganz getroffen;27:54:00;erkannt
+1eb6ec00-db08-436f-a948-523e78c08331;REC002.WAV;353.1;5;sebro;;71;Jul 97;neutral;gute Fade out, nicht zu hektischer 黚ergang, sehr harmonisch, das ohr kann sich gut an den neuen Track gew鰄nen;05:53;erkannt
+1eb6ec00-db08-436f-a948-523e78c08331;REC002.WAV;508.5;0;sebro;;89;1.0;smooth;keine Transition;08:28;erkannt
+1eb6ec00-db08-436f-a948-523e78c08331;REC002.WAV;677.9;5;sebro;;83;2.0;smooth;Gute Transition, harmonisch gut, nicht zu svchnell, evtl mit Bass vom vorherigen Track zu fr黨 raus, gutes Beat Matching;11:18;erkannt
+1eb6ec00-db08-436f-a948-523e78c08331;REC002.WAV;910.1;4;sebro;;85;01. Jun;smooth;Gutes Timing, Bass etwas zu stark zu Beginn der Transition, Meldischer Teil 黚erlappt leicht, zu sp鋞 mit dem vorherigen Track raus;15:10;erkannt
+1eb6ec00-db08-436f-a948-523e78c08331;REC002.WAV;1162.0;5;sebro;;81;Jul 95;smooth;Gutes Timing, keine Harmonie 黚erlappen, gute 躡ergabe, keine Disharmonien;19:22;erkannt
+1eb6ec00-db08-436f-a948-523e78c08331;REC002.WAV;1480.7;4;sebro;;71;13.34;neutral;Sch鰊er Loop zumr Transition, harmonisch sehr stimmig;01.01.1900 00:41;erkannt
+5667ada4-bf22-41bb-bc88-c44a5dda9f59;REC002.WAV;287.8;5;sebro;timing_off (Engine: 353.1s -> korrigiert);71;Jul 97;neutral;gute Fade put, nicht zu hektischer 黚ergang, sehr harmonisch;04:48;erkannt
+5667ada4-bf22-41bb-bc88-c44a5dda9f59;REC002.WAV;624.9;5;sebro;timing_off (Engine: 677.9s -> korrigiert);83;2.0;smooth;Gute Transition, harmonisch gut, nicht zu svchnell, evtl mit Bass vom vorherigen Track zu fr黨 raus, gutes Beat Matching;10:25;erkannt
+5667ada4-bf22-41bb-bc88-c44a5dda9f59;REC002.WAV;887.0;4;sebro;timing_off (Engine: 910.1s -> korrigiert);85;01. Jun;smooth;Gutes Timing, Bass etwas zu stark zu Beginn der Transition, Meldischer Teil 黚erlappt leicht;14:47;erkannt
+5667ada4-bf22-41bb-bc88-c44a5dda9f59;REC002.WAV;1162.0;5;sebro;correct;81;Jul 95;smooth;Gutes Timing, keine Harmonie 黚erlappen, gute 躡ergabe, keine Disharmonien;19:22;erkannt
+5667ada4-bf22-41bb-bc88-c44a5dda9f59;REC002.WAV;1520.4;4;sebro;timing_off (Engine: 1480.7s -> korrigiert);71;13.34;neutral;Sch鰊er Loop zumr Transition, harmonisch sehr stimmig;25:20:00;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;347.1;3;sebro;correct;61;15.89;neutral;guter Fade in, nicht zu dominat, Beat leicht off,Bass out zu schnell;05:47;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;522.4;3;sebro;timing_off (Engine: 537.0s -> korrigiert);71;Jul 39;neutral;leicht dishamonisch, drop Timing gut, erster Track zu lange drin und zu laut, Ausstieg verpasst;08:42;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;809.8;4;sebro;timing_off (Engine: 819.4s -> korrigiert);82;02. Mai;smooth;guter Einstieg mit den Vocals, leichtes 黚erlappen, erster Track in der Transition faded zu langsam raus;13:30;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;970.0;4;sebro;timing_off (Engine: 1028.2s -> korrigiert);87;Jan 95;smooth;Keys beissen sich etwas, leicht disharmonisch, Spin am Ende passend;16:10;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;1118.4;3;sebro;timing_off (Engine: 1206.7s -> korrigiert);85;Jan 23;smooth;Einstieg nicht auf dem Beat, beisst sich etwas;18:38;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;1472.9;3;sebro;correct;78;Feb 95;smooth;Bass fad in zu dominat, zu hektisch, leicht disharmonie;24:33:00;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;1659.5;4;sebro;timing_off (Engine: 1651.9s -> korrigiert);81;Apr 95;smooth;Gutes Timing, Guter Loop Einsatz der Vocals;27:39:00;erkannt
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;85.4;3;sebro;missed (von dir markiert);;;;erster Track zu sehr rausgefaded, off Beat an einer Stelle;01:25;missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;119.4;0;sebro;missed (von dir markiert);;;;keine Transition;01:59;missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;1279.7;2;sebro;missed (von dir markiert);;;;beisst sich, fliesst nicht gut ineinander 黚er , disharmonisch;21:20;missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b;REC003.WAV;1848.8;4;sebro;missed (von dir markiert);;;;Gute Harmonie, zu schnell mit dem Bass in Track 1 raus. Nicht ganz smooth;30:49:00;missed
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;228.1;5;sebro;timing_off (Engine: 250.0s -> korrigiert);63;16.23;neutral;Fade out der Lyrics evtl zu fr黨, aber sehr geschmeidiger 躡ergang;03:48;erkannt
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;374.8;3;sebro;timing_off (Engine: 395.5s -> korrigiert);71;12. Dez;neutral;Lyrics aus dem n鋍hsten Track zu fr黨, klingt etwas konfus, leicht disharmonisch;06:15;erkannt
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;709.0;3;sebro;timing_off (Engine: 693.2s -> korrigiert);61;08. Feb;neutral;Gutes Timing aber evtl etwas zu dominanter 躡ergang, leicht disharmonisch, Melodien 黚erlappen st鰎end;11:49;erkannt
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;894.6;3;sebro;missed (von dir markiert);;;;Beat leicht off, Timing nicht ganz passend, Fade in leicht daneben;14:55;missed
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;1107.8;4;sebro;correct;61;11. Jul;neutral;Drop gut, Beat 黚ername gut mit Vocals aus Track 1 vereinbar, Spin als Transition mit gutem Timing;18:28;erkannt
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;1310.8;2;sebro;missed (von dir markiert);;;;Mit Bass zu fr黨 raus, klingt unsauber, nicht ganz auf dem Beat, Fade in eher langweilig;21:51;missed
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;1462.9;4;sebro;missed (von dir markiert);;;;Timing ok, Schneller 躡ergang;24:23:00;missed
+a156bceb-7fc9-4514-bbdd-8988788def66;REC004.WAV;1669.2;3;sebro;timing_off (Engine: 1742.2s -> korrigiert);71;07. Sep;neutral;Beat gut getroffen, Harmonien 黚erlappen, zu schnell raus mit Track 1, klingt nicht wie ein flie遝nder 躡ergang;27:49:00;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;90.0;5;sebro;;78;01. Aug;smooth;etwas zu viel Bass im, 躡ergang, sonst ausgewogen und harmonisch;01:30;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;281.0;4;sebro;;73;Mrz 13;neutral;Smoothe Einleitung. Evtl zu fr黨 mit den Tiefen raus, ruhiger Blend, evtl etwas zu langer Blend;04:41;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;374.0;0;sebro;;66;09. Mai;neutral;keine Transition;06:14;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;445.0;3;sebro;;69;07. Jan;neutral;zu wild im 躡ergang, passt nicht ganz mit dem eher ruhigen Intro;07:25;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;554.0;4;sebro;;74;10. Aug;neutral;Beat geht ruhig rein, etwas zu viel eventuel, vorheriger Track geht zu sp鋞 raus, ab Drop immer noch drin;09:14;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;746.0;4;sebro;;92;Jan 42;smooth;gutes Beatmatching, harmonischer Sound, k鰊nte noch etwas enleganter und weniger druckvoll sein;12:26;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;902.0;0;sebro;;58;15. Sep;neutral;keine transition;15:02;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1070.0;3;sebro;;61;Dez 61;neutral;etwas holprig, nicht ganz perfekter timing, track pairing etwas daneben;17:50;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1241.0;4;sebro;;58;13.96;neutral;Harmonisch, fade in etwas zu agressiv, vorheriger Track etwas falsch im Timing, unruhige Stellen, die sich leicht 黚erlappen;20:41;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1407.0;0;sebro;;66;Jul 83;neutral;keine Transition;23:27;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1506.0;4;sebro;;66;Sep 97;neutral;Beatmatching ok, Timing ok, 黚erleitung von einem Beat in den anderen etwas daneben;25:06:00;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1745.0;4;sebro;;66;05. Feb;neutral;Sch鰊e 躡erleitung, harmonisch ok;29:05:00;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1831.0;0;sebro;;72;06. Feb;neutral;keine Transition;30:31:00;erkannt
+0cdea2cb-a130-4743-8c8a-90942e8e3b63;REC010.WAV;1912.0;0;sebro;;72;15.26;neutral;keine Transition;31:52:00;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;67.0;5;sebro;correct;58;15. Sep;neutral;etwas zu viel Bass im, 躡ergang, sonst ausgewogen und harmonisch;01:07;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;260.9;4;sebro;timing_off (Engine: 270.4s -> korrigiert);61;09. Jun;neutral;Smoothe Einleitung. Evtl zu fr黨 mit den Tiefen raus, ruhiger Blend, evtl etwas zu langer Blend;04:21;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;433.2;3;sebro;timing_off (Engine: 483.0s -> korrigiert);61;Nov 91;neutral;zu wild im 躡ergang, passt nicht ganz mit dem eher ruhigen Intro;07:13;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;571.8;4;sebro;correct;99;0.0;smooth;Beat geht ruhig rein, etwas zu viel eventuel, vorheriger Track geht zu sp鋞 raus, ab Drop immer noch drin;09:32;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;738.3;4;sebro;timing_off (Engine: 763.9s -> korrigiert);92;Jan 65;smooth;gutes Beatmatching, harmonischer Sound, k鰊nte noch etwas enleganter und weniger druckvoll sein;12:18;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;1072.5;3;sebro;correct;61;12.0;neutral;etwas holprig, nicht ganz perfekter timing, track pairing etwas daneben;17:52;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;1211.7;4;sebro;timing_off (Engine: 1233.6s -> korrigiert);78;Mrz 87;smooth;Harmonisch, fade in etwas zu agressiv, vorheriger Track etwas falsch im Timing, unruhige Stellen, die sich leicht 黚erlappen;20:12;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;1497.7;3;sebro;correct;79;Mrz 98;smooth;Beatmatching ok, Timing ok, 黚erleitung von einem Beat in den anderen etwas daneben;24:58:00;erkannt
+4c70d684-c852-4b50-8859-6e3a121093e9;REC010.WAV;1710.3;4;sebro;timing_off (Engine: 1742.9s -> korrigiert);66;Dez 26;neutral;Sch鰊e 躡erleitung, harmonisch ok;28:30:00;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;262.6;4;sebro;;62;08. Aug;neutral;Smoothe Einleitung. Evtl zu fr黨 mit den Tiefen raus, ruhiger Blend, evtl etwas zu langer Blend;04:23;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;372.8;0;sebro;;71;14.91;neutral;keine Transition;06:13;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;474.7;3;sebro;;76;Mrz 62;smooth;zu wild im 躡ergang, passt nicht ganz mit dem eher ruhigen Intro;07:55;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;571.8;4;sebro;;70;13.97;neutral;Beat geht ruhig rein, etwas zu viel eventuel, vorheriger Track geht zu sp鋞 raus, ab Drop immer noch drin;09:32;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;763.9;4;sebro;;92;Jan 65;smooth;gutes Beatmatching, harmonischer Sound, k鰊nte noch etwas enleganter und weniger druckvoll sein;12:44;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;875.7;0;sebro;;59;14. Jan;neutral;keine Transition;14:36;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;1062.8;3;sebro;;61;09. Sep;neutral;etwas holprig, nicht ganz perfekter timing, track pairing etwas daneben;17:43;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;1206.2;4;sebro;;62;Aug 94;neutral;Harmonisch, fade in etwas zu agressiv, vorheriger Track etwas falsch im Timing, unruhige Stellen, die sich leicht 黚erlappen;20:06;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;1504.6;4;sebro;;71;Mai 95;neutral;Beatmatching ok, Timing ok, 黚erleitung von einem Beat in den anderen etwas daneben;25:05:00;erkannt
+6ce5120c-1c0d-431c-9474-89f753976a0c;REC010.WAV;1716.3;4;sebro;;58;Okt 91;neutral;Sch鰊e 躡erleitung, harmonisch ok;28:36:00;erkannt
+9193384c-d687-441f-b88c-99770937981c;REC013.WAV;237.6;4;sebro;timing_off (Engine: 261.7s -> korrigiert);79;Jan 68;smooth;weicher 躡ergang, kein harter Cut, Blend k鰊nte noch etwas besser sein aber genrell nicht schlecht;03:58;erkannt
+9193384c-d687-441f-b88c-99770937981c;REC013.WAV;391.6;4;sebro;timing_off (Engine: 398.1s -> korrigiert);80;Apr 94;smooth;gute auf dem Beat, Cut dezent und gut zu h鰎en, guter Fade Out;06:32;erkannt
+9193384c-d687-441f-b88c-99770937981c;REC013.WAV;930.0;4;sebro;timing_off (Engine: 952.2s -> korrigiert);89;1.0;smooth;ZU fr黨 mit den Tiefen in neuem Track hoch;15:30;erkannt
+9193384c-d687-441f-b88c-99770937981c;REC013.WAV;1125.6;4;sebro;timing_off (Engine: 1169.7s -> korrigiert);71;Apr 96;neutral;Loop passt gut rein, Transition evt etwas zu lange, also Timing kann man verbessern;18:46;erkannt
+9193384c-d687-441f-b88c-99770937981c;REC013.WAV;1466.4;4;sebro;correct;71;Sep 87;neutral;Tiefen zu abrupt raus, kein fliessender 躡ergang, fade out in neuen Track aber gut;24:26:00;erkannt
+9193384c-d687-441f-b88c-99770937981c;REC013.WAV;594.8;3;sebro;missed (von dir markiert);;;;Loop w鋜e gut gewersen um die Vocals mit zu 黚ernehmen, Blend zu abrupt;09:55;missed
+ee76cba3-b8a8-4d29-8f54-8b200322bf7e;REC013.WAV;261.7;4;sebro;;79;Jan 68;smooth;weicher 躡ergang, kein harter Cut, Blend k鰊nte noch etwas besser sein aber genrell nicht schlecht;04:22;erkannt
+ee76cba3-b8a8-4d29-8f54-8b200322bf7e;REC013.WAV;398.1;4;sebro;;80;Apr 94;smooth;gute auf dem Beat, Cut dezent und gut zu h鰎en, guter Fade Out;06:38;erkannt
+ee76cba3-b8a8-4d29-8f54-8b200322bf7e;REC013.WAV;952.2;4;sebro;;89;1.0;smooth;ZU fr黨 mit den Tiefen in neuem Track hoch;15:52;erkannt
+ee76cba3-b8a8-4d29-8f54-8b200322bf7e;REC013.WAV;1169.7;4;sebro;;71;Apr 96;neutral;Loop passt gut rein, Transition evt etwas zu lange, also Timing kann man verbessern;19:30;erkannt
+ee76cba3-b8a8-4d29-8f54-8b200322bf7e;REC013.WAV;1466.4;4;sebro;;71;Sep 87;neutral;Tiefen zu abrupt raus, kein fliessender 躡ergang, fade out in neuen Track aber gut;24:26:00;erkannt
+0383a764-4f88-425d-b3a6-7bda901e7725;synthetic_mix.wav;113.0;;sebro;;70;15. Aug;neutral;;01:53;erkannt
+94576c8d-c521-4df7-a7a8-f02b0cd7b538;synthetic_mix.wav;113.0;;sebro;;70;15. Aug;neutral;;01:53;erkannt

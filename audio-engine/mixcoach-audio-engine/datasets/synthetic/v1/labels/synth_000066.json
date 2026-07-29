@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000066",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:46:02.875979Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1201.68,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\VA-4hero_Present_Brazilika_Vol_2-(FAROCD109)-2006-JUST\\11-natures_plan-broken_samba_(exclusive_track).mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 249.22,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Daphni\\Caribou - Honey.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 249.22,
+   "end_in_mix": 487.27,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\5 Years of Hyperdub - CD1\\11 - Turn Away.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 487.27,
+   "end_in_mix": 723.81,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Breaka - Mangled.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 723.81,
+   "end_in_mix": 961.03,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Chaos In the CBD - Come Together [In Dust We Trust].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 961.03,
+   "end_in_mix": 1201.68,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 245.88,
+   "overlap_end": 249.22,
+   "center_time": 247.55,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -284.6,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 460.52,
+   "overlap_end": 487.27,
+   "center_time": 473.9,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 722.93,
+   "overlap_end": 723.81,
+   "center_time": 723.37,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 954.34,
+   "overlap_end": 961.03,
+   "center_time": 957.69,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

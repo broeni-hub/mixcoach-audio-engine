@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000131",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:26:46.565457Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1051.99,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Kollektiv_Turmstrasse-Verrueckte_Welt-(NORE008)-FREEWEB-2006-KPS_INT\\04-kollektiv_turmstrasse-liaison.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 249.36,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Oldies but Goldies\\70er'\\VA_-_Fetenhits-the_Best_of_Real_Classics-2CD-2007-MOD\\114_hermes_house_band_-_i_will_survive.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 249.36,
+   "end_in_mix": 517.11,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\Sigur Ros\\sigur ros - hlemmur ost (2003) @192\\07-bversögn.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "A Major",
+   "camelot": "11B",
+   "start_in_mix": 517.11,
+   "end_in_mix": 600.93,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\01 Stimming & Einmusik - Madleine [Original Mix].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 600.93,
+   "end_in_mix": 842.61,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\04-benyayer_aka_dark_sky-wuh_(edit).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 842.61,
+   "end_in_mix": 1051.99,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 247.41,
+   "overlap_end": 249.36,
+   "center_time": 248.38,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 485.9,
+   "overlap_end": 517.11,
+   "center_time": 501.5,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 593.5,
+   "overlap_end": 600.93,
+   "center_time": 597.22,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 812.88,
+   "overlap_end": 842.61,
+   "center_time": 827.75,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,205 @@
+{
+ "summary": {
+  "mixes": 8,
+  "recall": 0.9,
+  "precision": 1.0,
+  "duplicate_matches": 2,
+  "boundary_error_median_s": 1.65,
+  "boundary_error_p90_s": 33.38,
+  "avg_match_seconds": 42.5
+ },
+ "results": [
+  {
+   "mix": "synth_000001",
+   "n_truth_findable": 6,
+   "n_found": 6,
+   "n_duplicate_matches": 0,
+   "n_matches": 6,
+   "n_correct_matches": 6,
+   "boundary_errors": [
+    0.0,
+    0.2369614512471685,
+    3.478231292517023,
+    1.2781859410430911,
+    1.6497052154194876,
+    0.44201814058953914,
+    1.787097505668953,
+    6.481587301587297,
+    22.82843537414965,
+    10.562879818594183,
+    112.03848072562346,
+    0.45154195011332376
+   ],
+   "t_prep": 8.6,
+   "t_match": 55.2,
+   "misses": [],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000002",
+   "n_truth_findable": 6,
+   "n_found": 5,
+   "n_duplicate_matches": 1,
+   "n_matches": 5,
+   "n_correct_matches": 5,
+   "boundary_errors": [
+    0.0,
+    7.587800453514717,
+    9.13056689342406,
+    0.41671201814062897,
+    0.7882312925170254,
+    47.67097505668937,
+    54.12530612244893,
+    3.4126530612244323,
+    113.2206575963719,
+    2.253537414966104
+   ],
+   "t_prep": 24.0,
+   "t_match": 129.9,
+   "misses": [
+    "05 - century (feat. hardhouse banton).mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000003",
+   "n_truth_findable": 5,
+   "n_found": 4,
+   "n_duplicate_matches": 0,
+   "n_matches": 4,
+   "n_correct_matches": 4,
+   "boundary_errors": [
+    0.0,
+    0.004240362811771092,
+    9.801133786848084,
+    0.3237868480725865,
+    1.5338095238095093,
+    1.1889342403628689,
+    90.57632653061228,
+    0.5374603174602726
+   ],
+   "t_prep": 6.1,
+   "t_match": 29.1,
+   "misses": [
+    "gui borattoforgive me5pentagram.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000004",
+   "n_truth_findable": 4,
+   "n_found": 3,
+   "n_duplicate_matches": 0,
+   "n_matches": 3,
+   "n_correct_matches": 3,
+   "boundary_errors": [
+    0.0,
+    3.879297052154186,
+    4.250816326530611,
+    0.20684807256236581,
+    0.9498866213152155,
+    1.3277777777777828
+   ],
+   "t_prep": 5.5,
+   "t_match": 23.6,
+   "misses": [
+    "01-appleblim_and_ramadanman-void_23.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000005",
+   "n_truth_findable": 4,
+   "n_found": 3,
+   "n_duplicate_matches": 1,
+   "n_matches": 3,
+   "n_correct_matches": 3,
+   "boundary_errors": [
+    0.0,
+    0.7437414965986306,
+    0.37081632653061547,
+    34.107596371882096,
+    10.938662131519209,
+    0.4734013605442442
+   ],
+   "t_prep": 5.1,
+   "t_match": 24.5,
+   "misses": [
+    "havana cultura band - 09 - orisa atjazz love soul remix.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000006",
+   "n_truth_findable": 6,
+   "n_found": 6,
+   "n_duplicate_matches": 0,
+   "n_matches": 6,
+   "n_correct_matches": 6,
+   "boundary_errors": [
+    0.0,
+    0.2369614512471685,
+    3.478231292517023,
+    1.2781859410430911,
+    1.6497052154194876,
+    0.44201814058953914,
+    1.787097505668953,
+    6.481587301587297,
+    22.82843537414965,
+    10.562879818594183,
+    112.03848072562346,
+    0.45154195011332376
+   ],
+   "t_prep": 6.6,
+   "t_match": 30.6,
+   "misses": [],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000007",
+   "n_truth_findable": 4,
+   "n_found": 4,
+   "n_duplicate_matches": 0,
+   "n_matches": 4,
+   "n_correct_matches": 4,
+   "boundary_errors": [
+    0.0,
+    0.09498866213149881,
+    0.2765306122448976,
+    2.672290249433104,
+    66.43029478458055,
+    1.8321088435374122,
+    1.460589569160902,
+    1.1057142857142708
+   ],
+   "t_prep": 5.0,
+   "t_match": 21.6,
+   "misses": [],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000008",
+   "n_truth_findable": 5,
+   "n_found": 5,
+   "n_duplicate_matches": 0,
+   "n_matches": 5,
+   "n_correct_matches": 5,
+   "boundary_errors": [
+    0.0,
+    0.08802721088432008,
+    0.8310657596371698,
+    15.204331065759618,
+    7.402426303854895,
+    5.183696145124713,
+    14.506825396825434,
+    16.018185941043157,
+    26.81174603174611,
+    11.71925170068016
+   ],
+   "t_prep": 5.9,
+   "t_match": 25.9,
+   "misses": [],
+   "false_matches": []
+  }
+ ]
+}

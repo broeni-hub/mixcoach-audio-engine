@@ -1,0 +1,11 @@
+{
+ "analysisId": "11da05af-edee-47c2-9b12-3972ab10448a",
+ "verdicts": {
+  "1": {
+   "midSec": 113.0,
+   "verdict": "not_a_transition"
+  }
+ },
+ "missed": [],
+ "updatedAt": 1783926204.0204449
+}

@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000114",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:21:46.130398Z",
+ "sample_rate": 22050,
+ "duration_seconds": 939.47,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\04. Gilberto Gil - Maracatu Atomico (Greg Wilson & Derek Kaye Remix).mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 103.36,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 245.3,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\Mouse on Mars\\autoditacker\\03-maggots hell wigs.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 103.36,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 245.3,
+   "end_in_mix": 486.39,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Groove\\RomareAll Night0Love Songs Part Two.mp3",
+   "bpm_original": 107.67,
+   "bpm_in_mix": 103.36,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 486.39,
+   "end_in_mix": 708.32,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\Lord & dego - Lord & dego 2 - 08 Faith Must Have Reason.flac",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 107.67,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 708.32,
+   "end_in_mix": 939.47,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 240.65,
+   "overlap_end": 245.3,
+   "center_time": 242.97,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 449.24,
+   "overlap_end": 486.39,
+   "center_time": 467.81,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 707.16,
+   "overlap_end": 708.32,
+   "center_time": 707.74,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000155",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:32:43.190533Z",
+ "sample_rate": 22050,
+ "duration_seconds": 992.1,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\call super - nervous sex traffic.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 245.27,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Fairmont\\FairmontTraum7Slow Mow Go.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 245.27,
+   "end_in_mix": 485.65,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\03_Heart Shaped Mole (Will Hofbauer Remix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 485.65,
+   "end_in_mix": 723.79,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\ewan.pearson - sci.fi.hi.fi. volume 1.2005\\ewan pearson - 15 - da fresh - broken dream.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 723.79,
+   "end_in_mix": 992.1,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 229.67,
+   "overlap_end": 245.27,
+   "center_time": 237.47,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 105.3,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 477.84,
+   "overlap_end": 485.65,
+   "center_time": 481.74,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 719.89,
+   "overlap_end": 723.79,
+   "center_time": 721.84,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 3
+  }
+ ]
+}

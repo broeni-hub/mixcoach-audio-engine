@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000018",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T11:09:37.902116Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1479.33,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Super Flu\\super flu - fibi maybe (original mix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 250.52,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\VA-4hero_Present_Brazilika_Vol_2-(FAROCD109)-2006-JUST\\15-milton_nascimento-saidas_e_bandeiras.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "E Major",
+   "camelot": "12B",
+   "start_in_mix": 250.52,
+   "end_in_mix": 477.54,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Nelson of the EastNight Frames2.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 477.54,
+   "end_in_mix": 717.29,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\VA-4hero_Present_Brazilika_Vol_2-(FAROCD109)-2006-JUST\\13-azymuth-tudo_que_voce_podia_ser.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 717.29,
+   "end_in_mix": 987.38,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit Swindle,Lorenz RhodeMusic for Clubs2Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 987.38,
+   "end_in_mix": 1221.18,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Magda - She's a Dancing Machine\\06 Central Bron-Z Program -Reflected-Boat-Black ... [Mark Henning Remix].mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 1221.18,
+   "end_in_mix": 1479.33,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 242.72,
+   "overlap_end": 250.52,
+   "center_time": 246.62,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": 152.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 473.64,
+   "overlap_end": 477.54,
+   "center_time": 475.59,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 134.4,
+   "key_compatibility_camelot_distance": 7,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 715.43,
+   "overlap_end": 717.29,
+   "center_time": 716.36,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 985.43,
+   "overlap_end": 987.38,
+   "center_time": 986.41,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 1219.33,
+   "overlap_end": 1221.18,
+   "center_time": 1220.25,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

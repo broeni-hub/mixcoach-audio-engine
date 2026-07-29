@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000135",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:27:42.202854Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1029.82,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\james holden - 03 10101.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 245.39,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Jimpster\\JimpsterSolitude2Electronica Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 245.39,
+   "end_in_mix": 481.07,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\04 - Jesse Perez - Pocket Full Of Ones.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 481.07,
+   "end_in_mix": 721.61,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\02 - Fis-T - Night Hunter.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 721.61,
+   "end_in_mix": 859.32,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoWatsollndit - Original Version15Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 859.32,
+   "end_in_mix": 1029.82,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 243.53,
+   "overlap_end": 245.39,
+   "center_time": 244.46,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -252.2,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 473.64,
+   "overlap_end": 481.07,
+   "center_time": 477.36,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 721.12,
+   "overlap_end": 721.61,
+   "center_time": 721.36,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 843.72,
+   "overlap_end": 859.32,
+   "center_time": 851.52,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

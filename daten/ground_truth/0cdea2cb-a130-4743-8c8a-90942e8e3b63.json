@@ -1,0 +1,27 @@
+{
+ "analysisId": "0cdea2cb-a130-4743-8c8a-90942e8e3b63",
+ "verdicts": {
+  "3": {
+   "midSec": 374.0,
+   "verdict": "not_a_transition"
+  },
+  "7": {
+   "midSec": 902.0,
+   "verdict": "not_a_transition"
+  },
+  "10": {
+   "midSec": 1407.0,
+   "verdict": "not_a_transition"
+  },
+  "13": {
+   "midSec": 1831.0,
+   "verdict": "not_a_transition"
+  },
+  "14": {
+   "midSec": 1912.0,
+   "verdict": "not_a_transition"
+  }
+ },
+ "missed": [],
+ "updatedAt": 1783926204.0358942
+}

@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000167",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:39:21.110487Z",
+ "sample_rate": 22050,
+ "duration_seconds": 920.64,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\SBTRKT\\02 - BACK ON.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 193.25,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Hugo MariSwim1Serotonin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 193.25,
+   "end_in_mix": 426.1,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\03-Paul Kalkbrenner-Castanets.MP3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 426.1,
+   "end_in_mix": 662.59,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Bugz in the Attic\\amy winehouse - in my bed - 05 - in my bed (bugz in the attic dub).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 662.59,
+   "end_in_mix": 920.64,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 191.39,
+   "overlap_end": 193.25,
+   "center_time": 192.32,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 411.24,
+   "overlap_end": 426.1,
+   "center_time": 418.67,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 660.64,
+   "overlap_end": 662.59,
+   "center_time": 661.62,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000094",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:14:19.034499Z",
+ "sample_rate": 22050,
+ "duration_seconds": 912.16,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Floating Points\\1-02 Vocoder.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\DegoDego's Dancehall Cry18A Wha' Him Deh Pon.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 260.0,
+   "end_in_mix": 359.61,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Sepalcure\\Sepalcure-Fleur_EP-(HF026D)2011\\04-sepalcure-your_love.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 359.61,
+   "end_in_mix": 575.33,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Tech House\\AdryianoMove It, Move It - Original Mix2Heist Recordings Releases.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 575.33,
+   "end_in_mix": 821.64,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\05 Champion - Gunshot.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 821.64,
+   "end_in_mix": 912.16,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 245.88,
+   "overlap_end": 260.0,
+   "center_time": 252.94,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 9.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 331.38,
+   "overlap_end": 359.61,
+   "center_time": 345.5,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 573.65,
+   "overlap_end": 575.33,
+   "center_time": 574.49,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 10.0,
+   "beat_offset_ms": 95.3,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 807.53,
+   "overlap_end": 821.64,
+   "center_time": 814.59,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  }
+ ]
+}

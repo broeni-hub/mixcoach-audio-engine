@@ -1,0 +1,16 @@
+{
+ "file": "REC009.WAV",
+ "annotated_by": "Basti (Ohren, live in der App validiert)",
+ "date": "2026-07-02",
+ "note": "ca.-Angaben; 23:20 laut Basti von der App nicht erkannt",
+ "true_transitions_sec": [
+  176,
+  320,
+  500,
+  765,
+  1055,
+  1400,
+  1701
+ ],
+ "track_count": 8
+}

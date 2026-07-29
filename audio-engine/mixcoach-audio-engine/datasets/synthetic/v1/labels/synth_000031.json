@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000031",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:22:55.315983Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1144.11,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Acid Pauli\\09. Acid Pauli - Seufzende Steine.mp3",
+   "bpm_original": 172.27,
+   "bpm_in_mix": 172.27,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 259.78,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\Mouse on Mars\\Iaora Tahiti\\Track05.mp3",
+   "bpm_original": 161.5,
+   "bpm_in_mix": 172.27,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 259.78,
+   "end_in_mix": 471.43,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\4hero - play with the changes - 2007\\07_4hero-something_in_the_way_(feat._bembe_segue_and_kaidi_tatham).mp3",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 161.5,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 471.43,
+   "end_in_mix": 682.87,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\Dego,KaidiDon't Remain the Same3.mp3",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 152.0,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 682.87,
+   "end_in_mix": 912.78,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\rekordbox\\Sampler\\GROOVE CIRCUIT\\PRESET\\4-Floor Breaks Kit\\House4.wav",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 152.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 912.78,
+   "end_in_mix": 922.42,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Minilogue - Animals 2 CD (2008)\\CD2 Ambient CD\\(11) [Minilogue] Europhonia.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 152.0,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 922.42,
+   "end_in_mix": 1144.11,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 248.64,
+   "overlap_end": 259.78,
+   "center_time": 254.21,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 449.14,
+   "overlap_end": 471.43,
+   "center_time": 460.29,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 659.1,
+   "overlap_end": 682.87,
+   "center_time": 670.99,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 909.62,
+   "overlap_end": 912.78,
+   "center_time": 911.2,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 912.78,
+   "overlap_end": 922.42,
+   "center_time": 917.6,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

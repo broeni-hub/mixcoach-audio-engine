@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000073",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:51:16.415270Z",
+ "sample_rate": 22050,
+ "duration_seconds": 856.24,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoFemuscle - Original Version6Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 185.04,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\04 - Gas Logs.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 185.04,
+   "end_in_mix": 439.72,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\Dego,Kaidi TathamWe Are Virgo5A Wha' Him Deh Pon.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 439.72,
+   "end_in_mix": 616.54,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\01 - Twelve Steps.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 616.54,
+   "end_in_mix": 856.24,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 180.95,
+   "overlap_end": 185.04,
+   "center_time": 183.0,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 407.02,
+   "overlap_end": 439.72,
+   "center_time": 423.37,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -245.4,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 585.33,
+   "overlap_end": 616.54,
+   "center_time": 600.93,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

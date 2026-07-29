@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000145",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:30:27.999114Z",
+ "sample_rate": 22050,
+ "duration_seconds": 905.85,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\drum&bassmix1\\13.the real.mp3",
+   "bpm_original": 86.13,
+   "bpm_in_mix": 86.13,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 231.81,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Question\\QuestionConte5Study Guide.mp3",
+   "bpm_original": 89.1,
+   "bpm_in_mix": 86.13,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 231.81,
+   "end_in_mix": 420.5,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Benga - Transformers.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 89.1,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 420.5,
+   "end_in_mix": 657.43,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\03 fi3ac2031030.mp3",
+   "bpm_original": 89.1,
+   "bpm_in_mix": 92.29,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 657.43,
+   "end_in_mix": 905.85,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 230.42,
+   "overlap_end": 231.81,
+   "center_time": 231.11,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 398.2,
+   "overlap_end": 420.5,
+   "center_time": 409.35,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 654.74,
+   "overlap_end": 657.43,
+   "center_time": 656.09,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": 299.3,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000163",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:37:47.584353Z",
+ "sample_rate": 22050,
+ "duration_seconds": 896.48,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Gui Boratto\\Gui Boratto - Take My Breath Away 2009\\08 Besides.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "D# Major",
+   "camelot": "5B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 252.85,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Space Dimension Controller\\Kaleidoscopic Ecstasy - Space Dimension Controller.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 99.38,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 252.85,
+   "end_in_mix": 508.99,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoBad Idea6Mosaik.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 103.36,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 508.99,
+   "end_in_mix": 663.14,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Jazzuelle, Lars Behrenroth, Tamara DeyFall into You - Deetron Remix Radio Edit0Fall into You (Deetron Remix Radio Edit).mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 99.38,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 663.14,
+   "end_in_mix": 896.48,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 250.44,
+   "overlap_end": 252.85,
+   "center_time": 251.64,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 499.33,
+   "overlap_end": 508.99,
+   "center_time": 504.16,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 662.56,
+   "overlap_end": 663.14,
+   "center_time": 662.85,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

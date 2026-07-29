@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000149",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:31:07.064556Z",
+ "sample_rate": 22050,
+ "duration_seconds": 651.66,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - a+a=b - 02 - portmanteau zs lovedearest mix.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 103.36,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 250.15,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoDoctor Beak2Doctor Beak's Rantanplant.mp3",
+   "bpm_original": 107.67,
+   "bpm_in_mix": 103.36,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 250.15,
+   "end_in_mix": 491.59,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoKatharsis Impossible - Original Version18Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 107.67,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 491.59,
+   "end_in_mix": 552.59,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\Sigur Ros\\sigur ros - hlemmur ost (2003) @192\\09-jósef tekur fimmuna í vinnuna 2.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 99.38,
+   "key": "A# Major",
+   "camelot": "6B",
+   "start_in_mix": 552.59,
+   "end_in_mix": 651.66,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 240.86,
+   "overlap_end": 250.15,
+   "center_time": 245.5,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 81.1,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 454.44,
+   "overlap_end": 491.59,
+   "center_time": 473.01,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 552.03,
+   "overlap_end": 552.59,
+   "center_time": 552.31,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  }
+ ]
+}

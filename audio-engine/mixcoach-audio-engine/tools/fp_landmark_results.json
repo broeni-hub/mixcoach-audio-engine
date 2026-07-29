@@ -1,0 +1,35 @@
+[
+ {
+  "mix": "synth_000001",
+  "findable": 6,
+  "found": 6,
+  "n_matches": 6,
+  "correct": 6,
+  "lm_correct": 0,
+  "false": [],
+  "t_chroma": 47.1,
+  "t_lm": 1967.9
+ },
+ {
+  "mix": "synth_000002",
+  "findable": 6,
+  "found": 5,
+  "n_matches": 5,
+  "correct": 5,
+  "lm_correct": 0,
+  "false": [],
+  "t_chroma": 46.8,
+  "t_lm": 2402.9
+ },
+ {
+  "mix": "synth_000003",
+  "findable": 5,
+  "found": 5,
+  "n_matches": 5,
+  "correct": 5,
+  "lm_correct": 1,
+  "false": [],
+  "t_chroma": 100.9,
+  "t_lm": 2406.8
+ }
+]

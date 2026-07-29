@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000106",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:18:32.332019Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1229.44,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Techno\\07-Sascha Funke-Soso.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 247.85,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Manuel Darquart - Gutterball.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 247.85,
+   "end_in_mix": 448.77,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\AtjazzFox Tooth - Original Mix12Fox Tooth.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 448.77,
+   "end_in_mix": 720.15,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\02. Jorg Kuning - Ex-tensor (Original Mix).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 720.15,
+   "end_in_mix": 989.24,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Atjazz,Nacho MarcoWind & Sea - Nacho Marco Remix30That Something Else!.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 989.24,
+   "end_in_mix": 1229.44,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 216.64,
+   "overlap_end": 247.85,
+   "center_time": 232.25,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 447.8,
+   "overlap_end": 448.77,
+   "center_time": 448.28,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 718.1,
+   "overlap_end": 720.15,
+   "center_time": 719.12,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": 171.4,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 981.44,
+   "overlap_end": 989.24,
+   "center_time": 985.34,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

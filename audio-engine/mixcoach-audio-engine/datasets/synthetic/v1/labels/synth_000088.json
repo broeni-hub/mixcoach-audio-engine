@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000088",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:06:52.908177Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1212.99,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Electro Deluxe - Stardown (2005)\\10 Seatback.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 248.36,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleFreeqy Polly7Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 248.36,
+   "end_in_mix": 487.43,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\01 - I Wanna Know (Seven Davis Jr Midnight Remix) [Explicit].mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 487.43,
+   "end_in_mix": 728.29,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\AtjazzWutchbender40Lab Results.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 728.29,
+   "end_in_mix": 955.04,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\2000black\\2000blackSunday Avuncular1Sunday Avuncular.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 955.04,
+   "end_in_mix": 1212.99,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 240.93,
+   "overlap_end": 248.36,
+   "center_time": 244.65,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 480.0,
+   "overlap_end": 487.43,
+   "center_time": 483.72,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 191.5,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 697.09,
+   "overlap_end": 728.29,
+   "center_time": 712.69,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 952.99,
+   "overlap_end": 955.04,
+   "center_time": 954.01,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000175",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:42:57.620982Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1243.53,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Girls of the Internet,Peven EverettLove Delicious - 12 Edit0Love Delicious.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 246.62,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Jazz,Blues\\NuJazz\\Saint Germain\\Saint Germain - Lounge\\CD1\\Electro Stew - Saint Germain - Lounge -  - Junkie Chase (Cyb.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 246.62,
+   "end_in_mix": 499.88,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Gui Boratto\\Gui Boratto - Chromophobia\\07. Gui Boratto - The Blessing.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 499.88,
+   "end_in_mix": 751.42,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\03-will_hofbauer-mudpuller_(eden_burns_whistle_beatz_remix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 751.42,
+   "end_in_mix": 990.96,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\CHLOE (ThÃ©venin) - Control (Original Mix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 990.96,
+   "end_in_mix": 1243.53,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 242.53,
+   "overlap_end": 246.62,
+   "center_time": 244.58,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 491.71,
+   "overlap_end": 499.88,
+   "center_time": 495.79,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 747.52,
+   "overlap_end": 751.42,
+   "center_time": 749.47,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 83.9,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 983.53,
+   "overlap_end": 990.96,
+   "center_time": 987.24,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

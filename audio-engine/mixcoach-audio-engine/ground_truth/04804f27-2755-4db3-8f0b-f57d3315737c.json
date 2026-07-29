@@ -1,0 +1,166 @@
+{
+ "analysisId": "04804f27-2755-4db3-8f0b-f57d3315737c",
+ "verdicts": {
+  "1": {
+   "midSec": 487.2,
+   "verdict": "not_a_transition"
+  },
+  "2": {
+   "midSec": 619.65,
+   "verdict": "correct"
+  },
+  "3": {
+   "midSec": 788.32,
+   "verdict": "correct"
+  },
+  "4": {
+   "midSec": 999.57,
+   "verdict": "correct"
+  },
+  "5": {
+   "midSec": 1148.62,
+   "verdict": "correct"
+  },
+  "6": {
+   "midSec": 1250.37,
+   "verdict": "correct"
+  },
+  "7": {
+   "midSec": 1372.3,
+   "verdict": "correct"
+  },
+  "8": {
+   "midSec": 1541.73,
+   "verdict": "correct"
+  },
+  "9": {
+   "midSec": 1771.94,
+   "verdict": "not_a_transition"
+  },
+  "10": {
+   "midSec": 1909.93,
+   "verdict": "timing_off",
+   "correctedSec": 1857.63
+  },
+  "11": {
+   "midSec": 2109.14,
+   "verdict": "correct"
+  },
+  "12": {
+   "midSec": 2232.51,
+   "verdict": "correct"
+  },
+  "13": {
+   "midSec": 2386.15,
+   "verdict": "timing_off",
+   "correctedSec": 2305.56
+  },
+  "14": {
+   "midSec": 2450.47,
+   "verdict": "timing_off",
+   "correctedSec": 2374.73
+  },
+  "15": {
+   "midSec": 2718.8,
+   "verdict": "timing_off",
+   "correctedSec": 2692.45
+  },
+  "16": {
+   "midSec": 2821.78,
+   "verdict": "not_a_transition"
+  },
+  "17": {
+   "midSec": 3029.88,
+   "verdict": "timing_off",
+   "correctedSec": 2983.46
+  },
+  "18": {
+   "midSec": 3092.76,
+   "verdict": "timing_off",
+   "correctedSec": 3046.6
+  },
+  "19": {
+   "midSec": 3330.37,
+   "verdict": "correct"
+  },
+  "20": {
+   "midSec": 3393.25,
+   "verdict": "correct"
+  },
+  "21": {
+   "midSec": 3605.66,
+   "verdict": "timing_off",
+   "correctedSec": 3586.25
+  },
+  "22": {
+   "midSec": 3690.86,
+   "verdict": "timing_off",
+   "correctedSec": 3653.38
+  },
+  "23": {
+   "midSec": 3881.93,
+   "verdict": "correct"
+  },
+  "24": {
+   "midSec": 4004.82,
+   "verdict": "timing_off",
+   "correctedSec": 3956.82
+  },
+  "25": {
+   "midSec": 4243.22,
+   "verdict": "timing_off",
+   "correctedSec": 4122.88
+  },
+  "26": {
+   "midSec": 4368.0,
+   "verdict": "correct"
+  },
+  "27": {
+   "midSec": 4455.14,
+   "verdict": "timing_off",
+   "correctedSec": 4337.71
+  },
+  "28": {
+   "midSec": 4713.16,
+   "verdict": "correct"
+  },
+  "29": {
+   "midSec": 5309.57,
+   "verdict": "timing_off",
+   "correctedSec": 5299.98
+  },
+  "30": {
+   "midSec": 5484.37,
+   "verdict": "correct"
+  },
+  "31": {
+   "midSec": 5804.92,
+   "verdict": "timing_off",
+   "correctedSec": 5789.43
+  },
+  "32": {
+   "midSec": 6049.73,
+   "verdict": "timing_off",
+   "correctedSec": 5976.93
+  },
+  "33": {
+   "midSec": 6310.84,
+   "verdict": "timing_off",
+   "correctedSec": 6150.28
+  },
+  "34": {
+   "midSec": 6628.88,
+   "verdict": "timing_off",
+   "correctedSec": 6565.26
+  }
+ },
+ "missed": [
+  183.67,
+  221.81,
+  304.96,
+  6837.26,
+  7015.65,
+  7167.24
+ ],
+ "updatedAt": 1783354222.5271094
+}

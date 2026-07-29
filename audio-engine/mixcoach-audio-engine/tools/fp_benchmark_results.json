@@ -1,0 +1,194 @@
+{
+ "summary": {
+  "mixes": 8,
+  "recall": 0.7,
+  "precision": 0.9655,
+  "boundary_error_median_s": 1.39,
+  "boundary_error_p90_s": 14.86,
+  "avg_match_seconds": 8.4
+ },
+ "results": [
+  {
+   "mix": "synth_000001",
+   "n_truth_findable": 6,
+   "n_found": 5,
+   "n_matches": 5,
+   "n_correct_matches": 5,
+   "boundary_errors": [
+    0.0,
+    0.2369614512471685,
+    3.478231292517023,
+    1.2781859410430911,
+    1.6497052154194876,
+    0.44201814058953914,
+    1.787097505668953,
+    6.481587301587297,
+    22.82843537414965,
+    10.562879818594183
+   ],
+   "t_prep": 18.6,
+   "t_match": 8.9,
+   "misses": [
+    "joe love, paranoid london - love one self with joe love albu"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000002",
+   "n_truth_findable": 6,
+   "n_found": 3,
+   "n_matches": 4,
+   "n_correct_matches": 3,
+   "boundary_errors": [
+    0.0,
+    7.587800453514717,
+    0.7882312925170254,
+    47.67097505668937,
+    113.2206575963719,
+    2.253537414966104
+   ],
+   "t_prep": 7.6,
+   "t_match": 10.3,
+   "misses": [
+    "daphniface to face2.mp3",
+    "01. adam kroll - klostergarten.mp3",
+    "05 - century (feat. hardhouse banton).mp3"
+   ],
+   "false_matches": [
+    "daphni - 02 - face to face.mp3"
+   ]
+  },
+  {
+   "mix": "synth_000003",
+   "n_truth_findable": 5,
+   "n_found": 3,
+   "n_matches": 3,
+   "n_correct_matches": 3,
+   "boundary_errors": [
+    0.0,
+    0.004240362811771092,
+    9.801133786848084,
+    0.3237868480725865,
+    1.5338095238095093,
+    1.1889342403628689
+   ],
+   "t_prep": 5.8,
+   "t_match": 8.4,
+   "misses": [
+    "gui borattoforgive me5pentagram.mp3",
+    "02-marek_hemmann-tagoma.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000004",
+   "n_truth_findable": 4,
+   "n_found": 3,
+   "n_matches": 3,
+   "n_correct_matches": 3,
+   "boundary_errors": [
+    0.0,
+    3.879297052154186,
+    4.250816326530611,
+    0.20684807256236581,
+    0.9498866213152155,
+    1.3277777777777828
+   ],
+   "t_prep": 5.4,
+   "t_match": 7.7,
+   "misses": [
+    "01-appleblim_and_ramadanman-void_23.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000005",
+   "n_truth_findable": 4,
+   "n_found": 2,
+   "n_matches": 2,
+   "n_correct_matches": 2,
+   "boundary_errors": [
+    0.0,
+    0.7437414965986306,
+    10.938662131519209,
+    0.4734013605442442
+   ],
+   "t_prep": 5.3,
+   "t_match": 7.6,
+   "misses": [
+    "211-stephan_bodzin_s_marc_romboy-triton-ifpd.mp3",
+    "havana cultura band - 09 - orisa atjazz love soul remix.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000006",
+   "n_truth_findable": 6,
+   "n_found": 5,
+   "n_matches": 5,
+   "n_correct_matches": 5,
+   "boundary_errors": [
+    0.0,
+    0.2369614512471685,
+    3.478231292517023,
+    1.2781859410430911,
+    1.6497052154194876,
+    0.44201814058953914,
+    1.787097505668953,
+    6.481587301587297,
+    22.82843537414965,
+    10.562879818594183
+   ],
+   "t_prep": 6.5,
+   "t_match": 8.9,
+   "misses": [
+    "joe love, paranoid london - love one self with joe love albu"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000007",
+   "n_truth_findable": 4,
+   "n_found": 3,
+   "n_matches": 3,
+   "n_correct_matches": 3,
+   "boundary_errors": [
+    0.0,
+    0.09498866213149881,
+    0.2765306122448976,
+    2.672290249433104,
+    1.460589569160902,
+    1.1057142857142708
+   ],
+   "t_prep": 4.8,
+   "t_match": 7.2,
+   "misses": [
+    "2-mosca-orange jack.mp3"
+   ],
+   "false_matches": []
+  },
+  {
+   "mix": "synth_000008",
+   "n_truth_findable": 5,
+   "n_found": 4,
+   "n_matches": 4,
+   "n_correct_matches": 4,
+   "boundary_errors": [
+    0.0,
+    0.08802721088432008,
+    0.8310657596371698,
+    15.204331065759618,
+    7.402426303854895,
+    5.183696145124713,
+    14.506825396825434,
+    16.018185941043157
+   ],
+   "t_prep": 5.9,
+   "t_match": 7.8,
+   "misses": [
+    "(11) [minilogue] europhonia.mp3"
+   ],
+   "false_matches": []
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000045",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:24:19.292962Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1431.93,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Daphni\\Daphni - Cherry.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 259.32,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt - Extra Welt Hits [CORLP048DIGITAL]\\Extrawelt - Dark Side Of My Room (Live at Fusion Festival) [Cocoon Recordings].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 259.32,
+   "end_in_mix": 479.31,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Detroit House\\Kassian,DJ NatureLove 42 - DJ Nature Remix4Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 479.31,
+   "end_in_mix": 717.57,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\Kassian - Off World Vehicles [Faux Poly].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 717.57,
+   "end_in_mix": 985.59,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Parker Madicine,Detroit SwindleHeartbreaker - Detroit Swindle Remix2Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 985.59,
+   "end_in_mix": 1201.65,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Techno\\06-Sascha Funke-Twingo.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 1201.65,
+   "end_in_mix": 1431.93,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 245.2,
+   "overlap_end": 259.32,
+   "center_time": 252.26,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -273.2,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 475.78,
+   "overlap_end": 479.31,
+   "center_time": 477.54,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 716.64,
+   "overlap_end": 717.57,
+   "center_time": 717.1,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 954.39,
+   "overlap_end": 985.59,
+   "center_time": 969.99,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 1171.93,
+   "overlap_end": 1201.65,
+   "center_time": 1186.79,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000081",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:01:15.775770Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1230.8,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\VA_-_Stephan_Bodzin_vs_Marc_Romboy_-_Luna-(Retail_Boxset)-READNFO-3CD-2011-iFPD\\305-stephan_bodzin_vs_marc_romboy-telesto_(martin_buttrich_remix)-ifpd.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Minilogue - Animals 2 CD (2008)\\CD1 Dance CD\\(03) [Minilogue] Hitchhiker's Choice.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 260.0,
+   "end_in_mix": 498.05,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Alma Negra,Hugo MariThis Is the Place - Hugo Mari Remix6Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 498.05,
+   "end_in_mix": 740.84,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Fairmont-Coloured_In_Memory-CD-2007-TSP\\07-fairmont-bikini_atoll.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D Major",
+   "camelot": "10B",
+   "start_in_mix": 740.84,
+   "end_in_mix": 966.58,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\Bobby Womack - Love Is Gonna Lift You Up (Julio Bashmore Remix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G Major",
+   "camelot": "9B",
+   "start_in_mix": 966.58,
+   "end_in_mix": 1230.8,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 259.54,
+   "overlap_end": 260.0,
+   "center_time": 259.77,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 496.19,
+   "overlap_end": 498.05,
+   "center_time": 497.12,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 733.04,
+   "overlap_end": 740.84,
+   "center_time": 736.94,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 7,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 958.78,
+   "overlap_end": 966.58,
+   "center_time": 962.68,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

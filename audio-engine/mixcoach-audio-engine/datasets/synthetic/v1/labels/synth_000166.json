@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000166",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:39:13.101158Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1355.25,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\02 Beyond.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Panthera Krause\\Panthera KrauseThrough My Mind1Laika.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "C# Major",
+   "camelot": "3B",
+   "start_in_mix": 260.0,
+   "end_in_mix": 501.49,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\drum&bassmix1\\15.the real.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 501.49,
+   "end_in_mix": 611.2,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\05 - Rhythm of Auld (feat. J'Danna).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 611.2,
+   "end_in_mix": 871.78,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt - Extra Welt Hits [CORLP048DIGITAL]\\Extrawelt - Drehfehler (Original Mix) [Cocoon Recordings].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 871.78,
+   "end_in_mix": 1127.92,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\Destiny71zMarmot Black27.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 1127.92,
+   "end_in_mix": 1355.25,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 259.07,
+   "overlap_end": 260.0,
+   "center_time": 259.54,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 471.77,
+   "overlap_end": 501.49,
+   "center_time": 486.63,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 603.4,
+   "overlap_end": 611.2,
+   "center_time": 607.3,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 869.73,
+   "overlap_end": 871.78,
+   "center_time": 870.75,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 1112.31,
+   "overlap_end": 1127.92,
+   "center_time": 1120.11,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

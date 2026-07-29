@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000075",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:56:47.985351Z",
+ "sample_rate": 22050,
+ "duration_seconds": 641.11,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Oldies but Goldies\\The Rolling Stone Magazines 500 Greatest Songs Of All Time\\067 - Elvis Presley - Jailhouse Rock.mp3",
+   "bpm_original": 161.5,
+   "bpm_in_mix": 161.5,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 145.26,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\rekordbox\\Sampler\\GROOVE CIRCUIT\\PRESET\\4-Floor Breaks Kit\\House4.wav",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 161.5,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 145.26,
+   "end_in_mix": 151.72,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\Mouse on Mars\\autoditacker\\08-sw-shop.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 152.0,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 151.72,
+   "end_in_mix": 379.18,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\AtjazzIt's Complete4Labfunk.mp3",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 143.55,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 379.18,
+   "end_in_mix": 641.11,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 139.32,
+   "overlap_end": 145.26,
+   "center_time": 142.29,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 145.26,
+   "overlap_end": 151.72,
+   "center_time": 148.49,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 91.5,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 366.55,
+   "overlap_end": 379.18,
+   "center_time": 372.86,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

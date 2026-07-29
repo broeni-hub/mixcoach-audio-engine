@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000004",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T10:15:18.169065Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1068.74,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Dalfie - R Rated (Original Mix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 258.37,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Harvey Sutherland\\Harvey SutherlandSunday Flower2Edges EP.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 258.37,
+   "end_in_mix": 475.38,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - rocket in the pocket.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 475.38,
+   "end_in_mix": 726.85,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\01-appleblim_and_ramadanman-void_23.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 726.85,
+   "end_in_mix": 987.73,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\Adam F-Colours\\02-73.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 987.73,
+   "end_in_mix": 1068.74,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 227.16,
+   "overlap_end": 258.37,
+   "center_time": 242.76,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 12.0,
+   "beat_offset_ms": 112.5,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 473.43,
+   "overlap_end": 475.38,
+   "center_time": 474.41,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 722.77,
+   "overlap_end": 726.85,
+   "center_time": 724.81,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 10.0,
+   "beat_offset_ms": 101.1,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 983.64,
+   "overlap_end": 987.73,
+   "center_time": 985.69,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

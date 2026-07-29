@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000044",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:24:11.293454Z",
+ "sample_rate": 22050,
+ "duration_seconds": 962.32,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleLucky Number 1310Heist Recordings Releases.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "G# Major",
+   "camelot": "4B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 178.07,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\08 Digital Mystikz - New Life Baby Paris.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 178.07,
+   "end_in_mix": 272.32,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\UnmapThe Gold Route48Slow Mow Go.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 272.32,
+   "end_in_mix": 474.27,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Statues\\01 Familiar Feeling.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 474.27,
+   "end_in_mix": 718.06,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt_-_Deine_Beine_Rmxs\\02-extrawelt_-_mit_liese_auf_der_wiese_(max_cooper_melt_remix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 718.06,
+   "end_in_mix": 962.32,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 171.39,
+   "overlap_end": 178.07,
+   "center_time": 174.73,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 271.91,
+   "overlap_end": 272.32,
+   "center_time": 272.11,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 473.85,
+   "overlap_end": 474.27,
+   "center_time": 474.06,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 714.53,
+   "overlap_end": 718.06,
+   "center_time": 716.29,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 12.0,
+   "beat_offset_ms": -140.4,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  }
+ ]
+}

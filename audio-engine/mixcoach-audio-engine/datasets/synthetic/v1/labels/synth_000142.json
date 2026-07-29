@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000142",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:29:50.382226Z",
+ "sample_rate": 22050,
+ "duration_seconds": 989.53,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\Alannah MylesBlack Velvet58Slow Mow Go.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 92.29,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 254.91,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\2000black\\2000blackDealt a Bad Hand12A Next Set a Rockers.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 92.29,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 254.91,
+   "end_in_mix": 500.76,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - gulls galore.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 500.76,
+   "end_in_mix": 574.07,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Freddie Joachim\\Freddie JoachimThe Jade14Study Guide.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 99.38,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 574.07,
+   "end_in_mix": 748.01,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Breaks\\01 - Yemp Booty (Original Mix).mp3",
+   "bpm_original": 86.13,
+   "bpm_in_mix": 92.29,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 748.01,
+   "end_in_mix": 989.53,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 234.1,
+   "overlap_end": 254.91,
+   "center_time": 244.51,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 143.1,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 490.36,
+   "overlap_end": 500.76,
+   "center_time": 495.56,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 564.41,
+   "overlap_end": 574.07,
+   "center_time": 569.24,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": -274.4,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 746.8,
+   "overlap_end": 748.01,
+   "center_time": 747.4,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  }
+ ]
+}

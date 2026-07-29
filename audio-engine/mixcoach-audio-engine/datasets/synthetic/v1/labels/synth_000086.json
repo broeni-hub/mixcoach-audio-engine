@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000086",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:04:16.813743Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1221.49,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Floating Points\\05 - Fast Forward.flac",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "D Major",
+   "camelot": "10B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 258.23,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Magda - She's a Dancing Machine\\05 Suces Mes Graines-Dark Pearl-Artists Have Bad Haircuts-Oblivicleas.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 258.23,
+   "end_in_mix": 485.74,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\1 - Don't Need No Dirty Money.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 485.74,
+   "end_in_mix": 739.9,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Da CapoUmbovukazi0Hyenah presents RISE RADAR 01.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 739.9,
+   "end_in_mix": 963.35,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\Patrice ScottM.F.D.T. - Original Mix3.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 963.35,
+   "end_in_mix": 1221.49,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 250.8,
+   "overlap_end": 258.23,
+   "center_time": 254.51,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 478.31,
+   "overlap_end": 485.74,
+   "center_time": 482.02,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -57.8,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 724.3,
+   "overlap_end": 739.9,
+   "center_time": 732.1,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 961.49,
+   "overlap_end": 963.35,
+   "center_time": 962.42,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

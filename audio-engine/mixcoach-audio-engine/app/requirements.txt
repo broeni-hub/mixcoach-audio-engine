@@ -1,0 +1,13 @@
+# MixCoach Audio-Engine: alle benoetigten Bibliotheken.
+# Wiederherstellen (im Ordner mixcoach-audio-engine, venv aktiv oder direkt):
+#   ..\.venv\Scripts\python.exe -m pip install -r app\requirements.txt
+fastapi
+uvicorn
+python-multipart
+librosa
+soundfile
+scipy
+numpy
+pydantic
+# Nur fuer das Retraining des ML-Modells (app/calibration/retrain_model.py):
+# scikit-learn

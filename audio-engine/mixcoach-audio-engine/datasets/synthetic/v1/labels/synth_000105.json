@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000105",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:18:19.064680Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1387.82,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Sepalcure\\Sepalcure - Love Pressure EP\\01 Love Pressure.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 92.29,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 238.33,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - my dog eats beats.mp3",
+   "bpm_original": 89.1,
+   "bpm_in_mix": 92.29,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 238.33,
+   "end_in_mix": 474.36,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Super Flu\\11 - Skorr.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 89.1,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 474.36,
+   "end_in_mix": 728.55,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Groove\\02 - Watermelon Woman (Dub).mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 95.7,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 728.55,
+   "end_in_mix": 976.45,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\Photek - Modus Operandi\\08-Modus Operandi.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 976.45,
+   "end_in_mix": 1196.32,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Statues\\06 Blow X Blow.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 1196.32,
+   "end_in_mix": 1387.82,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 227.93,
+   "overlap_end": 238.33,
+   "center_time": 233.13,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 453.55,
+   "overlap_end": 474.36,
+   "center_time": 463.96,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 92.3,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 723.16,
+   "overlap_end": 728.55,
+   "center_time": 725.85,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -114.2,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 936.32,
+   "overlap_end": 976.45,
+   "center_time": 956.38,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 1195.72,
+   "overlap_end": 1196.32,
+   "center_time": 1196.02,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  }
+ ]
+}

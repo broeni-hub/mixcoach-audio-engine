@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000136",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:27:58.094813Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1410.71,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\COIDO - Wedge.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 234.96,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Kassian - Off World Vehicles.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 234.96,
+   "end_in_mix": 473.59,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Aloka - Concave [Typeless Records].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 473.59,
+   "end_in_mix": 727.02,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Magda - She's a Dancing Machine\\02 Adgam-Twilite 4-Spectrometer.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 727.02,
+   "end_in_mix": 948.09,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\CrackazatHolding You Close0Rainbow Fantasia.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "A Major",
+   "camelot": "11B",
+   "start_in_mix": 948.09,
+   "end_in_mix": 1191.86,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\Adam F-Colours\\03-Metropolis.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 1191.86,
+   "end_in_mix": 1410.71,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 234.08,
+   "overlap_end": 234.96,
+   "center_time": 234.52,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 471.83,
+   "overlap_end": 473.59,
+   "center_time": 472.71,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 725.16,
+   "overlap_end": 727.02,
+   "center_time": 726.09,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 944.38,
+   "overlap_end": 948.09,
+   "center_time": 946.24,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 1160.65,
+   "overlap_end": 1191.86,
+   "center_time": 1176.25,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

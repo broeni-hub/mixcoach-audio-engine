@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000112",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:20:19.200757Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1495.93,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\08-Paul Kalkbrenner-Dockyard.MP3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 256.98,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Gui Boratto\\Gui Boratto - Chromophobia\\09. Gui Boratto - Acrostico.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "F Major",
+   "camelot": "7B",
+   "start_in_mix": 256.98,
+   "end_in_mix": 519.59,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoAu Au Au!5Pearls & Embarrassments 2000 - 2010 (Vol. 02).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 519.59,
+   "end_in_mix": 774.09,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Khen, Guy Mantzur, KamilaChildren With No Name0Black Coffee Ibiza 17 Appreciation Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 774.09,
+   "end_in_mix": 1019.4,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\a81b7f50-be5c-48d0-b1b6-62501b5d6648.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 1019.4,
+   "end_in_mix": 1237.88,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\04 - Gas Logs.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 1237.88,
+   "end_in_mix": 1495.93,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 255.91,
+   "overlap_end": 256.98,
+   "center_time": 256.44,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 502.5,
+   "overlap_end": 519.59,
+   "center_time": 511.05,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 770.0,
+   "overlap_end": 774.09,
+   "center_time": 772.04,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 9.0,
+   "beat_offset_ms": -161.1,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 1011.6,
+   "overlap_end": 1019.4,
+   "center_time": 1015.5,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 1235.93,
+   "overlap_end": 1237.88,
+   "center_time": 1236.9,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

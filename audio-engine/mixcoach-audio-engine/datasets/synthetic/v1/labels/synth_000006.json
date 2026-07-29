@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000006",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:22:03.979405Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1281.45,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\17 N Type - Way Of The Dub.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 164.82,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Access 58Jazz Drama16Serotonin.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 164.82,
+   "end_in_mix": 383.2,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\02 The Analyst.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 383.2,
+   "end_in_mix": 645.63,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Jazz,Blues\\Jazz Deluxe\\02-brad_mehldau_trio-house_on_hill.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 645.63,
+   "end_in_mix": 901.1,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\06 D1 - Bamboo.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 901.1,
+   "end_in_mix": 1034.47,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\Joe Love, Paranoid London - Love One Self with Joe Love Album.mp3",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 143.55,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 1034.47,
+   "end_in_mix": 1281.45,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 158.13,
+   "overlap_end": 164.82,
+   "center_time": 161.47,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 381.53,
+   "overlap_end": 383.2,
+   "center_time": 382.36,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 643.87,
+   "overlap_end": 645.63,
+   "center_time": 644.75,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 874.35,
+   "overlap_end": 901.1,
+   "center_time": 887.72,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 1007.72,
+   "overlap_end": 1034.47,
+   "center_time": 1021.1,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

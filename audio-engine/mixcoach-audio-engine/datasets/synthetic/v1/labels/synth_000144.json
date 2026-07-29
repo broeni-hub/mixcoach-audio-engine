@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000144",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:30:06.593817Z",
+ "sample_rate": 22050,
+ "duration_seconds": 942.8,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\Butti 49,SesongSpiritual Rotations - Butti 49's 6-to-4 Fusion10Slow Mow Go.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 257.67,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoDunkelrot - Original Version20Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 257.67,
+   "end_in_mix": 478.33,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\VA_-_Stephan_Bodzin_vs_Marc_Romboy_-_Luna-(Retail_Boxset)-READNFO-3CD-2011-iFPD\\201-stephan_bodzin_vs_marc_romboy-hydra_(minilogue_remix_part_1)-ifpd.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 478.33,
+   "end_in_mix": 724.42,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\01 Jupiter George (Original Mix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 724.42,
+   "end_in_mix": 942.8,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 241.32,
+   "overlap_end": 257.67,
+   "center_time": 249.5,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -68.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 474.25,
+   "overlap_end": 478.33,
+   "center_time": 476.29,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -98.6,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 693.21,
+   "overlap_end": 724.42,
+   "center_time": 708.81,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

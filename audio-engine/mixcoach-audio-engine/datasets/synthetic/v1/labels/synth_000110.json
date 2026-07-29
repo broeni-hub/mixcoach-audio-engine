@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000110",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:19:42.805229Z",
+ "sample_rate": 22050,
+ "duration_seconds": 983.39,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Robert_Babicz-A_Cheerful_Temper-SYST00062-ADVANCE_CD-2007-BPM\\06-robert_babicz-sin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 259.58,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\La Fine Equipe,Fulgeance,Haring,GangueNils0Sauce bogosse  Nils.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 259.58,
+   "end_in_mix": 495.1,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\4heroHold It Down - Bugz In The Attic's Co-Operative Mix0Lifestyle2 - Dance Grooves Vol 1 (Budget Version).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 495.1,
+   "end_in_mix": 765.49,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Ian Pooley900 Degrees10.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 765.49,
+   "end_in_mix": 983.39,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 251.77,
+   "overlap_end": 259.58,
+   "center_time": 255.67,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 9.0,
+   "beat_offset_ms": -99.9,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 493.15,
+   "overlap_end": 495.1,
+   "center_time": 494.12,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 734.28,
+   "overlap_end": 765.49,
+   "center_time": 749.89,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

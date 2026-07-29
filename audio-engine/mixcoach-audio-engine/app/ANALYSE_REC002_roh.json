@@ -1,0 +1,2160 @@
+{
+ "id": "d6f25a8b-f234-4f6b-ba61-f0b018828d6d",
+ "fileName": "REC002.WAV",
+ "createdAt": "2026-07-02T14:23:04.986382Z",
+ "mapperVersion": "honest-v2",
+ "bpm": 123,
+ "key": "A Minor",
+ "camelot": "8A",
+ "transitionLength": null,
+ "energyCurve": [
+  {
+   "t": 4,
+   "value": 69
+  },
+  {
+   "t": 12,
+   "value": 87
+  },
+  {
+   "t": 20,
+   "value": 71
+  },
+  {
+   "t": 28,
+   "value": 63
+  },
+  {
+   "t": 36,
+   "value": 78
+  },
+  {
+   "t": 44,
+   "value": 76
+  },
+  {
+   "t": 52,
+   "value": 81
+  },
+  {
+   "t": 60,
+   "value": 77
+  },
+  {
+   "t": 68,
+   "value": 87
+  },
+  {
+   "t": 76,
+   "value": 88
+  },
+  {
+   "t": 84,
+   "value": 77
+  },
+  {
+   "t": 92,
+   "value": 73
+  },
+  {
+   "t": 100,
+   "value": 75
+  },
+  {
+   "t": 108,
+   "value": 82
+  },
+  {
+   "t": 116,
+   "value": 90
+  },
+  {
+   "t": 124,
+   "value": 84
+  },
+  {
+   "t": 132,
+   "value": 78
+  },
+  {
+   "t": 140,
+   "value": 82
+  },
+  {
+   "t": 148,
+   "value": 80
+  },
+  {
+   "t": 156,
+   "value": 80
+  },
+  {
+   "t": 164,
+   "value": 76
+  },
+  {
+   "t": 172,
+   "value": 77
+  },
+  {
+   "t": 180,
+   "value": 77
+  },
+  {
+   "t": 188,
+   "value": 76
+  },
+  {
+   "t": 196,
+   "value": 63
+  },
+  {
+   "t": 204,
+   "value": 64
+  },
+  {
+   "t": 212,
+   "value": 63
+  },
+  {
+   "t": 220,
+   "value": 64
+  },
+  {
+   "t": 228,
+   "value": 64
+  },
+  {
+   "t": 236,
+   "value": 64
+  },
+  {
+   "t": 244,
+   "value": 64
+  },
+  {
+   "t": 252,
+   "value": 66
+  },
+  {
+   "t": 260,
+   "value": 66
+  },
+  {
+   "t": 268,
+   "value": 62
+  },
+  {
+   "t": 276,
+   "value": 62
+  },
+  {
+   "t": 284,
+   "value": 66
+  },
+  {
+   "t": 292,
+   "value": 60
+  },
+  {
+   "t": 300,
+   "value": 42
+  },
+  {
+   "t": 308,
+   "value": 43
+  },
+  {
+   "t": 316,
+   "value": 40
+  },
+  {
+   "t": 324,
+   "value": 40
+  },
+  {
+   "t": 332,
+   "value": 45
+  },
+  {
+   "t": 340,
+   "value": 40
+  },
+  {
+   "t": 348,
+   "value": 41
+  },
+  {
+   "t": 356,
+   "value": 43
+  },
+  {
+   "t": 364,
+   "value": 54
+  },
+  {
+   "t": 372,
+   "value": 64
+  },
+  {
+   "t": 380,
+   "value": 68
+  },
+  {
+   "t": 388,
+   "value": 68
+  },
+  {
+   "t": 396,
+   "value": 54
+  },
+  {
+   "t": 404,
+   "value": 72
+  },
+  {
+   "t": 412,
+   "value": 74
+  },
+  {
+   "t": 420,
+   "value": 73
+  },
+  {
+   "t": 428,
+   "value": 53
+  },
+  {
+   "t": 436,
+   "value": 43
+  },
+  {
+   "t": 444,
+   "value": 70
+  },
+  {
+   "t": 452,
+   "value": 77
+  },
+  {
+   "t": 460,
+   "value": 72
+  },
+  {
+   "t": 468,
+   "value": 75
+  },
+  {
+   "t": 476,
+   "value": 71
+  },
+  {
+   "t": 484,
+   "value": 76
+  },
+  {
+   "t": 492,
+   "value": 73
+  },
+  {
+   "t": 500,
+   "value": 75
+  },
+  {
+   "t": 508,
+   "value": 74
+  },
+  {
+   "t": 516,
+   "value": 74
+  },
+  {
+   "t": 524,
+   "value": 72
+  },
+  {
+   "t": 532,
+   "value": 70
+  },
+  {
+   "t": 540,
+   "value": 50
+  },
+  {
+   "t": 548,
+   "value": 44
+  },
+  {
+   "t": 556,
+   "value": 43
+  },
+  {
+   "t": 564,
+   "value": 38
+  },
+  {
+   "t": 572,
+   "value": 36
+  },
+  {
+   "t": 580,
+   "value": 37
+  },
+  {
+   "t": 588,
+   "value": 37
+  },
+  {
+   "t": 596,
+   "value": 36
+  },
+  {
+   "t": 604,
+   "value": 40
+  },
+  {
+   "t": 612,
+   "value": 58
+  },
+  {
+   "t": 620,
+   "value": 76
+  },
+  {
+   "t": 628,
+   "value": 73
+  },
+  {
+   "t": 636,
+   "value": 64
+  },
+  {
+   "t": 644,
+   "value": 60
+  },
+  {
+   "t": 652,
+   "value": 56
+  },
+  {
+   "t": 660,
+   "value": 45
+  },
+  {
+   "t": 668,
+   "value": 37
+  },
+  {
+   "t": 676,
+   "value": 36
+  },
+  {
+   "t": 684,
+   "value": 47
+  },
+  {
+   "t": 692,
+   "value": 40
+  },
+  {
+   "t": 700,
+   "value": 40
+  },
+  {
+   "t": 708,
+   "value": 59
+  },
+  {
+   "t": 716,
+   "value": 60
+  },
+  {
+   "t": 724,
+   "value": 71
+  },
+  {
+   "t": 732,
+   "value": 71
+  },
+  {
+   "t": 740,
+   "value": 73
+  },
+  {
+   "t": 748,
+   "value": 71
+  },
+  {
+   "t": 756,
+   "value": 76
+  },
+  {
+   "t": 764,
+   "value": 70
+  },
+  {
+   "t": 772,
+   "value": 74
+  },
+  {
+   "t": 780,
+   "value": 74
+  },
+  {
+   "t": 788,
+   "value": 73
+  },
+  {
+   "t": 796,
+   "value": 73
+  },
+  {
+   "t": 804,
+   "value": 75
+  },
+  {
+   "t": 812,
+   "value": 75
+  },
+  {
+   "t": 820,
+   "value": 75
+  },
+  {
+   "t": 828,
+   "value": 72
+  },
+  {
+   "t": 836,
+   "value": 73
+  },
+  {
+   "t": 844,
+   "value": 74
+  },
+  {
+   "t": 852,
+   "value": 72
+  },
+  {
+   "t": 860,
+   "value": 71
+  },
+  {
+   "t": 868,
+   "value": 76
+  },
+  {
+   "t": 876,
+   "value": 66
+  },
+  {
+   "t": 884,
+   "value": 72
+  },
+  {
+   "t": 892,
+   "value": 72
+  },
+  {
+   "t": 900,
+   "value": 68
+  },
+  {
+   "t": 908,
+   "value": 52
+  },
+  {
+   "t": 916,
+   "value": 51
+  },
+  {
+   "t": 924,
+   "value": 46
+  },
+  {
+   "t": 932,
+   "value": 45
+  },
+  {
+   "t": 940,
+   "value": 40
+  },
+  {
+   "t": 948,
+   "value": 48
+  },
+  {
+   "t": 956,
+   "value": 51
+  },
+  {
+   "t": 964,
+   "value": 52
+  },
+  {
+   "t": 972,
+   "value": 56
+  },
+  {
+   "t": 980,
+   "value": 62
+  },
+  {
+   "t": 988,
+   "value": 61
+  },
+  {
+   "t": 996,
+   "value": 59
+  },
+  {
+   "t": 1004,
+   "value": 61
+  },
+  {
+   "t": 1012,
+   "value": 60
+  },
+  {
+   "t": 1020,
+   "value": 54
+  },
+  {
+   "t": 1028,
+   "value": 60
+  },
+  {
+   "t": 1036,
+   "value": 60
+  },
+  {
+   "t": 1044,
+   "value": 59
+  },
+  {
+   "t": 1052,
+   "value": 58
+  },
+  {
+   "t": 1060,
+   "value": 54
+  },
+  {
+   "t": 1068,
+   "value": 58
+  },
+  {
+   "t": 1076,
+   "value": 55
+  },
+  {
+   "t": 1084,
+   "value": 57
+  },
+  {
+   "t": 1092,
+   "value": 57
+  },
+  {
+   "t": 1100,
+   "value": 59
+  },
+  {
+   "t": 1108,
+   "value": 60
+  },
+  {
+   "t": 1116,
+   "value": 62
+  },
+  {
+   "t": 1124,
+   "value": 58
+  },
+  {
+   "t": 1132,
+   "value": 61
+  },
+  {
+   "t": 1140,
+   "value": 53
+  },
+  {
+   "t": 1148,
+   "value": 38
+  },
+  {
+   "t": 1156,
+   "value": 44
+  },
+  {
+   "t": 1164,
+   "value": 62
+  },
+  {
+   "t": 1172,
+   "value": 59
+  },
+  {
+   "t": 1180,
+   "value": 48
+  },
+  {
+   "t": 1188,
+   "value": 46
+  },
+  {
+   "t": 1196,
+   "value": 42
+  },
+  {
+   "t": 1204,
+   "value": 35
+  },
+  {
+   "t": 1212,
+   "value": 32
+  },
+  {
+   "t": 1220,
+   "value": 28
+  },
+  {
+   "t": 1228,
+   "value": 23
+  },
+  {
+   "t": 1236,
+   "value": 27
+  },
+  {
+   "t": 1244,
+   "value": 36
+  },
+  {
+   "t": 1252,
+   "value": 53
+  },
+  {
+   "t": 1260,
+   "value": 54
+  },
+  {
+   "t": 1268,
+   "value": 58
+  },
+  {
+   "t": 1276,
+   "value": 51
+  },
+  {
+   "t": 1284,
+   "value": 32
+  },
+  {
+   "t": 1292,
+   "value": 38
+  },
+  {
+   "t": 1300,
+   "value": 58
+  },
+  {
+   "t": 1308,
+   "value": 57
+  },
+  {
+   "t": 1316,
+   "value": 58
+  },
+  {
+   "t": 1324,
+   "value": 59
+  },
+  {
+   "t": 1332,
+   "value": 60
+  },
+  {
+   "t": 1340,
+   "value": 44
+  },
+  {
+   "t": 1348,
+   "value": 20
+  },
+  {
+   "t": 1356,
+   "value": 40
+  },
+  {
+   "t": 1364,
+   "value": 58
+  },
+  {
+   "t": 1372,
+   "value": 59
+  },
+  {
+   "t": 1380,
+   "value": 58
+  },
+  {
+   "t": 1388,
+   "value": 67
+  },
+  {
+   "t": 1396,
+   "value": 75
+  },
+  {
+   "t": 1404,
+   "value": 75
+  },
+  {
+   "t": 1412,
+   "value": 75
+  },
+  {
+   "t": 1420,
+   "value": 73
+  },
+  {
+   "t": 1428,
+   "value": 74
+  },
+  {
+   "t": 1436,
+   "value": 75
+  },
+  {
+   "t": 1444,
+   "value": 76
+  },
+  {
+   "t": 1452,
+   "value": 34
+  },
+  {
+   "t": 1460,
+   "value": 32
+  },
+  {
+   "t": 1468,
+   "value": 42
+  },
+  {
+   "t": 1476,
+   "value": 45
+  },
+  {
+   "t": 1484,
+   "value": 73
+  },
+  {
+   "t": 1492,
+   "value": 72
+  },
+  {
+   "t": 1500,
+   "value": 74
+  },
+  {
+   "t": 1508,
+   "value": 74
+  },
+  {
+   "t": 1516,
+   "value": 74
+  },
+  {
+   "t": 1524,
+   "value": 54
+  },
+  {
+   "t": 1532,
+   "value": 53
+  },
+  {
+   "t": 1540,
+   "value": 59
+  },
+  {
+   "t": 1548,
+   "value": 50
+  },
+  {
+   "t": 1556,
+   "value": 43
+  },
+  {
+   "t": 1564,
+   "value": 44
+  },
+  {
+   "t": 1572,
+   "value": 46
+  },
+  {
+   "t": 1580,
+   "value": 32
+  },
+  {
+   "t": 1588,
+   "value": 17
+  },
+  {
+   "t": 1596,
+   "value": 28
+  },
+  {
+   "t": 1604,
+   "value": 38
+  },
+  {
+   "t": 1612,
+   "value": 42
+  },
+  {
+   "t": 1620,
+   "value": 46
+  },
+  {
+   "t": 1628,
+   "value": 47
+  },
+  {
+   "t": 1636,
+   "value": 46
+  },
+  {
+   "t": 1644,
+   "value": 47
+  },
+  {
+   "t": 1652,
+   "value": 46
+  },
+  {
+   "t": 1660,
+   "value": 44
+  },
+  {
+   "t": 1668,
+   "value": 46
+  },
+  {
+   "t": 1676,
+   "value": 48
+  },
+  {
+   "t": 1684,
+   "value": 47
+  },
+  {
+   "t": 1692,
+   "value": 49
+  },
+  {
+   "t": 1700,
+   "value": 48
+  },
+  {
+   "t": 1708,
+   "value": 48
+  },
+  {
+   "t": 1716,
+   "value": 49
+  },
+  {
+   "t": 1724,
+   "value": 48
+  },
+  {
+   "t": 1732,
+   "value": 47
+  },
+  {
+   "t": 1740,
+   "value": 31
+  },
+  {
+   "t": 1748,
+   "value": 29
+  },
+  {
+   "t": 1756,
+   "value": 26
+  },
+  {
+   "t": 1764,
+   "value": 32
+  },
+  {
+   "t": 1772,
+   "value": 45
+  },
+  {
+   "t": 1780,
+   "value": 46
+  },
+  {
+   "t": 1788,
+   "value": 45
+  },
+  {
+   "t": 1796,
+   "value": 47
+  },
+  {
+   "t": 1804,
+   "value": 47
+  },
+  {
+   "t": 1812,
+   "value": 47
+  },
+  {
+   "t": 1820,
+   "value": 47
+  },
+  {
+   "t": 1828,
+   "value": 47
+  },
+  {
+   "t": 1836,
+   "value": 48
+  },
+  {
+   "t": 1844,
+   "value": 45
+  },
+  {
+   "t": 1852,
+   "value": 47
+  },
+  {
+   "t": 1860,
+   "value": 47
+  },
+  {
+   "t": 1868,
+   "value": 48
+  },
+  {
+   "t": 1876,
+   "value": 47
+  },
+  {
+   "t": 1884,
+   "value": 47
+  },
+  {
+   "t": 1892,
+   "value": 22
+  },
+  {
+   "t": 1900,
+   "value": 12
+  },
+  {
+   "t": 1908,
+   "value": 10
+  },
+  {
+   "t": 1917,
+   "value": 3
+  }
+ ],
+ "volumeCurve": [
+  {
+   "t": 4,
+   "value": 69
+  },
+  {
+   "t": 12,
+   "value": 87
+  },
+  {
+   "t": 20,
+   "value": 71
+  },
+  {
+   "t": 28,
+   "value": 63
+  },
+  {
+   "t": 36,
+   "value": 78
+  },
+  {
+   "t": 44,
+   "value": 76
+  },
+  {
+   "t": 52,
+   "value": 81
+  },
+  {
+   "t": 60,
+   "value": 77
+  },
+  {
+   "t": 68,
+   "value": 87
+  },
+  {
+   "t": 76,
+   "value": 88
+  },
+  {
+   "t": 84,
+   "value": 77
+  },
+  {
+   "t": 92,
+   "value": 73
+  },
+  {
+   "t": 100,
+   "value": 75
+  },
+  {
+   "t": 108,
+   "value": 82
+  },
+  {
+   "t": 116,
+   "value": 90
+  },
+  {
+   "t": 124,
+   "value": 84
+  },
+  {
+   "t": 132,
+   "value": 78
+  },
+  {
+   "t": 140,
+   "value": 82
+  },
+  {
+   "t": 148,
+   "value": 80
+  },
+  {
+   "t": 156,
+   "value": 80
+  },
+  {
+   "t": 164,
+   "value": 76
+  },
+  {
+   "t": 172,
+   "value": 77
+  },
+  {
+   "t": 180,
+   "value": 77
+  },
+  {
+   "t": 188,
+   "value": 76
+  },
+  {
+   "t": 196,
+   "value": 63
+  },
+  {
+   "t": 204,
+   "value": 64
+  },
+  {
+   "t": 212,
+   "value": 63
+  },
+  {
+   "t": 220,
+   "value": 64
+  },
+  {
+   "t": 228,
+   "value": 64
+  },
+  {
+   "t": 236,
+   "value": 64
+  },
+  {
+   "t": 244,
+   "value": 64
+  },
+  {
+   "t": 252,
+   "value": 66
+  },
+  {
+   "t": 260,
+   "value": 66
+  },
+  {
+   "t": 268,
+   "value": 62
+  },
+  {
+   "t": 276,
+   "value": 62
+  },
+  {
+   "t": 284,
+   "value": 66
+  },
+  {
+   "t": 292,
+   "value": 60
+  },
+  {
+   "t": 300,
+   "value": 42
+  },
+  {
+   "t": 308,
+   "value": 43
+  },
+  {
+   "t": 316,
+   "value": 40
+  },
+  {
+   "t": 324,
+   "value": 40
+  },
+  {
+   "t": 332,
+   "value": 45
+  },
+  {
+   "t": 340,
+   "value": 40
+  },
+  {
+   "t": 348,
+   "value": 41
+  },
+  {
+   "t": 356,
+   "value": 43
+  },
+  {
+   "t": 364,
+   "value": 54
+  },
+  {
+   "t": 372,
+   "value": 64
+  },
+  {
+   "t": 380,
+   "value": 68
+  },
+  {
+   "t": 388,
+   "value": 68
+  },
+  {
+   "t": 396,
+   "value": 54
+  },
+  {
+   "t": 404,
+   "value": 72
+  },
+  {
+   "t": 412,
+   "value": 74
+  },
+  {
+   "t": 420,
+   "value": 73
+  },
+  {
+   "t": 428,
+   "value": 53
+  },
+  {
+   "t": 436,
+   "value": 43
+  },
+  {
+   "t": 444,
+   "value": 70
+  },
+  {
+   "t": 452,
+   "value": 77
+  },
+  {
+   "t": 460,
+   "value": 72
+  },
+  {
+   "t": 468,
+   "value": 75
+  },
+  {
+   "t": 476,
+   "value": 71
+  },
+  {
+   "t": 484,
+   "value": 76
+  },
+  {
+   "t": 492,
+   "value": 73
+  },
+  {
+   "t": 500,
+   "value": 75
+  },
+  {
+   "t": 508,
+   "value": 74
+  },
+  {
+   "t": 516,
+   "value": 74
+  },
+  {
+   "t": 524,
+   "value": 72
+  },
+  {
+   "t": 532,
+   "value": 70
+  },
+  {
+   "t": 540,
+   "value": 50
+  },
+  {
+   "t": 548,
+   "value": 44
+  },
+  {
+   "t": 556,
+   "value": 43
+  },
+  {
+   "t": 564,
+   "value": 38
+  },
+  {
+   "t": 572,
+   "value": 36
+  },
+  {
+   "t": 580,
+   "value": 37
+  },
+  {
+   "t": 588,
+   "value": 37
+  },
+  {
+   "t": 596,
+   "value": 36
+  },
+  {
+   "t": 604,
+   "value": 40
+  },
+  {
+   "t": 612,
+   "value": 58
+  },
+  {
+   "t": 620,
+   "value": 76
+  },
+  {
+   "t": 628,
+   "value": 73
+  },
+  {
+   "t": 636,
+   "value": 64
+  },
+  {
+   "t": 644,
+   "value": 60
+  },
+  {
+   "t": 652,
+   "value": 56
+  },
+  {
+   "t": 660,
+   "value": 45
+  },
+  {
+   "t": 668,
+   "value": 37
+  },
+  {
+   "t": 676,
+   "value": 36
+  },
+  {
+   "t": 684,
+   "value": 47
+  },
+  {
+   "t": 692,
+   "value": 40
+  },
+  {
+   "t": 700,
+   "value": 40
+  },
+  {
+   "t": 708,
+   "value": 59
+  },
+  {
+   "t": 716,
+   "value": 60
+  },
+  {
+   "t": 724,
+   "value": 71
+  },
+  {
+   "t": 732,
+   "value": 71
+  },
+  {
+   "t": 740,
+   "value": 73
+  },
+  {
+   "t": 748,
+   "value": 71
+  },
+  {
+   "t": 756,
+   "value": 76
+  },
+  {
+   "t": 764,
+   "value": 70
+  },
+  {
+   "t": 772,
+   "value": 74
+  },
+  {
+   "t": 780,
+   "value": 74
+  },
+  {
+   "t": 788,
+   "value": 73
+  },
+  {
+   "t": 796,
+   "value": 73
+  },
+  {
+   "t": 804,
+   "value": 75
+  },
+  {
+   "t": 812,
+   "value": 75
+  },
+  {
+   "t": 820,
+   "value": 75
+  },
+  {
+   "t": 828,
+   "value": 72
+  },
+  {
+   "t": 836,
+   "value": 73
+  },
+  {
+   "t": 844,
+   "value": 74
+  },
+  {
+   "t": 852,
+   "value": 72
+  },
+  {
+   "t": 860,
+   "value": 71
+  },
+  {
+   "t": 868,
+   "value": 76
+  },
+  {
+   "t": 876,
+   "value": 66
+  },
+  {
+   "t": 884,
+   "value": 72
+  },
+  {
+   "t": 892,
+   "value": 72
+  },
+  {
+   "t": 900,
+   "value": 68
+  },
+  {
+   "t": 908,
+   "value": 52
+  },
+  {
+   "t": 916,
+   "value": 51
+  },
+  {
+   "t": 924,
+   "value": 46
+  },
+  {
+   "t": 932,
+   "value": 45
+  },
+  {
+   "t": 940,
+   "value": 40
+  },
+  {
+   "t": 948,
+   "value": 48
+  },
+  {
+   "t": 956,
+   "value": 51
+  },
+  {
+   "t": 964,
+   "value": 52
+  },
+  {
+   "t": 972,
+   "value": 56
+  },
+  {
+   "t": 980,
+   "value": 62
+  },
+  {
+   "t": 988,
+   "value": 61
+  },
+  {
+   "t": 996,
+   "value": 59
+  },
+  {
+   "t": 1004,
+   "value": 61
+  },
+  {
+   "t": 1012,
+   "value": 60
+  },
+  {
+   "t": 1020,
+   "value": 54
+  },
+  {
+   "t": 1028,
+   "value": 60
+  },
+  {
+   "t": 1036,
+   "value": 60
+  },
+  {
+   "t": 1044,
+   "value": 59
+  },
+  {
+   "t": 1052,
+   "value": 58
+  },
+  {
+   "t": 1060,
+   "value": 54
+  },
+  {
+   "t": 1068,
+   "value": 58
+  },
+  {
+   "t": 1076,
+   "value": 55
+  },
+  {
+   "t": 1084,
+   "value": 57
+  },
+  {
+   "t": 1092,
+   "value": 57
+  },
+  {
+   "t": 1100,
+   "value": 59
+  },
+  {
+   "t": 1108,
+   "value": 60
+  },
+  {
+   "t": 1116,
+   "value": 62
+  },
+  {
+   "t": 1124,
+   "value": 58
+  },
+  {
+   "t": 1132,
+   "value": 61
+  },
+  {
+   "t": 1140,
+   "value": 53
+  },
+  {
+   "t": 1148,
+   "value": 38
+  },
+  {
+   "t": 1156,
+   "value": 44
+  },
+  {
+   "t": 1164,
+   "value": 62
+  },
+  {
+   "t": 1172,
+   "value": 59
+  },
+  {
+   "t": 1180,
+   "value": 48
+  },
+  {
+   "t": 1188,
+   "value": 46
+  },
+  {
+   "t": 1196,
+   "value": 42
+  },
+  {
+   "t": 1204,
+   "value": 35
+  },
+  {
+   "t": 1212,
+   "value": 32
+  },
+  {
+   "t": 1220,
+   "value": 28
+  },
+  {
+   "t": 1228,
+   "value": 23
+  },
+  {
+   "t": 1236,
+   "value": 27
+  },
+  {
+   "t": 1244,
+   "value": 36
+  },
+  {
+   "t": 1252,
+   "value": 53
+  },
+  {
+   "t": 1260,
+   "value": 54
+  },
+  {
+   "t": 1268,
+   "value": 58
+  },
+  {
+   "t": 1276,
+   "value": 51
+  },
+  {
+   "t": 1284,
+   "value": 32
+  },
+  {
+   "t": 1292,
+   "value": 38
+  },
+  {
+   "t": 1300,
+   "value": 58
+  },
+  {
+   "t": 1308,
+   "value": 57
+  },
+  {
+   "t": 1316,
+   "value": 58
+  },
+  {
+   "t": 1324,
+   "value": 59
+  },
+  {
+   "t": 1332,
+   "value": 60
+  },
+  {
+   "t": 1340,
+   "value": 44
+  },
+  {
+   "t": 1348,
+   "value": 20
+  },
+  {
+   "t": 1356,
+   "value": 40
+  },
+  {
+   "t": 1364,
+   "value": 58
+  },
+  {
+   "t": 1372,
+   "value": 59
+  },
+  {
+   "t": 1380,
+   "value": 58
+  },
+  {
+   "t": 1388,
+   "value": 67
+  },
+  {
+   "t": 1396,
+   "value": 75
+  },
+  {
+   "t": 1404,
+   "value": 75
+  },
+  {
+   "t": 1412,
+   "value": 75
+  },
+  {
+   "t": 1420,
+   "value": 73
+  },
+  {
+   "t": 1428,
+   "value": 74
+  },
+  {
+   "t": 1436,
+   "value": 75
+  },
+  {
+   "t": 1444,
+   "value": 76
+  },
+  {
+   "t": 1452,
+   "value": 34
+  },
+  {
+   "t": 1460,
+   "value": 32
+  },
+  {
+   "t": 1468,
+   "value": 42
+  },
+  {
+   "t": 1476,
+   "value": 45
+  },
+  {
+   "t": 1484,
+   "value": 73
+  },
+  {
+   "t": 1492,
+   "value": 72
+  },
+  {
+   "t": 1500,
+   "value": 74
+  },
+  {
+   "t": 1508,
+   "value": 74
+  },
+  {
+   "t": 1516,
+   "value": 74
+  },
+  {
+   "t": 1524,
+   "value": 54
+  },
+  {
+   "t": 1532,
+   "value": 53
+  },
+  {
+   "t": 1540,
+   "value": 59
+  },
+  {
+   "t": 1548,
+   "value": 50
+  },
+  {
+   "t": 1556,
+   "value": 43
+  },
+  {
+   "t": 1564,
+   "value": 44
+  },
+  {
+   "t": 1572,
+   "value": 46
+  },
+  {
+   "t": 1580,
+   "value": 32
+  },
+  {
+   "t": 1588,
+   "value": 17
+  },
+  {
+   "t": 1596,
+   "value": 28
+  },
+  {
+   "t": 1604,
+   "value": 38
+  },
+  {
+   "t": 1612,
+   "value": 42
+  },
+  {
+   "t": 1620,
+   "value": 46
+  },
+  {
+   "t": 1628,
+   "value": 47
+  },
+  {
+   "t": 1636,
+   "value": 46
+  },
+  {
+   "t": 1644,
+   "value": 47
+  },
+  {
+   "t": 1652,
+   "value": 46
+  },
+  {
+   "t": 1660,
+   "value": 44
+  },
+  {
+   "t": 1668,
+   "value": 46
+  },
+  {
+   "t": 1676,
+   "value": 48
+  },
+  {
+   "t": 1684,
+   "value": 47
+  },
+  {
+   "t": 1692,
+   "value": 49
+  },
+  {
+   "t": 1700,
+   "value": 48
+  },
+  {
+   "t": 1708,
+   "value": 48
+  },
+  {
+   "t": 1716,
+   "value": 49
+  },
+  {
+   "t": 1724,
+   "value": 48
+  },
+  {
+   "t": 1732,
+   "value": 47
+  },
+  {
+   "t": 1740,
+   "value": 31
+  },
+  {
+   "t": 1748,
+   "value": 29
+  },
+  {
+   "t": 1756,
+   "value": 26
+  },
+  {
+   "t": 1764,
+   "value": 32
+  },
+  {
+   "t": 1772,
+   "value": 45
+  },
+  {
+   "t": 1780,
+   "value": 46
+  },
+  {
+   "t": 1788,
+   "value": 45
+  },
+  {
+   "t": 1796,
+   "value": 47
+  },
+  {
+   "t": 1804,
+   "value": 47
+  },
+  {
+   "t": 1812,
+   "value": 47
+  },
+  {
+   "t": 1820,
+   "value": 47
+  },
+  {
+   "t": 1828,
+   "value": 47
+  },
+  {
+   "t": 1836,
+   "value": 48
+  },
+  {
+   "t": 1844,
+   "value": 45
+  },
+  {
+   "t": 1852,
+   "value": 47
+  },
+  {
+   "t": 1860,
+   "value": 47
+  },
+  {
+   "t": 1868,
+   "value": 48
+  },
+  {
+   "t": 1876,
+   "value": 47
+  },
+  {
+   "t": 1884,
+   "value": 47
+  },
+  {
+   "t": 1892,
+   "value": 22
+  },
+  {
+   "t": 1900,
+   "value": 12
+  },
+  {
+   "t": 1908,
+   "value": 10
+  },
+  {
+   "t": 1917,
+   "value": 3
+  }
+ ],
+ "frequency": null,
+ "scores": {
+  "beatmatching": 100,
+  "eq": null,
+  "timing": 39,
+  "creativity": null,
+  "flow": 69,
+  "musicality": 54,
+  "overall": 66
+ },
+ "notMeasured": [
+  "eq",
+  "creativity",
+  "frequency"
+ ],
+ "analysisWarnings": [],
+ "timeline": [
+  {
+   "time": "00:00",
+   "label": "Set analysis started",
+   "type": "info"
+  }
+ ],
+ "strengths": [
+  "Es gibt eine auswertbare Struktur, auf der MixCoach weiter aufbauen kann."
+ ],
+ "weaknesses": [
+  "Keine gro\u00dfen Probleme erkannt. Feintuning bei \u00dcberg\u00e4ngen und Track-Auswahl lohnt sich trotzdem."
+ ],
+ "feedback": {
+  "worked": [
+   "Es gibt eine auswertbare Struktur, auf der MixCoach weiter aufbauen kann."
+  ],
+  "improve": [
+   "Keine gro\u00dfen Probleme erkannt. Feintuning bei \u00dcberg\u00e4ngen und Track-Auswahl lohnt sich trotzdem."
+  ],
+  "exercise": "Keine gro\u00dfen Probleme erkannt. Feintuning bei \u00dcberg\u00e4ngen und Track-Auswahl lohnt sich trotzdem.",
+  "confidence": 66
+ },
+ "exercises": [
+  {
+   "title": "Transition Review",
+   "description": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "xp": 40
+  }
+ ],
+ "setTransitions": [
+  {
+   "index": 1,
+   "start_sec": 22.0,
+   "mid_sec": 38.0,
+   "end_sec": 54.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "D Minor",
+   "key_after": "C# Minor",
+   "camelot_before": "7A",
+   "camelot_after": "12A",
+   "phrase_beats_off": 13.22,
+   "phrase_alignment_score": 30,
+   "energy_dip_pct": 0,
+   "bass_overlap_score": null,
+   "quality_score": 58,
+   "label": "neutral",
+   "feedback": "Uebergang bei 00:38 liegt 13 Beats neben dem Phrasenstart - starte den Uebergang ca. 13 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet; ausserdem wechselt harmonisch weit (D Minor -> C# Minor, Camelot 7A -> 12A) - waehle einen Track im Nachbarfeld des Camelot-Rads.",
+   "type": "blend_transition",
+   "confidence": 0.579
+  },
+  {
+   "index": 2,
+   "start_sec": 278.0,
+   "mid_sec": 294.0,
+   "end_sec": 310.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "C# Minor",
+   "key_after": "A# Minor",
+   "camelot_before": "12A",
+   "camelot_after": "3A",
+   "phrase_beats_off": 15.64,
+   "phrase_alignment_score": 30,
+   "energy_dip_pct": 17,
+   "bass_overlap_score": null,
+   "quality_score": 61,
+   "label": "neutral",
+   "feedback": "Uebergang bei 04:54 liegt 16 Beats neben dem Phrasenstart - starte den Uebergang ca. 16 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet; ausserdem wechselt harmonisch weit (C# Minor -> A# Minor, Camelot 12A -> 3A) - waehle einen Track im Nachbarfeld des Camelot-Rads.",
+   "type": "blend_transition",
+   "confidence": 0.941
+  },
+  {
+   "index": 3,
+   "start_sec": 595.0,
+   "mid_sec": 611.0,
+   "end_sec": 627.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "A# Minor",
+   "key_after": "F Minor",
+   "camelot_before": "3A",
+   "camelot_after": "4A",
+   "phrase_beats_off": 14.69,
+   "phrase_alignment_score": 30,
+   "energy_dip_pct": 0,
+   "bass_overlap_score": null,
+   "quality_score": 66,
+   "label": "neutral",
+   "feedback": "Uebergang bei 10:11 liegt 15 Beats neben dem Phrasenstart - starte den Uebergang ca. 15 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet.",
+   "type": "blend_transition",
+   "confidence": 0.995
+  },
+  {
+   "index": 4,
+   "start_sec": 887.0,
+   "mid_sec": 903.0,
+   "end_sec": 919.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "F Minor",
+   "key_after": "A Minor",
+   "camelot_before": "4A",
+   "camelot_after": "8A",
+   "phrase_beats_off": 5.87,
+   "phrase_alignment_score": 55,
+   "energy_dip_pct": 17,
+   "bass_overlap_score": null,
+   "quality_score": 70,
+   "label": "neutral",
+   "feedback": "Uebergang bei 15:03 liegt 6 Beats neben dem Phrasenstart - starte den Uebergang ca. 6 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet; ausserdem wechselt harmonisch weit (F Minor -> A Minor, Camelot 4A -> 8A) - waehle einen Track im Nachbarfeld des Camelot-Rads.",
+   "type": "blend_transition",
+   "confidence": 0.715
+  },
+  {
+   "index": 5,
+   "start_sec": 1143.0,
+   "mid_sec": 1159.0,
+   "end_sec": 1175.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "A Minor",
+   "key_after": "G Minor",
+   "camelot_before": "8A",
+   "camelot_after": "6A",
+   "phrase_beats_off": 15.48,
+   "phrase_alignment_score": 30,
+   "energy_dip_pct": 0,
+   "bass_overlap_score": null,
+   "quality_score": 58,
+   "label": "neutral",
+   "feedback": "Uebergang bei 19:19 liegt 15 Beats neben dem Phrasenstart - starte den Uebergang ca. 15 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet; ausserdem wechselt harmonisch weit (A Minor -> G Minor, Camelot 8A -> 6A) - waehle einen Track im Nachbarfeld des Camelot-Rads.",
+   "type": "blend_transition",
+   "confidence": 0.956
+  },
+  {
+   "index": 6,
+   "start_sec": 1434.0,
+   "mid_sec": 1450.0,
+   "end_sec": 1466.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "G Minor",
+   "key_after": "A Minor",
+   "camelot_before": "6A",
+   "camelot_after": "8A",
+   "phrase_beats_off": 7.58,
+   "phrase_alignment_score": 55,
+   "energy_dip_pct": 31,
+   "bass_overlap_score": null,
+   "quality_score": 73,
+   "label": "neutral",
+   "feedback": "Uebergang bei 24:10 liegt 8 Beats neben dem Phrasenstart - starte den Uebergang ca. 8 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet; ausserdem wechselt harmonisch weit (G Minor -> A Minor, Camelot 6A -> 8A) - waehle einen Track im Nachbarfeld des Camelot-Rads.",
+   "type": "blend_transition",
+   "confidence": 0.987
+  },
+  {
+   "index": 7,
+   "start_sec": 1717.0,
+   "mid_sec": 1733.0,
+   "end_sec": 1749.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "A Minor",
+   "key_after": "A Minor",
+   "camelot_before": "8A",
+   "camelot_after": "8A",
+   "phrase_beats_off": 9.58,
+   "phrase_alignment_score": 30,
+   "energy_dip_pct": 7,
+   "bass_overlap_score": null,
+   "quality_score": 68,
+   "label": "neutral",
+   "feedback": "Uebergang bei 28:53 liegt 10 Beats neben dem Phrasenstart - starte den Uebergang ca. 10 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet.",
+   "type": "bass_swap_transition",
+   "confidence": 0.918
+  },
+  {
+   "index": 8,
+   "start_sec": 1875.0,
+   "mid_sec": 1891.0,
+   "end_sec": 1907.0,
+   "bpm_before": 123.05,
+   "bpm_after": 123.05,
+   "bpm_drift": 0.0,
+   "key_before": "A Minor",
+   "key_after": "G Minor",
+   "camelot_before": "8A",
+   "camelot_after": "6A",
+   "phrase_beats_off": 6.12,
+   "phrase_alignment_score": 55,
+   "energy_dip_pct": 36,
+   "bass_overlap_score": null,
+   "quality_score": 74,
+   "label": "neutral",
+   "feedback": "Uebergang bei 31:31 liegt 6 Beats neben dem Phrasenstart - starte den Uebergang ca. 6 Beats frueher oder spaeter, damit er auf der 8-Bar-Grenze landet; ausserdem wechselt harmonisch weit (A Minor -> G Minor, Camelot 8A -> 6A) - waehle einen Track im Nachbarfeld des Camelot-Rads.",
+   "type": "blend_transition",
+   "confidence": 0.996
+  }
+ ],
+ "totalDurationSec": 1920,
+ "findings": []
+}

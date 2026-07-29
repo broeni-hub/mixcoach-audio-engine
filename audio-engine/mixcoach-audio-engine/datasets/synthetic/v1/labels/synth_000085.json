@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000085",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:04:02.865904Z",
+ "sample_rate": 22050,
+ "duration_seconds": 817.74,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\DJ T.,Emanuel SatieBreak Loose1Electronica Mix.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 243.69,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\Rej (Original Mix).mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 243.69,
+   "end_in_mix": 500.51,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\AtjazzEverything3That Something Else!.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 500.51,
+   "end_in_mix": 744.32,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\10 Digital Mystikz - Heartless Ninja.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 744.32,
+   "end_in_mix": 817.74,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 241.28,
+   "overlap_end": 243.69,
+   "center_time": 242.49,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 173.1,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 499.9,
+   "overlap_end": 500.51,
+   "center_time": 500.2,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 705.68,
+   "overlap_end": 744.32,
+   "center_time": 725.0,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

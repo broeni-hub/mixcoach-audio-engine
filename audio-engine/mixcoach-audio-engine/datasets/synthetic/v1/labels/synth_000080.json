@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000080",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:00:55.426044Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1183.5,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Pearson SoundStifle0Hessle Audio 116 and Rising.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 259.27,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\Mosca - Done Me Wrong.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 259.27,
+   "end_in_mix": 513.6,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Dawl  - Break It Down (Kosh Remix).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 513.6,
+   "end_in_mix": 733.82,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoEinmal In Der Woche Schreien10Mosaik.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 733.82,
+   "end_in_mix": 938.88,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Minilogue - Animals 2 CD (2008)\\CD1 Dance CD\\(09) [Minilogue] Giant Hairy Super Monster.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 938.88,
+   "end_in_mix": 1183.5,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 258.81,
+   "overlap_end": 259.27,
+   "center_time": 259.04,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 483.88,
+   "overlap_end": 513.6,
+   "center_time": 498.74,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 718.96,
+   "overlap_end": 733.82,
+   "center_time": 726.39,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 935.16,
+   "overlap_end": 938.88,
+   "center_time": 937.02,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

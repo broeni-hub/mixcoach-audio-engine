@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000032",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:23:04.451862Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1349.62,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoNicht gewesen17Pearls & Embarrassments 2000 - 2010 (Vol. 02).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 173.66,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Kollektiv_Turmstrasse-Verrueckte_Welt-(NORE008)-FREEWEB-2006-KPS_INT\\10-kollektiv_turmstrasse-freiflug.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 173.66,
+   "end_in_mix": 423.23,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\John TejadaFarther And Fainter1.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 423.23,
+   "end_in_mix": 667.57,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\Flying Pop'sFly to me now5Slow Mow Go.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 129.2,
+   "key": "D Major",
+   "camelot": "10B",
+   "start_in_mix": 667.57,
+   "end_in_mix": 898.19,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\03. popnebo - of course she does.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 898.19,
+   "end_in_mix": 1128.88,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\Adam F-Colours\\06-Mother Earth.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 1128.88,
+   "end_in_mix": 1349.62,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 171.71,
+   "overlap_end": 173.66,
+   "center_time": 172.69,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 407.63,
+   "overlap_end": 423.23,
+   "center_time": 415.43,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 636.37,
+   "overlap_end": 667.57,
+   "center_time": 651.97,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 894.48,
+   "overlap_end": 898.19,
+   "center_time": 896.34,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 1100.65,
+   "overlap_end": 1128.88,
+   "center_time": 1114.77,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000093",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:13:40.904564Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1454.81,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\02 Echoes Of My Mind.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 257.62,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\dj nori - happy_sunday (maurice fulton).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 257.62,
+   "end_in_mix": 491.15,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\Lone - Ambivert Tools Volume One - 02 - Chroma.flac",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 491.15,
+   "end_in_mix": 740.11,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt_-_Deine_Beine_Rmxs\\01-extrawelt_-_was_uebrig_bleibt_(dominik_eulberg_and_das_es_remix).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 740.11,
+   "end_in_mix": 994.02,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\VA_-_Stephan_Bodzin_vs_Marc_Romboy_-_Luna-(Retail_Boxset)-READNFO-3CD-2011-iFPD\\108-stephan_bodzin_vs_marc_romboy-hydra-ifpd.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 994.02,
+   "end_in_mix": 1198.52,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Super Flu\\07 - pwf FEL.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 1198.52,
+   "end_in_mix": 1454.81,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 249.82,
+   "overlap_end": 257.62,
+   "center_time": 253.72,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 475.54,
+   "overlap_end": 491.15,
+   "center_time": 483.35,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 723.76,
+   "overlap_end": 740.11,
+   "center_time": 731.94,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 962.82,
+   "overlap_end": 994.02,
+   "center_time": 978.42,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 1194.81,
+   "overlap_end": 1198.52,
+   "center_time": 1196.66,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -158.4,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  }
+ ]
+}

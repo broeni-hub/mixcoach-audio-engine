@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000146",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:30:40.751647Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1145.93,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\World Beats\\Brazil Tunes\\Azymuth\\AzymuthThat's Today - London Elektricity Remix3Electronica Mix.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 248.27,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electro Pop\\Chemical Brothers\\The Chemical Brothers - We Are The Night (2007)\\07.Chemical Brothers-The Salmon Dance (featuring Fatlip).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 248.27,
+   "end_in_mix": 436.51,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Discreet UnitUnit7.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 436.51,
+   "end_in_mix": 666.04,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\08. margo - la baumette (broker-dealer rmx).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 666.04,
+   "end_in_mix": 919.86,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoIck hab wat bessret vor - Electro Version12Pearls & Embarrassments 2000 - 2010 (Vol. 02).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "E Major",
+   "camelot": "12B",
+   "start_in_mix": 919.86,
+   "end_in_mix": 1145.93,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 215.57,
+   "overlap_end": 248.27,
+   "center_time": 231.92,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 420.17,
+   "overlap_end": 436.51,
+   "center_time": 428.34,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 650.44,
+   "overlap_end": 666.04,
+   "center_time": 658.24,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 917.91,
+   "overlap_end": 919.86,
+   "center_time": 918.88,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

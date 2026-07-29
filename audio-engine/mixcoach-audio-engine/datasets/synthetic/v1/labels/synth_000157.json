@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000157",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:33:09.539117Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1436.9,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Dance, Funk, Soul\\Funk\\Nite-Funk,Dâm-Funk\\Dâm-FunkYour House66Architecture.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "A Major",
+   "camelot": "11B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 255.02,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\AtjazzHarmony - Dixon's Late Night Remix1Lab Results.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "D Major",
+   "camelot": "10B",
+   "start_in_mix": 255.02,
+   "end_in_mix": 483.09,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Oldies but Goldies\\60er'\\Good Morning Vietnam\\CD 1\\01   The Animals - The House Of The Rising Sun.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 483.09,
+   "end_in_mix": 753.78,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\TOPS,Patrick HollandColder & Closer - Patrick Holland Remix1Serotonin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 753.78,
+   "end_in_mix": 1016.51,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoIsegrim12Comic.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 1016.51,
+   "end_in_mix": 1200.34,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Bugz in the Attic\\06. Bugz In The Attic - Redhanded.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 1200.34,
+   "end_in_mix": 1436.9,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 237.93,
+   "overlap_end": 255.02,
+   "center_time": 246.48,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 482.02,
+   "overlap_end": 483.09,
+   "center_time": 482.56,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 749.5,
+   "overlap_end": 753.78,
+   "center_time": 751.64,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 12.0,
+   "beat_offset_ms": -70.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 983.82,
+   "overlap_end": 1016.51,
+   "center_time": 1000.16,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 1198.39,
+   "overlap_end": 1200.34,
+   "center_time": 1199.37,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  }
+ ]
+}

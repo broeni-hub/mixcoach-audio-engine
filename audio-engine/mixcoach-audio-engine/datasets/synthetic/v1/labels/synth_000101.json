@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000101",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:16:34.040824Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1203.23,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Polo & PanFeel Good1Serotonin.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 223.31,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Fonzo, Roaming Data - CTX Original Mix - www.djsoundtop.com.mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 95.7,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 223.31,
+   "end_in_mix": 458.8,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - gulls galore.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 92.29,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 458.8,
+   "end_in_mix": 542.77,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Domu\\DomuDangerous Times10This Is Domu.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 542.77,
+   "end_in_mix": 782.23,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\No Need 2 Be Sorry, Call Me_ (Mount Kimbie Remix).mp3",
+   "bpm_original": 92.29,
+   "bpm_in_mix": 95.7,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 782.23,
+   "end_in_mix": 1000.18,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LoneAlpha Wheel1Levitate.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 92.29,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 1000.18,
+   "end_in_mix": 1203.23,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 220.8,
+   "overlap_end": 223.31,
+   "center_time": 222.05,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 453.79,
+   "overlap_end": 458.8,
+   "center_time": 456.3,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 537.57,
+   "overlap_end": 542.77,
+   "center_time": 540.17,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 779.82,
+   "overlap_end": 782.23,
+   "center_time": 781.03,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 990.15,
+   "overlap_end": 1000.18,
+   "center_time": 995.16,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 1
+  }
+ ]
+}

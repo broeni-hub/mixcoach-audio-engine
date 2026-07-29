@@ -1,0 +1,3225 @@
+{
+  "01b605f1-8f9e-4385-97da-4811fd42621b": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 175.31,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 98,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 398.29,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 559.97,
+        "diff_seconds": 2.95,
+        "phrase_beats_off": 6.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 843.19,
+        "diff_seconds": 1.96,
+        "phrase_beats_off": 4.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1015.04,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.93,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1126.14,
+        "diff_seconds": 0.08,
+        "phrase_beats_off": 0.17,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1230.03,
+        "diff_seconds": 6.92,
+        "phrase_beats_off": 14.17,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1378.34,
+        "diff_seconds": 5.46,
+        "phrase_beats_off": 11.18,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1687.9,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.11,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "0383a764-4f88-425d-b3a6-7bda901e7725": {
+    "fileName": "synthetic_mix.wav",
+    "transitions": [
+      {
+        "center_time": 113.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.08,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "04804f27-2755-4db3-8f0b-f57d3315737c": {
+    "fileName": "Dixon WE2  Tomorrowland 2025.mp3",
+    "transitions": [
+      {
+        "center_time": 619.65,
+        "diff_seconds": 5.77,
+        "phrase_beats_off": 11.84,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 788.32,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.01,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 999.57,
+        "diff_seconds": 4.33,
+        "phrase_beats_off": 8.9,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1148.62,
+        "diff_seconds": 4.82,
+        "phrase_beats_off": 9.9,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1250.37,
+        "diff_seconds": 6.33,
+        "phrase_beats_off": 13.0,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1372.3,
+        "diff_seconds": 0.96,
+        "phrase_beats_off": 1.98,
+        "engine_quality_score": 96,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1541.73,
+        "diff_seconds": 0.01,
+        "phrase_beats_off": 0.02,
+        "engine_quality_score": 100,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1857.63,
+        "diff_seconds": 0.97,
+        "phrase_beats_off": 1.99,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 2109.14,
+        "diff_seconds": 1.0,
+        "phrase_beats_off": 2.06,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 2232.51,
+        "diff_seconds": 0.0,
+        "phrase_beats_off": 0.0,
+        "engine_quality_score": 100,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 2305.56,
+        "diff_seconds": 0.48,
+        "phrase_beats_off": 0.98,
+        "engine_quality_score": 99,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 2374.73,
+        "diff_seconds": 2.88,
+        "phrase_beats_off": 5.91,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2692.45,
+        "diff_seconds": 6.71,
+        "phrase_beats_off": 13.78,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 2983.46,
+        "diff_seconds": 7.22,
+        "phrase_beats_off": 14.83,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3046.6,
+        "diff_seconds": 0.95,
+        "phrase_beats_off": 1.95,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 3330.37,
+        "diff_seconds": 6.71,
+        "phrase_beats_off": 13.78,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3393.25,
+        "diff_seconds": 0.97,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 78,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 3586.25,
+        "diff_seconds": 4.19,
+        "phrase_beats_off": 8.6,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3653.38,
+        "diff_seconds": 7.25,
+        "phrase_beats_off": 14.89,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3881.93,
+        "diff_seconds": 6.22,
+        "phrase_beats_off": 12.78,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3956.82,
+        "diff_seconds": 0.0,
+        "phrase_beats_off": 0.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 4122.88,
+        "diff_seconds": 5.29,
+        "phrase_beats_off": 10.87,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4368.0,
+        "diff_seconds": 1.02,
+        "phrase_beats_off": 2.1,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 4337.71,
+        "diff_seconds": 5.8,
+        "phrase_beats_off": 11.9,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4713.16,
+        "diff_seconds": 3.89,
+        "phrase_beats_off": 7.98,
+        "engine_quality_score": 72,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 5299.98,
+        "diff_seconds": 3.37,
+        "phrase_beats_off": 6.93,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 5484.37,
+        "diff_seconds": 5.27,
+        "phrase_beats_off": 10.82,
+        "engine_quality_score": 65,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 5789.43,
+        "diff_seconds": 3.4,
+        "phrase_beats_off": 6.98,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 5976.93,
+        "diff_seconds": 1.69,
+        "phrase_beats_off": 3.47,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 6150.28,
+        "diff_seconds": 1.49,
+        "phrase_beats_off": 3.05,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 6565.26,
+        "diff_seconds": 5.27,
+        "phrase_beats_off": 10.83,
+        "engine_quality_score": 64,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 183.67,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 221.81,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 304.96,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 6837.26,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 7015.65,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 7167.24,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "0cdea2cb-a130-4743-8c8a-90942e8e3b63": {
+    "fileName": "REC010.WAV",
+    "transitions": [
+      {
+        "center_time": 90.0,
+        "diff_seconds": 0.84,
+        "phrase_beats_off": 1.8,
+        "engine_quality_score": 78,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 281.0,
+        "diff_seconds": 1.45,
+        "phrase_beats_off": 3.13,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 374.0,
+        "diff_seconds": 4.41,
+        "phrase_beats_off": 9.5,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 445.0,
+        "diff_seconds": 3.25,
+        "phrase_beats_off": 7.01,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 554.0,
+        "diff_seconds": 5.01,
+        "phrase_beats_off": 10.8,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 746.0,
+        "diff_seconds": 0.66,
+        "phrase_beats_off": 1.42,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 902.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.09,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1070.0,
+        "diff_seconds": 5.85,
+        "phrase_beats_off": 12.61,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1241.0,
+        "diff_seconds": 6.48,
+        "phrase_beats_off": 13.96,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1407.0,
+        "diff_seconds": 3.63,
+        "phrase_beats_off": 7.83,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1506.0,
+        "diff_seconds": 4.63,
+        "phrase_beats_off": 9.97,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1745.0,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 5.2,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1831.0,
+        "diff_seconds": 2.88,
+        "phrase_beats_off": 6.2,
+        "engine_quality_score": 72,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1912.0,
+        "diff_seconds": 7.08,
+        "phrase_beats_off": 15.26,
+        "engine_quality_score": 72,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "11da05af-edee-47c2-9b12-3972ab10448a": {
+    "fileName": "mix.wav",
+    "transitions": [
+      {
+        "center_time": 113.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.08,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "14ce6088-f73c-437c-83ff-14b8a3efecb4": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 163.0,
+        "diff_seconds": 3.81,
+        "phrase_beats_off": 7.8,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 229.0,
+        "diff_seconds": 2.61,
+        "phrase_beats_off": 5.34,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 363.0,
+        "diff_seconds": 6.88,
+        "phrase_beats_off": 14.09,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 584.0,
+        "diff_seconds": 1.27,
+        "phrase_beats_off": 2.6,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 828.0,
+        "diff_seconds": 6.13,
+        "phrase_beats_off": 12.56,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1031.0,
+        "diff_seconds": 2.78,
+        "phrase_beats_off": 5.7,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1189.0,
+        "diff_seconds": 1.1,
+        "phrase_beats_off": 2.26,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1381.0,
+        "diff_seconds": 1.66,
+        "phrase_beats_off": 3.41,
+        "engine_quality_score": 86,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1704.0,
+        "diff_seconds": 6.18,
+        "phrase_beats_off": 12.66,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "1eb6ec00-db08-436f-a948-523e78c08331": {
+    "fileName": "REC002.WAV",
+    "transitions": [
+      {
+        "center_time": 353.15,
+        "diff_seconds": 3.89,
+        "phrase_beats_off": 7.97,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 508.47,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 677.86,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 83,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 910.15,
+        "diff_seconds": 0.52,
+        "phrase_beats_off": 1.06,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1162.04,
+        "diff_seconds": 3.88,
+        "phrase_beats_off": 7.95,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1480.71,
+        "diff_seconds": 6.51,
+        "phrase_beats_off": 13.34,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "2d1e54b9-da08-4fbb-b389-8e76f5d8d826": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 175.31,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 98,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 398.29,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 559.97,
+        "diff_seconds": 2.95,
+        "phrase_beats_off": 6.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 843.19,
+        "diff_seconds": 1.96,
+        "phrase_beats_off": 4.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1015.04,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.93,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1181.69,
+        "diff_seconds": 7.88,
+        "phrase_beats_off": 16.15,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1378.34,
+        "diff_seconds": 5.94,
+        "phrase_beats_off": 12.18,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1687.9,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.11,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "2d77d3fc-2c42-4242-812b-738f9fa28467": {
+    "fileName": "Dixon at Cercle Festival 2024 (Ariane Stage).mp3",
+    "transitions": [
+      {
+        "center_time": 586.31,
+        "diff_seconds": 3.87,
+        "phrase_beats_off": 7.94,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 813.0,
+        "diff_seconds": 0.95,
+        "phrase_beats_off": 1.95,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 875.55,
+        "diff_seconds": 1.46,
+        "phrase_beats_off": 3.0,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1105.5,
+        "diff_seconds": 1.99,
+        "phrase_beats_off": 4.08,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1297.43,
+        "diff_seconds": 7.25,
+        "phrase_beats_off": 14.88,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1246.04,
+        "diff_seconds": 1.46,
+        "phrase_beats_off": 3.0,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1608.04,
+        "diff_seconds": 4.85,
+        "phrase_beats_off": 9.94,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1857.56,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.94,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2154.07,
+        "diff_seconds": 1.46,
+        "phrase_beats_off": 3.0,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 2523.63,
+        "diff_seconds": 4.37,
+        "phrase_beats_off": 8.96,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 2718.96,
+        "diff_seconds": 4.83,
+        "phrase_beats_off": 9.9,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 2853.24,
+        "diff_seconds": 1.44,
+        "phrase_beats_off": 2.95,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 3125.63,
+        "diff_seconds": 1.44,
+        "phrase_beats_off": 2.95,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 3257.31,
+        "diff_seconds": 0.53,
+        "phrase_beats_off": 1.08,
+        "engine_quality_score": 96,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 3441.76,
+        "diff_seconds": 0.97,
+        "phrase_beats_off": 1.99,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 4072.93,
+        "diff_seconds": 1.82,
+        "phrase_beats_off": 3.73,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 4310.13,
+        "diff_seconds": 1.44,
+        "phrase_beats_off": 2.95,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 4558.22,
+        "diff_seconds": 0.0,
+        "phrase_beats_off": 0.0,
+        "engine_quality_score": 96,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 4837.9,
+        "diff_seconds": 0.21,
+        "phrase_beats_off": 0.43,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 203.72,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 387.4,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1719.69,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3598.4,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "4a7d8eda-5b60-47a2-ad9c-5aaf20757776": {
+    "fileName": "MixCoach1.WAV",
+    "transitions": [
+      {
+        "center_time": 208.96,
+        "diff_seconds": 0.48,
+        "phrase_beats_off": 1.03,
+        "engine_quality_score": 95,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 416.87,
+        "diff_seconds": 0.93,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 96,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1030.57,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.05,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1587.44,
+        "diff_seconds": 6.21,
+        "phrase_beats_off": 13.38,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 120.33,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 305.85,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 554.52,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 684.56,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 809.75,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 963.53,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1202.67,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1341.77,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "4c70d684-c852-4b50-8859-6e3a121093e9": {
+    "fileName": "REC010.WAV",
+    "transitions": [
+      {
+        "center_time": 67.04,
+        "diff_seconds": 7.38,
+        "phrase_beats_off": 15.9,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 260.87,
+        "diff_seconds": 4.2,
+        "phrase_beats_off": 9.06,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 433.19,
+        "diff_seconds": 5.53,
+        "phrase_beats_off": 11.91,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 571.82,
+        "diff_seconds": 0.0,
+        "phrase_beats_off": 0.0,
+        "engine_quality_score": 99,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 738.33,
+        "diff_seconds": 0.77,
+        "phrase_beats_off": 1.65,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1072.48,
+        "diff_seconds": 5.57,
+        "phrase_beats_off": 12.0,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1211.66,
+        "diff_seconds": 1.8,
+        "phrase_beats_off": 3.87,
+        "engine_quality_score": 78,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1497.68,
+        "diff_seconds": 1.85,
+        "phrase_beats_off": 3.98,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1710.29,
+        "diff_seconds": 5.69,
+        "phrase_beats_off": 12.26,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "4d427732-3536-4b45-b542-a3f1cfd44b81": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 175.31,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 98,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 398.29,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 559.97,
+        "diff_seconds": 2.95,
+        "phrase_beats_off": 6.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 843.19,
+        "diff_seconds": 1.96,
+        "phrase_beats_off": 4.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1126.14,
+        "diff_seconds": 0.08,
+        "phrase_beats_off": 0.17,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1378.34,
+        "diff_seconds": 5.46,
+        "phrase_beats_off": 11.18,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1673.84,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.11,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "53b0a8a3-1338-4dc4-a8a7-2014363b4dcb": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 163.0,
+        "diff_seconds": 3.81,
+        "phrase_beats_off": 7.8,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 229.0,
+        "diff_seconds": 2.61,
+        "phrase_beats_off": 5.34,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 363.0,
+        "diff_seconds": 6.88,
+        "phrase_beats_off": 14.09,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 584.0,
+        "diff_seconds": 1.27,
+        "phrase_beats_off": 2.6,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 828.0,
+        "diff_seconds": 6.13,
+        "phrase_beats_off": 12.56,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1031.0,
+        "diff_seconds": 2.78,
+        "phrase_beats_off": 5.7,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1189.0,
+        "diff_seconds": 1.1,
+        "phrase_beats_off": 2.26,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1381.0,
+        "diff_seconds": 1.66,
+        "phrase_beats_off": 3.41,
+        "engine_quality_score": 86,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1704.0,
+        "diff_seconds": 6.18,
+        "phrase_beats_off": 12.66,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "5667ada4-bf22-41bb-bc88-c44a5dda9f59": {
+    "fileName": "REC002.WAV",
+    "transitions": [
+      {
+        "center_time": 287.75,
+        "diff_seconds": 3.89,
+        "phrase_beats_off": 7.97,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 624.88,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 83,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 886.95,
+        "diff_seconds": 0.52,
+        "phrase_beats_off": 1.06,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1162.04,
+        "diff_seconds": 3.88,
+        "phrase_beats_off": 7.95,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1520.37,
+        "diff_seconds": 6.51,
+        "phrase_beats_off": 13.34,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "5b51fd6a-5f79-4afc-82fb-c2c2e5008e3b": {
+    "fileName": "mix.wav",
+    "transitions": [
+      {
+        "center_time": 113.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.08,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "68d08250-5234-4f4a-aa2d-b3b49bb9896d": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 199.41,
+        "diff_seconds": 7.13,
+        "phrase_beats_off": 14.61,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 398.29,
+        "diff_seconds": 7.42,
+        "phrase_beats_off": 15.21,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 559.97,
+        "diff_seconds": 2.95,
+        "phrase_beats_off": 6.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 843.19,
+        "diff_seconds": 1.96,
+        "phrase_beats_off": 4.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1015.04,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.93,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1230.03,
+        "diff_seconds": 6.9,
+        "phrase_beats_off": 14.14,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1378.34,
+        "diff_seconds": 5.46,
+        "phrase_beats_off": 11.18,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1687.9,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.11,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "6ce5120c-1c0d-431c-9474-89f753976a0c": {
+    "fileName": "REC010.WAV",
+    "transitions": [
+      {
+        "center_time": 262.59,
+        "diff_seconds": 4.08,
+        "phrase_beats_off": 8.8,
+        "engine_quality_score": 62,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 372.82,
+        "diff_seconds": 6.92,
+        "phrase_beats_off": 14.91,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 474.73,
+        "diff_seconds": 1.68,
+        "phrase_beats_off": 3.62,
+        "engine_quality_score": 76,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 571.82,
+        "diff_seconds": 6.48,
+        "phrase_beats_off": 13.97,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 763.89,
+        "diff_seconds": 0.77,
+        "phrase_beats_off": 1.65,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 875.74,
+        "diff_seconds": 6.5,
+        "phrase_beats_off": 14.01,
+        "engine_quality_score": 59,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1062.75,
+        "diff_seconds": 4.59,
+        "phrase_beats_off": 9.9,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1206.18,
+        "diff_seconds": 4.15,
+        "phrase_beats_off": 8.94,
+        "engine_quality_score": 62,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1504.58,
+        "diff_seconds": 2.76,
+        "phrase_beats_off": 5.95,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1716.28,
+        "diff_seconds": 5.06,
+        "phrase_beats_off": 10.91,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "823b0f49-cc54-4646-bb2c-4f560947adba": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 163.0,
+        "diff_seconds": 3.81,
+        "phrase_beats_off": 7.8,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 229.0,
+        "diff_seconds": 2.61,
+        "phrase_beats_off": 5.34,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 363.0,
+        "diff_seconds": 6.88,
+        "phrase_beats_off": 14.09,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 584.0,
+        "diff_seconds": 1.27,
+        "phrase_beats_off": 2.6,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 828.0,
+        "diff_seconds": 6.13,
+        "phrase_beats_off": 12.56,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1031.0,
+        "diff_seconds": 2.78,
+        "phrase_beats_off": 5.7,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1189.0,
+        "diff_seconds": 1.1,
+        "phrase_beats_off": 2.26,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1381.0,
+        "diff_seconds": 1.66,
+        "phrase_beats_off": 3.41,
+        "engine_quality_score": 86,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1704.0,
+        "diff_seconds": 6.18,
+        "phrase_beats_off": 12.66,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "8ad069d6-d387-45da-abf0-a7461e07acb8": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 175.31,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 98,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 375.28,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 559.97,
+        "diff_seconds": 2.95,
+        "phrase_beats_off": 6.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 843.19,
+        "diff_seconds": 1.96,
+        "phrase_beats_off": 4.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 952.05,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.93,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1126.14,
+        "diff_seconds": 0.08,
+        "phrase_beats_off": 0.17,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1185.55,
+        "diff_seconds": 6.92,
+        "phrase_beats_off": 14.17,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1378.34,
+        "diff_seconds": 5.46,
+        "phrase_beats_off": 11.18,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1673.97,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.11,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "90964e92-db1f-4e90-b9cf-b4b06175e4e5": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 163.0,
+        "diff_seconds": 3.81,
+        "phrase_beats_off": 7.8,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 229.0,
+        "diff_seconds": 2.61,
+        "phrase_beats_off": 5.34,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 363.0,
+        "diff_seconds": 6.88,
+        "phrase_beats_off": 14.09,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 584.0,
+        "diff_seconds": 1.27,
+        "phrase_beats_off": 2.6,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 828.0,
+        "diff_seconds": 6.13,
+        "phrase_beats_off": 12.56,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1031.0,
+        "diff_seconds": 2.78,
+        "phrase_beats_off": 5.7,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1189.0,
+        "diff_seconds": 1.1,
+        "phrase_beats_off": 2.26,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1381.0,
+        "diff_seconds": 1.66,
+        "phrase_beats_off": 3.41,
+        "engine_quality_score": 86,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1704.0,
+        "diff_seconds": 6.18,
+        "phrase_beats_off": 12.66,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "9193384c-d687-441f-b88c-99770937981c": {
+    "fileName": "REC013.WAV",
+    "transitions": [
+      {
+        "center_time": 237.58,
+        "diff_seconds": 0.82,
+        "phrase_beats_off": 1.68,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 391.63,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.94,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 929.97,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1125.6,
+        "diff_seconds": 2.42,
+        "phrase_beats_off": 4.96,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1466.36,
+        "diff_seconds": 4.81,
+        "phrase_beats_off": 9.87,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 594.83,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "9330c3ec-a245-4f04-8c87-aba07d29afd5": {
+    "fileName": "R\u00dcF\u00dcS DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3",
+    "transitions": [
+      {
+        "center_time": 589.08,
+        "diff_seconds": 3.54,
+        "phrase_beats_off": 7.25,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 966.73,
+        "diff_seconds": 1.46,
+        "phrase_beats_off": 3.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1160.04,
+        "diff_seconds": 0.0,
+        "phrase_beats_off": 0.0,
+        "engine_quality_score": 87,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1381.52,
+        "diff_seconds": 6.59,
+        "phrase_beats_off": 13.51,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1703.98,
+        "diff_seconds": 7.73,
+        "phrase_beats_off": 15.88,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1872.32,
+        "diff_seconds": 2.9,
+        "phrase_beats_off": 5.95,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2047.19,
+        "diff_seconds": 7.57,
+        "phrase_beats_off": 15.51,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 2468.14,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 2819.19,
+        "diff_seconds": 3.39,
+        "phrase_beats_off": 6.95,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 3109.94,
+        "diff_seconds": 7.73,
+        "phrase_beats_off": 15.84,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3326.3,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 82,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 4093.68,
+        "diff_seconds": 7.27,
+        "phrase_beats_off": 14.89,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4371.99,
+        "diff_seconds": 0.96,
+        "phrase_beats_off": 1.96,
+        "engine_quality_score": 92,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 4692.46,
+        "diff_seconds": 7.73,
+        "phrase_beats_off": 15.84,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4964.93,
+        "diff_seconds": 6.28,
+        "phrase_beats_off": 12.9,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 5370.49,
+        "diff_seconds": 3.88,
+        "phrase_beats_off": 7.95,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 5591.18,
+        "diff_seconds": 3.87,
+        "phrase_beats_off": 7.94,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 5751.3,
+        "diff_seconds": 4.83,
+        "phrase_beats_off": 9.9,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 5997.09,
+        "diff_seconds": 7.27,
+        "phrase_beats_off": 14.89,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 352.63,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3661.96,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "94576c8d-c521-4df7-a7a8-f02b0cd7b538": {
+    "fileName": "synthetic_mix.wav",
+    "transitions": [
+      {
+        "center_time": 113.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.08,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "9af411b6-6abc-499c-9447-c4742fd90995": {
+    "fileName": "Dec25.WAV",
+    "transitions": [
+      {
+        "center_time": 289.99,
+        "diff_seconds": 0.44,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 976.48,
+        "diff_seconds": 3.09,
+        "phrase_beats_off": 7.01,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1266.66,
+        "diff_seconds": 6.7,
+        "phrase_beats_off": 15.2,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1432.57,
+        "diff_seconds": 0.86,
+        "phrase_beats_off": 1.95,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1724.92,
+        "diff_seconds": 1.28,
+        "phrase_beats_off": 2.9,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 453.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 612.46,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 790.53,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1968.99,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "a156bceb-7fc9-4514-bbdd-8988788def66": {
+    "fileName": "REC004.WAV",
+    "transitions": [
+      {
+        "center_time": 228.12,
+        "diff_seconds": 7.55,
+        "phrase_beats_off": 16.23,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 374.81,
+        "diff_seconds": 5.64,
+        "phrase_beats_off": 12.12,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 709.02,
+        "diff_seconds": 3.81,
+        "phrase_beats_off": 8.2,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1107.75,
+        "diff_seconds": 5.15,
+        "phrase_beats_off": 11.07,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1669.22,
+        "diff_seconds": 3.3,
+        "phrase_beats_off": 7.09,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 894.6,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1310.8,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1462.86,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "a1637264-8524-4173-ac4b-9ddf3f99f7ef": {
+    "fileName": "Four Tet - S\u00f3nar 2025 - ARTE Concert.mp3",
+    "transitions": [
+      {
+        "center_time": 135.51,
+        "diff_seconds": 5.18,
+        "phrase_beats_off": 11.14,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 522.5,
+        "diff_seconds": 2.83,
+        "phrase_beats_off": 6.09,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 860.35,
+        "diff_seconds": 7.05,
+        "phrase_beats_off": 15.16,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1178.62,
+        "diff_seconds": 5.15,
+        "phrase_beats_off": 11.08,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1363.0,
+        "diff_seconds": 6.05,
+        "phrase_beats_off": 13.02,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1645.55,
+        "diff_seconds": 6.57,
+        "phrase_beats_off": 14.13,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1836.98,
+        "diff_seconds": 2.34,
+        "phrase_beats_off": 5.05,
+        "engine_quality_score": 78,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2135.82,
+        "diff_seconds": 0.92,
+        "phrase_beats_off": 1.98,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 2388.26,
+        "diff_seconds": 3.25,
+        "phrase_beats_off": 7.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 3079.62,
+        "diff_seconds": 3.69,
+        "phrase_beats_off": 7.96,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2771.35,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3290.66,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3566.64,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3780.13,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3971.77,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "a5ee0fde-765d-489a-a336-0c74060e3e0b": {
+    "fileName": "REC003.WAV",
+    "transitions": [
+      {
+        "center_time": 347.07,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.89,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 522.36,
+        "diff_seconds": 3.43,
+        "phrase_beats_off": 7.39,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 809.8,
+        "diff_seconds": 0.95,
+        "phrase_beats_off": 2.05,
+        "engine_quality_score": 82,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 969.97,
+        "diff_seconds": 0.9,
+        "phrase_beats_off": 1.95,
+        "engine_quality_score": 87,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1118.38,
+        "diff_seconds": 0.57,
+        "phrase_beats_off": 1.23,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1472.89,
+        "diff_seconds": 1.37,
+        "phrase_beats_off": 2.95,
+        "engine_quality_score": 78,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1659.48,
+        "diff_seconds": 2.3,
+        "phrase_beats_off": 4.95,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 85.4,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 119.39,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1279.72,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1848.85,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "c1476fee-08ba-40a1-b707-58614085ed12": {
+    "fileName": "Dec25.WAV",
+    "transitions": [
+      {
+        "center_time": 289.99,
+        "diff_seconds": 0.44,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 361.0,
+        "diff_seconds": 0.84,
+        "phrase_beats_off": 1.9,
+        "engine_quality_score": 87,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 734.47,
+        "diff_seconds": 1.09,
+        "phrase_beats_off": 2.48,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1043.57,
+        "diff_seconds": 3.09,
+        "phrase_beats_off": 7.01,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1221.0,
+        "diff_seconds": 6.7,
+        "phrase_beats_off": 15.2,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1529.99,
+        "diff_seconds": 0.86,
+        "phrase_beats_off": 1.95,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1739.59,
+        "diff_seconds": 1.28,
+        "phrase_beats_off": 2.9,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 75
+      }
+    ]
+  },
+  "caa1a114-2221-4ee4-a0a1-a1b55a52527f": {
+    "fileName": "Dec25.WAV",
+    "transitions": [
+      {
+        "center_time": 289.99,
+        "diff_seconds": 0.44,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 361.0,
+        "diff_seconds": 0.84,
+        "phrase_beats_off": 1.9,
+        "engine_quality_score": 87,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 734.47,
+        "diff_seconds": 1.09,
+        "phrase_beats_off": 2.48,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1043.57,
+        "diff_seconds": 3.09,
+        "phrase_beats_off": 7.01,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1221.0,
+        "diff_seconds": 6.7,
+        "phrase_beats_off": 15.2,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1529.99,
+        "diff_seconds": 0.86,
+        "phrase_beats_off": 1.95,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 1739.59,
+        "diff_seconds": 1.28,
+        "phrase_beats_off": 2.9,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 75
+      }
+    ]
+  },
+  "cb40456a-3696-41f7-9f10-ca3f1c663662": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 163.0,
+        "diff_seconds": 3.81,
+        "phrase_beats_off": 7.8,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 229.0,
+        "diff_seconds": 2.61,
+        "phrase_beats_off": 5.34,
+        "engine_quality_score": 75,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 363.0,
+        "diff_seconds": 6.88,
+        "phrase_beats_off": 14.09,
+        "engine_quality_score": 63,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 584.0,
+        "diff_seconds": 1.27,
+        "phrase_beats_off": 2.6,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 828.0,
+        "diff_seconds": 6.13,
+        "phrase_beats_off": 12.56,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1031.0,
+        "diff_seconds": 2.78,
+        "phrase_beats_off": 5.7,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1189.0,
+        "diff_seconds": 1.1,
+        "phrase_beats_off": 2.26,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1381.0,
+        "diff_seconds": 1.66,
+        "phrase_beats_off": 3.41,
+        "engine_quality_score": 86,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 1704.0,
+        "diff_seconds": 6.18,
+        "phrase_beats_off": 12.66,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "d684297d-f39e-4daa-8879-7b213dfa4272": {
+    "fileName": "REC001.WAV",
+    "transitions": [
+      {
+        "center_time": 175.31,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 98,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 376.69,
+        "diff_seconds": 0.98,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 559.97,
+        "diff_seconds": 2.95,
+        "phrase_beats_off": 6.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 843.19,
+        "diff_seconds": 1.96,
+        "phrase_beats_off": 4.01,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 952.56,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.93,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1135.94,
+        "diff_seconds": 7.88,
+        "phrase_beats_off": 16.15,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1378.34,
+        "diff_seconds": 5.94,
+        "phrase_beats_off": 12.18,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1673.91,
+        "diff_seconds": 7.37,
+        "phrase_beats_off": 15.11,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "e218afcd-8ce0-46b6-a53f-5ba8fbf3f383": {
+    "fileName": "Joris Voorn Vinyl Only Techno Set  Upclose 2026.mp3",
+    "transitions": [
+      {
+        "center_time": 215.95,
+        "diff_seconds": 1.25,
+        "phrase_beats_off": 2.98,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 359.98,
+        "diff_seconds": 4.2,
+        "phrase_beats_off": 10.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 655.64,
+        "diff_seconds": 0.0,
+        "phrase_beats_off": 0.0,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 742.41,
+        "diff_seconds": 5.87,
+        "phrase_beats_off": 14.05,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 856.86,
+        "diff_seconds": 5.82,
+        "phrase_beats_off": 13.92,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 897.68,
+        "diff_seconds": 4.6,
+        "phrase_beats_off": 11.0,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1231.28,
+        "diff_seconds": 3.33,
+        "phrase_beats_off": 7.97,
+        "engine_quality_score": 74,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1488.27,
+        "diff_seconds": 6.28,
+        "phrase_beats_off": 15.02,
+        "engine_quality_score": 69,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1662.74,
+        "diff_seconds": 3.34,
+        "phrase_beats_off": 8.0,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1810.53,
+        "diff_seconds": 0.42,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 84,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1941.42,
+        "diff_seconds": 0.84,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 2277.92,
+        "diff_seconds": 0.21,
+        "phrase_beats_off": 0.51,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 2507.18,
+        "diff_seconds": 1.67,
+        "phrase_beats_off": 4.0,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 2582.38,
+        "diff_seconds": 5.4,
+        "phrase_beats_off": 12.93,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 2601.16,
+        "diff_seconds": 3.79,
+        "phrase_beats_off": 9.07,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 2844.72,
+        "diff_seconds": 2.11,
+        "phrase_beats_off": 5.04,
+        "engine_quality_score": 67,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2842.73,
+        "diff_seconds": 1.25,
+        "phrase_beats_off": 3.0,
+        "engine_quality_score": 73,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 3070.95,
+        "diff_seconds": 4.59,
+        "phrase_beats_off": 10.97,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 3284.37,
+        "diff_seconds": 0.84,
+        "phrase_beats_off": 2.0,
+        "engine_quality_score": 85,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 3469.87,
+        "diff_seconds": 1.69,
+        "phrase_beats_off": 4.04,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 3541.63,
+        "diff_seconds": 0.17,
+        "phrase_beats_off": 0.41,
+        "engine_quality_score": 84,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 3683.68,
+        "diff_seconds": 2.9,
+        "phrase_beats_off": 6.94,
+        "engine_quality_score": 68,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 4370.02,
+        "diff_seconds": 4.36,
+        "phrase_beats_off": 10.44,
+        "engine_quality_score": 61,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4723.01,
+        "diff_seconds": 5.43,
+        "phrase_beats_off": 13.0,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4810.25,
+        "diff_seconds": 6.27,
+        "phrase_beats_off": 15.0,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 4957.99,
+        "diff_seconds": 0.02,
+        "phrase_beats_off": 0.05,
+        "engine_quality_score": 93,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 5117.77,
+        "diff_seconds": 1.54,
+        "phrase_beats_off": 3.69,
+        "engine_quality_score": 90,
+        "engine_alignment_score": 75
+      },
+      {
+        "center_time": 521.41,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1007.2,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 2313.5,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 2370.98,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 2684.79,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 2978.99,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3817.82,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 3904.72,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 4030.34,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 4146.71,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 4254.5,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 4495.88,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 4580.3,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 5399.95,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "eb2a0257-3a8b-4aaf-9503-823bf1a70f0a": {
+    "fileName": "Be Svendsen live at Mount Nemrut, in T\u00fcrkiye for Cercle.mp3",
+    "transitions": [
+      {
+        "center_time": 397.72,
+        "diff_seconds": 5.4,
+        "phrase_beats_off": 10.11,
+        "engine_quality_score": 68,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 600.76,
+        "diff_seconds": 7.97,
+        "phrase_beats_off": 14.92,
+        "engine_quality_score": 58,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1086.44,
+        "diff_seconds": 6.27,
+        "phrase_beats_off": 11.74,
+        "engine_quality_score": 55,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 1685.14,
+        "diff_seconds": 2.62,
+        "phrase_beats_off": 5.13,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2079.32,
+        "diff_seconds": 2.6,
+        "phrase_beats_off": 5.09,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 2262.13,
+        "diff_seconds": 4.02,
+        "phrase_beats_off": 7.86,
+        "engine_quality_score": 81,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 3065.03,
+        "diff_seconds": 3.54,
+        "phrase_beats_off": 6.93,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 3677.39,
+        "diff_seconds": 4.08,
+        "phrase_beats_off": 7.99,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 4152.08,
+        "diff_seconds": 0.48,
+        "phrase_beats_off": 0.94,
+        "engine_quality_score": 97,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 4333.61,
+        "diff_seconds": 0.51,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 98,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 4797.73,
+        "diff_seconds": 4.6,
+        "phrase_beats_off": 9.0,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 5373.91,
+        "diff_seconds": 3.04,
+        "phrase_beats_off": 5.95,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 5701.18,
+        "diff_seconds": 7.66,
+        "phrase_beats_off": 14.99,
+        "engine_quality_score": 66,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 6255.94,
+        "diff_seconds": 7.01,
+        "phrase_beats_off": 13.72,
+        "engine_quality_score": 47,
+        "engine_alignment_score": 30
+      },
+      {
+        "center_time": 6609.63,
+        "diff_seconds": 2.07,
+        "phrase_beats_off": 4.24,
+        "engine_quality_score": 68,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 720.08,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 793.97,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "ee76cba3-b8a8-4d29-8f54-8b200322bf7e": {
+    "fileName": "REC013.WAV",
+    "transitions": [
+      {
+        "center_time": 261.74,
+        "diff_seconds": 0.82,
+        "phrase_beats_off": 1.68,
+        "engine_quality_score": 79,
+        "engine_alignment_score": 90
+      },
+      {
+        "center_time": 398.06,
+        "diff_seconds": 2.41,
+        "phrase_beats_off": 4.94,
+        "engine_quality_score": 80,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 952.25,
+        "diff_seconds": 0.49,
+        "phrase_beats_off": 1.0,
+        "engine_quality_score": 89,
+        "engine_alignment_score": 100
+      },
+      {
+        "center_time": 1169.7,
+        "diff_seconds": 2.42,
+        "phrase_beats_off": 4.96,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 55
+      },
+      {
+        "center_time": 1466.36,
+        "diff_seconds": 4.81,
+        "phrase_beats_off": 9.87,
+        "engine_quality_score": 71,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "eee0b095-3932-44fb-8b6d-373722aff4ac": {
+    "fileName": "mix.wav",
+    "transitions": [
+      {
+        "center_time": 113.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.08,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "fdc53ee6-9fe5-4990-88d6-03dbcd511f66": {
+    "fileName": "mix.wav",
+    "transitions": [
+      {
+        "center_time": 113.0,
+        "diff_seconds": 7.0,
+        "phrase_beats_off": 15.08,
+        "engine_quality_score": 70,
+        "engine_alignment_score": 30
+      }
+    ]
+  },
+  "0b292660-9d0c-407d-b09a-13331d388298": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 219.01,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1468.51,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 381.11,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 594.89,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 926.82,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1125.02,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "3be87436-0a21-4fba-8212-9bae89431b0b": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 178.16,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 323.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 503.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 756.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1058.25,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1709.19,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1410.78,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "54258d74-025e-4433-9d88-2b6233d69c4e": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 204.58,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 486.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 620.9,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 780.67,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1705.99,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 340.43,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1076.18,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1160.49,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1319.29,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1536.8,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "5995866f-03a5-4850-ad04-3f91d944cf60": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 201.88,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 486.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 619.47,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 782.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1707.54,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 340.82,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1072.85,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1175.11,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1322.26,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1539.4,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "74d3fcd5-766b-478d-b8bc-0adef3ba8346": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 32.71,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 260.6,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 437.57,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 560.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1434.19,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 749.41,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1067.93,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1211.13,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1673.19,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "908733b4-5e11-4d90-8ff0-7c4e968d53f9": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 466.68,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 701.46,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 908.3,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1541.89,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1763.65,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 231.53,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1048.68,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1275.82,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "c6a613b5-0483-4106-9d73-e745dd72b4e5": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 215.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 474.55,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 786.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 903.0,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 575.01,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1246.11,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1412.67,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1585.67,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  },
+  "d3b5cc14-1635-4f01-a1dc-451868d52a5c": {
+    "fileName": "(Ergebnis-JSON fehlt)",
+    "transitions": [
+      {
+        "center_time": 191.32,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 480.78,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 579.25,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 766.42,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 939.43,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1246.73,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1415.13,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      },
+      {
+        "center_time": 1578.55,
+        "diff_seconds": null,
+        "phrase_beats_off": null,
+        "engine_quality_score": null,
+        "engine_alignment_score": null
+      }
+    ]
+  }
+}

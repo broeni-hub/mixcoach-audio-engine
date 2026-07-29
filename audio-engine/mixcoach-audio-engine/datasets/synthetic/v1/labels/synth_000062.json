@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000062",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:41:12.706217Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1450.26,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleMe, Myself & You3_0.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 254.96,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Harvey Sutherland\\Harvey SutherlandBamboo3Brothers.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 254.96,
+   "end_in_mix": 502.39,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\KlloWalls to Build - Mall Grab Remix0Walls to Build Remix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 502.39,
+   "end_in_mix": 760.8,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Panthera Krause\\Panthera KrauseRedo Rdid6It's A Business Doing Pleasure With You.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D# Major",
+   "camelot": "5B",
+   "start_in_mix": 760.8,
+   "end_in_mix": 967.39,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Earth BoysLos Angeles1.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 967.39,
+   "end_in_mix": 1200.1,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - zero zero.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 1200.1,
+   "end_in_mix": 1450.26,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 250.87,
+   "overlap_end": 254.96,
+   "center_time": 252.91,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 1.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 494.21,
+   "overlap_end": 502.39,
+   "center_time": 498.3,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": -57.4,
+   "key_compatibility_camelot_distance": 7,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 752.63,
+   "overlap_end": 760.8,
+   "center_time": 756.72,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -116.4,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 959.59,
+   "overlap_end": 967.39,
+   "center_time": 963.49,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 1196.01,
+   "overlap_end": 1200.1,
+   "center_time": 1198.06,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 67.7,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  }
+ ]
+}

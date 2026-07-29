@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000161",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:35:37.780527Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1241.89,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\DJ T.,Emanuel SatieBreak Loose1Electronica Mix.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 243.69,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoLoosie - Bonus Track6The Plasterer of Love (Deluxe Edition).mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 99.38,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 243.69,
+   "end_in_mix": 490.22,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Atjazz,Clara HillBefore22Full Circle.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 490.22,
+   "end_in_mix": 736.38,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Atjazz,Sarai JazzThe Only One - Beatless Version34The Only One.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 736.38,
+   "end_in_mix": 972.55,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\Pablo BolivarChannel One74Slow Mow Go.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 95.7,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 972.55,
+   "end_in_mix": 1241.89,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 241.28,
+   "overlap_end": 243.69,
+   "center_time": 242.49,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 480.56,
+   "overlap_end": 490.22,
+   "center_time": 485.39,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 716.31,
+   "overlap_end": 736.38,
+   "center_time": 726.34,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": -72.4,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 971.92,
+   "overlap_end": 972.55,
+   "center_time": 972.23,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "analysisId": "2d20cf62-f3aa-4f8f-8d3e-e256c29488a2",
+ "verdicts": {
+  "2": {
+   "midSec": 314.02,
+   "verdict": "correct"
+  },
+  "3": {
+   "midSec": 478.04,
+   "verdict": "correct"
+  }
+ },
+ "missed": [],
+ "updatedAt": 1785170364.0128334
+}

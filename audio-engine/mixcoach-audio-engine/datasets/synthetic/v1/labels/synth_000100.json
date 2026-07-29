@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000100",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:15:32.996854Z",
+ "sample_rate": 22050,
+ "duration_seconds": 871.55,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\drum&bassmix1\\15.the real.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 148.75,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\DJ AngeloBlack Sheep0Black Coffee Ibiza 17 Appreciation Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 148.75,
+   "end_in_mix": 407.32,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\4hero - play with the changes - 2007\\08_4hero-stoke_up_the_fire_(feat._face).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 407.32,
+   "end_in_mix": 633.93,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\ewan.pearson - sci.fi.hi.fi. volume 1.2005\\ewan pearson - 02 - lontano - lovebass.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 633.93,
+   "end_in_mix": 871.55,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 144.66,
+   "overlap_end": 148.75,
+   "center_time": 146.7,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 390.98,
+   "overlap_end": 407.32,
+   "center_time": 399.15,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 10.0,
+   "beat_offset_ms": 289.3,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 626.13,
+   "overlap_end": 633.93,
+   "center_time": 630.03,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  }
+ ]
+}

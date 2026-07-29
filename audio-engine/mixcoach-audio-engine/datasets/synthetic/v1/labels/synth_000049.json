@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000049",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:24:57.632661Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1112.54,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Suchi - Swift.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 253.33,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoFeed My Meatmachine3Sirimande  Feed My Meatmachine.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 253.33,
+   "end_in_mix": 428.11,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt - Extra Welt Hits [CORLP048DIGITAL]\\Extrawelt - 8000 (Original Mix) [Cocoon Recordings].mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 428.11,
+   "end_in_mix": 658.99,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Adryiano,Jamie 326Move It, Move It - Jamie 326 Remix3Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 658.99,
+   "end_in_mix": 892.74,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Electro Deluxe - Stardown (2005)\\08 Deumbe Wessouna.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 892.74,
+   "end_in_mix": 1112.54,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 223.61,
+   "overlap_end": 253.33,
+   "center_time": 238.47,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 398.39,
+   "overlap_end": 428.11,
+   "center_time": 413.25,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 658.5,
+   "overlap_end": 658.99,
+   "center_time": 658.74,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 863.02,
+   "overlap_end": 892.74,
+   "center_time": 877.88,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

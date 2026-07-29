@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000059",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:37:53.747240Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1114.15,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Domu\\DomuStay Away6This Is Domu.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 253.49,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoKatharsis Impossible - Original Version18Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 95.7,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 253.49,
+   "end_in_mix": 359.98,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\DegoWhatever (Instrumental)8A Wha' Him Deh Pon.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 359.98,
+   "end_in_mix": 546.9,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Polo & PanFeel Good1Serotonin.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 546.9,
+   "end_in_mix": 747.41,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\Freddie Joachim\\Freddie JoachimCalm4Study Guide.mp3",
+   "bpm_original": 95.7,
+   "bpm_in_mix": 95.7,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 747.41,
+   "end_in_mix": 849.36,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\Kink\\(T) Hackman - Semibreves (Kink's Mix) -.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 95.7,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 849.36,
+   "end_in_mix": 1114.15,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 243.46,
+   "overlap_end": 253.49,
+   "center_time": 248.48,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -61.4,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 349.95,
+   "overlap_end": 359.98,
+   "center_time": 354.96,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 537.24,
+   "overlap_end": 546.9,
+   "center_time": 542.07,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 728.09,
+   "overlap_end": 747.41,
+   "center_time": 737.75,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 844.35,
+   "overlap_end": 849.36,
+   "center_time": 846.86,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 143.5,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 3
+  }
+ ]
+}

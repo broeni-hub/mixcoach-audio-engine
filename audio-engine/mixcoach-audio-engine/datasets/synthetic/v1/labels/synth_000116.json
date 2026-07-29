@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000116",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:22:16.666207Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1002.97,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Sam Irl\\Sam IrlEile - Interlude9Raw Land.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 65.55,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoPlastic Hips6Enthusiast.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 65.55,
+   "end_in_mix": 298.4,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Linkwood\\LinkwoodNectarine97Slow Mow Go.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 99.38,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 298.4,
+   "end_in_mix": 522.61,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\Julien AubertPaint Club - Lusine Remix45Slow Mow Go.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 99.38,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 522.61,
+   "end_in_mix": 745.39,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Jazz,Blues\\Zeitgenössig\\Brad_Mehldau_Trio-House_On_Hill-2006-SAW\\03-brad_mehldau_trio-bealtine.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 103.36,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 745.39,
+   "end_in_mix": 1002.97,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 55.89,
+   "overlap_end": 65.55,
+   "center_time": 60.72,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 11.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 279.08,
+   "overlap_end": 298.4,
+   "center_time": 288.74,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 1.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 483.97,
+   "overlap_end": 522.61,
+   "center_time": 503.29,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 742.97,
+   "overlap_end": 745.39,
+   "center_time": 744.18,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

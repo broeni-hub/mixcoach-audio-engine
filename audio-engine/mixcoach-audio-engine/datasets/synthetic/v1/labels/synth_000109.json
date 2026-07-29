@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000109",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:19:38.817508Z",
+ "sample_rate": 22050,
+ "duration_seconds": 989.52,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Statues\\01 Familiar Feeling.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 259.25,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoNights Off4The Uninvited Guest.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 259.25,
+   "end_in_mix": 483.0,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\VA-4hero_Present_Brazilika_Vol_2-(FAROCD109)-2006-JUST\\06-marcos_valle-parabens_(misa_negra_remix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 483.0,
+   "end_in_mix": 731.47,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Detroit House\\Omar SThe Sound of Neptune5.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 731.47,
+   "end_in_mix": 989.52,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 251.82,
+   "overlap_end": 259.25,
+   "center_time": 255.54,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 235.3,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 481.14,
+   "overlap_end": 483.0,
+   "center_time": 482.07,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 77.2,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 729.52,
+   "overlap_end": 731.47,
+   "center_time": 730.5,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

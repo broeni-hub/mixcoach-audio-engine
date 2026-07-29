@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000140",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:28:45.836490Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1144.87,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Gui Boratto\\Gui BorattoThe Black Bookshelf2Pentagram.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 217.8,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoErste Sein - Original Version11Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 217.8,
+   "end_in_mix": 398.97,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Axel Boman\\Axel Boman - Barcelona.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 398.97,
+   "end_in_mix": 643.56,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit Swindle,Tom Misch,Sterac ElectronicsYes, No, Maybe - Sterac Electronics Instrumental Remix6Heist Recordings Releases.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 643.56,
+   "end_in_mix": 877.34,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Atjazz,TrueSelfPeanuts - Trueself Remix32That Something Else!.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 877.34,
+   "end_in_mix": 1144.87,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 201.46,
+   "overlap_end": 217.8,
+   "center_time": 209.63,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 397.94,
+   "overlap_end": 398.97,
+   "center_time": 398.45,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 639.48,
+   "overlap_end": 643.56,
+   "center_time": 641.52,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 873.26,
+   "overlap_end": 877.34,
+   "center_time": 875.3,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 3
+  }
+ ]
+}

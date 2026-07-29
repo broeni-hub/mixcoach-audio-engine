@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000040",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:23:54.028712Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1067.26,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoLast Dear8Diskoding.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 243.44,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoThe Univited Guest - Original Version4Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 243.44,
+   "end_in_mix": 386.5,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoComic1Where Was I.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 386.5,
+   "end_in_mix": 572.84,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\DedalusSantiago78Slow Mow Go.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 572.84,
+   "end_in_mix": 799.93,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LonePetcrane Beach Track7Emerald Fantasy Tracks.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 799.93,
+   "end_in_mix": 1067.26,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 226.35,
+   "overlap_end": 243.44,
+   "center_time": 234.89,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 377.95,
+   "overlap_end": 386.5,
+   "center_time": 382.22,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 540.14,
+   "overlap_end": 572.84,
+   "center_time": 556.49,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 795.65,
+   "overlap_end": 799.93,
+   "center_time": 797.79,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 1.0,
+   "beat_offset_ms": 197.8,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  }
+ ]
+}

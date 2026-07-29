@@ -1,0 +1,305 @@
+set_id,file_name,transition_center_time,human_rating,rater,verdict_info,engine_quality_score,phrase_beats_off,engine_label,comment,time_mmss,quelle
+0383a764-4f88-425d-b3a6-7bda901e7725,synthetic_mix.wav,113.0,,sebro,,70,15.08,neutral,,1:53,erkannt
+11da05af-edee-47c2-9b12-3972ab10448a,mix.wav,113.0,,sebro,,70,15.08,neutral,,1:53,erkannt
+5b51fd6a-5f79-4afc-82fb-c2c2e5008e3b,mix.wav,113.0,,sebro,,70,15.08,neutral,,1:53,erkannt
+94576c8d-c521-4df7-a7a8-f02b0cd7b538,synthetic_mix.wav,113.0,,sebro,,70,15.08,neutral,,1:53,erkannt
+eee0b095-3932-44fb-8b6d-373722aff4ac,mix.wav,113.0,,sebro,,70,15.08,neutral,,1:53,erkannt
+fdc53ee6-9fe5-4990-88d6-03dbcd511f66,mix.wav,113.0,,sebro,,70,15.08,neutral,,1:53,erkannt
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),619.6,,sebro,correct,,,,,10:20,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),788.3,,sebro,correct,,,,,13:08,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),999.6,,sebro,correct,,,,,16:40,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),1148.6,,sebro,correct,,,,,19:09,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),1250.4,,sebro,correct,,,,,20:50,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),1372.3,,sebro,correct,,,,,22:52,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),1541.7,,sebro,correct,,,,,25:42,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),1857.6,,sebro,timing_off (Engine: 1909.9s -> korrigiert),,,,,30:58,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),2109.1,,sebro,correct,,,,,35:09,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),2232.5,,sebro,correct,,,,,37:13,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),2305.6,,sebro,timing_off (Engine: 2386.2s -> korrigiert),,,,,38:26,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),2374.7,,sebro,timing_off (Engine: 2450.5s -> korrigiert),,,,,39:35,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),2692.4,,sebro,timing_off (Engine: 2718.8s -> korrigiert),,,,,44:52,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),2983.5,,sebro,timing_off (Engine: 3029.9s -> korrigiert),,,,,49:43,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3046.6,,sebro,timing_off (Engine: 3092.8s -> korrigiert),,,,,50:47,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3330.4,,sebro,correct,,,,,55:30,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3393.2,,sebro,correct,,,,,56:33,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3586.2,,sebro,timing_off (Engine: 3605.7s -> korrigiert),,,,,59:46,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3653.4,,sebro,timing_off (Engine: 3690.9s -> korrigiert),,,,,60:53,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3881.9,,sebro,correct,,,,,64:42,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),3956.8,,sebro,timing_off (Engine: 4004.8s -> korrigiert),,,,,65:57,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),4122.9,,sebro,timing_off (Engine: 4243.2s -> korrigiert),,,,,68:43,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),4368.0,,sebro,correct,,,,,72:48,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),4337.7,,sebro,timing_off (Engine: 4455.1s -> korrigiert),,,,,72:18,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),4713.2,,sebro,correct,,,,,78:33,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),5300.0,,sebro,timing_off (Engine: 5309.6s -> korrigiert),,,,,88:20,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),5484.4,,sebro,correct,,,,,91:24,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),5789.4,,sebro,timing_off (Engine: 5804.9s -> korrigiert),,,,,96:29,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),5976.9,,sebro,timing_off (Engine: 6049.7s -> korrigiert),,,,,99:37,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),6150.3,,sebro,timing_off (Engine: 6310.8s -> korrigiert),,,,,102:30,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),6565.3,,sebro,timing_off (Engine: 6628.9s -> korrigiert),,,,,109:25,nur_ground_truth
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),183.7,,sebro,missed (von dir markiert),,,,,3:04,missed
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),221.8,,sebro,missed (von dir markiert),,,,,3:42,missed
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),305.0,,sebro,missed (von dir markiert),,,,,5:05,missed
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),6837.3,,sebro,missed (von dir markiert),,,,,113:57,missed
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),7015.6,,sebro,missed (von dir markiert),,,,,116:56,missed
+04804f27-2755-4db3-8f0b-f57d3315737c,(Ergebnis-JSON fehlt),7167.2,,sebro,missed (von dir markiert),,,,,119:27,missed
+0b292660-9d0c-407d-b09a-13331d388298,(Ergebnis-JSON fehlt),219.0,,sebro,timing_off (Engine: 263.0s -> korrigiert),,,,,3:39,nur_ground_truth
+0b292660-9d0c-407d-b09a-13331d388298,(Ergebnis-JSON fehlt),1468.5,,sebro,timing_off (Engine: 1484.0s -> korrigiert),,,,,24:29,nur_ground_truth
+0b292660-9d0c-407d-b09a-13331d388298,(Ergebnis-JSON fehlt),381.1,,sebro,missed (von dir markiert),,,,,6:21,missed
+0b292660-9d0c-407d-b09a-13331d388298,(Ergebnis-JSON fehlt),594.9,,sebro,missed (von dir markiert),,,,,9:55,missed
+0b292660-9d0c-407d-b09a-13331d388298,(Ergebnis-JSON fehlt),926.8,,sebro,missed (von dir markiert),,,,,15:27,missed
+0b292660-9d0c-407d-b09a-13331d388298,(Ergebnis-JSON fehlt),1125.0,,sebro,missed (von dir markiert),,,,,18:45,missed
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),586.3,,sebro,timing_off (Engine: 610.8s -> korrigiert),,,,,9:46,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),813.0,,sebro,correct,,,,,13:33,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),875.5,,sebro,timing_off (Engine: 969.6s -> korrigiert),,,,,14:36,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),1105.5,,sebro,timing_off (Engine: 1138.5s -> korrigiert),,,,,18:26,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),1297.4,,sebro,timing_off (Engine: 1269.5s -> korrigiert),,,,,21:37,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),1246.0,,sebro,timing_off (Engine: 1330.0s -> korrigiert),,,,,20:46,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),1608.0,,sebro,timing_off (Engine: 1629.8s -> korrigiert),,,,,26:48,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),1857.6,,sebro,timing_off (Engine: 1906.6s -> korrigiert),,,,,30:58,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),2154.1,,sebro,timing_off (Engine: 2187.1s -> korrigiert),,,,,35:54,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),2523.6,,sebro,timing_off (Engine: 2601.6s -> korrigiert),,,,,42:04,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),2719.0,,sebro,timing_off (Engine: 2730.3s -> korrigiert),,,,,45:19,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),2853.2,,sebro,correct,,,,,47:33,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),3125.6,,sebro,timing_off (Engine: 3069.9s -> korrigiert),,,,,52:06,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),3257.3,,sebro,timing_off (Engine: 3287.2s -> korrigiert),,,,,54:17,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),4072.9,,sebro,timing_off (Engine: 3967.2s -> korrigiert),,,,,67:53,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),4310.1,,sebro,correct,,,,,71:50,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),4558.2,,sebro,correct,,,,,75:58,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),4837.9,,sebro,correct,,,,,80:38,nur_ground_truth
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),203.7,,sebro,missed (von dir markiert),,,,,3:24,missed
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),387.4,,sebro,missed (von dir markiert),,,,,6:27,missed
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),1719.7,,sebro,missed (von dir markiert),,,,,28:40,missed
+2d77d3fc-2c42-4242-812b-738f9fa28467,(Ergebnis-JSON fehlt),3598.4,,sebro,missed (von dir markiert),,,,,59:58,missed
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),178.2,,sebro,timing_off (Engine: 188.0s -> korrigiert),,,,,2:58,nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),323.0,,sebro,correct,,,,,5:23,nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),503.0,,sebro,correct,,,,,8:23,nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),756.0,,sebro,correct,,,,,12:36,nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),1058.2,,sebro,timing_off (Engine: 1091.0s -> korrigiert),,,,,17:38,nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),1709.2,,sebro,timing_off (Engine: 1685.0s -> korrigiert),,,,,28:29,nur_ground_truth
+3be87436-0a21-4fba-8212-9bae89431b0b,(Ergebnis-JSON fehlt),1410.8,,sebro,missed (von dir markiert),,,,,23:31,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),209.0,,sebro,correct,,,,,3:29,nur_ground_truth
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),416.9,,sebro,correct,,,,,6:57,nur_ground_truth
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),1030.6,,sebro,timing_off (Engine: 1034.0s -> korrigiert),,,,,17:11,nur_ground_truth
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),1587.4,,sebro,timing_off (Engine: 1614.8s -> korrigiert),,,,,26:27,nur_ground_truth
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),120.3,,sebro,missed (von dir markiert),,,,,2:00,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),305.9,,sebro,missed (von dir markiert),,,,,5:06,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),554.5,,sebro,missed (von dir markiert),,,,,9:15,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),684.6,,sebro,missed (von dir markiert),,,,,11:25,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),809.8,,sebro,missed (von dir markiert),,,,,13:30,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),963.5,,sebro,missed (von dir markiert),,,,,16:04,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),1202.7,,sebro,missed (von dir markiert),,,,,20:03,missed
+4a7d8eda-5b60-47a2-ad9c-5aaf20757776,(Ergebnis-JSON fehlt),1341.8,,sebro,missed (von dir markiert),,,,,22:22,missed
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),67.0,,sebro,correct,,,,,1:07,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),260.9,,sebro,timing_off (Engine: 270.4s -> korrigiert),,,,,4:21,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),433.2,,sebro,timing_off (Engine: 483.0s -> korrigiert),,,,,7:13,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),571.8,,sebro,correct,,,,,9:32,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),738.3,,sebro,timing_off (Engine: 763.9s -> korrigiert),,,,,12:18,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),1072.5,,sebro,correct,,,,,17:52,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),1211.7,,sebro,timing_off (Engine: 1233.6s -> korrigiert),,,,,20:12,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),1497.7,,sebro,correct,,,,,24:58,nur_ground_truth
+4c70d684-c852-4b50-8859-6e3a121093e9,(Ergebnis-JSON fehlt),1710.3,,sebro,timing_off (Engine: 1742.9s -> korrigiert),,,,,28:30,nur_ground_truth
+4d427732-3536-4b45-b542-a3f1cfd44b81,(Ergebnis-JSON fehlt),398.3,,sebro,correct,,,,,6:38,nur_ground_truth
+4d427732-3536-4b45-b542-a3f1cfd44b81,(Ergebnis-JSON fehlt),1126.1,,sebro,correct,,,,,18:46,nur_ground_truth
+4d427732-3536-4b45-b542-a3f1cfd44b81,(Ergebnis-JSON fehlt),1378.3,,sebro,correct,,,,,22:58,nur_ground_truth
+4d427732-3536-4b45-b542-a3f1cfd44b81,(Ergebnis-JSON fehlt),1673.8,,sebro,timing_off (Engine: 1687.9s -> korrigiert),,,,,27:54,nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),204.6,,sebro,timing_off (Engine: 246.0s -> korrigiert),,,,,3:25,nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),486.0,,sebro,correct,,,,,8:06,nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),620.9,,sebro,timing_off (Engine: 638.0s -> korrigiert),,,,,10:21,nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),780.7,,sebro,timing_off (Engine: 782.0s -> korrigiert),,,,,13:01,nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),1706.0,,sebro,timing_off (Engine: 1742.0s -> korrigiert),,,,,28:26,nur_ground_truth
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),340.4,,sebro,missed (von dir markiert),,,,,5:40,missed
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),1076.2,,sebro,missed (von dir markiert),,,,,17:56,missed
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),1160.5,,sebro,missed (von dir markiert),,,,,19:20,missed
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),1319.3,,sebro,missed (von dir markiert),,,,,21:59,missed
+54258d74-025e-4433-9d88-2b6233d69c4e,(Ergebnis-JSON fehlt),1536.8,,sebro,missed (von dir markiert),,,,,25:37,missed
+5667ada4-bf22-41bb-bc88-c44a5dda9f59,(Ergebnis-JSON fehlt),287.8,,sebro,timing_off (Engine: 353.1s -> korrigiert),,,,,4:48,nur_ground_truth
+5667ada4-bf22-41bb-bc88-c44a5dda9f59,(Ergebnis-JSON fehlt),624.9,,sebro,timing_off (Engine: 677.9s -> korrigiert),,,,,10:25,nur_ground_truth
+5667ada4-bf22-41bb-bc88-c44a5dda9f59,(Ergebnis-JSON fehlt),887.0,,sebro,timing_off (Engine: 910.1s -> korrigiert),,,,,14:47,nur_ground_truth
+5667ada4-bf22-41bb-bc88-c44a5dda9f59,(Ergebnis-JSON fehlt),1162.0,,sebro,correct,,,,,19:22,nur_ground_truth
+5667ada4-bf22-41bb-bc88-c44a5dda9f59,(Ergebnis-JSON fehlt),1520.4,,sebro,timing_off (Engine: 1480.7s -> korrigiert),,,,,25:20,nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),201.9,,sebro,timing_off (Engine: 278.0s -> korrigiert),,,,,3:22,nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),486.0,,sebro,correct,,,,,8:06,nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),619.5,,sebro,timing_off (Engine: 638.0s -> korrigiert),,,,,10:19,nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),782.0,,sebro,correct,,,,,13:02,nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),1707.5,,sebro,timing_off (Engine: 1742.0s -> korrigiert),,,,,28:28,nur_ground_truth
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),340.8,,sebro,missed (von dir markiert),,,,,5:41,missed
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),1072.8,,sebro,missed (von dir markiert),,,,,17:53,missed
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),1175.1,,sebro,missed (von dir markiert),,,,,19:35,missed
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),1322.3,,sebro,missed (von dir markiert),,,,,22:02,missed
+5995866f-03a5-4850-ad04-3f91d944cf60,(Ergebnis-JSON fehlt),1539.4,,sebro,missed (von dir markiert),,,,,25:39,missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),32.7,,sebro,timing_off (Engine: 44.0s -> korrigiert),,,,,0:33,nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),260.6,,sebro,timing_off (Engine: 181.0s -> korrigiert),,,,,4:21,nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),437.6,,sebro,timing_off (Engine: 273.0s -> korrigiert),,,,,7:18,nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),560.0,,sebro,correct,,,,,9:20,nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),1434.2,,sebro,timing_off (Engine: 1421.0s -> korrigiert),,,,,23:54,nur_ground_truth
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),749.4,,sebro,missed (von dir markiert),,,,,12:29,missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),1067.9,,sebro,missed (von dir markiert),,,,,17:48,missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),1211.1,,sebro,missed (von dir markiert),,,,,20:11,missed
+74d3fcd5-766b-478d-b8bc-0adef3ba8346,(Ergebnis-JSON fehlt),1673.2,,sebro,missed (von dir markiert),,,,,27:53,missed
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),375.3,,sebro,timing_off (Engine: 398.3s -> korrigiert),,,,,6:15,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),952.0,,sebro,timing_off (Engine: 1015.0s -> korrigiert),,,,,15:52,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),175.3,,sebro,correct,,,,,2:55,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),560.0,,sebro,correct,,,,,9:20,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),843.2,,sebro,correct,,,,,14:03,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),1126.1,,sebro,correct,,,,,18:46,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),1185.5,,sebro,timing_off (Engine: 1230.0s -> korrigiert),,,,,19:46,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),1378.3,,sebro,correct,,,,,22:58,nur_ground_truth
+8ad069d6-d387-45da-abf0-a7461e07acb8,(Ergebnis-JSON fehlt),1674.0,,sebro,timing_off (Engine: 1687.9s -> korrigiert),,,,,27:54,nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),466.7,,sebro,timing_off (Engine: 488.0s -> korrigiert),,,,,7:47,nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),701.5,,sebro,timing_off (Engine: 693.0s -> korrigiert),,,,,11:41,nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),908.3,,sebro,timing_off (Engine: 916.0s -> korrigiert),,,,,15:08,nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),1541.9,,sebro,timing_off (Engine: 1596.0s -> korrigiert),,,,,25:42,nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),1763.7,,sebro,timing_off (Engine: 1794.0s -> korrigiert),,,,,29:24,nur_ground_truth
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),231.5,,sebro,missed (von dir markiert),,,,,3:52,missed
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),1048.7,,sebro,missed (von dir markiert),,,,,17:29,missed
+908733b4-5e11-4d90-8ff0-7c4e968d53f9,(Ergebnis-JSON fehlt),1275.8,,sebro,missed (von dir markiert),,,,,21:16,missed
+9193384c-d687-441f-b88c-99770937981c,(Ergebnis-JSON fehlt),237.6,,sebro,timing_off (Engine: 261.7s -> korrigiert),,,,,3:58,nur_ground_truth
+9193384c-d687-441f-b88c-99770937981c,(Ergebnis-JSON fehlt),391.6,,sebro,timing_off (Engine: 398.1s -> korrigiert),,,,,6:32,nur_ground_truth
+9193384c-d687-441f-b88c-99770937981c,(Ergebnis-JSON fehlt),930.0,,sebro,timing_off (Engine: 952.2s -> korrigiert),,,,,15:30,nur_ground_truth
+9193384c-d687-441f-b88c-99770937981c,(Ergebnis-JSON fehlt),1125.6,,sebro,timing_off (Engine: 1169.7s -> korrigiert),,,,,18:46,nur_ground_truth
+9193384c-d687-441f-b88c-99770937981c,(Ergebnis-JSON fehlt),1466.4,,sebro,correct,,,,,24:26,nur_ground_truth
+9193384c-d687-441f-b88c-99770937981c,(Ergebnis-JSON fehlt),594.8,,sebro,missed (von dir markiert),,,,,9:55,missed
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),589.1,,sebro,timing_off (Engine: 555.8s -> korrigiert),,,,,9:49,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),966.7,,sebro,timing_off (Engine: 983.2s -> korrigiert),,,,,16:07,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),1160.0,,sebro,timing_off (Engine: 1139.3s -> korrigiert),,,,,19:20,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),1381.5,,sebro,correct,,,,,23:02,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),1704.0,,sebro,timing_off (Engine: 1730.4s -> korrigiert),,,,,28:24,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),1872.3,,sebro,timing_off (Engine: 1888.2s -> korrigiert),,,,,31:12,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),2047.2,,sebro,timing_off (Engine: 2020.0s -> korrigiert),,,,,34:07,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),2468.1,,sebro,correct,,,,,41:08,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),2819.2,,sebro,timing_off (Engine: 2823.5s -> korrigiert),,,,,46:59,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),3109.9,,sebro,correct,,,,,51:50,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),3326.3,,sebro,correct,,,,,55:26,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),4372.0,,sebro,correct,,,,,72:52,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),4093.7,,sebro,correct,,,,,68:14,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),4692.5,,sebro,timing_off (Engine: 4704.9s -> korrigiert),,,,,78:12,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),4964.9,,sebro,timing_off (Engine: 5070.0s -> korrigiert),,,,,82:45,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),5370.5,,sebro,timing_off (Engine: 5401.6s -> korrigiert),,,,,89:30,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),5591.2,,sebro,correct,,,,,93:11,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),5751.3,,sebro,correct,,,,,95:51,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),5997.1,,sebro,correct,,,,,99:57,nur_ground_truth
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),352.6,,sebro,missed (von dir markiert),,,,,5:53,missed
+9330c3ec-a245-4f04-8c87-aba07d29afd5,(Ergebnis-JSON fehlt),3662.0,,sebro,missed (von dir markiert),,,,,61:02,missed
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),290.0,,sebro,correct,,,,,4:50,nur_ground_truth
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),976.5,,sebro,timing_off (Engine: 1043.6s -> korrigiert),,,,,16:16,nur_ground_truth
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),1266.7,,sebro,timing_off (Engine: 1221.0s -> korrigiert),,,,,21:07,nur_ground_truth
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),1432.6,,sebro,timing_off (Engine: 1530.0s -> korrigiert),,,,,23:53,nur_ground_truth
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),1724.9,,sebro,timing_off (Engine: 1739.6s -> korrigiert),,,,,28:45,nur_ground_truth
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),453.0,,sebro,missed (von dir markiert),,,,,7:33,missed
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),612.5,,sebro,missed (von dir markiert),,,,,10:12,missed
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),790.5,,sebro,missed (von dir markiert),,,,,13:11,missed
+9af411b6-6abc-499c-9447-c4742fd90995,(Ergebnis-JSON fehlt),1969.0,,sebro,missed (von dir markiert),,,,,32:49,missed
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),228.1,,sebro,timing_off (Engine: 250.0s -> korrigiert),,,,,3:48,nur_ground_truth
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),374.8,,sebro,timing_off (Engine: 395.5s -> korrigiert),,,,,6:15,nur_ground_truth
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),709.0,,sebro,timing_off (Engine: 693.2s -> korrigiert),,,,,11:49,nur_ground_truth
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),1107.8,,sebro,correct,,,,,18:28,nur_ground_truth
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),1669.2,,sebro,timing_off (Engine: 1742.2s -> korrigiert),,,,,27:49,nur_ground_truth
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),894.6,,sebro,missed (von dir markiert),,,,,14:55,missed
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),1310.8,,sebro,missed (von dir markiert),,,,,21:51,missed
+a156bceb-7fc9-4514-bbdd-8988788def66,(Ergebnis-JSON fehlt),1462.9,,sebro,missed (von dir markiert),,,,,24:23,missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),135.5,,sebro,timing_off (Engine: 169.6s -> korrigiert),,,,,2:16,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),522.5,,sebro,timing_off (Engine: 550.2s -> korrigiert),,,,,8:42,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),860.4,,sebro,correct,,,,,14:20,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),1178.6,,sebro,timing_off (Engine: 1231.8s -> korrigiert),,,,,19:39,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),1363.0,,sebro,timing_off (Engine: 1480.7s -> korrigiert),,,,,22:43,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),1645.5,,sebro,timing_off (Engine: 1669.6s -> korrigiert),,,,,27:26,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),1837.0,,sebro,correct,,,,,30:37,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),2135.8,,sebro,correct,,,,,35:36,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),2388.3,,sebro,timing_off (Engine: 2423.4s -> korrigiert),,,,,39:48,nur_ground_truth
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),2771.3,,sebro,missed (von dir markiert),,,,,46:11,missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),3290.7,,sebro,missed (von dir markiert),,,,,54:51,missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),3566.6,,sebro,missed (von dir markiert),,,,,59:27,missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),3780.1,,sebro,missed (von dir markiert),,,,,63:00,missed
+a1637264-8524-4173-ac4b-9ddf3f99f7ef,(Ergebnis-JSON fehlt),3971.8,,sebro,missed (von dir markiert),,,,,66:12,missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),347.1,,sebro,correct,,,,,5:47,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),522.4,,sebro,timing_off (Engine: 537.0s -> korrigiert),,,,,8:42,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),809.8,,sebro,timing_off (Engine: 819.4s -> korrigiert),,,,,13:30,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),970.0,,sebro,timing_off (Engine: 1028.2s -> korrigiert),,,,,16:10,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),1118.4,,sebro,timing_off (Engine: 1206.7s -> korrigiert),,,,,18:38,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),1472.9,,sebro,correct,,,,,24:33,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),1659.5,,sebro,timing_off (Engine: 1651.9s -> korrigiert),,,,,27:39,nur_ground_truth
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),85.4,,sebro,missed (von dir markiert),,,,,1:25,missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),119.4,,sebro,missed (von dir markiert),,,,,1:59,missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),1279.7,,sebro,missed (von dir markiert),,,,,21:20,missed
+a5ee0fde-765d-489a-a336-0c74060e3e0b,(Ergebnis-JSON fehlt),1848.8,,sebro,missed (von dir markiert),,,,,30:49,missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),215.0,,sebro,correct,,,,,3:35,nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),474.6,,sebro,timing_off (Engine: 490.0s -> korrigiert),,,,,7:55,nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),786.0,,sebro,correct,,,,,13:06,nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),903.0,,sebro,correct,,,,,15:03,nur_ground_truth
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),575.0,,sebro,missed (von dir markiert),,,,,9:35,missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),1246.1,,sebro,missed (von dir markiert),,,,,20:46,missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),1412.7,,sebro,missed (von dir markiert),,,,,23:33,missed
+c6a613b5-0483-4106-9d73-e745dd72b4e5,(Ergebnis-JSON fehlt),1585.7,,sebro,missed (von dir markiert),,,,,26:26,missed
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),191.3,,sebro,timing_off (Engine: 96.0s -> korrigiert),,,,,3:11,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),480.8,,sebro,timing_off (Engine: 490.0s -> korrigiert),,,,,8:01,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),579.2,,sebro,timing_off (Engine: 786.0s -> korrigiert),,,,,9:39,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),766.4,,sebro,timing_off (Engine: 903.0s -> korrigiert),,,,,12:46,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),939.4,,sebro,timing_off (Engine: 1025.0s -> korrigiert),,,,,15:39,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),1246.7,,sebro,timing_off (Engine: 1124.0s -> korrigiert),,,,,20:47,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),1415.1,,sebro,timing_off (Engine: 1324.0s -> korrigiert),,,,,23:35,nur_ground_truth
+d3b5cc14-1635-4f01-a1dc-451868d52a5c,(Ergebnis-JSON fehlt),1578.5,,sebro,missed (von dir markiert),,,,,26:19,missed
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),175.3,,sebro,correct,,,,,2:55,nur_ground_truth
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),376.7,,sebro,timing_off (Engine: 398.3s -> korrigiert),,,,,6:17,nur_ground_truth
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),843.2,,sebro,correct,,,,,14:03,nur_ground_truth
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),952.6,,sebro,timing_off (Engine: 1015.0s -> korrigiert),,,,,15:53,nur_ground_truth
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),1135.9,,sebro,timing_off (Engine: 1181.7s -> korrigiert),,,,,18:56,nur_ground_truth
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),1378.3,,sebro,correct,,,,,22:58,nur_ground_truth
+d684297d-f39e-4daa-8879-7b213dfa4272,(Ergebnis-JSON fehlt),1673.9,,sebro,timing_off (Engine: 1687.9s -> korrigiert),,,,,27:54,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),215.9,,sebro,correct,,,,,3:36,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),360.0,,sebro,correct,,,,,6:00,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),655.6,,sebro,correct,,,,,10:56,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),742.4,,sebro,correct,,,,,12:22,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),856.9,,sebro,correct,,,,,14:17,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),897.7,,sebro,timing_off (Engine: 955.3s -> korrigiert),,,,,14:58,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),1231.3,,sebro,timing_off (Engine: 1260.3s -> korrigiert),,,,,20:31,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),1488.3,,sebro,timing_off (Engine: 1589.6s -> korrigiert),,,,,24:48,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),1662.7,,sebro,timing_off (Engine: 1754.4s -> korrigiert),,,,,27:43,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),1810.5,,sebro,timing_off (Engine: 1875.9s -> korrigiert),,,,,30:11,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),1941.4,,sebro,timing_off (Engine: 2037.1s -> korrigiert),,,,,32:21,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2277.9,,sebro,correct,,,,,37:58,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2507.2,,sebro,correct,,,,,41:47,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2582.4,,sebro,correct,,,,,43:02,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2601.2,,sebro,timing_off (Engine: 2699.2s -> korrigiert),,,,,43:21,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2844.7,,sebro,correct,,,,,47:25,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2842.7,,sebro,timing_off (Engine: 2980.0s -> korrigiert),,,,,47:23,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3070.9,,sebro,timing_off (Engine: 3163.2s -> korrigiert),,,,,51:11,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3284.4,,sebro,correct,,,,,54:44,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3469.9,,sebro,correct,,,,,57:50,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3541.6,,sebro,timing_off (Engine: 3643.3s -> korrigiert),,,,,59:02,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3683.7,,sebro,timing_off (Engine: 3819.2s -> korrigiert),,,,,61:24,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4370.0,,sebro,correct,,,,,72:50,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4723.0,,sebro,correct,,,,,78:43,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4810.2,,sebro,correct,,,,,80:10,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4958.0,,sebro,correct,,,,,82:38,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),5117.8,,sebro,correct,,,,,85:18,nur_ground_truth
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),521.4,,sebro,missed (von dir markiert),,,,,8:41,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),1007.2,,sebro,missed (von dir markiert),,,,,16:47,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2313.5,,sebro,missed (von dir markiert),,,,,38:34,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2371.0,,sebro,missed (von dir markiert),,,,,39:31,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2684.8,,sebro,missed (von dir markiert),,,,,44:45,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),2979.0,,sebro,missed (von dir markiert),,,,,49:39,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3817.8,,sebro,missed (von dir markiert),,,,,63:38,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),3904.7,,sebro,missed (von dir markiert),,,,,65:05,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4030.3,,sebro,missed (von dir markiert),,,,,67:10,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4146.7,,sebro,missed (von dir markiert),,,,,69:07,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4254.5,,sebro,missed (von dir markiert),,,,,70:54,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4495.9,,sebro,missed (von dir markiert),,,,,74:56,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),4580.3,,sebro,missed (von dir markiert),,,,,76:20,missed
+e218afcd-8ce0-46b6-a53f-5ba8fbf3f383,(Ergebnis-JSON fehlt),5399.9,,sebro,missed (von dir markiert),,,,,90:00,missed
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),397.7,,sebro,timing_off (Engine: 481.6s -> korrigiert),,,,,6:38,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),600.8,,sebro,timing_off (Engine: 712.1s -> korrigiert),,,,,10:01,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),1086.4,,sebro,correct,,,,,18:06,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),1685.1,,sebro,correct,,,,,28:05,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),2079.3,,sebro,correct,,,,,34:39,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),2262.1,,sebro,correct,,,,,37:42,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),3065.0,,sebro,timing_off (Engine: 3189.7s -> korrigiert),,,,,51:05,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),3677.4,,sebro,correct,,,,,61:17,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),4152.1,,sebro,correct,,,,,69:12,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),4333.6,,sebro,correct,,,,,72:14,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),4797.7,,sebro,correct,,,,,79:58,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),5373.9,,sebro,correct,,,,,89:34,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),5701.2,,sebro,timing_off (Engine: 5840.9s -> korrigiert),,,,,95:01,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),6255.9,,sebro,correct,,,,,104:16,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),6609.6,,sebro,correct,,,,,110:10,nur_ground_truth
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),720.1,,sebro,missed (von dir markiert),,,,,12:00,missed
+eb2a0257-3a8b-4aaf-9503-823bf1a70f0a,(Ergebnis-JSON fehlt),794.0,,sebro,missed (von dir markiert),,,,,13:14,missed

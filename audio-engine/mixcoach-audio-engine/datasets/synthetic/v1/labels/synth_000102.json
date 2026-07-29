@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000102",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:16:43.677983Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1184.23,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Floating Points\\084 - Floating Points - Del Oro.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 253.86,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\2fox,NandiAll Love1Serotonin.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 253.86,
+   "end_in_mix": 470.88,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\Barnt-Chappell.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 470.88,
+   "end_in_mix": 696.92,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\03_Heart Shaped Mole (Will Hofbauer Remix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 696.92,
+   "end_in_mix": 951.16,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Groove\\Psychic MirrorsThe Witching Hour2Electronica Mix.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 951.16,
+   "end_in_mix": 1184.23,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 224.14,
+   "overlap_end": 253.86,
+   "center_time": 239.0,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 456.02,
+   "overlap_end": 470.88,
+   "center_time": 463.45,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 241.1,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 694.97,
+   "overlap_end": 696.92,
+   "center_time": 695.95,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 934.81,
+   "overlap_end": 951.16,
+   "center_time": 942.99,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 10.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  }
+ ]
+}

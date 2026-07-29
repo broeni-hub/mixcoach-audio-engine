@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000024",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T11:39:43.690114Z",
+ "sample_rate": 22050,
+ "duration_seconds": 995.28,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Groove\\12 One Nite Stand.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 247.71,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\01-appleblim_and_ramadanman-void_23.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 247.71,
+   "end_in_mix": 491.31,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Kollektiv_Turmstrasse-Verrueckte_Welt-(NORE008)-FREEWEB-2006-KPS_INT\\09-kollektiv_turmstrasse-muttitasking.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 491.31,
+   "end_in_mix": 749.52,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electro Pop\\Chemical Brothers\\The Chemical Brothers - We Are The Night (2007)\\09.Chemical Brothers-A Modern Midnight Conversation.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 749.52,
+   "end_in_mix": 995.28,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 231.36,
+   "overlap_end": 247.71,
+   "center_time": 239.54,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 489.27,
+   "overlap_end": 491.31,
+   "center_time": 490.29,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 747.57,
+   "overlap_end": 749.52,
+   "center_time": 748.54,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

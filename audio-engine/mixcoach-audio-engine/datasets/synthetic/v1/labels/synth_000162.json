@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000162",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:36:57.092162Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1313.55,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\05 Skream - I (Loefah Remix).mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 172.25,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\08-levos-cuparooi-35508876.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 172.25,
+   "end_in_mix": 386.54,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Kollektiv_Turmstrasse-Verrueckte_Welt-(NORE008)-FREEWEB-2006-KPS_INT\\01-kollektiv_turmstrasse-wir_geben_nicht_auf.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 386.54,
+   "end_in_mix": 601.05,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\01 - M3 7LW.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 129.2,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 601.05,
+   "end_in_mix": 858.61,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\You've_come_a_long_way,_baby\\05_-_Build_it_up_-_Tear_it_down.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 858.61,
+   "end_in_mix": 1126.45,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleLucky Number 1310Heist Recordings Releases.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "G# Major",
+   "camelot": "4B",
+   "start_in_mix": 1126.45,
+   "end_in_mix": 1313.55,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 145.5,
+   "overlap_end": 172.25,
+   "center_time": 158.87,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 359.79,
+   "overlap_end": 386.54,
+   "center_time": 373.17,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 597.52,
+   "overlap_end": 601.05,
+   "center_time": 599.29,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 856.75,
+   "overlap_end": 858.61,
+   "center_time": 857.68,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 1124.68,
+   "overlap_end": 1126.45,
+   "center_time": 1125.57,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

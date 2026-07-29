@@ -1,0 +1,14 @@
+{
+ "file": "REC002.WAV",
+ "annotated_by": "Basti (Ohren)",
+ "date": "2026-07-02",
+ "note": "ca.-Angaben",
+ "true_transitions_sec": [
+  285,
+  622,
+  885,
+  1160,
+  1520
+ ],
+ "track_count": 6
+}

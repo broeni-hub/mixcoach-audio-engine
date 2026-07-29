@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000111",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:19:55.831721Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1447.77,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit SwindleKetama Gold1Heist Recordings Releases.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 239.77,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\Dego,Kaidi TathamWe Are Virgo5A Wha' Him Deh Pon.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 239.77,
+   "end_in_mix": 469.69,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Mosca - All Very Hush Hush-1.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 469.69,
+   "end_in_mix": 722.24,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Jimpster\\Where You Are - Jimpster.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 722.24,
+   "end_in_mix": 942.85,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\Leon Vynehall - Rojus (Designed To Dance)\\Leon Vynehall - ...There Is You.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 942.85,
+   "end_in_mix": 1183.55,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\PittoJazz Kids3Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 1183.55,
+   "end_in_mix": 1447.77,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 237.63,
+   "overlap_end": 239.77,
+   "center_time": 238.7,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 465.42,
+   "overlap_end": 469.69,
+   "center_time": 467.56,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 689.54,
+   "overlap_end": 722.24,
+   "center_time": 705.89,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 942.36,
+   "overlap_end": 942.85,
+   "center_time": 942.6,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 4.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 1175.74,
+   "overlap_end": 1183.55,
+   "center_time": 1179.65,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

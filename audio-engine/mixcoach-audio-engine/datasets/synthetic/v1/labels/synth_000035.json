@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000035",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:23:22.782899Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1125.23,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\Fold - Business.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Floating Points\\Floating PointsSais (Dub)1Electronica Mix.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 260.0,
+   "end_in_mix": 486.84,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\- Arctor - Pkd.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 486.84,
+   "end_in_mix": 720.52,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\VA - Traum 100\\04 - Minilogue - Carnival.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 720.52,
+   "end_in_mix": 954.74,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoLet me in! - Original Version10Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 954.74,
+   "end_in_mix": 1125.23,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 246.62,
+   "overlap_end": 260.0,
+   "center_time": 253.31,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 7.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 473.46,
+   "overlap_end": 486.84,
+   "center_time": 480.15,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 716.99,
+   "overlap_end": 720.52,
+   "center_time": 718.76,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 947.68,
+   "overlap_end": 954.74,
+   "center_time": 951.21,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000107",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:19:19.002182Z",
+ "sample_rate": 22050,
+ "duration_seconds": 956.85,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Jazz,Blues\\Zeitgenössig\\Brad_Mehldau_Trio-House_On_Hill-2006-SAW\\06-brad_mehldau_trio-fear_and_trembling.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 250.84,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Levos - Day Off (Original Mix) 137.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 250.84,
+   "end_in_mix": 484.99,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\[traum cd14] various - elektronische musik - interkontinental 3 (2003)\\04. michael fentum - warm hands.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 484.99,
+   "end_in_mix": 710.07,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Magda - She's a Dancing Machine\\15 Ryf2-Avon-Snake Charmer-Lunar Park.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 710.07,
+   "end_in_mix": 956.85,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 249.17,
+   "overlap_end": 250.84,
+   "center_time": 250.01,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 471.62,
+   "overlap_end": 484.99,
+   "center_time": 478.31,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 709.18,
+   "overlap_end": 710.07,
+   "center_time": 709.62,
+   "overlap_beats": 2.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  }
+ ]
+}

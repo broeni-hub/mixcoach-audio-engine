@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000002",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T10:07:25.772851Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1485.73,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\02 - Ngeke (Andhim Remix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 258.42,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Daphni\\DaphniFace to Face2.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 258.42,
+   "end_in_mix": 487.85,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\Atjazz,Jullian Gomes,Robert OwensTurn Back to You4.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 487.85,
+   "end_in_mix": 751.7,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\01. adam kroll - klostergarten.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 751.7,
+   "end_in_mix": 993.14,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\05 - Century (feat. Hardhouse Banton).mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 993.14,
+   "end_in_mix": 1229.45,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\04 Oldboy - Extender.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 1229.45,
+   "end_in_mix": 1485.73,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 242.07,
+   "overlap_end": 258.42,
+   "center_time": 250.24,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 483.77,
+   "overlap_end": 487.85,
+   "center_time": 485.81,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 735.35,
+   "overlap_end": 751.7,
+   "center_time": 743.53,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 961.93,
+   "overlap_end": 993.14,
+   "center_time": 977.54,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 1225.73,
+   "overlap_end": 1229.45,
+   "center_time": 1227.59,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  }
+ ]
+}

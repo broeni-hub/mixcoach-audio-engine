@@ -1,0 +1,120 @@
+{
+ "analysisId": "9330c3ec-a245-4f04-8c87-aba07d29afd5",
+ "verdicts": {
+  "1": {
+   "midSec": 555.82,
+   "verdict": "timing_off",
+   "correctedSec": 589.08
+  },
+  "2": {
+   "midSec": 826.93,
+   "verdict": "not_a_transition"
+  },
+  "3": {
+   "midSec": 983.23,
+   "verdict": "timing_off",
+   "correctedSec": 966.73
+  },
+  "4": {
+   "midSec": 1139.29,
+   "verdict": "timing_off",
+   "correctedSec": 1160.04
+  },
+  "5": {
+   "midSec": 1381.52,
+   "verdict": "correct"
+  },
+  "6": {
+   "midSec": 1730.42,
+   "verdict": "timing_off",
+   "correctedSec": 1703.98
+  },
+  "7": {
+   "midSec": 1888.15,
+   "verdict": "timing_off",
+   "correctedSec": 1872.32
+  },
+  "8": {
+   "midSec": 2020.0,
+   "verdict": "timing_off",
+   "correctedSec": 2047.19
+  },
+  "9": {
+   "midSec": 2095.72,
+   "verdict": "not_a_transition"
+  },
+  "10": {
+   "midSec": 2203.6,
+   "verdict": "not_a_transition"
+  },
+  "11": {
+   "midSec": 2468.14,
+   "verdict": "correct"
+  },
+  "12": {
+   "midSec": 2695.77,
+   "verdict": "not_a_transition"
+  },
+  "13": {
+   "midSec": 2823.5,
+   "verdict": "timing_off",
+   "correctedSec": 2819.19
+  },
+  "14": {
+   "midSec": 3109.94,
+   "verdict": "correct"
+  },
+  "15": {
+   "midSec": 3326.3,
+   "verdict": "correct"
+  },
+  "17": {
+   "midSec": 4371.99,
+   "verdict": "correct"
+  },
+  "16": {
+   "midSec": 4093.68,
+   "verdict": "correct"
+  },
+  "18": {
+   "midSec": 4704.85,
+   "verdict": "timing_off",
+   "correctedSec": 4692.46
+  },
+  "19": {
+   "midSec": 5069.98,
+   "verdict": "timing_off",
+   "correctedSec": 4964.93
+  },
+  "20": {
+   "midSec": 5305.06,
+   "verdict": "not_a_transition"
+  },
+  "21": {
+   "midSec": 5401.56,
+   "verdict": "timing_off",
+   "correctedSec": 5370.49
+  },
+  "22": {
+   "midSec": 5591.18,
+   "verdict": "correct"
+  },
+  "23": {
+   "midSec": 5751.3,
+   "verdict": "correct"
+  },
+  "24": {
+   "midSec": 5881.45,
+   "verdict": "not_a_transition"
+  },
+  "25": {
+   "midSec": 5997.09,
+   "verdict": "correct"
+  }
+ },
+ "missed": [
+  352.63,
+  3661.96
+ ],
+ "updatedAt": 1783365855.8311567
+}

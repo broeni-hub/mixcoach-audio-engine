@@ -1,0 +1,141 @@
+{
+ "analysisId": "e218afcd-8ce0-46b6-a53f-5ba8fbf3f383",
+ "verdicts": {
+  "1": {
+   "midSec": 215.95,
+   "verdict": "correct"
+  },
+  "2": {
+   "midSec": 359.98,
+   "verdict": "correct"
+  },
+  "3": {
+   "midSec": 655.64,
+   "verdict": "correct"
+  },
+  "4": {
+   "midSec": 742.41,
+   "verdict": "correct"
+  },
+  "5": {
+   "midSec": 856.86,
+   "verdict": "correct"
+  },
+  "6": {
+   "midSec": 955.34,
+   "verdict": "timing_off",
+   "correctedSec": 897.68
+  },
+  "7": {
+   "midSec": 1260.29,
+   "verdict": "timing_off",
+   "correctedSec": 1231.28
+  },
+  "8": {
+   "midSec": 1589.57,
+   "verdict": "timing_off",
+   "correctedSec": 1488.27
+  },
+  "9": {
+   "midSec": 1754.41,
+   "verdict": "timing_off",
+   "correctedSec": 1662.74
+  },
+  "10": {
+   "midSec": 1875.89,
+   "verdict": "timing_off",
+   "correctedSec": 1810.53
+  },
+  "11": {
+   "midSec": 2037.06,
+   "verdict": "timing_off",
+   "correctedSec": 1941.42
+  },
+  "12": {
+   "midSec": 2277.92,
+   "verdict": "correct"
+  },
+  "13": {
+   "midSec": 2507.18,
+   "verdict": "correct"
+  },
+  "14": {
+   "midSec": 2582.38,
+   "verdict": "correct"
+  },
+  "15": {
+   "midSec": 2699.25,
+   "verdict": "timing_off",
+   "correctedSec": 2601.16
+  },
+  "16": {
+   "midSec": 2844.72,
+   "verdict": "correct"
+  },
+  "17": {
+   "midSec": 2980.03,
+   "verdict": "timing_off",
+   "correctedSec": 2842.73
+  },
+  "18": {
+   "midSec": 3163.23,
+   "verdict": "timing_off",
+   "correctedSec": 3070.95
+  },
+  "19": {
+   "midSec": 3284.37,
+   "verdict": "correct"
+  },
+  "20": {
+   "midSec": 3469.87,
+   "verdict": "correct"
+  },
+  "21": {
+   "midSec": 3643.3,
+   "verdict": "timing_off",
+   "correctedSec": 3541.63
+  },
+  "22": {
+   "midSec": 3819.22,
+   "verdict": "timing_off",
+   "correctedSec": 3683.68
+  },
+  "23": {
+   "midSec": 4370.02,
+   "verdict": "correct"
+  },
+  "24": {
+   "midSec": 4723.01,
+   "verdict": "correct"
+  },
+  "25": {
+   "midSec": 4810.25,
+   "verdict": "correct"
+  },
+  "26": {
+   "midSec": 4957.99,
+   "verdict": "correct"
+  },
+  "27": {
+   "midSec": 5117.77,
+   "verdict": "correct"
+  }
+ },
+ "missed": [
+  521.41,
+  1007.2,
+  2313.5,
+  2370.98,
+  2684.79,
+  2978.99,
+  3817.82,
+  3904.72,
+  4030.34,
+  4146.71,
+  4254.5,
+  4495.88,
+  4580.3,
+  5399.95
+ ],
+ "updatedAt": 1783536548.5448673
+}

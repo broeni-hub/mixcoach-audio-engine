@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000134",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:27:34.352923Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1448.14,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Oliver HuntemannLa Boum2.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Major",
+   "camelot": "4B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 248.17,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Acid Pauli\\2 - Huch.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 248.17,
+   "end_in_mix": 463.28,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\036. frankey & sandrino - acamar (original mix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 463.28,
+   "end_in_mix": 691.23,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Fouk,Detroit SwindleNeed My Space - Detroit Swindle Remix1Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 691.23,
+   "end_in_mix": 954.2,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Sam Irl\\Sam IrlLost Chords6Raw Land.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 954.2,
+   "end_in_mix": 1183.91,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Peggy Gou - I Go (DJ Koze Remix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 1183.91,
+   "end_in_mix": 1448.14,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 216.97,
+   "overlap_end": 248.17,
+   "center_time": 232.57,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 212.3,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 432.08,
+   "overlap_end": 463.28,
+   "center_time": 447.68,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 10.0,
+   "beat_offset_ms": -212.4,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 690.72,
+   "overlap_end": 691.23,
+   "center_time": 690.98,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 6,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 937.85,
+   "overlap_end": 954.2,
+   "center_time": 946.03,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 1176.11,
+   "overlap_end": 1183.91,
+   "center_time": 1180.01,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 9.0,
+   "beat_offset_ms": -69.2,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000058",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:35:43.403550Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1102.93,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\05 Champion - Gunshot.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 103.82,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\5 Years of Hyperdub - CD1\\13 - Shake It.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 129.2,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 103.82,
+   "end_in_mix": 349.95,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Techno\\04-Sascha Funke-Strassentanz.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 349.95,
+   "end_in_mix": 589.88,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LoneAquamarine2Emerald Fantasy Tracks.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 589.88,
+   "end_in_mix": 844.79,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Kelpe, PhotayAll the Way Round - Photay Remix0All the Way Round (Photay Remix).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 844.79,
+   "end_in_mix": 1102.93,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 88.96,
+   "overlap_end": 103.82,
+   "center_time": 96.39,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 346.23,
+   "overlap_end": 349.95,
+   "center_time": 348.09,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -238.7,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 586.35,
+   "overlap_end": 589.88,
+   "center_time": 588.11,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 842.93,
+   "overlap_end": 844.79,
+   "center_time": 843.86,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

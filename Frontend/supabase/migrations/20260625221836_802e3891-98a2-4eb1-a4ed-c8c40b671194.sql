@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.log_user_rule_override_change() FROM PUBLIC, anon, authenticated;

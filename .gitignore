@@ -1,0 +1,36 @@
+# --- Umgebung -------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+node_modules/
+.DS_Store
+*.egg-info/
+.pytest_cache/
+
+# --- Audio: nie ins Repo (23 GB Rohdaten) --------------------------------
+# Analyse-Ergebnisse als JSON WERDEN versioniert, die zugehoerigen
+# Set-Aufnahmen nicht. Die JSONs sind die Datengrundlage fuer die
+# Ground-Truth-Auswertung und nur wenige MB gross.
+*.wav
+*.mp3
+*.flac
+*.aiff
+*.aif
+*.m4a
+*.ogg
+
+# --- Abgeleitete Fingerprints (aus Audio regenerierbar, 1.6 GB) ----------
+daten/library/fp/
+daten/library/lm/
+
+# --- Synthetische Trainings-Mixe (7.5 GB, per Skript reproduzierbar) -----
+audio-engine/mixcoach-audio-engine/datasets/synthetic/*/mixes/
+audio-engine/mixcoach-audio-engine/sample_audio/
+
+# --- Laufzeit-Logs --------------------------------------------------------
+audio-engine/mixcoach-audio-engine/dd/*.log
+audio-engine/mixcoach-audio-engine/dd/*_log.txt
+
+# --- Backups des Library-Index (entstehen bei jedem repath-Lauf) ---------
+daten/library/index.json.bak-*

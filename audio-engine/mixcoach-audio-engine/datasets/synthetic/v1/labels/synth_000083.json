@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000083",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:03:17.547285Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1336.68,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\03_Heart Shaped Mole (Will Hofbauer Remix).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 252.87,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoLast Dear8Diskoding.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 252.87,
+   "end_in_mix": 483.3,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Acid Pauli\\05 Peace Waer Schoen.flac",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 483.3,
+   "end_in_mix": 738.86,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoComic1Where Was I.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 738.86,
+   "end_in_mix": 892.71,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\Mr. FingersMystery Of Love11Electronica Mix.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 892.71,
+   "end_in_mix": 1115.81,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Lone\\LoneRe-Schooling5Emerald Fantasy Tracks.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 1115.81,
+   "end_in_mix": 1336.68,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 248.78,
+   "overlap_end": 252.87,
+   "center_time": 250.82,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 479.21,
+   "overlap_end": 483.3,
+   "center_time": 481.26,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 704.68,
+   "overlap_end": 738.86,
+   "center_time": 721.77,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 858.53,
+   "overlap_end": 892.71,
+   "center_time": 875.62,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 1113.67,
+   "overlap_end": 1115.81,
+   "center_time": 1114.74,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

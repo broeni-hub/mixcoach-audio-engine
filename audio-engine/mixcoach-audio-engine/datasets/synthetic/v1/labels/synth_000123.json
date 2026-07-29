@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000123",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:23:27.969057Z",
+ "sample_rate": 22050,
+ "duration_seconds": 958.49,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\A. John Talabot - The Strange Silence.flac",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Detroit House\\22-oddvar-the dark defender-40f4cfe9.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 260.0,
+   "end_in_mix": 514.17,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Atjazz\\AtjazzFacet of Jazz6That Something Else!.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 514.17,
+   "end_in_mix": 739.63,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Detroit Swindle\\Detroit Swindle,Tom Misch,Sterac ElectronicsYes, No, Maybe - Sterac Electronics Instrumental Remix6Heist Recordings Releases.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 739.63,
+   "end_in_mix": 958.49,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 243.65,
+   "overlap_end": 260.0,
+   "center_time": 251.83,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 165.5,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 497.82,
+   "overlap_end": 514.17,
+   "center_time": 505.99,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 9.0,
+   "beat_offset_ms": -219.8,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 708.42,
+   "overlap_end": 739.63,
+   "center_time": 724.03,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -200.4,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE public.analyses ADD COLUMN IF NOT EXISTS payload jsonb NOT NULL DEFAULT '{}'::jsonb;

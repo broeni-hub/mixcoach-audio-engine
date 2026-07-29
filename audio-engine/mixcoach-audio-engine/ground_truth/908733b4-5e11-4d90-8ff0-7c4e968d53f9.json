@@ -1,0 +1,68 @@
+{
+ "analysisId": "908733b4-5e11-4d90-8ff0-7c4e968d53f9",
+ "verdicts": {
+  "1": {
+   "midSec": 93.0,
+   "verdict": "not_a_transition"
+  },
+  "2": {
+   "midSec": 488.0,
+   "verdict": "timing_off",
+   "correctedSec": 466.68
+  },
+  "3": {
+   "midSec": 516.0,
+   "verdict": "not_a_transition"
+  },
+  "4": {
+   "midSec": 693.0,
+   "verdict": "timing_off",
+   "correctedSec": 701.46
+  },
+  "6": {
+   "midSec": 916.0,
+   "verdict": "timing_off",
+   "correctedSec": 908.3
+  },
+  "7": {
+   "midSec": 1109.0,
+   "verdict": "not_a_transition"
+  },
+  "8": {
+   "midSec": 1170.0,
+   "verdict": "not_a_transition"
+  },
+  "9": {
+   "midSec": 1384.0,
+   "verdict": "not_a_transition"
+  },
+  "10": {
+   "midSec": 1477.0,
+   "verdict": "not_a_transition"
+  },
+  "11": {
+   "midSec": 1596.0,
+   "verdict": "timing_off",
+   "correctedSec": 1541.89
+  },
+  "12": {
+   "midSec": 1713.0,
+   "verdict": "not_a_transition"
+  },
+  "13": {
+   "midSec": 1794.0,
+   "verdict": "timing_off",
+   "correctedSec": 1763.65
+  },
+  "14": {
+   "midSec": 1985.0,
+   "verdict": "not_a_transition"
+  }
+ },
+ "missed": [
+  231.53,
+  1048.68,
+  1275.82
+ ],
+ "updatedAt": 1783282214.5833647
+}

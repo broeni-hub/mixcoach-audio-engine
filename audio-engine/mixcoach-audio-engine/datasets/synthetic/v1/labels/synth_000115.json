@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000115",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:21:56.452532Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1166.06,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Panthera Krause\\Panthera Krause,Martina RotherDas Schöne Meer Lied5It's A Business Doing Pleasure With You.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 250.75,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\NachtbrakerHamdi - Bil Mix4Heist Recordings Releases.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G# Major",
+   "camelot": "4B",
+   "start_in_mix": 250.75,
+   "end_in_mix": 482.09,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Tech House\\WbeezaCoast Spotting0Ibiza Appreciation 18.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Major",
+   "camelot": "5B",
+   "start_in_mix": 482.09,
+   "end_in_mix": 716.82,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoErste Sein - Original Version11Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 716.82,
+   "end_in_mix": 910.01,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\06 - Made to Stray (DJ Koze Remix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 910.01,
+   "end_in_mix": 1166.06,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 246.85,
+   "overlap_end": 250.75,
+   "center_time": 248.8,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 450.88,
+   "overlap_end": 482.09,
+   "center_time": 466.49,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 716.31,
+   "overlap_end": 716.82,
+   "center_time": 716.57,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 894.41,
+   "overlap_end": 910.01,
+   "center_time": 902.21,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000076",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:57:59.516625Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1190.42,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Harvey Sutherland\\Harvey SutherlandSomething In The Water1Something In The Water.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 225.44,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Bugz in the Attic\\08. Bugz In The Attic - Knocks Me Off My Feet.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "G# Major",
+   "camelot": "4B",
+   "start_in_mix": 225.44,
+   "end_in_mix": 442.69,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoThe Door - Original Version3Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 442.69,
+   "end_in_mix": 571.33,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\console\\console - zero zero\\04 zero, zero (1979 version).mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 129.2,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 571.33,
+   "end_in_mix": 757.41,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Panthera Krause\\Panthera Krause,SpunkKeep On8It's A Business Doing Pleasure With You.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 757.41,
+   "end_in_mix": 918.85,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\VA_-_Stephan_Bodzin_vs_Marc_Romboy_-_Luna-(Retail_Boxset)-READNFO-3CD-2011-iFPD\\321-stephan_bodzin_vs_marc_romboy-phobos_(synthapella)-ifpd.mp3",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 143.55,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 918.85,
+   "end_in_mix": 1190.42,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 221.73,
+   "overlap_end": 225.44,
+   "center_time": 223.58,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 438.97,
+   "overlap_end": 442.69,
+   "center_time": 440.83,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 563.53,
+   "overlap_end": 571.33,
+   "center_time": 567.43,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 755.55,
+   "overlap_end": 757.41,
+   "center_time": 756.48,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 915.33,
+   "overlap_end": 918.85,
+   "center_time": 917.09,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

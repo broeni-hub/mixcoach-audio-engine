@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000048",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:24:33.787982Z",
+ "sample_rate": 22050,
+ "duration_seconds": 947.36,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoWow - Original Version5Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 117.45,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 212.76,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt - Extra Welt Hits [CORLP048DIGITAL]\\Minilogue - The Leopard (Extrawelt Remix) [Cocoon Recordings].mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 212.76,
+   "end_in_mix": 468.23,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electro Pop\\Chemical Brothers\\The Chemical Brothers - We Are The Night (2007)\\09.Chemical Brothers-A Modern Midnight Conversation.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D# Minor",
+   "camelot": "2A",
+   "start_in_mix": 468.23,
+   "end_in_mix": 691.26,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Acid Pauli\\Acid Pauli, Nico Stojan - Flying Lizard (Original Mix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 691.26,
+   "end_in_mix": 947.36,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 208.68,
+   "overlap_end": 212.76,
+   "center_time": 210.72,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 96.6,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 435.54,
+   "overlap_end": 468.23,
+   "center_time": 451.88,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 687.36,
+   "overlap_end": 691.26,
+   "center_time": 689.31,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

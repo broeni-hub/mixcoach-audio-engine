@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000151",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:31:46.509570Z",
+ "sample_rate": 22050,
+ "duration_seconds": 996.14,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\02_Element of Surprise.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 249.92,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\rekordbox\\Sampler\\GROOVE CIRCUIT\\PRESET\\4-Floor Breaks Kit\\House4.wav",
+   "bpm_original": 152.0,
+   "bpm_in_mix": 143.55,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 249.92,
+   "end_in_mix": 261.7,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\01 Scuzzy.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 152.0,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 261.7,
+   "end_in_mix": 494.32,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Aleksandir - valentine ᯓ♡ (Rhyw remix).mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 494.32,
+   "end_in_mix": 740.31,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\19 Benga - Mammoth (Plasticman Remix).mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 740.31,
+   "end_in_mix": 762.49,
+   "stretch_method": "none"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Daphni\\DAPHNI - Cloudy (Kelbin Remix).mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 762.49,
+   "end_in_mix": 996.14,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 248.24,
+   "overlap_end": 249.92,
+   "center_time": 249.08,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 249.92,
+   "overlap_end": 261.7,
+   "center_time": 255.81,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": 271.2,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 488.0,
+   "overlap_end": 494.32,
+   "center_time": 491.16,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 713.56,
+   "overlap_end": 740.31,
+   "center_time": 726.94,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 749.11,
+   "overlap_end": 762.49,
+   "center_time": 755.8,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

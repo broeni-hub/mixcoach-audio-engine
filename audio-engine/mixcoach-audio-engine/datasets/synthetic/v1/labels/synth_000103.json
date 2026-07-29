@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000103",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:17:04.545585Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1303.24,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Groove\\Psychic MirrorsThe Witching Hour2Electronica Mix.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 246.29,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoComic1Comic.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 246.29,
+   "end_in_mix": 434.12,
+   "stretch_method": "none"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\Adam F-Colours\\04-Music In My Mind (Album Version).mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 434.12,
+   "end_in_mix": 648.53,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\Red Axes\\Red_Axes_-_Waiting_For_A_Surprise_(feat_Abrao_-_original_mix)_320.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 648.53,
+   "end_in_mix": 890.39,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\SBTRKT\\09 - NEW DORP. NEW YORK (feat Ezra Koenig).mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 112.35,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 890.39,
+   "end_in_mix": 1070.88,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Panthera Krause\\Panthera KrauseThe Space Between Us4Umami EP.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 1070.88,
+   "end_in_mix": 1303.24,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 244.16,
+   "overlap_end": 246.29,
+   "center_time": 245.23,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 6.0,
+   "beat_offset_ms": -52.3,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 399.94,
+   "overlap_end": 434.12,
+   "center_time": 417.03,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 631.44,
+   "overlap_end": 648.53,
+   "center_time": 639.99,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -296.8,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 888.25,
+   "overlap_end": 890.39,
+   "center_time": 889.32,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": 264.4,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 4,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 1053.79,
+   "overlap_end": 1070.88,
+   "center_time": 1062.33,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  }
+ ]
+}

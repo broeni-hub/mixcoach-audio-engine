@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000108",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:19:36.362812Z",
+ "sample_rate": 22050,
+ "duration_seconds": 822.31,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\22 - Instinct - Someone (Original Mix).mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 249.31,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\02 Pressure & Warrior Queen - Dem A Bomb We.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "A# Minor",
+   "camelot": "3A",
+   "start_in_mix": 249.31,
+   "end_in_mix": 385.45,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\Sam Binga & Redders - Natural Mission (Bakey Remix).mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "F Minor",
+   "camelot": "4A",
+   "start_in_mix": 385.45,
+   "end_in_mix": 600.72,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt_-_Deine_Beine_Rmxs\\04-extrawelt_-_was_uebrig_bleibt_(ricardo_tobar_remix).mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 136.0,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 600.72,
+   "end_in_mix": 822.31,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 242.25,
+   "overlap_end": 249.31,
+   "center_time": 245.78,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 381.92,
+   "overlap_end": 385.45,
+   "center_time": 383.69,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 573.97,
+   "overlap_end": 600.72,
+   "center_time": 587.35,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

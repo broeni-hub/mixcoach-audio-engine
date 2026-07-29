@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000138",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:28:19.825297Z",
+ "sample_rate": 22050,
+ "duration_seconds": 971.97,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Stephan Bodzin\\Stephan Bodzin - Liebe Ist... (2007)\\01 Stephan Bodzin - Mondfahrt.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 256.53,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\La Fine Equipe,Fulgeance,Haring,GangueNils0Sauce bogosse  Nils.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 256.53,
+   "end_in_mix": 462.84,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\Frankey and Sandrino - Rana (Original Mix).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 462.84,
+   "end_in_mix": 715.36,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electro Pop\\Chemical Brothers\\Dig Your Own Hole\\Chemical Brothers - Dig Your Own Hole - 06 - It Doesn't Matt.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "B Minor",
+   "camelot": "10A",
+   "start_in_mix": 715.36,
+   "end_in_mix": 971.97,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 226.81,
+   "overlap_end": 256.53,
+   "center_time": 241.67,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 459.13,
+   "overlap_end": 462.84,
+   "center_time": 460.99,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 699.76,
+   "overlap_end": 715.36,
+   "center_time": 707.56,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

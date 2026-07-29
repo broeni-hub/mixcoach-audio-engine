@@ -1,0 +1,97 @@
+{
+ "mix_id": "synth_000156",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:32:58.374672Z",
+ "sample_rate": 22050,
+ "duration_seconds": 899.57,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Minimal\\Extrawelt\\Extrawelt-Schone_Neue_Extrawelt-(CORCD019)-CD-2008-OBC\\12-extrawelt-homing.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 260.0,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Funky House\\Choklate,OpolopoThe Tea - Opolopo Remix14.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 260.0,
+   "end_in_mix": 500.42,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Drum 'n' Bass\\Adam F-Colours\\12-Aromatherapy (Edit).mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "E Major",
+   "camelot": "12B",
+   "start_in_mix": 500.42,
+   "end_in_mix": 727.28,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\Victoria Monét,Khalid,SG LewisExperience1Serotonin.mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "A Major",
+   "camelot": "11B",
+   "start_in_mix": 727.28,
+   "end_in_mix": 899.57,
+   "stretch_method": "none"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 259.51,
+   "overlap_end": 260.0,
+   "center_time": 259.76,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 484.82,
+   "overlap_end": 500.42,
+   "center_time": 492.62,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 128.6,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 723.19,
+   "overlap_end": 727.28,
+   "center_time": 725.23,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

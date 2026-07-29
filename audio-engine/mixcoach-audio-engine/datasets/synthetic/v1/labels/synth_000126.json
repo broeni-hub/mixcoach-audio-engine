@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000126",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:24:05.359925Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1212.38,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Pop House\\ewan.pearson - sci.fi.hi.fi. volume 1.2005\\ewan pearson - 13 - soldout - i don't want to have sex with you (mugwump zexual sealing reversion).mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 254.14,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Fixate - 129SpaceLine.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 254.14,
+   "end_in_mix": 466.92,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electronica\\Magda - She's a Dancing Machine\\06 Central Bron-Z Program -Reflected-Boat-Black ... [Mark Henning Remix].mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 466.92,
+   "end_in_mix": 706.2,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\Poison Zcora - Watch Me Steal It Back.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 123.05,
+   "key": "A Minor",
+   "camelot": "8A",
+   "start_in_mix": 706.2,
+   "end_in_mix": 965.22,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Afro House\\Guy Mantzur, Roy RosenfeldEpika0Black Coffee Ibiza 17 Appreciation Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "D Major",
+   "camelot": "10B",
+   "start_in_mix": 965.22,
+   "end_in_mix": 1212.38,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 246.34,
+   "overlap_end": 254.14,
+   "center_time": 250.24,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 463.02,
+   "overlap_end": 466.92,
+   "center_time": 464.97,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 698.77,
+   "overlap_end": 706.2,
+   "center_time": 702.49,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 964.74,
+   "overlap_end": 965.22,
+   "center_time": 964.98,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 3.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000061",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:40:39.894929Z",
+ "sample_rate": 22050,
+ "duration_seconds": 877.18,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Experimental House\\05 - Century (feat. Hardhouse Banton).mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 136.0,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 254.19,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\14 Digital Mystikz - Intergalactic.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 254.19,
+   "end_in_mix": 314.82,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\02_Element of Surprise.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 143.55,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 314.82,
+   "end_in_mix": 562.71,
+   "stretch_method": "none"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\UK Garage\\04 Oldboy - Extender.mp3",
+   "bpm_original": 136.0,
+   "bpm_in_mix": 143.55,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 562.71,
+   "end_in_mix": 796.37,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Soft Electro\\Sigur Ros\\sigur ros - hlemmur ost (2003) @192\\12-hlemmur 3.mp3",
+   "bpm_original": 143.55,
+   "bpm_in_mix": 136.0,
+   "key": "F Major",
+   "camelot": "7B",
+   "start_in_mix": 796.37,
+   "end_in_mix": 877.18,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 247.13,
+   "overlap_end": 254.19,
+   "center_time": 250.66,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 307.76,
+   "overlap_end": 314.82,
+   "center_time": 311.29,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 549.34,
+   "overlap_end": 562.71,
+   "center_time": 556.03,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 793.02,
+   "overlap_end": 796.37,
+   "center_time": 794.69,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  }
+ ]
+}

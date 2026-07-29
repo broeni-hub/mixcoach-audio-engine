@@ -1,0 +1,48 @@
+{
+ "analysisId": "5995866f-03a5-4850-ad04-3f91d944cf60",
+ "verdicts": {
+  "2": {
+   "midSec": 278.0,
+   "verdict": "timing_off",
+   "correctedSec": 201.88
+  },
+  "3": {
+   "midSec": 486.0,
+   "verdict": "correct"
+  },
+  "4": {
+   "midSec": 638.0,
+   "verdict": "timing_off",
+   "correctedSec": 619.47
+  },
+  "5": {
+   "midSec": 683.0,
+   "verdict": "not_a_transition"
+  },
+  "6": {
+   "midSec": 782.0,
+   "verdict": "correct"
+  },
+  "7": {
+   "midSec": 1644.0,
+   "verdict": "not_a_transition"
+  },
+  "8": {
+   "midSec": 1742.0,
+   "verdict": "timing_off",
+   "correctedSec": 1707.54
+  },
+  "9": {
+   "midSec": 1846.0,
+   "verdict": "not_a_transition"
+  }
+ },
+ "missed": [
+  340.82,
+  1072.85,
+  1175.11,
+  1322.26,
+  1539.4
+ ],
+ "updatedAt": 1783336763.170769
+}

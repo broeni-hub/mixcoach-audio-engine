@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000053",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:31:29.865951Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1389.63,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\Four Tet\\Four TetSW9 9SL9.mp3",
+   "bpm_original": 129.2,
+   "bpm_in_mix": 129.2,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 254.86,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\4hero\\VA-4hero_Present_Brazilika_Vol_2-(FAROCD109)-2006-JUST\\01-milton_nascimento-bicho_homem.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 129.2,
+   "key": "D Minor",
+   "camelot": "7A",
+   "start_in_mix": 254.86,
+   "end_in_mix": 390.24,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Upbeat\\NebraskaAffirmation1Heist Recordings Releases.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 390.24,
+   "end_in_mix": 624.43,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\DemuirPhilippine Sunrise - Original Mix3Heist Recordings Releases.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 624.43,
+   "end_in_mix": 883.71,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Sam Irl\\Sam IrlCrunch1Raw Land.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 883.71,
+   "end_in_mix": 1119.27,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Smooth House\\Jimpster\\Jimpster,Khalil AnthonyWhere You Are5Electronica Mix.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 117.45,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 1119.27,
+   "end_in_mix": 1389.63,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 253.0,
+   "overlap_end": 254.86,
+   "center_time": 253.93,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 108.3,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 3
+  },
+  {
+   "index": 1,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 388.38,
+   "overlap_end": 390.24,
+   "center_time": 389.31,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 616.63,
+   "overlap_end": 624.43,
+   "center_time": 620.53,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 0,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 875.53,
+   "overlap_end": 883.71,
+   "center_time": 879.62,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "off_phrase",
+   "overlap_start": 1117.32,
+   "overlap_end": 1119.27,
+   "center_time": 1118.3,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 8.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 2,
+   "expected_quality_label": 2
+  }
+ ]
+}

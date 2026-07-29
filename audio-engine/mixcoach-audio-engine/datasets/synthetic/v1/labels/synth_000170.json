@@ -1,0 +1,122 @@
+{
+ "mix_id": "synth_000170",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T13:40:41.951879Z",
+ "sample_rate": 22050,
+ "duration_seconds": 1044.48,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Melodic House\\Harvey Sutherland\\Harvey SutherlandSpiders5Expectations.mp3",
+   "bpm_original": 123.05,
+   "bpm_in_mix": 123.05,
+   "key": "G Major",
+   "camelot": "9B",
+   "start_in_mix": 0.0,
+   "end_in_mix": 249.71,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\LoFi\\SlowMow\\Channel TresTopdown0Channel Tres.mp3",
+   "bpm_original": 117.45,
+   "bpm_in_mix": 123.05,
+   "key": "E Minor",
+   "camelot": "9A",
+   "start_in_mix": 249.71,
+   "end_in_mix": 440.2,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoUrlaub in Berlin - Original Version12Pearls & Embarrassments 2000 - 2010 (Vol. 01).mp3",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 117.45,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 440.2,
+   "end_in_mix": 618.0,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Breaking Beats\\Dego\\Lord & dego - Lord & dego 2 - 08 Faith Must Have Reason.flac",
+   "bpm_original": 112.35,
+   "bpm_in_mix": 112.35,
+   "key": "C Minor",
+   "camelot": "5A",
+   "start_in_mix": 618.0,
+   "end_in_mix": 831.23,
+   "stretch_method": "none"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoAuf Wiedersehen4Sirimande  Feed My Meatmachine.mp3",
+   "bpm_original": 107.67,
+   "bpm_in_mix": 112.35,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 831.23,
+   "end_in_mix": 1044.48,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "eq_blend",
+   "quality_profile": "clean",
+   "overlap_start": 234.1,
+   "overlap_end": 249.71,
+   "center_time": 241.91,
+   "overlap_beats": 32.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "key_clash",
+   "overlap_start": 438.25,
+   "overlap_end": 440.2,
+   "center_time": 439.23,
+   "overlap_beats": 4.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 3,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 2,
+   "type": "cut",
+   "quality_profile": "abrupt",
+   "overlap_start": 617.49,
+   "overlap_end": 618.0,
+   "center_time": 617.74,
+   "overlap_beats": 1.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 5.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 826.95,
+   "overlap_end": 831.23,
+   "center_time": 829.09,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "s_curve",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  }
+ ]
+}

@@ -1,0 +1,168 @@
+// Normalize the legacy in-app `AnalysisResult` (src/lib/analysis.ts) into the
+// shared `ReportView` shape used by every report page. Anything that's
+// missing comes through as `null` / empty array so the UI can render
+// placeholders instead of crashing.
+
+import type { AnalysisResult as LegacyAnalysisResult } from "./analysis";
+import type {
+  AnalysisResult as ReportView,
+  DetectedTransition,
+  FullSetAnalysisResult,
+  SingleTransitionAnalysisResult,
+  SkillScore,
+} from "./report-types";
+
+const SKILL_LABELS: Record<string, string> = {
+  beatmatching: "Your Timing",
+  eq: "Clean Mixing",
+  flow: "Crowd Momentum",
+  timing: "Transition Flow",
+  musicality: "Track Pairing",
+  creativity: "Your Signature",
+};
+
+function num(n: unknown): number | null {
+  return typeof n === "number" && isFinite(n) ? n : null;
+}
+
+export function toReportView(a: LegacyAnalysisResult): ReportView {
+  const skills: SkillScore[] = (["beatmatching", "eq", "flow", "timing", "musicality", "creativity"] as const).map((k) => ({
+    key: k,
+    label: SKILL_LABELS[k],
+    value: num(a.scores?.[k]),
+  }));
+
+  const isSet = Array.isArray(a.setTransitions) && a.setTransitions.length > 0;
+
+  const base: ReportView = {
+    id: a.id,
+    fileName: a.fileName,
+    createdAt: a.createdAt,
+    mode: isSet ? "set" : "single",
+    bpm: num(a.bpm),
+    key: a.key || null,
+    durationSec: num(a.totalDurationSec) ?? num(a.transitionLength),
+    overallScore: num(a.scores?.overall),
+    skills,
+    energyCurve: a.energyCurve ?? [],
+    volumeCurve: a.volumeCurve ?? [],
+    frequency: a.frequency
+      ? { bass: a.frequency.bass, mid: a.frequency.mid, high: a.frequency.high }
+      : null,
+    timeline: (a.timeline ?? []).map((t) => ({ time: t.time, label: t.label, type: t.type })),
+    strengths: a.strengths ?? [],
+    weaknesses: a.weaknesses ?? [],
+    coach: a.feedback
+      ? {
+          worked: a.feedback.worked ?? [],
+          improve: a.feedback.improve ?? [],
+          summary: a.feedback.exercise || undefined,
+          confidence: num(a.feedback.confidence),
+        }
+      : null,
+    exercises: (a.exercises ?? []).map((e) => ({ title: e.title, description: e.description, xp: e.xp })),
+  };
+
+  if (isSet) {
+    return toFullSetView(base, a);
+  }
+  return toSingleView(base, a);
+}
+
+function toSingleView(base: ReportView, a: LegacyAnalysisResult): SingleTransitionAnalysisResult {
+  const t = a.transition;
+  return {
+    ...base,
+    mode: "single",
+    transition: t
+      ? {
+          cuePointSec: num(t.cue_point_sec),
+          overlapSec: num(t.overlap_sec),
+          bpmDrift: num(t.bpm_drift),
+          harmonicLabel: t.harmonic_label,
+          camelotA: t.camelot_a,
+          camelotB: t.camelot_b,
+          bassClashScore: num(t.bass_clash_score),
+          phraseAlignmentScore: num(t.phrase_alignment_score),
+        }
+      : undefined,
+    trackB: a.trackB
+      ? { fileName: a.trackB.fileName, bpm: num(a.trackB.bpm), key: a.trackB.key }
+      : undefined,
+  };
+}
+
+function toFullSetView(base: ReportView, a: LegacyAnalysisResult): FullSetAnalysisResult {
+  const transitions: DetectedTransition[] = (a.setTransitions ?? []).map((t) => ({
+    index: t.index,
+    startSec: t.start_sec,
+    endSec: t.end_sec,
+    midSec: t.mid_sec,
+    bpmBefore: num(t.bpm_before),
+    bpmAfter: num(t.bpm_after),
+    bpmDrift: num(t.bpm_drift),
+    qualityScore: num(t.quality_score),
+    label: t.label,
+    scores: {
+      beatmatching: num(t.bpm_drift) === null ? undefined : Math.max(0, 100 - (t.bpm_drift ?? 0) * 10),
+      eq: num(t.bass_overlap_score) === null ? undefined : 100 - (t.bass_overlap_score ?? 0),
+      timing: num(t.phrase_alignment_score) ?? undefined,
+    },
+    note: undefined,
+  }));
+
+  // best / weakest
+  let bestIdx: number | null = null;
+  let weakIdx: number | null = null;
+  let bestScore = -Infinity;
+  let weakScore = Infinity;
+  transitions.forEach((t, i) => {
+    const s = t.qualityScore;
+    if (s === null) return;
+    if (s > bestScore) { bestScore = s; bestIdx = i; }
+    if (s < weakScore) { weakScore = s; weakIdx = i; }
+  });
+
+  // average BPM across detected transitions
+  const bpms = transitions
+    .flatMap((t) => [t.bpmBefore, t.bpmAfter])
+    .filter((x): x is number => typeof x === "number");
+  const avgBpm = bpms.length ? Math.round(bpms.reduce((s, n) => s + n, 0) / bpms.length) : (base.bpm ?? null);
+
+  // common mistakes — derive from weak transitions
+  const mistakes = new Set<string>();
+  for (const t of transitions) {
+    if (t.label === "rough") {
+      if ((t.bpmDrift ?? 0) > 2) mistakes.add(`Your tracks drifted out of sync around ${formatTime(t.midSec)}`);
+      if ((t.scores?.eq ?? 100) < 60) mistakes.add(`The low end got crowded around ${formatTime(t.midSec)}`);
+      if ((t.scores?.timing ?? 100) < 60) mistakes.add(`The drop landed off the phrase around ${formatTime(t.midSec)}`);
+    }
+  }
+
+  return {
+    ...base,
+    mode: "set",
+    setDurationSec: base.durationSec,
+    averageBpm: avgBpm,
+    transitions,
+    bestTransitionIndex: bestIdx,
+    weakestTransitionIndex: weakIdx,
+    commonMistakes: Array.from(mistakes).slice(0, 5),
+    setFlowFeedback: a.feedback?.exercise || undefined,
+  };
+}
+
+export function formatTime(sec: number | null | undefined): string {
+  if (typeof sec !== "number" || !isFinite(sec)) return "—";
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+export function formatDuration(sec: number | null | undefined): string {
+  if (typeof sec !== "number" || !isFinite(sec) || sec <= 0) return "—";
+  if (sec < 60) return `${Math.round(sec)}s`;
+  const m = Math.floor(sec / 60);
+  const s = Math.round(sec % 60);
+  return s ? `${m}m ${s}s` : `${m}m`;
+}

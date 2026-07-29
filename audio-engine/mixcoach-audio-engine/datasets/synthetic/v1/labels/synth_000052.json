@@ -1,0 +1,147 @@
+{
+ "mix_id": "synth_000052",
+ "generator_version": "1.0.0",
+ "created_at": "2026-07-13T12:30:39.141837Z",
+ "sample_rate": 22050,
+ "duration_seconds": 841.51,
+ "tracks": [
+  {
+   "index": 0,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Bass House\\SmerzBecause3Electronica Mix.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 103.36,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 0.0,
+   "end_in_mix": 173.5,
+   "stretch_method": "none"
+  },
+  {
+   "index": 1,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Complexo\\Mouse on Mars\\Iaora Tahiti\\Track09.mp3",
+   "bpm_original": 107.67,
+   "bpm_in_mix": 103.36,
+   "key": "C# Minor",
+   "camelot": "12A",
+   "start_in_mix": 173.5,
+   "end_in_mix": 268.54,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 2,
+   "source_file": "C:\\Users\\Sebro\\Music\\House\\Deep House\\Pablo BolivarChannel One74Slow Mow Go.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 107.67,
+   "key": "G# Minor",
+   "camelot": "1A",
+   "start_in_mix": 268.54,
+   "end_in_mix": 474.23,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 3,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Bass Music\\Siriusmo\\SiriusmoAlways Du2Where Was I.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 99.38,
+   "key": "G Minor",
+   "camelot": "6A",
+   "start_in_mix": 474.23,
+   "end_in_mix": 553.92,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 4,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Dubstep\\Dubstep Allstars Vol.3\\21 Skream - Korma.mp3",
+   "bpm_original": 99.38,
+   "bpm_in_mix": 103.36,
+   "key": "F# Minor",
+   "camelot": "11A",
+   "start_in_mix": 553.92,
+   "end_in_mix": 643.08,
+   "stretch_method": "librosa"
+  },
+  {
+   "index": 5,
+   "source_file": "C:\\Users\\Sebro\\Music\\Electro\\Electro Pop\\Double Trouble\\01 Come Fly With Me.mp3",
+   "bpm_original": 103.36,
+   "bpm_in_mix": 99.38,
+   "key": "C Major",
+   "camelot": "8B",
+   "start_in_mix": 643.08,
+   "end_in_mix": 841.51,
+   "stretch_method": "librosa"
+  }
+ ],
+ "transitions": [
+  {
+   "index": 0,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 168.86,
+   "overlap_end": 173.5,
+   "center_time": 171.18,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 1,
+   "type": "crossfade",
+   "quality_profile": "clean",
+   "overlap_start": 231.39,
+   "overlap_end": 268.54,
+   "center_time": 249.96,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "equal_power",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": 0.0,
+   "key_compatibility_camelot_distance": 1,
+   "expected_quality_label": 5
+  },
+  {
+   "index": 2,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 438.56,
+   "overlap_end": 474.23,
+   "center_time": 456.4,
+   "overlap_beats": 64.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 12.0,
+   "beat_offset_ms": 225.1,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 1
+  },
+  {
+   "index": 3,
+   "type": "crossfade",
+   "quality_profile": "off_beat",
+   "overlap_start": 549.09,
+   "overlap_end": 553.92,
+   "center_time": 551.5,
+   "overlap_beats": 8.0,
+   "crossfade_curve": "exponential",
+   "phrase_offset_beats": 0.0,
+   "beat_offset_ms": -248.0,
+   "key_compatibility_camelot_distance": 5,
+   "expected_quality_label": 2
+  },
+  {
+   "index": 4,
+   "type": "crossfade",
+   "quality_profile": "train_wreck",
+   "overlap_start": 633.8,
+   "overlap_end": 643.08,
+   "center_time": 638.44,
+   "overlap_beats": 16.0,
+   "crossfade_curve": "linear",
+   "phrase_offset_beats": 2.0,
+   "beat_offset_ms": -101.9,
+   "key_compatibility_camelot_distance": 4,
+   "expected_quality_label": 1
+  }
+ ]
+}
