@@ -1,5 +1,7 @@
 # MixCoach Audio-Engine: alle benoetigten Bibliotheken.
-# Wiederherstellen (im Ordner mixcoach-audio-engine, venv aktiv oder direkt):
+# Wiederherstellen (im Projektstamm, siehe SETUP_MACOS.md):
+#   .venv/bin/pip install -r audio-engine/mixcoach-audio-engine/app/requirements.txt
+# Windows frueher:
 #   ..\.venv\Scripts\python.exe -m pip install -r app\requirements.txt
 fastapi
 uvicorn
@@ -9,5 +11,14 @@ soundfile
 scipy
 numpy
 pydantic
-# Nur fuer das Retraining des ML-Modells (app/calibration/retrain_model.py):
-# scikit-learn
+
+# Retraining des ML-Modells (app/calibration/retrain_model.py).
+# Stand 29.07.2026 nicht mehr optional: librosa zieht scikit-learn ohnehin
+# als Abhaengigkeit mit, und ohne das Paket laufen mehrere Tests nicht.
+scikit-learn
+
+# Tests. Waren auf dem alten Rechner von Hand installiert und fehlten
+# deshalb hier - dadurch war die Suite auf einem frischen System nicht
+# lauffaehig (httpx braucht fastapi.testclient).
+pytest
+httpx
