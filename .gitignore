@@ -1,3 +1,11 @@
+# --- Zugangsdaten ---------------------------------------------------------
+# Frontend/.env enthaelt den Supabase-Service-Role-Key. Der umgeht Row Level
+# Security - er darf unter keinen Umstaenden ins Repo. Vorlage ohne Werte:
+# Frontend/.env.example (die ist absichtlich versioniert).
+.env
+.env.*
+!.env.example
+
 # --- Umgebung -------------------------------------------------------------
 .venv/
 venv/

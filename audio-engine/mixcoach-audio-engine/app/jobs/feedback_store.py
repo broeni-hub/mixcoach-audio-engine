@@ -86,4 +86,11 @@ def save_missed(analysis_id: str, sec: float) -> Dict:
 
 
 def _write(data: Dict) -> None:
-    _path(data["analysisId"]).write_text(json.dumps(data, indent=1), encoding="utf-8")
+    # Zielordner sicherstellen, statt sich auf den mkdir-Nebeneffekt beim
+    # Import von app/paths.py zu verlassen. Der greift nur fuer den einen
+    # Pfad, der beim Start galt - zeigt GROUND_TRUTH_DIR spaeter woanders
+    # hin (Test, geaenderte MIXCOACH_DATA_DIR, geloeschter Ordner), lief
+    # das Schreiben vorher auf FileNotFoundError.
+    path = _path(data["analysisId"])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=1), encoding="utf-8")
