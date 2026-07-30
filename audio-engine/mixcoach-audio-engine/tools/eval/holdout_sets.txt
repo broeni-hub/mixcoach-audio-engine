@@ -1,0 +1,13 @@
+# Holdout-Sets fuer die Precision-90-Arbeit (P0, 30.07.2026).
+# Geschichtet nach EIGEN/REFERENZ, innerhalb der Gruppe deterministisch
+# per SHA256 des Set-Namens - ohne Blick auf irgendeine Metrik.
+# Diese Sets werden bis zum Abschlusslauf NICHT benutzt.
+# Erzeugt von: python -m tools.eval.pick_holdout --write
+Be Svendsen live at Mount Nemrut, in Türkiye for Cercle.mp3
+Four Tet - Sónar 2025 - ARTE Concert.mp3
+MixCoach3.WAV
+MixCoach4.WAV
+MixCoach5.WAV
+REC001.WAV
+REC002.WAV
+REC013.WAV
