@@ -52,10 +52,21 @@ from app.audio.scoring.stem_annotate import annotate_stem_based_scores
 from app.audio.scoring.composite import annotate_composite_scores
 
 # Demucs-Stem-Trennung pro Uebergang ist der teuerste Analyse-Schritt (siehe
-# app/audio/scoring/stems.py) - per Umgebungsvariable abschaltbar, falls sie
-# auf einer Maschine zu langsam ist. Harmonic-Clash/Vocal-Overlap bleiben
-# dann ehrlich None statt die Analyse zu verlangsamen oder zu erfinden.
-STEM_SCORING_ENABLED = os.environ.get("MIXCOACH_ENABLE_STEM_SCORING", "1") != "0"
+# app/audio/scoring/stems.py). Harmonic-Clash/Vocal-Overlap bleiben ohne sie
+# ehrlich None statt die Analyse zu verlangsamen oder Werte zu erfinden.
+#
+# DEFAULT SEIT 30.07.2026: AUS. Gemessen an einem 70-Minuten-Set kostet
+# Demucs 25s je Uebergangsfenster x 17 Uebergaenge = 7,1 min von insgesamt
+# 10,5 min Analysezeit - also rund 70% der Rechenzeit. Der einzige Abnehmer
+# dieser Werte ist composite_quality_score; der wird zwar bis
+# analysis_mapper.py in das Frontend-JSON gemappt, aber im gesamten
+# React-Code kein einziges Mal ausgelesen (geprueft: 0 Treffer fuer
+# "composite_quality_score", "harmonic_clash", "vocal_overlap",
+# "exit_quality", "beat_alignment" unter Frontend/src/). Es wurden also
+# 70% der Rechenzeit fuer eine Zahl aufgewendet, die kein Nutzer sieht.
+#
+# Wieder einschalten: MIXCOACH_ENABLE_STEM_SCORING=1
+STEM_SCORING_ENABLED = os.environ.get("MIXCOACH_ENABLE_STEM_SCORING", "0") != "0"
 
 
 def run_set_pipeline(audio, progress=None) -> Dict:

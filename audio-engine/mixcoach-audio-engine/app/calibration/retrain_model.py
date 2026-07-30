@@ -69,6 +69,20 @@ FEATURES = ["score", "blend", "drop", "bass_swap", "chroma_75_15", "chroma_45_10
 AUDIO_SUFFIXES = [".wav", ".mp3", ".flac", ".m4a", ".aiff", ".aif"]
 
 # Cluster-/Trefferfenster in Sekunden (identisch zur bisherigen Bewertung).
+#
+# WOHER DIE 105 KOMMEN (2026-07-30 nachvollzogen): build_features.py setzt
+# FAIR_BEFORE=45.0 und FAIR_AFTER=60.0 - ein Kandidat gilt dort als positiv,
+# wenn er im Fenster [Anker-45s, Anker+60s] liegt. 45+60 = 105. Metrik und
+# Label-Definition sind also aufeinander abgestimmt: das Modell wird darauf
+# TRAINIERT, irgendwo in einem 105s-Fenster zu feuern, und genau daran wird
+# es dann gemessen. In sich stimmig - aber es heisst, dass Praezision im
+# Sekundenbereich nie Ziel war und mit dieser Label-Definition auch nicht
+# erreichbar ist.
+#
+# Ab jetzt Default-Wert statt harter Konstante: die Bewertungsfunktionen
+# nehmen cluster_gap/tolerance als Parameter entgegen (siehe
+# _score_selection). Ohne Argument verhalten sie sich exakt wie bisher,
+# damit alte Log-Werte vergleichbar bleiben.
 CLUSTER_GAP = 105.0
 
 
@@ -196,24 +210,46 @@ def collect_feedback_rows():
     return rows
 
 
-def _score_selection(test_rows, probs, min_p, gap):
-    """Auswahl-Logik + Cluster-Bewertung fuer EIN Set -> (Treffer, Wahrheit, Auswahl)."""
+def select_markers(test_rows, probs, min_p, gap):
+    """Die reine Auswahl-Logik: welche Kandidatenzeiten meldet das Modell?
+
+    Herausgeloest, damit Bewertungen mit verschiedenen Toleranzen dieselbe
+    Auswahl benutzen koennen, ohne das Modell neu anzuwenden."""
     selected = []
     for r, p in sorted(zip(test_rows, probs), key=lambda x: -x[1]):
         if p < min_p or r["edge"] > 0.5:
             continue
         if all(abs(r["t"] - s) >= gap for s in selected):
             selected.append(r["t"])
+    return sorted(selected)
+
+
+def _score_selection(test_rows, probs, min_p, gap, tolerance=None, cluster_gap=None):
+    """Auswahl-Logik + Cluster-Bewertung fuer EIN Set -> (Treffer, Wahrheit, Auswahl).
+
+    tolerance   - Abstand, bis zu dem ein Marker als Treffer einer
+                  Wahrheits-Gruppe zaehlt (Default: cluster_gap).
+    cluster_gap - Abstand, ab dem zwei Positiv-Anker als GETRENNTE
+                  Uebergaenge gelten (Default: CLUSTER_GAP = 105 s).
+
+    Ohne Argumente identisch zum bisherigen Verhalten.
+    """
+    if cluster_gap is None:
+        cluster_gap = CLUSTER_GAP
+    if tolerance is None:
+        tolerance = cluster_gap
+
+    selected = select_markers(test_rows, probs, min_p, gap)
 
     pos_times = sorted(r["t"] for r in test_rows if r["label"] == 1)
     clusters = []
     for t in pos_times:
-        if not clusters or t - clusters[-1][-1] > CLUSTER_GAP:
+        if not clusters or t - clusters[-1][-1] > cluster_gap:
             clusters.append([t])
         else:
             clusters[-1].append(t)
     hits = sum(1 for c in clusters
-               if any(c[0] - CLUSTER_GAP <= s <= c[-1] + CLUSTER_GAP for s in selected))
+               if any(c[0] - tolerance <= s <= c[-1] + tolerance for s in selected))
     return hits, len(clusters), len(selected)
 
 
@@ -228,10 +264,37 @@ def _aggregate(counts):
     return recall, precision, f1
 
 
-def loso_metrics(rows, make_model, min_p=0.4, min_gap=150.0):
-    """Leave-One-Set-Out. Liefert (Recall, Precision, F1, Zaehler-pro-Set)."""
+def make_model():
+    """Die Modell-Fabrik - eine Stelle, damit Retrain und Evaluation
+    garantiert dasselbe Modell bauen (vorher als Lambda in run_retrain)."""
+    from sklearn.ensemble import GradientBoostingClassifier
+    return GradientBoostingClassifier(n_estimators=60, max_depth=2, random_state=0)
+
+
+def collect_rows(include_synthetic: bool = False) -> list:
+    """Alle Trainingszeilen einsammeln - Basis + App-Feedback (+ optional
+    Synthetik). Herausgeloest aus run_retrain, damit Messskripte unter
+    tools/eval/ exakt dieselbe Datenbasis benutzen koennen."""
+    rows = json.loads(BASE_FEATURES.read_text(encoding="utf-8"))
+    rows = rows + collect_feedback_rows()
+
+    if include_synthetic:
+        if SYNTHETIC_NEGATIVES.exists():
+            rows += json.loads(SYNTHETIC_NEGATIVES.read_text(encoding="utf-8"))
+        if SYNTHETIC_MIXES.exists():
+            rows += json.loads(SYNTHETIC_MIXES.read_text(encoding="utf-8"))
+    return rows
+
+
+def loso_predictions(rows, make_model):
+    """Leave-One-Set-Out, aber nur die rohen Wahrscheinlichkeiten.
+
+    Liefert {set_name: (test_rows, probs)}. Das Modell-Fitting ist der teure
+    Teil; wer mehrere Toleranzen oder Schwellen vergleichen will, ruft das
+    hier EINMAL auf und bewertet danach beliebig oft.
+    """
     sets = sorted(set(r["set"] for r in rows))
-    per_set = {}
+    out = {}
     for test_set in sets:
         train = [r for r in rows if r["set"] != test_set]
         test = [r for r in rows if r["set"] == test_set]
@@ -241,7 +304,17 @@ def loso_metrics(rows, make_model, min_p=0.4, min_gap=150.0):
             continue
         model = make_model().fit(X, y)
         probs = model.predict_proba(np.array([_row_vector(r) for r in test]))[:, 1]
-        per_set[test_set] = _score_selection(test, list(probs), min_p, min_gap)
+        out[test_set] = (test, list(probs))
+    return out
+
+
+def loso_metrics(rows, make_model, min_p=0.4, min_gap=150.0,
+                 tolerance=None, cluster_gap=None):
+    """Leave-One-Set-Out. Liefert (Recall, Precision, F1, Zaehler-pro-Set)."""
+    per_set = {
+        name: _score_selection(test, probs, min_p, min_gap, tolerance, cluster_gap)
+        for name, (test, probs) in loso_predictions(rows, make_model).items()
+    }
     recall, precision, f1 = _aggregate(per_set.values())
     return recall, precision, f1, per_set
 
@@ -307,8 +380,6 @@ def run_retrain(include_synthetic: bool = False) -> dict:
     zudem die Auswahl-Parameter (min_p/gap), die per LOSO ueber ALLE Sets
     getunt werden. include_synthetic=True nur noch als bewusste Ausnahme.
     """
-    from sklearn.ensemble import GradientBoostingClassifier
-
     base_rows = json.loads(BASE_FEATURES.read_text(encoding="utf-8"))
     print(f"Basis: {len(base_rows)} Kandidaten aus {len(set(r['set'] for r in base_rows))} Sets")
 
@@ -332,7 +403,7 @@ def run_retrain(include_synthetic: bool = False) -> dict:
             print(f"Synthetische Uebergaenge: {len(synthetic_mix_rows)} Kandidaten aus {n_mixes} Mixes")
 
     all_rows = base_rows + feedback_rows + synthetic_rows + synthetic_mix_rows
-    make = lambda: GradientBoostingClassifier(n_estimators=60, max_depth=2, random_state=0)
+    make = make_model  # eine gemeinsame Fabrik fuer Retrain und tools/eval/
 
     old_model = load_model()
 
