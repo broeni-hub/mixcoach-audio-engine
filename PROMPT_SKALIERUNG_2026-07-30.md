@@ -1,5 +1,14 @@
 # Prompt — Wege aus dem Label-Nadelöhr
 
+> **Erledigt am 30.07.2026.** Das Ergebnis steht in
+> `ZUKUNFTSWEGE_2026-07-30.md`, der Folgeauftrag in `PROMPT_K1_2026-07-30.md`.
+> Dieses Dokument bleibt als Beleg stehen und ist **nicht erneut auszuführen**.
+>
+> Eine Angabe darin ist überholt: Die unten genannte Schwelle „~15–20 gelabelte
+> Sets und 75–80 % Precision" gilt seit dem 30.07. nicht mehr — siehe `CLAUDE.md`.
+> Die Liste der gemessen gescheiterten Wege am Ende gilt dagegen weiter und ist
+> der nützlichste Teil.
+
 *Zum Einfügen in eine frische Claude-Code-Session im Projektstamm `MixCoach/`.
 Erstellt 30.07.2026. Alles unterhalb dieser Zeile ist der Prompt.*
 
