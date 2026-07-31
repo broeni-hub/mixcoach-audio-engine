@@ -2,6 +2,8 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from uuid import uuid4
 
+from app.audio.dramaturgie import bogen
+
 # Scores, die die Set-Pipeline derzeit NICHT misst, werden bewusst als
 # None (null) ausgegeben statt mit erfundenen Zahlen befuellt.
 # Grundsatz: Nur anzeigen, was wirklich gemessen wurde.
@@ -46,6 +48,7 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
 
     bpm = _measured_bpm(tempo)
     overall = _measured_int(quality.get("overall"))
+    verlauf = _map_loudness_curve(analysis) or _map_energy_curve(energy)
     dominant = analysis.get("dominant_key") or {}
 
     return {
@@ -65,7 +68,20 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
         # Messungen (Sebastians Frage 2026-07-17). Fallback auf die
         # Energiekurve nur fuer Analysen, die vor der Einfuehrung von
         # loudness_curve im Pipeline-Result entstanden sind.
-        "volumeCurve": _map_loudness_curve(analysis) or _map_energy_curve(energy),
+        "volumeCurve": verlauf,
+
+        # Beschreibung genau DER Kurve, die auch gezeichnet wird - nicht
+        # einer zweiten, intern gerechneten. Sonst koennte der Text etwas
+        # anderes behaupten als das Bild daneben zeigt.
+        #
+        # Rein beschreibend, ohne Note: siehe app/audio/dramaturgie.py.
+        # Nachgemessen an 19 echten Aufnahmen (31.07.2026): der Verlauf ist
+        # deterministisch (zwei Analysen derselben Aufnahme ergeben
+        # identische Kurven, Median-Abstand 0,000 ueber 66 Paare) und
+        # unterscheidet die Aufnahmen (Median-Abstand 0,180 zwischen
+        # verschiedenen). Das ist der Unterschied zu den Groessen in
+        # NOT_YET_MEASURED.
+        "energyArc": bogen(verlauf, round(float(analysis.get("duration", 0))) or None),
 
         "frequency": None,
 

@@ -2,6 +2,7 @@
 // src/lib/audio-analysis.ts) and turns them into the report shape consumed
 // by the UI. When DB-backed coaching findings are provided, they override
 // the local heuristic strengths/weaknesses/feedback/exercises.
+import type { EnergyArc } from "./report-types";
 import type { Measurements } from "./audio-analysis";
 import type { Finding } from "./coaching";
 import type { TransitionMetrics } from "./transition-analysis";
@@ -56,6 +57,9 @@ export interface AnalysisResult {
   transitionLength: number | null; // seconds
   energyCurve: CurvePoint[];
   volumeCurve: CurvePoint[];
+  /** Beschreibung des Energieverlaufs ueber das ganze Set. Bewusst ohne
+   *  Note - siehe app/audio/dramaturgie.py. null, wenn keine Kurve vorliegt. */
+  energyArc?: EnergyArc | null;
   frequency: { bass: number; mid: number; high: number } | null;
   /** Vom Backend gemeldete Analyse-Warnungen (honest-v2). */
   analysisWarnings?: string[];

@@ -64,6 +64,26 @@ export interface CurvePoint {
   value: number;
 }
 
+/** Beschreibung des Energieverlaufs ueber ein ganzes Set.
+ *
+ *  Rein beschreibend. Es gibt hier absichtlich kein Score-Feld: nachgemessen
+ *  an 19 Aufnahmen ist der Verlauf zwar deterministisch und unterscheidet die
+ *  Sets deutlich, aber wo der Hoehepunkt zu LIEGEN hat, sagt keine Theorie -
+ *  es gibt also keinen belegten Sollwert, gegen den benotet werden koennte.
+ *  Erzeugt in app/audio/dramaturgie.py. */
+export interface EnergyArc {
+  punkte: number;
+  dynamikumfang: number;
+  drittel: [number, number, number] | number[];
+  anstieg_gesamt: number;
+  peak_anteil: number;
+  peak_sec: number | null;
+  laengster_aufbau_anteil: number;
+  laengster_aufbau_sec: number | null;
+  laengster_aufbau_start_sec: number | null;
+  form: string;
+}
+
 export interface FrequencyBalance {
   bass: number;
   mid: number;
@@ -105,6 +125,9 @@ export interface AnalysisResult {
   skills?: SkillScore[];
   energyCurve?: CurvePoint[];
   volumeCurve?: CurvePoint[];
+  /** Beschreibung des Energieverlaufs. Enthaelt absichtlich KEINE Note:
+   *  wo der Hoehepunkt eines Sets zu liegen hat, ist nicht gemessen. */
+  energyArc?: EnergyArc | null;
   frequency?: FrequencyBalance | null;
   timeline?: TimelineEvent[];
   strengths?: string[];

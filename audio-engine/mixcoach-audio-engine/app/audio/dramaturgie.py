@@ -38,11 +38,16 @@ from __future__ import annotations
 import statistics
 from typing import Dict, List, Optional
 
-# Glaettungsfenster in Stuetzpunkten. Bei 240 Punkten ueber ein 90-min-Set
-# ist ein Punkt rund 22 s; +-12 Punkte glaetten also ueber gut 9 min. Das
-# ist bewusst grob: gesucht ist der Bogen ueber das Set, nicht die
-# Schwankung einzelner Tracks.
-GLAETTUNG = 12
+# Glaettungsfenster als ANTEIL der Kurvenlaenge, nicht als feste Punktzahl.
+# Grund: die Kurven kommen in verschiedenen Aufloesungen - energyCurve hat
+# durchweg 240 Stuetzpunkte, volumeCurve je nach Analyse 240 bis ueber 1700.
+# Ein festes Fenster von 12 Punkten wuerde bei 240 Punkten ueber gut 9 min
+# glaetten und bei 1770 Punkten nur ueber 1,2 min - dieselbe Aufnahme
+# bekaeme je nach Kurve eine andere Form zugeschrieben.
+#
+# 0,05 entspricht bei 240 Punkten genau den frueheren +-12. Bewusst grob:
+# gesucht ist der Bogen ueber das Set, nicht die Schwankung einzelner Tracks.
+GLAETTUNG_ANTEIL = 0.05
 
 # Ab welchem Unterschied zweier Drittel von einer Bewegung gesprochen wird.
 # 5 Punkte auf der 0-100-Skala der Kurve - darunter liegt der Unterschied
@@ -62,7 +67,8 @@ def _werte(kurve: Optional[List[dict]]) -> Optional[List[float]]:
     return werte if len(werte) >= 12 else None
 
 
-def _glaetten(werte: List[float], fenster: int = GLAETTUNG) -> List[float]:
+def _glaetten(werte: List[float], anteil: float = GLAETTUNG_ANTEIL) -> List[float]:
+    fenster = max(1, round(len(werte) * anteil))
     return [statistics.fmean(werte[max(0, i - fenster):min(len(werte), i + fenster + 1)])
             for i in range(len(werte))]
 

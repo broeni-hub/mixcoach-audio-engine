@@ -46,6 +46,7 @@ export function toReportView(a: LegacyAnalysisResult): ReportView {
     skills,
     energyCurve: a.energyCurve ?? [],
     volumeCurve: a.volumeCurve ?? [],
+    energyArc: a.energyArc ?? null,
     frequency: a.frequency
       ? { bass: a.frequency.bass, mid: a.frequency.mid, high: a.frequency.high }
       : null,

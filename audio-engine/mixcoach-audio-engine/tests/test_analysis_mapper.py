@@ -234,3 +234,32 @@ def test_result_has_stable_top_level_shape():
         "totalDurationSec", "findings",
     ):
         assert field in result, f"Feld {field} fehlt im Frontend-Result"
+
+
+def test_energy_arc_beschreibt_die_gezeichnete_kurve():
+    """Der Bogen muss auf DERSELBEN Kurve rechnen, die als volumeCurve
+    ausgeliefert wird - sonst behauptet der Text etwas anderes, als das
+    Bild daneben zeigt."""
+    result = map_set_analysis_to_frontend_result("test.mp3", _fake_analysis())
+    arc = result["energyArc"]
+
+    assert arc is not None
+    assert arc["punkte"] == len(result["volumeCurve"])
+    assert set(arc) >= {"form", "drittel", "anstieg_gesamt", "peak_anteil"}
+
+
+def test_energy_arc_traegt_keine_note():
+    """Gegenprobe zur Ehrlichkeitslinie: der Bogen ist beschreibend. Kaeme
+    hier eine Note dazu, waere es derselbe Fehler wie bei beatmatching."""
+    result = map_set_analysis_to_frontend_result("test.mp3", _fake_analysis())
+    arc = result["energyArc"]
+    assert not ({"score", "quality", "rating", "note"} & set(arc))
+
+
+def test_energy_arc_ist_none_ohne_kurve():
+    analyse = _fake_analysis()
+    analyse["energy"] = {"points": []}
+    analyse.pop("loudness_curve", None)
+    result = map_set_analysis_to_frontend_result("test.mp3", analyse)
+    assert result["volumeCurve"] == []
+    assert result["energyArc"] is None
