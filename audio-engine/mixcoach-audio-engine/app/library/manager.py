@@ -226,7 +226,15 @@ def build_landmark_index(tids: list[str] | None = None, track_cap_seconds: float
 
 def load_landmark_fingerprints(tids: list[str] | None = None) -> dict[str, dict]:
     """tid -> {hashes, frames, path, title, artist, duration} fuer alle
-    verfuegbaren Landmark-Fingerprints (die, deren .npz existiert)."""
+    verfuegbaren Landmark-Fingerprints (die, deren .npz existiert).
+
+    frames kommt hier in ZWEI dtypes zurueck, und das ist so gewollt: .npz
+    von vor dem 30.07.2026 enthalten uint16, danach geschriebene int64
+    (siehe landmark_match.py). Eine Migration ist NICHT noetig - der Cap in
+    build_landmark_index (360 s = Frame 15502) haelt Library-Tracks weit
+    unter der uint16-Grenze von 65535, nachgemessen an allen 6113 .npz.
+    landmark_match.match() hebt beide Seiten vor der Subtraktion nach
+    int64, der gemischte Betrieb ist also abgedeckt."""
     if not INDEX_PATH.exists() or not LM_DIR.exists():
         return {}
     index = _load_index()

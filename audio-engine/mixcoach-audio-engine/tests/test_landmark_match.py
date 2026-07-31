@@ -159,3 +159,94 @@ def test_gap_fill_returns_early_when_fully_covered():
     index = {"B": _index_entry(_tone_sequence(seed=17, seconds=10.0), 10.0, "B")}
     chroma = [{"start": 0.0, "end": 40.0, "path": "A.mp3", "score": 0.9}]
     assert lm.gap_fill(mix_fp, index, chroma, set_len_seconds=40.0) == []
+
+
+# --- Frame-Dtype: volle Mix-Laenge (Regression 30.07.2026) ------------------
+# Die Tests oben arbeiten alle mit 40-80s-Signalen bzw. ~4min-Synthetik-Mixen
+# und beruehren die alte uint16-Grenze (Frame 65535 = 25:22) deshalb NIE.
+# Genau darum blieb der Ueberlauf unentdeckt, obwohl jede echte Aufnahme in
+# daten/analysis_results (28-120 min) davon betroffen war.
+
+
+def _long_sparse_signal(seconds: float, seed: int, sr: int = lm.SR) -> np.ndarray:
+    """Langes, ueberwiegend STILLES Signal mit kurzen Tonbursts - inklusive
+    einem am Ende, damit auch die letzten Frames Peaks tragen.
+
+    Bewusst duenn besetzt: constellation() verwirft stille Spalten sofort
+    (col.max() < 1e-3), damit bleibt ein 26-Minuten-Fingerprint bei rund 1.3s
+    statt Minuten. Die STFT kostet trotzdem ~1.2 GB Spitzenspeicher - der
+    Preis dafuer, die Grenze am ECHTEN Codepfad zu pruefen statt
+    _hash_arrays() mit kuenstlichen Peaks zu fuettern."""
+    rng = np.random.default_rng(seed)
+    n = int(seconds * sr)
+    sig = np.zeros(n, dtype=np.float32)
+    for start_s in np.linspace(0.0, seconds - 3.0, 60):
+        s = int(start_s * sr)
+        e = s + int(2.0 * sr)
+        t = np.arange(e - s) / sr
+        for f0 in rng.uniform(200, 4000, 5):
+            sig[s:e] += np.sin(2 * np.pi * f0 * t).astype(np.float32)
+    return sig
+
+
+def test_fingerprint_covers_mix_longer_than_the_uint16_limit():
+    # 26.5 min > 25:22 - vorher warf _hash_arrays hier unter numpy 2 einen
+    # OverflowError, unter numpy 1 klappten die Frames still modulo 65536 um.
+    seconds = 26.5 * 60
+    frames = lm.fingerprint(_long_sparse_signal(seconds, seed=21))["frames"]
+
+    assert frames.size > 0
+    # 1. Die Grenze wird wirklich ueberschritten - sonst prueft der Test nichts.
+    assert int(frames.max()) > 65535
+    # 2. Monoton steigend: _hash_arrays laeuft ueber sorted(by_frame). Ein
+    #    Umklappen modulo 65536 waere genau hier ein Rueckwaertssprung.
+    assert np.all(np.diff(frames) >= 0)
+    # 3. Der spaeteste Anker liegt am Signal-ENDE, nicht - umgeklappt - vorn.
+    assert abs(lm.frames_to_seconds(int(frames.max())) - seconds) < 60.0
+    # 4. Vorzeichenbehaftet und weit genug fuer 120-min-Sets.
+    assert frames.dtype == np.int64
+
+
+def test_match_gives_same_result_for_uint16_frames_from_old_npz():
+    # Alle 6113 .npz in daten/library/lm/ tragen weiter uint16-Frames
+    # (groesster Index 15502 = 360s Cap) - der gemischte Betrieb (Mix int64
+    # gegen Track uint16) ist der Normalfall und darf nicht abschneiden.
+    track = _tone_sequence(seed=31, seconds=40.0)
+    mix_fp = lm.prepare_mix(lm.fingerprint(
+        np.concatenate([_tone_sequence(seed=32, seconds=20.0), track])))
+    track_fp = lm.fingerprint(track)
+
+    on_disk = {"hashes": track_fp["hashes"],
+               "frames": track_fp["frames"].astype(np.uint16)}
+    # Library-Tracks passen verlustfrei in uint16 - sonst prueft der
+    # Vergleich unten zwei verschiedene Fingerprints statt zwei Dtypes.
+    assert np.array_equal(on_disk["frames"], track_fp["frames"])
+
+    assert lm.match(mix_fp, on_disk) == lm.match(mix_fp, track_fp)
+    got = lm.frames_to_seconds(lm.match(mix_fp, on_disk)["offset_frames"])
+    assert abs(got - 20.0) < 1.0
+
+
+def test_match_keeps_negative_offset_with_uint16_track_frames():
+    # Mix = Ausschnitt ab 10s -> der Track startet 10s VOR dem Mix-Anfang,
+    # der Offset ist also legitim NEGATIV. Wuerde die Differenz in match()
+    # vorzeichenlos gebildet, klappte sie hier still auf einen riesigen
+    # positiven Wert um (uint16: 10-20 = 65526) - falscher Offset-Bin statt
+    # Fehler. Siehe den Kommentar an den int64-Casts in match().
+    sig = _tone_sequence(seed=33, seconds=40.0)
+    full = lm.fingerprint(sig)
+    on_disk = {"hashes": full["hashes"], "frames": full["frames"].astype(np.uint16)}
+    mix_fp = lm.fingerprint(sig[int(10.0 * lm.SR):])
+
+    res = lm.match(mix_fp, on_disk)
+    assert res["offset_frames"] < 0
+    assert abs(lm.frames_to_seconds(res["offset_frames"]) + 10.0) < 1.0
+
+
+def test_prepare_mix_keeps_frame_dtype_and_values():
+    # prepare_mix sortiert nach Hash - die Frames werden dabei nur permutiert,
+    # nicht verengt (sonst waere die Breite direkt hinter fingerprint() weg).
+    fp = lm.fingerprint(_tone_sequence(seed=34, seconds=40.0))
+    prep = lm.prepare_mix(fp)
+    assert prep["frames"].dtype == fp["frames"].dtype == np.int64
+    assert sorted(prep["frames"].tolist()) == sorted(fp["frames"].tolist())

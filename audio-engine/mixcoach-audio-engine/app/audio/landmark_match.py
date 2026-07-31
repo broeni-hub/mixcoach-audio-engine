@@ -17,7 +17,29 @@ Pitch-Sets sind eine bekannte Grenze fuer v1.
 
 Speicherformat je Track (kompakt, fuer den Index):
     hashes:  uint32-Array gepackter (f1,f2,dt)-Hashes
-    frames:  uint16-Array der Anker-Frames (parallel zu hashes)
+    frames:  int64-Array der Anker-Frames (parallel zu hashes)
+
+Frames waren bis 2026-07-30 uint16. Das deckt nur Frame-Index 65535 ab,
+bei HOP=512/SR=22050 also 1521.7 s = 25:22 Audio. Fuer Library-Tracks
+reicht das (build_landmark_index kappt bei 360 s = Frame 15502), aber
+fingerprint() laeuft auch ueber GANZE MIXES - jede Aufnahme in
+daten/analysis_results ist 28-120 min lang, lief also ueber: unter
+numpy 2 mit OverflowError, unter numpy 1 still modulo 65536. Der stille
+Fall war der gefaehrlichere - umgeklappte Anker-Frames haetten das
+Offset-Histogramm in match() fuer alles nach 25:22 verschmiert.
+
+int64 statt uint32, obwohl schon uint32 reichen wuerde (4.3e9 Frames =
+27 Jahre): Frames gehen ausschliesslich als DIFFERENZ in match() ein,
+und die ist legitim negativ (Track startet vor dem Mix-Ausschnitt) -
+ein vorzeichenbehafteter Typ ist hier der richtige, und er nimmt der
+Rechnung die Unsigned-Wrap-Falle. Kostet nach npz-Kompression nur
++1.7 % Dateigroesse (gemessen an 25 Library-.npz), weil die fuehrenden
+Nullbytes wegkomprimieren.
+
+Bestehende .npz in daten/library/lm/ brauchen KEINE Migration: sie
+liefern weiterhin uint16-Frames, und match() hebt beide Seiten vor der
+Subtraktion explizit nach int64. Der gemischte Fall (uint16 von Platte,
+int64 im Speicher) ist der Normalfall, nicht der Ausnahmefall.
 """
 
 from __future__ import annotations
@@ -69,7 +91,7 @@ def fingerprint(waveform: np.ndarray, sr: int = SR) -> dict[str, np.ndarray]:
     """Kompakter Landmark-Fingerprint fuer die Index-Ablage."""
     peaks = constellation(waveform, sr)
     hashes, frames = _hash_arrays(peaks)
-    return {"hashes": hashes.astype(np.uint32), "frames": frames.astype(np.uint16)}
+    return {"hashes": hashes.astype(np.uint32), "frames": frames.astype(np.int64)}
 
 
 def _hash_arrays(peaks: list[tuple[int, int]]) -> tuple[np.ndarray, np.ndarray]:
@@ -90,7 +112,10 @@ def _hash_arrays(peaks: list[tuple[int, int]]) -> tuple[np.ndarray, np.ndarray]:
                     targets += 1
                     if targets >= FANOUT:
                         break
-    return np.asarray(hashes, dtype=np.uint32), np.asarray(frames, dtype=np.uint16)
+    # frames als int64: Anker-Frames muessen die volle Mix-Laenge tragen
+    # (>25:22, siehe Modul-Docstring). hashes bleiben uint32 - sie sind auf
+    # 27 bit gepackt und wachsen nicht mit der Laufzeit.
+    return np.asarray(hashes, dtype=np.uint32), np.asarray(frames, dtype=np.int64)
 
 
 # Uebervolle Mix-Hash-Buckets kappen: ein Hash, der im Mix hunderte Male
@@ -162,6 +187,17 @@ def match(mix_fp: dict[str, np.ndarray], track_fp: dict[str, np.ndarray]) -> dic
     # starts[i] .. starts[i]+k[i]-1.
     within = np.arange(total) - np.repeat(np.cumsum(k) - k, k)
     idx = np.repeat(starts, k) + within
+    # Die beiden .astype(np.int64) BITTE STEHEN LASSEN. mf kommt aus einem
+    # frisch gerechneten Mix-Fingerprint (int64), tf meist aus einer alten
+    # .npz mit uint16-Frames (siehe Modul-Docstring). In genau dieser
+    # Paarung waeren die Casts zwar entbehrlich (numpy promotet int64-uint16
+    # selbst nach int64), aber sie sind das, was die Rechnung UNABHAENGIG
+    # von den Operanden-Typen macht: treffen zwei gleiche unsigned Typen
+    # aufeinander - zwei Fingerprints von Platte, oder haetten wir statt
+    # int64 uint32 gewaehlt -, bleibt die Differenz unsigned, und der
+    # legitim NEGATIVE Fall (Track startet vor dem Mix-Ausschnitt) klappt
+    # still auf einen riesigen positiven Wert um: uint16(10)-uint16(20)
+    # = 65526. Das waere ein falscher Offset-Bin, kein Fehler.
     delta = (mf[idx].astype(np.int64) - np.repeat(tf[keep].astype(np.int64), k)) // OFFSET_BIN
 
     bins, bin_counts = np.unique(delta, return_counts=True)
