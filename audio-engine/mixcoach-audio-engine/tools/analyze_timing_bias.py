@@ -6,9 +6,10 @@ bewusst ohne Audio und ohne numpy/librosa: nur Standardbibliothek, damit
 es auch dann funktioniert, wenn die Musik-Library nicht erreichbar ist
 (genau der Zustand nach dem Umzug auf macOS).
 
-    python -m tools.analyze_timing_bias                 # Report
+    python -m tools.analyze_timing_bias                 # Report (mode=dedup)
     python -m tools.analyze_timing_bias --check         # Sollwerte pruefen
-    python -m tools.analyze_timing_bias --mode dedup    # ohne Doppelzaehlung
+    python -m tools.analyze_timing_bias --mode spec     # alter Stand, 29.07.
+    python -m tools.analyze_timing_bias --nur-verwertbar          # ohne Leerlaeufe
     python -m tools.analyze_timing_bias --predictions neu.json   # vorher/nachher
 
 Vorzeichen-Konvention durchgehend:
@@ -30,6 +31,24 @@ sich (unterschiedliche Bewertungsstaende desselben Sets).
 
 Das ist fuer die Metrik kein Detail, sondern ein Messfehler - siehe
 --mode weiter unten.
+
+Die drei Sichten (--mode)
+-------------------------
+spec      Beide Ordner roh. Zaehlt die 24 gemeinsamen Sets doppelt und
+          REC001 vierzehnmal. Reproduziert die in
+          CLAUDE_CODE_SPEC_2026-07-29.md dokumentierten Zahlen und bleibt
+          allein dafuer erhalten - als Messgroesse ist sie falsch.
+analyse   Je analysisId der zuletzt bearbeitete Stand (45 Sets). Das war
+          bis 31.07.2026 '--mode dedup'.
+dedup     Je AUFNAHME (fileName) der zuletzt bearbeitete Stand (28 Sets).
+          SEIT 31.07.2026 DIE VORGABE. Vorher gruppierte dieser Modus nach
+          analysisId; REC001 zaehlte dadurch elfmal, obwohl es eine einzige
+          Aufnahme ist. collect_feedback_rows() im Retrain gruppiert seit
+          jeher nach fileName - die Metrik zieht hier nur nach.
+
+Die Sollwerte in SOLLWERTE gelten je Modus getrennt; --check sagt immer
+an, gegen welchen Stand es prueft. Die alten spec-Werte bleiben gueltig,
+sie messen nur etwas anderes als die Vorgabe.
 """
 
 from __future__ import annotations
@@ -37,7 +56,12 @@ from __future__ import annotations
 import argparse
 import json
 import statistics
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from tools.eval import gt_status  # noqa: E402
 
 # tools/ liegt direkt unter mixcoach-audio-engine/
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
@@ -46,24 +70,39 @@ GT_DIRS = [
     ENGINE_ROOT.parents[1] / "daten" / "ground_truth",
 ]
 
-# Stand vom 29.07.2026, mit dem die Analyse in CLAUDE_CODE_SPEC_2026-07-29.md
-# erstellt wurde. Dient als Selbsttest: reproduziert das Skript diese Zahlen
-# nicht, stimmt etwas am Einlesen der Ground Truth - dann hat Weiterbauen
-# keinen Sinn. Gilt fuer --mode spec.
+# Selbsttest je Sicht: reproduziert das Skript diese Zahlen nicht, stimmt
+# etwas am Einlesen der Ground Truth - dann hat Weiterbauen keinen Sinn.
+#
+# spec stammt vom 29.07.2026 aus CLAUDE_CODE_SPEC_2026-07-29.md und ist der
+# eingefrorene Anker. analyse und dedup sind am 31.07.2026 gemessen worden,
+# als der Modus dedup von analysisId auf fileName umgestellt wurde. Sie
+# entwerten die spec-Werte NICHT - sie zaehlen dieselbe Ground Truth nur
+# ohne Doppelzaehlung, und das ergibt zwangslaeufig andere Zahlen.
 SOLLWERTE = {
-    "n": 287,
-    "zu_spaet_pct": 86,
-    "median": -29.85,
-    "sigma": 52.87,
-    "innerhalb_8s_pct": 5,
-    "innerhalb_16s_pct": 22,
+    "spec": {
+        "quelle": "CLAUDE_CODE_SPEC_2026-07-29.md, Stand 29.07.2026",
+        "n": 287, "zu_spaet_pct": 86, "median": -29.85, "sigma": 52.87,
+        "innerhalb_8s_pct": 5, "innerhalb_16s_pct": 22,
+    },
+    "analyse": {
+        "quelle": "gemessen 31.07.2026 (bis dahin '--mode dedup')",
+        "n": 161, "zu_spaet_pct": 85.71, "median": -29.08, "sigma": 51.12,
+        "innerhalb_8s_pct": 4.35, "innerhalb_16s_pct": 22.36,
+    },
+    "dedup": {
+        "quelle": "gemessen 31.07.2026, Vorgabe seit dieser Aenderung",
+        "n": 130, "zu_spaet_pct": 85.38, "median": -29.43, "sigma": 54.58,
+        "innerhalb_8s_pct": 5.38, "innerhalb_16s_pct": 22.31,
+    },
 }
+PRUEF_SCHLUESSEL = ["n", "zu_spaet_pct", "median", "sigma",
+                    "innerhalb_8s_pct", "innerhalb_16s_pct"]
 
 
 # ---------------------------------------------------------------- Einlesen
 
 
-def _read_gt_files(mode: str) -> tuple[list[dict], list[str]]:
+def _read_gt_files(mode: str, nur_verwertbar: bool = False) -> tuple[list[dict], list[str]]:
     """Ground-Truth-Dateien laden. Liefert (Datensaetze, Hinweise)."""
     hinweise: list[str] = []
     roh: list[tuple[Path, dict]] = []
@@ -85,18 +124,55 @@ def _read_gt_files(mode: str) -> tuple[list[dict], list[str]]:
             f"In --mode spec zaehlen sie doppelt."
         )
 
-    if mode == "spec":
-        return [j for _, j in roh], hinweise
+    # Ausschlussliste aus der Bestandsaufnahme (tools/eval/gt_status.py).
+    # Nur gebraucht, wenn wirklich gefiltert oder nach Aufnahme gruppiert
+    # wird - so bleibt --mode spec vom Bestand der Ergebnis-JSONs unabhaengig
+    # und reproduziert seine Sollwerte auch dann noch, wenn die verschwinden.
+    aufnahme_je_id: dict[str, str] = {}
+    raus: set[str] = set()
+    if mode == "dedup" or nur_verwertbar:
+        try:
+            gruppen, gt_hinweise = gt_status.aufnahmen()
+        except Exception as error:  # noqa: BLE001
+            hinweise.append(f"gt_status nicht auswertbar ({error}) - "
+                            f"Gruppierung faellt auf analysisId zurueck")
+            gruppen, gt_hinweise = [], []
+        hinweise.extend(gt_hinweise)
+        for a in gruppen:
+            for aid in a.analysis_ids:
+                aufnahme_je_id[aid] = a.schluessel
+            if not a.verwertbar:
+                raus.add(a.schluessel)
 
-    # dedup: pro analysisId den zuletzt bearbeiteten Stand gewinnen lassen.
-    # updatedAt ist ein Unix-Timestamp, den feedback_store beim Speichern setzt.
-    besten: dict[str, dict] = {}
-    for path, j in roh:
-        key = j.get("analysisId") or path.stem
-        vorher = besten.get(key)
-        if vorher is None or (j.get("updatedAt") or 0) >= (vorher.get("updatedAt") or 0):
-            besten[key] = j
-    return list(besten.values()), hinweise
+    if mode == "spec":
+        datensaetze = [j for _, j in roh]
+    else:
+        # Je Gruppe den zuletzt bearbeiteten Stand gewinnen lassen. updatedAt
+        # ist ein Unix-Timestamp, den feedback_store beim Speichern setzt.
+        #
+        # mode=analyse gruppiert nach analysisId, mode=dedup nach AUFNAHME.
+        # Bewusst dieselbe "juengster gewinnt"-Regel wie bisher und KEINE
+        # Vereinigung der Verdicts ueber mehrere Analysen derselben Aufnahme:
+        # dieselbe Transition ist dort mehrfach bewertet, eine Vereinigung
+        # wuerde sie erneut doppelt zaehlen - genau der Fehler, der hier
+        # abgestellt wird.
+        besten: dict[str, dict] = {}
+        for path, j in roh:
+            aid = j.get("analysisId") or path.stem
+            key = aufnahme_je_id.get(aid, aid) if mode == "dedup" else aid
+            vorher = besten.get(key)
+            if vorher is None or (j.get("updatedAt") or 0) >= (vorher.get("updatedAt") or 0):
+                besten[key] = j
+        datensaetze = list(besten.values())
+
+    if nur_verwertbar and aufnahme_je_id:
+        vorher_n = len(datensaetze)
+        datensaetze = [j for j in datensaetze
+                       if aufnahme_je_id.get(j.get("analysisId") or "", "") not in raus]
+        hinweise.append(f"--nur-verwertbar: {vorher_n - len(datensaetze)} Set(s) "
+                        f"aussortiert, {len(datensaetze)} bleiben")
+
+    return datensaetze, hinweise
 
 
 def _count_duplicates(roh: list[tuple[Path, dict]]) -> int:
@@ -202,8 +278,9 @@ def _fehler_stats(deltas: list[float]) -> dict:
     }
 
 
-def auswerten(mode: str, predictions: dict | None = None) -> dict:
-    datensaetze, hinweise = _read_gt_files(mode)
+def auswerten(mode: str, predictions: dict | None = None,
+              nur_verwertbar: bool = False) -> dict:
+    datensaetze, hinweise = _read_gt_files(mode, nur_verwertbar=nur_verwertbar)
     roh = _collect(datensaetze, predictions)
 
     v = roh["verdicts"]
@@ -330,26 +407,36 @@ def bericht(e: dict, vergleich: dict | None = None) -> str:
     return "\n".join(z)
 
 
+TOLERANZEN = {"n": 0, "zu_spaet_pct": 0.5, "median": 0.01, "sigma": 0.01,
+              "innerhalb_8s_pct": 0.5, "innerhalb_16s_pct": 0.5}
+
+
 def pruefe_sollwerte(e: dict) -> tuple[bool, list[str]]:
-    """Selbsttest gegen den dokumentierten Stand vom 29.07.2026."""
+    """Selbsttest gegen den eingefrorenen Stand DES JEWEILIGEN MODUS.
+
+    Jeder Modus hat eigene Sollwerte, weil er eine andere Grundgesamtheit
+    zaehlt. Der Selbsttest sagt darum immer an, gegen welchen Stand er
+    prueft - sonst sieht ein Moduswechsel wie eine Regression aus.
+    """
     t = e["timing"]
-    meldungen: list[str] = []
+    soll = SOLLWERTE[e["mode"]]
+    meldungen = [f"  Stand: {soll['quelle']}"]
+
+    if soll.get("n") is None:
+        meldungen.append("  Fuer diesen Modus ist noch kein Stand eingefroren -")
+        meldungen.append("  gemessen wurde soeben:")
+        for key in PRUEF_SCHLUESSEL:
+            meldungen.append(f"    {key}: {t.get(key)}")
+        return False, meldungen
+
     ok = True
-    toleranzen = {
-        "n": (t.get("n"), 0),
-        "zu_spaet_pct": (t.get("zu_spaet_pct"), 0.5),
-        "median": (t.get("median"), 0.01),
-        "sigma": (t.get("sigma"), 0.01),
-        "innerhalb_8s_pct": (t.get("innerhalb_8s_pct"), 0.5),
-        "innerhalb_16s_pct": (t.get("innerhalb_16s_pct"), 0.5),
-    }
-    for key, (ist, tol) in toleranzen.items():
-        soll = SOLLWERTE[key]
-        if ist is None or abs(ist - soll) > tol:
+    for key in PRUEF_SCHLUESSEL:
+        ist, erwartet = t.get(key), soll[key]
+        if ist is None or abs(ist - erwartet) > TOLERANZEN[key]:
             ok = False
-            meldungen.append(f"  ABWEICHUNG {key}: soll {soll}, ist {ist}")
+            meldungen.append(f"  ABWEICHUNG {key}: soll {erwartet}, ist {ist}")
         else:
-            meldungen.append(f"  ok         {key}: {ist} (soll {soll})")
+            meldungen.append(f"  ok         {key}: {ist} (soll {erwartet})")
     return ok, meldungen
 
 
@@ -359,10 +446,15 @@ def pruefe_sollwerte(e: dict) -> tuple[bool, list[str]]:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--mode", choices=["spec", "dedup"], default="spec",
-                   help="spec: beide GT-Ordner roh (reproduziert die dokumentierten "
-                        "Sollwerte, zaehlt 24 Sets doppelt). "
-                        "dedup: pro Set nur der zuletzt bearbeitete Stand.")
+    p.add_argument("--mode", choices=["spec", "analyse", "dedup"], default="dedup",
+                   help="dedup (Vorgabe): je AUFNAHME (fileName) der zuletzt "
+                        "bearbeitete Stand - REC001 zaehlt einmal, nicht elfmal. "
+                        "analyse: je analysisId (das war bis 31.07.2026 'dedup'). "
+                        "spec: beide GT-Ordner roh, reproduziert die Zahlen aus "
+                        "CLAUDE_CODE_SPEC_2026-07-29.md.")
+    p.add_argument("--nur-verwertbar", action="store_true", dest="nur_verwertbar",
+                   help="Aufnahmen ohne Ergebnis-JSON und abgebrochene "
+                        "Label-Sitzungen aussortieren (siehe tools.eval.gt_status)")
     p.add_argument("--predictions", type=Path,
                    help="JSON analysisId -> {index: start_sec}; ersetzt midSec "
                         "als Engine-Zeitpunkt und schaltet den Vorher/Nachher-Block frei")
@@ -375,9 +467,11 @@ def main() -> int:
     predictions = None
     if args.predictions:
         predictions = json.loads(args.predictions.read_text(encoding="utf-8"))
-        vorher = auswerten(args.mode, predictions=None)
+        vorher = auswerten(args.mode, predictions=None,
+                           nur_verwertbar=args.nur_verwertbar)
 
-    ergebnis = auswerten(args.mode, predictions=predictions)
+    ergebnis = auswerten(args.mode, predictions=predictions,
+                         nur_verwertbar=args.nur_verwertbar)
     print(bericht(ergebnis, vergleich=vorher))
 
     if args.json:
@@ -386,14 +480,15 @@ def main() -> int:
         print(f"  JSON geschrieben: {args.json}\n")
 
     if args.check:
-        if args.mode != "spec":
-            print("  --check gilt nur fuer --mode spec (die Sollwerte stammen daher).")
-            return 1
         if predictions is not None:
             print("  --check gilt nur ohne --predictions (Sollwerte = Ausgangsstand).")
             return 1
+        if args.nur_verwertbar:
+            print("  --check gilt nur ohne --nur-verwertbar (die Sollwerte sind "
+                  "auf dem ungefilterten Bestand gemessen).")
+            return 1
         ok, meldungen = pruefe_sollwerte(ergebnis)
-        print("SELBSTTEST gegen CLAUDE_CODE_SPEC_2026-07-29.md")
+        print(f"SELBSTTEST  [mode={ergebnis['mode']}]")
         print("\n".join(meldungen))
         print("\n  ERGEBNIS: " + ("reproduziert." if ok else "NICHT reproduziert."))
         return 0 if ok else 1
