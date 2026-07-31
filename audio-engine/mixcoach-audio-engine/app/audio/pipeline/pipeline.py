@@ -335,13 +335,34 @@ def score_set_quality_v2(
     flow = _score_energy_flow(energy)
     dramaturgy_score = _dramaturgy_score(dramaturgy.get("energy_trend"))
 
+    # Stand 31.07.2026: overall ruht nur noch auf dem, was misst.
+    #
+    # Entfallen sind phrase_timing (0,30) und beatmatching (0,30). Beide sind
+    # in derselben Sitzung als nicht tragend nachgewiesen worden - siehe
+    # NOT_YET_MEASURED in app/api/analysis_mapper.py: bpm_drift ist in 89 %
+    # der Uebergaenge exakt 0 (nur 14 verschiedene Tempowerte ueber 19
+    # Aufnahmen), das Phrasenraster haengt an einer Segmentgrenze, die mit
+    # sigma = 52,87 s wandert.
+    #
+    # Die Folge war messbar: beatmatching lag bei 12 von 19 Aufnahmen auf
+    # exakt 100 (Spanne 91-100) und hat mit 30 % Gewicht den Gesamtwert
+    # zusammengedrueckt. scores.overall spannte ueber alle 19 Aufnahmen nur
+    # 12 Punkte (65-77, Median 73) - eine Kopfzahl, die keinen DJ von einem
+    # anderen unterscheiden kann. Die verbliebenen Teile streuen ueber 25 bis
+    # 26 Punkte.
+    #
+    # Ebenfalls entfallen: dramaturgy_score (0,10). Er vergibt rising 90,
+    # stable 75, falling 60 - ein Set, das ruhig ausklingt, wird bestraft,
+    # ohne dass irgendetwas belegt, dass Aufbauen besser ist. Das ist eine
+    # Geschmacksentscheidung im Gewand eines Messwerts und faellt unter
+    # dieselbe Regel wie die beiden oberen.
+    #
+    # Alle drei bleiben im Rueckgabe-Dict stehen: sie werden ausgewertet und
+    # exportiert. Sie bilden nur keine Note mehr.
     weighted = [
-        (aggregates["phrase_timing"], 0.30),
-        (aggregates["beatmatching"], 0.30),
         (aggregates["harmonic"], 0.10),
         (aggregates["energy_shape"], 0.10),
         (flow, 0.10),
-        (dramaturgy_score, 0.10),
     ]
     available = [(s, w) for s, w in weighted if s is not None]
 
