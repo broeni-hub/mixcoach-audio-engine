@@ -45,17 +45,20 @@ function TransitionDetail() {
   const meta = TRANSITION_META[type];
   const Icon = meta.icon;
 
+  // Achsen "Beatmatch" und "Phrase" entfallen (31.07.2026): beide wurden aus
+  // bpm_drift bzw. phrase_alignment_score gebildet, und die messen nicht, was
+  // ihr Name sagt - Begruendung und Zahlen in NOT_YET_MEASURED,
+  // app/api/analysis_mapper.py. Beatmatch war praktisch konstant 100, weil
+  // bpm_drift in 89 % der Uebergaenge exakt 0 ist.
   const metrics = [
-    { skill: "Beatmatch", value: clamp(100 - Math.min(100, t.bpm_drift * 25)) },
-    { skill: "Phrase", value: t.phrase_alignment_score },
     { skill: "EQ", value: clamp(100 - t.bass_overlap_score) },
     { skill: "Energy", value: clamp(100 - t.energy_dip_pct) },
     { skill: "Musicality", value: a.scores.musicality },
     { skill: "Creativity", value: a.scores.creativity },
   ].filter((m): m is { skill: string; value: number } => m.value != null);
+  // Konfidenz aus den beiden Groessen, die hier tatsaechlich etwas tragen.
   const confidence = Math.round(
-    50 +
-      (t.phrase_alignment_score + (100 - Math.min(100, t.bpm_drift * 25))) / 4,
+    50 + (clamp(100 - t.bass_overlap_score) + clamp(100 - t.energy_dip_pct)) / 4,
   );
 
   const mid = fmt(t.mid_sec);
@@ -93,7 +96,6 @@ function TransitionDetail() {
         <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <Stat label="Duration" value={`${dur}s`} />
           <Stat label="BPM" value={`${t.bpm_before || "?"} → ${t.bpm_after || "?"}`} />
-          <Stat label="Drift" value={`${t.bpm_drift.toFixed(2)}`} />
           <Stat label="Confidence" value={`${confidence}%`} />
         </CardContent>
       </Card>
@@ -116,7 +118,8 @@ function TransitionDetail() {
           <CardHeader><CardTitle className="text-base">Audio metrics</CardTitle></CardHeader>
           <CardContent className="space-y-2 text-sm">
             <Row label="Energy dip" value={`${t.energy_dip_pct}%`} />
-            <Row label="Phrase alignment" value={`${t.phrase_alignment_score}/100`} />
+            {/* "Phrase alignment X/100" entfernt - siehe Kommentar oben. */}
+            <Row label="Phrase alignment" value="nicht gemessen" />
             <Row label="Bass clash risk" value={`${t.bass_overlap_score}/100`} />
             <Row label="Vocal clash risk" value="—" />
             <Row label="Label" value={t.label} />
@@ -151,7 +154,7 @@ function TransitionDetail() {
               ? `This ${meta.label.toLowerCase()} lost ${t.energy_dip_pct}% energy. Re-attempt with a longer overlap and stagger the bass cut by 4 bars.`
               : t.label === "smooth"
                 ? `Solid ${meta.label.toLowerCase()}. Try the same pattern with a more drastic key change to push creativity.`
-                : `Neutral ${meta.label.toLowerCase()}. Lock the phrase boundary (currently ${t.phrase_alignment_score}/100) for a cleaner read.`}
+                : `Neutral ${meta.label.toLowerCase()}. Bass handover sits at ${t.bass_overlap_score}/100 — tighten the low end for a cleaner read.`}
           </p>
         </CardContent>
       </Card>

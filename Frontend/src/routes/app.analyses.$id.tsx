@@ -485,10 +485,15 @@ function AnalysisDetail() {
               </p>
             </CardHeader>
             <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-              <Stat label="Timing drift" value={singleView.transition.bpmDrift != null ? `${singleView.transition.bpmDrift.toFixed(2)} BPM` : "—"} />
+              {/* "Timing drift" und "Phrase landing" zeigen seit 31.07.2026
+                  bewusst nichts mehr an - siehe NOT_YET_MEASURED in
+                  app/api/analysis_mapper.py. Die Kacheln bleiben stehen, damit
+                  sichtbar ist, DASS die Groesse existiert und nicht gemessen
+                  wird; das ist der Unterschied zwischen Weg B und Loeschen. */}
+              <Stat label="Timing drift" value="nicht gemessen" />
               <Stat label="Key pairing" value={singleView.transition.camelotA && singleView.transition.camelotB ? `${singleView.transition.camelotA} → ${singleView.transition.camelotB}` : "—"} />
               <Stat label="Low-end clash" value={singleView.transition.bassClashScore != null ? `${singleView.transition.bassClashScore}/100` : "—"} />
-              <Stat label="Phrase landing" value={singleView.transition.phraseAlignmentScore != null ? `${singleView.transition.phraseAlignmentScore}/100` : "—"} />
+              <Stat label="Phrase landing" value="nicht gemessen" />
 
             </CardContent>
           </Card>

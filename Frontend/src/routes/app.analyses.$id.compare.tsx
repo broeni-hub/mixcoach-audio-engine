@@ -129,9 +129,9 @@ function ComparisonBody({ tA, tB, analysisId }: { tA: SetTransition; tB: SetTran
   const sideA = useMemo(() => deriveSide(tA), [tA]);
   const sideB = useMemo(() => deriveSide(tB), [tB]);
 
+  // Achsen "Beatmatch" und "Phrase" entfallen (31.07.2026) - deriveSide
+  // liefert sie nicht mehr, siehe Kommentar dort.
   const radarData = [
-    { skill: "Beatmatch", A: sideA.metrics.beatmatch, B: sideB.metrics.beatmatch },
-    { skill: "Phrase", A: sideA.metrics.phrase, B: sideB.metrics.phrase },
     { skill: "EQ", A: sideA.metrics.eq, B: sideB.metrics.eq },
     { skill: "Energy", A: sideA.metrics.energy, B: sideB.metrics.energy },
     { skill: "Smoothness", A: sideA.metrics.smoothness, B: sideB.metrics.smoothness },
@@ -265,9 +265,8 @@ function ScoreCard({
         <Row label="Type" value={meta.label} />
         <Row label="Duration" value={`${Math.round(t.end_sec - t.start_sec)}s`} />
         <Row label="BPM" value={`${t.bpm_before || "?"}→${t.bpm_after || "?"}`} />
-        <Row label="Drift" value={t.bpm_drift.toFixed(2)} />
         <Row label="Energy dip" value={`${t.energy_dip_pct}%`} />
-        <Row label="Phrase" value={`${t.phrase_alignment_score}/100`} />
+        <Row label="Bass clash risk" value={`${t.bass_overlap_score}/100`} />
       </CardContent>
     </Card>
   );
@@ -336,20 +335,19 @@ function deriveSide(t: SetTransition): Side {
     phrase_alignment_score: t.phrase_alignment_score,
     label: t.label,
   });
-  const beatmatch = clamp(100 - Math.min(100, t.bpm_drift * 25));
-  const phrase = clamp(t.phrase_alignment_score);
+  // beatmatch und phrase sind hier am 31.07.2026 entfallen: beide waren aus
+  // bpm_drift bzw. phrase_alignment_score abgeleitet, die nicht messen, was
+  // ihr Name sagt (siehe NOT_YET_MEASURED in app/api/analysis_mapper.py).
+  // beatmatch lag durch die 89 % Nullwerte praktisch immer bei 100 und hat
+  // den overall-Mittelwert damit systematisch nach oben gezogen.
   const eq = clamp(100 - t.bass_overlap_score);
   const energy = clamp(100 - t.energy_dip_pct);
   const smoothness = clamp(t.quality_score);
-  const metrics = { beatmatch, phrase, eq, energy, smoothness };
-  const overall = Math.round((beatmatch + phrase + eq + energy + smoothness) / 5);
+  const metrics = { eq, energy, smoothness };
+  const overall = Math.round((eq + energy + smoothness) / 3);
 
   const strengths: string[] = [];
   const weaknesses: string[] = [];
-  if (beatmatch >= 80) strengths.push(`Tight beatmatch — drift only ${t.bpm_drift.toFixed(2)} BPM.`);
-  else if (beatmatch < 60) weaknesses.push(`BPM drift of ${t.bpm_drift.toFixed(2)} is audible.`);
-  if (phrase >= 80) strengths.push(`Locked to the 16-bar phrase (${phrase}/100).`);
-  else if (phrase < 60) weaknesses.push(`Off-phrase entry (${phrase}/100) — bring the swap to a bar line.`);
   if (eq >= 80) strengths.push("Clean low-end swap, no bass clash.");
   else if (eq < 60) weaknesses.push(`Bass overlap risk ${t.bass_overlap_score}/100 — cut the outgoing bass earlier.`);
   if (energy >= 80) strengths.push("Energy held through the blend.");

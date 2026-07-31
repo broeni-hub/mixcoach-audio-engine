@@ -132,8 +132,13 @@ function normalizeCoachOutput(output: z.infer<typeof OutputZ>) {
 function buildFallbackCoachOutput(data: z.infer<typeof InputZ>): ReturnType<typeof normalizeCoachOutput> {
   const { measurements: m, findings, transition: t } = data;
   const primaryFinding = findings[0];
+  // bpm_drift und phrase_alignment_score sind hier am 31.07.2026 entfallen.
+  // Sie in einen LLM-Prompt zu geben ist der schaerfste Fall: das Modell
+  // formuliert daraus selbstbewusste Ratschlaege, und die Ueberschrift des
+  // Prompts lautet ausgerechnet "STRICT GROUNDING RULES (violations =
+  // hallucination)". Begruendung: NOT_YET_MEASURED, analysis_mapper.py.
   const transitionFocus = t
-    ? `Your transition shows ${t.bpm_drift.toFixed(2)} BPM drift, ${t.bass_clash_score}/100 bass clash, and ${t.phrase_alignment_score}/100 phrase alignment.`
+    ? `Your transition shows ${t.bass_clash_score}/100 bass clash.`
     : `Your mix measures ${m.bpm} BPM with ${m.bass_stability}/100 bass stability and ${m.dynamic_range_db} dB dynamic range.`;
 
   return {
@@ -145,7 +150,7 @@ function buildFallbackCoachOutput(data: z.infer<typeof InputZ>): ReturnType<type
         what: primaryFinding
           ? `${primaryFinding.diagnosis} The measured value was ${primaryFinding.value ?? "available in the report"} for ${primaryFinding.metric ?? primaryFinding.rule_slug}.`
           : t
-            ? `The transition currently has ${t.bpm_drift.toFixed(2)} BPM drift and ${t.bass_clash_score}/100 bass clash.`
+            ? `The transition currently has ${t.bass_clash_score}/100 bass clash.`
             : `The track analysis shows ${m.bass_stability}/100 bass stability and ${m.loudness_dbfs} dBFS loudness.`,
         why: t
           ? "Small timing, phrase, or low-end mismatches become most obvious during the overlap, where both tracks compete for space."
@@ -171,10 +176,12 @@ function buildPrompt(data: z.infer<typeof InputZ>) {
     ? `
 Transition (Track A → Track B):
 - Cue point: ${t.cue_point_sec.toFixed(1)}s, overlap window: ${t.overlap_sec.toFixed(1)}s
-- BPM: A=${t.bpm_a} vs B=${t.bpm_b} (drift ${t.bpm_drift.toFixed(2)} BPM)
+- BPM: A=${t.bpm_a} vs B=${t.bpm_b}
 - Key: A=${t.key_a} vs B=${t.key_b} (Camelot distance ${t.camelot_distance}, ${t.harmonic_label})
 - Bass clash score: ${t.bass_clash_score}/100 (lower is better)
-- Phrase alignment score: ${t.phrase_alignment_score}/100 (higher is better)`
+- NOT measured for this transition: tempo drift and phrase alignment. Do not
+  comment on beatmatching accuracy or phrase/bar alignment - there is no
+  reliable measurement behind them.`
     : "";
 
   return `You are a senior DJ coach for ${data.level} DJs. Give brutally specific, actionable feedback grounded ONLY in the measurements below.
@@ -227,7 +234,7 @@ function buildRetryPrompt(data: z.infer<typeof InputZ>, previousError: string) {
   const { measurements: m, findings, transition: t } = data;
   const topFinding = findings[0];
   const transitionLine = t
-    ? `Transition: BPM drift ${t.bpm_drift.toFixed(2)} (A=${t.bpm_a}, B=${t.bpm_b}), Camelot distance ${t.camelot_distance} (${t.harmonic_label}), bass clash ${t.bass_clash_score}/100, phrase alignment ${t.phrase_alignment_score}/100.`
+    ? `Transition: A=${t.bpm_a}, B=${t.bpm_b} BPM, Camelot distance ${t.camelot_distance} (${t.harmonic_label}), bass clash ${t.bass_clash_score}/100. Tempo drift and phrase alignment are NOT measured - do not comment on them.`
     : `Single track: BPM ${m.bpm}, key ${m.key}, bass stability ${m.bass_stability}/100, loudness ${m.loudness_dbfs} dBFS.`;
   const findingLine = topFinding
     ? `Top triggered rule: ${topFinding.title} — ${topFinding.diagnosis} Fix hint: ${topFinding.fix}`

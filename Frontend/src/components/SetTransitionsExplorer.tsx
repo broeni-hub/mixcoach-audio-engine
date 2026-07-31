@@ -261,7 +261,6 @@ function deriveStrengthsWeaknesses(t: SetTransition, type: TransitionType): { st
   if (t.energy_dip_pct > 65) weaknesses.push("Energy drops too far through the swap.");
   if (type === "long_blend" && t.quality_score >= 75) strengths.push("Long blend held steady through 32+ bars.");
   if (type === "drop_swap" && t.quality_score >= 80) strengths.push("Drop-swap landed on the kick.");
-  if (type === "hard_cut" && t.phrase_alignment_score < 70) weaknesses.push("Hard cut without phrase alignment.");
   return { strengths, weaknesses };
 }
 
@@ -276,16 +275,11 @@ function deriveAiFeedback(t: SetTransition, type: TransitionType, issue: string)
 }
 
 function deriveExercise(t: SetTransition, type: TransitionType): { title: string; description: string; xp: number } {
-  if (t.bpm_drift > 2) return {
-    title: "30-Second Sync Drill",
-    description: "Mix two tracks at the same BPM ±0. Hold the blend for 30 seconds with your eyes closed; the goal is zero drift before the bass swap.",
-    xp: 25,
-  };
-  if (t.phrase_alignment_score < 50) return {
-    title: "16-Bar Cue Locking",
-    description: "Pick 5 tracks. Mark a cue exactly on the first beat of a 16-bar phrase. Practice triggering on the 1.",
-    xp: 30,
-  };
+  // Sync-Drill und 16-Bar-Cue-Locking entfielen am 31.07.2026: beide wurden
+  // aus bpm_drift bzw. phrase_alignment_score abgeleitet. Eine UEBUNG aus
+  // einer Groesse zuzuweisen, die nicht misst, ist der schwerste Fall der
+  // Ehrlichkeitsverletzung - der DJ investiert Zeit in ein Problem, das die
+  // Engine nicht belegen kann.
   if (t.bass_overlap_score > 65) return {
     title: "Bass Swap Control",
     description: "Practice killing the low EQ on Deck A before raising the low EQ on Deck B. No overlap allowed.",
@@ -313,11 +307,9 @@ function deriveTimelineEvents(t: SetTransition): Enriched["timelineEvents"] {
   ev.push({ time: fmt(t.start_sec), label: "Outgoing track holds the floor", tone: "info" });
   if (t.energy_dip_pct > 25) ev.push({ time: fmt(t.start_sec + (t.end_sec - t.start_sec) * 0.4), label: `Energy dip ${t.energy_dip_pct}%`, tone: t.energy_dip_pct > 60 ? "warning" : "info" });
   if (t.bass_overlap_score > 60) ev.push({ time: fmt(t.mid_sec), label: "Bass overlap detected", tone: "warning" });
-  if (t.bpm_drift > 1.5) ev.push({ time: fmt(t.mid_sec), label: `BPM drift ${t.bpm_drift.toFixed(2)}`, tone: "warning" });
   if (t.loudness_jump_db != null && Math.abs(t.loudness_jump_db) >= 2)
     ev.push({ time: fmt(t.start_sec ?? t.mid_sec), label: `Pegelsprung ${t.loudness_jump_db > 0 ? "+" : ""}${t.loudness_jump_db.toFixed(1)} dB`, tone: Math.abs(t.loudness_jump_db) >= 4 ? "warning" : "info" });
   ev.push({ time: fmt(t.mid_sec), label: `Mix point · ${t.bpm_before || "?"} → ${t.bpm_after || "?"} BPM`, tone: t.label === "smooth" ? "good" : "info" });
-  if (t.phrase_alignment_score >= 75) ev.push({ time: fmt(t.mid_sec), label: "Cue landed on phrase boundary", tone: "good" });
   ev.push({ time: fmt(t.end_sec), label: "Incoming track owns the mix", tone: "good" });
   return ev;
 }
@@ -350,7 +342,9 @@ function enrich(t: SetTransition): Enriched {
 function applyFilter(items: Enriched[], key: FilterKey): Enriched[] {
   switch (key) {
     case "weak": return items.filter((t) => t.quality_score < 70);
-    case "vocal": return items.filter((t) => t.type === "vocal_overlay" || t.phrase_alignment_score < 45);
+    // Der Zusatz "|| phrase_alignment_score < 45" ist entfallen: er zog
+    // Uebergaenge in den Vocal-Filter, die mit Gesang nichts zu tun haben.
+    case "vocal": return items.filter((t) => t.type === "vocal_overlay");
     case "bass": return items.filter((t) => t.type === "bass_swap" && t.quality_score < 80 || t.bass_overlap_score > 65);
     case "low_conf": return items.filter((t) => t.confidence < 60);
     default: return items;
