@@ -97,10 +97,14 @@ export function SetTimeline({ analysisId, totalDurationSec, transitions }: Props
                 </span>
                 <span className="font-mono text-xs w-14 text-muted-foreground">{fmt(t.mid_sec)}</span>
                 <span className={`font-medium ${meta.color}`}>{meta.label}</span>
+                {/* drift und phrase entfernt (31.07.2026): bpm_drift ist in
+                    89 % der Uebergaenge exakt 0, phrase_alignment_score haengt
+                    an einem Raster, dessen Anker um ~3,4 Phrasen streut.
+                    Siehe NOT_YET_MEASURED in app/api/analysis_mapper.py. Die
+                    Rohwerte kommen weiter mit, sie werden nur nicht mehr als
+                    Note dargestellt. */}
                 <span className="text-xs text-muted-foreground">
                   {t.bpm_before || "?"} → {t.bpm_after || "?"} BPM
-                  {t.bpm_drift > 0 && <> • drift {t.bpm_drift.toFixed(2)}</>}
-                  {" • "}phrase {t.phrase_alignment_score}/100
                 </span>
                 <span className="ml-auto font-display text-lg font-bold w-10 text-right">{t.quality_score}</span>
               </Link>

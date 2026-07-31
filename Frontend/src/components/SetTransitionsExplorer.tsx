@@ -217,20 +217,26 @@ function scoreTone(score: number) {
 
 // ---- Enrichment ----------------------------------------------------------
 
+// phrase_alignment_score und bpm_drift fliessen seit 31.07.2026 nicht mehr
+// in Anzeige, Ratschlag oder Konfidenz ein - beide messen nicht, was ihr
+// Name sagt (Begruendung und Zahlen: NOT_YET_MEASURED in
+// app/api/analysis_mapper.py). Sie blieben hier ohnehin wirkungslos: die
+// Bedingung phrase > 0 traf auf 258 von 258 Uebergaengen zu, |drift| < 5
+// auf 250 von 258 - zwei Konstanten, die die Konfidenz nur aufgeblaeht
+// haben. Die verbleibenden drei Terme sind auf 100 normiert.
 function deriveConfidence(t: SetTransition): number {
   let c = 0;
-  if (t.bpm_before > 0) c += 25;
-  if (t.bpm_after > 0) c += 25;
-  if (t.phrase_alignment_score > 0) c += 20;
-  if (Math.abs(t.bpm_drift) < 5) c += 15;
-  if (t.bass_overlap_score < 60) c += 15;
+  if (t.bpm_before > 0) c += 35;
+  if (t.bpm_after > 0) c += 35;
+  if (t.bass_overlap_score < 60) c += 30;
   return Math.max(0, Math.min(100, c));
 }
 
 function deriveMainIssue(t: SetTransition, type: TransitionType): string {
   const candidates: { label: string; severity: number }[] = [];
-  if (t.bpm_drift > 2) candidates.push({ label: `BPM drift of ${t.bpm_drift.toFixed(1)} between decks`, severity: t.bpm_drift * 5 });
-  if (t.phrase_alignment_score < 50) candidates.push({ label: "Off-phrase: cue point misses the 16-bar grid", severity: 80 - t.phrase_alignment_score });
+  // Kein Ratschlag mehr aus bpm_drift und phrase_alignment_score. "Off-phrase"
+  // feuerte auf 44 % ALLER Uebergaenge, aus einem Raster, das am erkannten
+  // Segmentanfang haengt - und der streut um ~3,4 Phrasen.
   if (t.bass_overlap_score > 65) candidates.push({ label: "Bass clash — both low ends played together", severity: t.bass_overlap_score });
   if (t.energy_dip_pct > 65) candidates.push({ label: "Energy collapses through the swap", severity: t.energy_dip_pct });
   if (t.energy_dip_pct < 8 && type !== "hard_cut") candidates.push({ label: "No energy contour — transition feels flat", severity: 60 });
@@ -245,10 +251,10 @@ function deriveMainIssue(t: SetTransition, type: TransitionType): string {
 function deriveStrengthsWeaknesses(t: SetTransition, type: TransitionType): { strengths: string[]; weaknesses: string[] } {
   const strengths: string[] = [];
   const weaknesses: string[] = [];
-  if (t.bpm_drift <= 1) strengths.push("Tempo locked — drift under 1 BPM.");
-  else if (t.bpm_drift > 3) weaknesses.push(`Heavy tempo drift (${t.bpm_drift.toFixed(1)} BPM).`);
-  if (t.phrase_alignment_score >= 75) strengths.push("Cue point lands on a phrase boundary.");
-  else if (t.phrase_alignment_score < 50) weaknesses.push("Cue point is off the 16-bar grid.");
+  // "Tempo locked - drift under 1 BPM" wurde auf 96 % aller Uebergaenge
+  // vergeben, weil bpm_drift in 89 % exakt 0 ist - ein Lob dafuer, dass der
+  // Tempo-Schaetzer zweimal dieselbe Zahl geliefert hat. "Cue point lands on
+  // a phrase boundary" auf 33 %, der Gegenvorwurf auf 44 %. Beides entfernt.
   if (t.bass_overlap_score < 40) strengths.push("Clean low-end handover, no bass clash.");
   else if (t.bass_overlap_score > 70) weaknesses.push("Bass overlap caused mud in the low end.");
   if (t.energy_dip_pct >= 25 && t.energy_dip_pct <= 50) strengths.push("Healthy energy dip — gives the blend room.");
