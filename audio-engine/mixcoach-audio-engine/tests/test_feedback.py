@@ -1,5 +1,6 @@
 """Tests fuer den Ground-Truth-Feedback-Kreislauf."""
 
+import time
 import uuid
 
 import pytest
@@ -81,3 +82,46 @@ def test_timing_off_verdict_stores_corrected_time():
     v = r.json()["verdicts"]["2"]
     assert v["verdict"] == "timing_off"
     assert v["correctedSec"] == 271.5
+
+
+def test_verdict_traegt_einen_zeitstempel(isolated_ground_truth):
+    """Job 5.3: je Handgriff ein Zeitstempel, nicht nur je Datei.
+
+    Ohne ihn ist 'wie lange dauert ein Label-Durchgang' nicht beantwortbar -
+    updatedAt wird bei JEDEM Speichern ueberschrieben und ist am Ende nur
+    der Zeitpunkt des letzten Klicks.
+    """
+    vorher = time.time()
+    daten = feedback_store.save_verdict("set-1", 3, 120.0, "timing_off",
+                                        corrected_sec=95.5)
+    nachher = time.time()
+
+    eintrag = daten["verdicts"]["3"]
+    assert vorher <= eintrag["at"] <= nachher
+    assert eintrag["correctedSec"] == 95.5
+
+
+def test_zwei_verdicts_erlauben_die_dauer_zu_rechnen(isolated_ground_truth):
+    feedback_store.save_verdict("set-2", 1, 10.0, "correct")
+    time.sleep(0.01)
+    daten = feedback_store.save_verdict("set-2", 2, 20.0, "correct")
+    abstand = daten["verdicts"]["2"]["at"] - daten["verdicts"]["1"]["at"]
+    assert abstand >= 0.01
+
+
+def test_missed_bekommt_parallelen_zeitstempel_ohne_schema_bruch(isolated_ground_truth):
+    """missed bleibt eine Liste von Sekundenwerten - darauf verlassen sich
+    analyze_timing_bias (len) und retrain_model. Der Zeitstempel laeuft
+    parallel in missedAt."""
+    feedback_store.save_missed("set-3", 300.0)
+    daten = feedback_store.save_missed("set-3", 900.0)
+
+    assert daten["missed"] == [300.0, 900.0]
+    assert all(isinstance(s, float) for s in daten["missed"])
+    assert len(daten["missedAt"]) == 2
+    assert daten["missedAt"][0] <= daten["missedAt"][1]
+
+    # Der Dedup-Fall (innerhalb 15 s) darf auch keinen Zeitstempel anhaengen.
+    daten = feedback_store.save_missed("set-3", 905.0)
+    assert daten["missed"] == [300.0, 900.0]
+    assert len(daten["missedAt"]) == 2
