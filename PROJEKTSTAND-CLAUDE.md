@@ -122,13 +122,56 @@ War zu ~90% vorgebaut, einzige Lücke war das fehlende Mounten des Panels auf de
 
 Kernbotschaft: **Das Produkt-Erlebnis ist gut, das Produkt-Urteil noch nicht.** Teil 1 Engine — A1 Präzision ist die offene Kernlücke (~50% Fehlalarm-Rate auf schweren Sets, Timing oft zu spät), A2 Fingerprinting stark (~70-90% auf eigenen Sets), A3 Messwerte fertig, A4 Coaching verdrahtet, A5 Technik teilweise. Teil 2 Frontend weiter als gedacht (F2/F3 fertig), es fehlt F1 (Demo-Report/Onboarding) und bewusst noch F5 (Paywall). Teil 3 Online bewusst zuletzt.
 
-**Meilenstein für "gut genug fürs Live-Gehen" ist keine Zeitangabe, sondern eine Schwelle: ~15-20 gelabelte Sets, Precision ~75-80%, zuverlässiges Timing.**
+> **Überholt am 30.07.2026.** Die frühere Schwelle lautete: „~15-20 gelabelte
+> Sets, Precision ~75-80%, zuverlässiges Timing." Sie beruhte auf der Annahme,
+> dass mehr gelabelte Sets die Precision tragen. Die Annahme ist gemessen
+> widerlegt — 20 zusätzliche Sets bringen **+0,1 pp**, und die vorhandenen
+> Merkmale erklären **8 % der Zeitvarianz** (`ZUKUNFTSWEGE_2026-07-30.md`).
+> Die Schwelle festzuhalten hieße, den Livegang an eine Frage zu binden, die
+> niemand terminieren kann. Der Absatz bleibt als Beleg stehen, gilt aber nicht
+> mehr.
 
-**Empfohlene Reihenfolge (nicht abweichen ohne Grund):**
-1. Sebastian labelt kontinuierlich weiter (Fokus: "Startet woanders"-Fälle) → `MixCoach-Retrain.bat` bei "Training bereit" starten. Das ist aktuell der einzig wirksame A1-Hebel.
-2. A5-Quick-Fixes (Analyse-Tempo, T4/T5-Duplikat-Übergänge falls noch vorhanden).
-3. Erst wenn A1 trägt (~75-80% Precision): Demo-Report + Onboarding (F1), dann Hosting (Teil 3).
-4. **Nicht:** weiteres Landmark-Tuning, weitere Synth-Retrains — beide Wege sind für den aktuellen Precision-Hebel ausgereizt (siehe Abschnitt 4).
+### Die geltende Live-Schwelle (seit 30.07.2026)
+
+> **Live-reif ist MixCoach, wenn jeder angezeigte Wert gemessen ist, die Historie
+> einen Gerätewechsel überlebt, und drei Sets desselben DJs eine Entwicklung
+> sichtbar machen.**
+
+Drei Bedingungen, alle prüfbar, keine davon abhängig von einer offenen
+Forschungsfrage:
+
+1. **Jeder angezeigte Wert ist gemessen.** Schließt `phrase_alignment_score` in
+   seiner heutigen Form aus (`phrase_beats_off` ist über 0–16 Beats
+   gleichverteilt) und verlangt, dass `notMeasured` auf tatsächlich fehlende
+   Messungen reagiert statt eine feste Dreierliste zu führen. Das ist der
+   Markenkern, in eine Abnahmebedingung übersetzt.
+2. **Die Historie überlebt einen Gerätewechsel.** Heute liegt sie in
+   `localStorage` (`Frontend/src/lib/store.ts:68/76`). Ohne Serverspeicherung
+   kann Erlebnis-Punkt 4 nicht existieren — und der ist laut Geschäftsmodell das,
+   wofür bezahlt wird.
+3. **Drei Sets zeigen eine Entwicklung.** Der Beweis, dass aus Messwerten
+   Coaching wird. Auf Größen, die tragen: Pegelsprung in dB, Bass-Overlap,
+   LUFS-Verlauf, Tonartabstand.
+
+Die Übergangs-Präzision bleibt ein Ziel, aber **kein Tor**. Sie läuft parallel
+weiter und blockiert nichts mehr. Herleitung und Zahlenstand:
+`STANDORTBESTIMMUNG_2026-07-30.md`.
+
+**Empfohlene Reihenfolge (Stand 30.07.2026):**
+1. `PROMPT_K1_2026-07-30.md` abarbeiten — räumt den Ehrlichkeitsverstoß, behebt
+   den `uint16`-Überlauf, prüft die Daten-Schleife, klärt ob „sekundengenau"
+   einlösbar ist.
+2. Historie aus dem Browser nach Supabase. Höchster Hebel, reine Handwerksarbeit.
+3. Messwerte füllen: `bass_overlap_score` steht bei 67/431, `loudness_jump_db`
+   bei 214/431. Beides nennt die Vision als Alleinstellung.
+4. Coach auf messbaren Boden stellen — Übungen aus eigenem Material, aber nur aus
+   Größen, die tragen.
+5. Demo-Report und Teilen (F1, Erlebnis-Punkt 5).
+6. Online gehen (Teil 3).
+
+**Nicht:** weiteres Landmark-Tuning, weitere Synth-Retrains, weitere gelabelte
+Sets vor dem Ergebnis von K1 — alle drei Wege sind gemessen ausgereizt
+(Abschnitt 4 und `ZUKUNFTSWEGE_2026-07-30.md`).
 
 **Offene Kern-Lücke (nicht vergessen):** Es gibt bis heute keine systematische Genauigkeitsmessung des Fingerprint-Matchings auf echten Sets — nur Einzelfall-Diagnosen. `daten/ground_truth/` sind größtenteils ML-Grenz-Urteile (Übergang/kein Übergang), keine vollständigen Track-Identitäts-Labels. Ein echter Fingerprint-Benchmark auf realen Sets mit bekannter Tracklist wäre der nächste saubere Schritt, wenn A2 weiter verbessert werden soll — aber das ist nachrangig zu A1.
 

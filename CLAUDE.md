@@ -2,7 +2,21 @@
 
 DJ-Set-Analyse: Aufnahme rein, Report mit bewerteten Übergängen raus.
 Der USP ist die Transition, nicht der Track — siehe `PRODUKTVISION.md`
-und `ROADMAP.md`. Aktueller Arbeitsauftrag: `CLAUDE_CODE_SPEC_2026-07-29.md`.
+und `ROADMAP.md`. Aktueller Arbeitsauftrag: `PROMPT_K1_2026-07-30.md`.
+
+## Die Live-Schwelle — Maßstab für jede Priorisierung
+
+> **Live-reif ist MixCoach, wenn jeder angezeigte Wert gemessen ist, die Historie
+> einen Gerätewechsel überlebt, und drei Sets desselben DJs eine Entwicklung
+> sichtbar machen.**
+
+Gilt seit 30.07.2026 und ersetzt „Precision 75–80 %". Grund: 20 zusätzliche
+gelabelte Sets bringen +0,1 pp Precision, die vorhandenen Merkmale erklären 8 %
+der Zeitvarianz. Präzision und Timing bleiben Ziele, sind aber **kein Tor** mehr.
+
+Praktisch heißt das bei jeder Aufgabe: Sie zahlt auf eine der drei Bedingungen
+ein, oder sie hat einen anderen genannten Grund. Herleitung und ausgezählter
+Stand: `STANDORTBESTIMMUNG_2026-07-30.md`, Befund: `ZUKUNFTSWEGE_2026-07-30.md`.
 
 ## Aufbau
 
