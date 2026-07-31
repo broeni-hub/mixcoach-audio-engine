@@ -16,6 +16,16 @@ node_modules/
 *.egg-info/
 .pytest_cache/
 
+# --- Build-Ausgaben des Frontends ----------------------------------------
+# 'npm run build' legt diese Ordner an. Sie gehoeren nicht ins Repo: sie
+# werden aus src/ erzeugt, sind mehrere MB gross und aendern sich bei jedem
+# Lauf. Nachgetragen am 31.07.2026, als der Build zum ersten Mal auf diesem
+# Rechner lief.
+Frontend/.output/
+Frontend/.wrangler/
+Frontend/dist/
+Frontend/.vite/
+
 # --- Audio: nie ins Repo (23 GB Rohdaten) --------------------------------
 # Analyse-Ergebnisse als JSON WERDEN versioniert, die zugehoerigen
 # Set-Aufnahmen nicht. Die JSONs sind die Datengrundlage fuer die

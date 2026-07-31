@@ -321,7 +321,8 @@ function Row({ label, value }: { label: string; value: string }) {
 
 interface Side {
   type: ReturnType<typeof classifyTransition>;
-  metrics: { beatmatch: number; phrase: number; eq: number; energy: number; smoothness: number };
+  // beatmatch und phrase sind am 31.07.2026 entfallen, siehe deriveSide.
+  metrics: { eq: number; energy: number; smoothness: number };
   overall: number;
   strengths: string[];
   weaknesses: string[];
@@ -358,8 +359,14 @@ function deriveSide(t: SetTransition): Side {
   return { type, metrics, overall, strengths, weaknesses };
 }
 
+// "Pitch-fader micro-trim" und "16-Bar Phrase Lock" sind hier entfallen
+// (31.07.2026). Sie wurden aus beatmatch/phrase zugewiesen, also aus
+// bpm_drift und phrase_alignment_score - siehe NOT_YET_MEASURED in
+// app/api/analysis_mapper.py. Einen DJ eine Uebungseinheit in ein Problem
+// investieren zu lassen, das die Engine nicht belegen kann, ist der
+// schwerste Fall der Ehrlichkeitsverletzung, nicht der leichteste.
 function recommendDrills(a: Side, b: Side): { title: string; description: string; xp: number }[] {
-  const skills: Array<keyof Side["metrics"]> = ["beatmatch", "phrase", "eq", "energy", "smoothness"];
+  const skills: Array<keyof Side["metrics"]> = ["eq", "energy", "smoothness"];
   const gaps = skills
     .map((s) => ({ skill: s, weakest: Math.min(a.metrics[s], b.metrics[s]) }))
     .sort((x, y) => x.weakest - y.weakest);
@@ -368,8 +375,6 @@ function recommendDrills(a: Side, b: Side): { title: string; description: string
 }
 
 const DRILLS: Record<keyof Side["metrics"], { title: string; description: string; xp: number }> = {
-  beatmatch: { title: "Pitch-fader micro-trim", description: "Practice nudging ±0.05% over 32 bars without touching the jog wheel.", xp: 30 },
-  phrase: { title: "16-Bar Phrase Lock", description: "Count phrases out loud and only trigger the new track on bar 1.", xp: 40 },
   eq: { title: "Perfect EQ Swap", description: "Cut outgoing bass at the exact moment you bring in the new bass — same fader move, mirrored.", xp: 30 },
   energy: { title: "Energy Hold Drill", description: "Use a high-pass sweep to keep perceived energy flat through a long blend.", xp: 35 },
   smoothness: { title: "Long-Blend Builder", description: "Stretch a single transition to 64 bars, layering EQ, filter, and FX gradually.", xp: 45 },
