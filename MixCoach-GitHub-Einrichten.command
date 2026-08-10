@@ -89,9 +89,34 @@ echo "  erledigt (macOS-Schluesselbund)"
 
 echo ""
 echo "  --- Schritt 2: offene Aenderungen sichern ------------------"
+# NICHT blind 'git add -A'. Am 10.08.2026 hat genau das vier Dateien
+# mitgenommen, die niemand im Repo haben wollte: drei Analyse-JSONs aus einem
+# Testlauf und eine leere Relabel-Datei. Sie standen als "unversioniert" da,
+# weil sie Muell waren - und wurden dadurch erst recht eingesammelt.
+# Ein Push laesst sich nicht zurueckholen, also wird hier gefragt.
 if [ -n "$(git status --porcelain)" ]; then
-  git add -A
-  git commit -m "Stand vor der GitHub-Uebertragung"
+  echo ""
+  echo "  Diese Aenderungen wuerden mitgehen:"
+  echo ""
+  git status -s | sed 's/^/    /'
+  echo ""
+  echo "    (?? = bisher unversioniert - genau hier lohnt der zweite Blick)"
+  echo ""
+  read -r -p "  Alles davon sichern und hochladen? [j/N] " OK
+  case "${OK:-n}" in
+    j|J|y|Y)
+      git add -A
+      git commit -m "Stand vor der GitHub-Uebertragung"
+      ;;
+    *)
+      echo ""
+      echo "  Abgebrochen. Raeum auf, was nicht mit soll, und starte neu."
+      echo "  Nur committete Staende gehen hoch - offene Aenderungen bleiben liegen."
+      echo ""
+      read -r -p "  Enter zum Beenden..."
+      exit 0
+      ;;
+  esac
 else
   echo "  nichts Neues zu sichern - in Ordnung"
 fi

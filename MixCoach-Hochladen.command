@@ -29,8 +29,26 @@ echo "  Branch: $AKTUELL"
 echo ""
 echo "  --- Was hat sich geaendert? --------------------------------"
 if [ -n "$(git status --porcelain)" ]; then
-  git status -s
+  git status -s | sed 's/^/    /'
   echo ""
+  # Unversionierte Dateien getrennt hervorheben: sie sind der haeufigste Weg,
+  # auf dem Muell ins Repo rutscht (Testreste, Zwischenstaende). Am 10.08.2026
+  # sind so vier Dateien nach GitHub gelangt, die dort nicht hingehoerten.
+  NEU="$(git ls-files --others --exclude-standard | wc -l | tr -d ' ')"
+  if [ "$NEU" != "0" ]; then
+    echo "  ACHTUNG: $NEU Datei(en) sind bisher unversioniert (?? oben)."
+    echo "  Sie wuerden jetzt dauerhaft ins Repo aufgenommen."
+    echo ""
+    read -r -p "  Sollen die wirklich mit? [j/N] " OK
+    case "${OK:-n}" in
+      j|J|y|Y) ;;
+      *) echo ""
+         echo "  Abgebrochen. Raeum sie weg oder trag sie in .gitignore ein."
+         echo ""
+         read -r -p "  Enter zum Beenden..."; exit 0 ;;
+    esac
+    echo ""
+  fi
   read -r -p "  Kurze Beschreibung der Aenderung: " TEXT
   [ -z "${TEXT:-}" ] && TEXT="Zwischenstand"
   git add -A
