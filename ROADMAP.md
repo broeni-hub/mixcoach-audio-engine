@@ -44,6 +44,14 @@ Jedes analysierte Set bewerten (Stimmt / Kein Übergang / Startet woanders / Feh
 > weder billig noch der wirksame Hebel — und seit dem 30.07. kein Tor zum
 > Livegang mehr. Keine weiteren Sets labeln, bevor K1 beantwortet ist
 > (`PROMPT_K1_2026-07-30.md`).
+>
+> **Nachtrag 10.08.2026:** K1 ist beantwortet, und die Antwort schärft diesen
+> Absatz. Mehr Sets kaufen sehr wohl etwas — nur nicht das, was hier gemeint
+> war: Recall +17,4 pp von 4 auf 24 Sets, Precision +1,6 pp bei ±6,0 pp
+> Streuung. Und die Precision hängt gar nicht an den Daten: die Auswahl schöpft
+> 93–95 % ihrer Orakel-Schranke aus und setzt 317 Marker auf 170 echte
+> Übergänge. Sie ist durch die **Markerzahl** gedeckelt, nicht durch die
+> Trennschärfe (`tools/eval/nms2.py`, `SITZUNG_2026-08-10.md`).
 
 ### A2. Library-Fingerprinting (1–2 Wochen) — der Genauigkeits-Gamechanger
 Der DJ lädt seine Tracks (oder rekordbox-Playlist) hoch. Die Engine erkennt per Fingerprint, WELCHER Track WANN im Set läuft → Übergänge nahezu 100% exakt, auch bei drop-losem Techno/House (dein erklärtes Hauptproblem). Nebeneffekt: Der Report zeigt echte Tracknamen statt "Track 3".

@@ -2,7 +2,14 @@
 
 DJ-Set-Analyse: Aufnahme rein, Report mit bewerteten Übergängen raus.
 Der USP ist die Transition, nicht der Track — siehe `PRODUKTVISION.md`
-und `ROADMAP.md`. Aktueller Arbeitsauftrag: `PROMPT_K1_2026-07-30.md`.
+und `ROADMAP.md`.
+
+**Stand 10.08.2026:** `PROMPT_K1_2026-07-30.md` ist abgearbeitet, Ergebnis in
+`K1_AUFBAU_2026-07-31.md`. Nachgemessen und zusammengeführt am 10.08.:
+`SITZUNG_2026-08-10.md`. Offen und wartend auf Sebastian: die zweite,
+blinde Labelrunde (`MixCoach-Zweitrunde.command`) und die Entscheidung zu
+`quality_score`. Nächster Bauschritt laut Standortbestimmung: die Historie
+aus `localStorage` nach Supabase.
 
 ## Die Live-Schwelle — Maßstab für jede Priorisierung
 
@@ -72,9 +79,18 @@ ohne Audio und ohne numpy.
 .venv/bin/python -m tools.analyze_timing_bias --check     # muss grün sein
 ```
 
-Stand 29.07.2026: Recall 73 %, Precision 75 %, strikt korrekt 30 %.
-Von den 287 `timing_off` ist die Engine in 86 % **zu spät**, Median −29,85 s,
-σ = 52,87 s.
+Seit dem 31.07.2026 ist `--mode dedup` die **Vorgabe**: gezählt werden
+Aufnahmen (`fileName`), nicht Ground-Truth-Dateien — sonst zählt REC001 elfmal.
+`--check` sagt an, gegen welchen Stand es prüft.
+
+Stand 31.07.2026, Sicht `dedup`: 28 Aufnahmen, 286 bewertete Übergänge,
+Recall 71 %, Precision 74 %, strikt korrekt 29 %, **σ = 54,58 s**, Median
+−29,43 s, 85 % zu spät. Die alte Sicht `spec` (69 „Sets", σ = 52,87 s) bleibt
+über `--mode spec` abrufbar — **das Entdoppeln hat σ erhöht**, die
+Doppelzählung hatte die Streuung geschönt.
+
+Nur die 19 verwertbaren Aufnahmen (`dedup --nur-verwertbar`): Recall 74 %,
+Precision 80 %, σ = 45,85 s.
 
 Die Diagnose dazu: `detect_transition_zones()` sucht eine RMS-Delle — das ist
 im DJ-Mix der Breakdown vor dem Drop, also das *Ende* des Blends. Der Mensch
@@ -92,9 +108,31 @@ unverändert. **σ ist die Zahl, an der sich jede Änderung messen lassen muss.*
   Markenkern, kein Stilmittel.
 - Kommentare und Doku auf Deutsch, wie im Bestand.
 
+## Was gemessen erledigt ist — nicht nochmal aufmachen
+
+- **Mehr gelabelte Sets kaufen Recall, keine Precision.** Von 4 auf 24 Sets:
+  Recall +17,4 pp, Precision +1,6 pp bei ±6,0 pp Ziehungsstreuung
+  (`tools/eval/lernkurve.py`).
+- **Die 17 Merkmale tragen die Zeit nicht.** R² = 0,011 auf 1303
+  Kandidatenpaaren, ein konstanter Offset schafft dasselbe
+  (`tools/eval/zeit_regression.py`). Zweifach belegt, 30.07. und 10.08.
+- **Die Auswahl rankt nicht schlecht, sie setzt zu viele Marker.** 317 auf 170
+  echte Übergänge, Ausschöpfung der Orakel-Schranke 93–95 %
+  (`tools/eval/nms2.py`). Precision ist durch die Markerzahl gedeckelt.
+- **Kein fünfter Blend-Onset-Schätzer.** Vier sind gemessen gescheitert.
+- **Keine Synthetik im Training, kein Landmark-Vorfilter.** Beide gemessen
+  verworfen, siehe `PROJEKTSTAND-CLAUDE.md` Abschnitt 4.
+
+Wer eine dieser Fragen neu stellt, braucht einen neuen Eingang — nicht mehr
+Daten und keine andere Zielgröße.
+
 ## Tests
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 195 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 226 Tests, alle grün
 ```
+
+`tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm
+hinterlassen. Vor dem 31.07. taten sie das — 62 Stück waren aufgelaufen und
+haben eine Messung verschoben.

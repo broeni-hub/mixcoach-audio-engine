@@ -3,6 +3,24 @@
 Stand 30.07.2026. Grundlage: `PRODUKTVISION.md`, `ROADMAP.md`,
 `ZUKUNFTSWEGE_2026-07-30.md` und eine Auszählung des tatsächlichen Bestands.
 
+> **Nachtrag 10.08.2026 — was seither passiert ist.** Dieses Dokument bleibt als
+> Momentaufnahme stehen; drei seiner Aussagen sind überholt:
+>
+> - **„das klärt K1" (Abschnitt 1) und „Job 3 im K1-Prompt" (Abschnitt 2).**
+>   K1 ist am 31.07. abgearbeitet (`K1_AUFBAU_2026-07-31.md`). Burggraben 1 ist
+>   **halb belegt**: mehr Labels kaufen Recall (84 → 92 %), keine Precision.
+>   Burggraben 3 (Ehrlichkeit) ist von 60 % auf **belegt** gestiegen — die zwei
+>   Scheinwerte tragen keine Note und keinen Ratschlag mehr.
+> - **Schritt 1 der Reihenfolge (Abschnitt 5)** ist erledigt. Es beginnt jetzt
+>   bei der zweiten Labelrunde und Schritt 2, der Historie.
+> - **Schritt 3, „warum die Messwerte fehlen, ist zu klären".** Ist geklärt
+>   (10.08.): `bass_overlap_score`, `composite_quality_score` und Vocal-Clash
+>   hängen alle an der abgeschalteten Stem-Trennung.
+>
+> Der Kernsatz „Der Forschungsteil steht nicht zwischen dir und dem Livegang"
+> gilt unverändert — er ist seither eher härter belegt. Details:
+> `SITZUNG_2026-08-10.md`.
+
 ## Wie die Zahlen zustande kommen
 
 Ausgezählt, nicht geschätzt: 50 Analyse-Reports in `daten/analysis_results/` mit

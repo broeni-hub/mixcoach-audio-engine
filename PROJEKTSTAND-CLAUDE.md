@@ -157,21 +157,37 @@ Die Übergangs-Präzision bleibt ein Ziel, aber **kein Tor**. Sie läuft paralle
 weiter und blockiert nichts mehr. Herleitung und Zahlenstand:
 `STANDORTBESTIMMUNG_2026-07-30.md`.
 
-**Empfohlene Reihenfolge (Stand 30.07.2026):**
-1. `PROMPT_K1_2026-07-30.md` abarbeiten — räumt den Ehrlichkeitsverstoß, behebt
-   den `uint16`-Überlauf, prüft die Daten-Schleife, klärt ob „sekundengenau"
-   einlösbar ist.
-2. Historie aus dem Browser nach Supabase. Höchster Hebel, reine Handwerksarbeit.
-3. Messwerte füllen: `bass_overlap_score` steht bei 67/431, `loudness_jump_db`
-   bei 214/431. Beides nennt die Vision als Alleinstellung.
-4. Coach auf messbaren Boden stellen — Übungen aus eigenem Material, aber nur aus
-   Größen, die tragen.
+**Empfohlene Reihenfolge (fortgeschrieben 10.08.2026):**
+
+~~1. `PROMPT_K1_2026-07-30.md` abarbeiten.~~ **Erledigt am 31.07.**, Ergebnis in
+`K1_AUFBAU_2026-07-31.md`, nachgemessen und zusammengeführt am 10.08. in
+`SITZUNG_2026-08-10.md`. Der Ehrlichkeitsverstoß ist geräumt, der
+`uint16`-Überlauf behoben, die Daten-Schleife nachgeprüft (sie trägt **halb**:
+Recall ja, Precision nein), und das Messinstrument für „sekundengenau" steht
+startklar.
+
+1. **Zweite Labelrunde** (`MixCoach-Zweitrunde.command`) — wartet auf Sebastian,
+   ein Abend. Entscheidet, ob „sekundengenau" in `PRODUKTVISION.md` bleiben kann.
+2. **Historie aus dem Browser nach Supabase.** Höchster Hebel, reine
+   Handwerksarbeit, unberührt.
+3. **Messwerte füllen** — `bass_overlap_score` 67/431, `loudness_jump_db`
+   214/431, `composite_quality_score` 128/431. Seit dem 10.08. ist der Grund
+   belegt: alle drei hängen an der abgeschalteten Stem-Trennung
+   (`STEM_SCORING_ENABLED`). **Ein Schalter blockiert drei Vision-Zusagen.**
+4. Coach auf messbaren Boden stellen — nur aus Größen, die tragen.
 5. Demo-Report und Teilen (F1, Erlebnis-Punkt 5).
 6. Online gehen (Teil 3).
 
+Dazu ein Einzeiler, der jederzeit fällig ist: **ein Retrain**, damit der am
+10.08. erweiterte Betriebspunkt (`gap` bis 150 s statt 90 s) wirksam wird. Das
+aktive Modell fährt weiter den alten.
+
 **Nicht:** weiteres Landmark-Tuning, weitere Synth-Retrains, weitere gelabelte
-Sets vor dem Ergebnis von K1 — alle drei Wege sind gemessen ausgereizt
-(Abschnitt 4 und `ZUKUNFTSWEGE_2026-07-30.md`).
+Sets — alle drei Wege sind gemessen ausgereizt (Abschnitt 4 und
+`ZUKUNFTSWEGE_2026-07-30.md`). Seit dem 10.08. kommt dazu: **kein weiteres
+Tuning an Modell oder Merkmalen zur Precision-Steigerung.** Die Auswahl schöpft
+93–95 % ihrer Orakel-Schranke aus; die Precision ist durch die Markerzahl
+gedeckelt, nicht durch die Trennschärfe (`tools/eval/nms2.py`).
 
 **Offene Kern-Lücke (nicht vergessen):** Es gibt bis heute keine systematische Genauigkeitsmessung des Fingerprint-Matchings auf echten Sets — nur Einzelfall-Diagnosen. `daten/ground_truth/` sind größtenteils ML-Grenz-Urteile (Übergang/kein Übergang), keine vollständigen Track-Identitäts-Labels. Ein echter Fingerprint-Benchmark auf realen Sets mit bekannter Tracklist wäre der nächste saubere Schritt, wenn A2 weiter verbessert werden soll — aber das ist nachrangig zu A1.
 
