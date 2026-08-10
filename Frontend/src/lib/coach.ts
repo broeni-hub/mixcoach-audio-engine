@@ -249,20 +249,11 @@ export function detectPatterns(state: AppState): DetectedPattern[] {
           "eq",
         );
       }
-      if (t.bpm_drift > 2) {
-        bump(
-          "bpm-drift",
-          "Your tracks tend to drift out of sync once a blend gets going.",
-          "beatmatching",
-        );
-      }
-      if (t.phrase_alignment_score > 0 && t.phrase_alignment_score < 50) {
-        bump(
-          "off-phrase",
-          "Your drops are landing off the phrase instead of right in the pocket.",
-          "phrase",
-        );
-      }
+      // Die Muster "bpm-drift" und "off-phrase" sind am 31.07.2026 entfallen.
+      // Ein Coach-Muster ist eine Aussage ueber den DJ ueber mehrere Sets
+      // hinweg - aus bpm_drift (in 89 % exakt 0) und phrase_alignment_score
+      // (Raster streut um ~3,4 Phrasen) laesst sich die nicht ableiten.
+      // Begruendung und Zahlen: NOT_YET_MEASURED, app/api/analysis_mapper.py.
       if (t.energy_dip_pct > 60) {
         bump(
           "energy-collapse",

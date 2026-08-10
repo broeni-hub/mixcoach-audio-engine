@@ -209,3 +209,71 @@ def test_phrase_grid_extends_beyond_last_full_phrase():
     # Uebergang bei 95s (Segmentende): korrekt ~2 Beats vor der 96s-Grenze.
     off = phrase_distance_beats(grid, 95.0, 120.0)
     assert off is not None and off <= 3.0, off
+
+
+# --- Set-Gesamtnote: nur noch aus Gemessenem (Regression 31.07.2026) -------
+
+def _transition(phrase, tempo, harmonic, energy):
+    return {"scores": {"phrase": phrase, "tempo": tempo,
+                       "harmonic": harmonic, "energy": energy}}
+
+
+def test_overall_ignoriert_phrase_und_beatmatching():
+    """phrase_timing und beatmatching sind am 31.07.2026 aus der
+    Gesamtnote genommen worden.
+
+    Grund, gemessen: bpm_drift ist in 89 % der Uebergaenge exakt 0 - der
+    daraus gemittelte beatmatching-Score lag bei 12 von 19 Aufnahmen auf
+    exakt 100 und hat mit 30 % Gewicht die Kopfzahl zusammengedrueckt.
+    scores.overall spannte ueber 19 Aufnahmen nur 12 Punkte.
+
+    Der Test setzt beide auf Extremwerte. Aendert sich overall dadurch,
+    fliessen sie wieder ein.
+    """
+    from app.audio.pipeline.pipeline import score_set_quality_v2
+
+    energie = {"points": [{"time": float(t), "rms": 0.5} for t in range(60)]}
+    dram = {"energy_trend": "rising"}
+
+    hoch = score_set_quality_v2(energie, dram,
+                                [_transition(100, 100, 60, 60)])
+    tief = score_set_quality_v2(energie, dram,
+                                [_transition(0, 0, 60, 60)])
+
+    assert hoch["overall"] == tief["overall"], (
+        "phrase/beatmatching bewegen die Gesamtnote wieder")
+    # Die Teilwerte bleiben erhalten - sie werden nur nicht mehr benotet.
+    assert hoch["phrase_timing"] == 100.0
+    assert hoch["beatmatching"] == 100.0
+
+
+def test_overall_ignoriert_den_dramaturgie_geschmack():
+    """rising 90 / stable 75 / falling 60 war eine Geschmacksentscheidung im
+    Gewand eines Messwerts: ein Set, das ruhig ausklingt, wurde bestraft,
+    ohne dass belegt ist, dass Aufbauen besser waere."""
+    from app.audio.pipeline.pipeline import score_set_quality_v2
+
+    energie = {"points": [{"time": float(t), "rms": 0.5} for t in range(60)]}
+    t = [_transition(80, 80, 60, 60)]
+
+    steigend = score_set_quality_v2(energie, {"energy_trend": "rising"}, t)
+    fallend = score_set_quality_v2(energie, {"energy_trend": "falling"}, t)
+
+    assert steigend["overall"] == fallend["overall"]
+    # Der Wert wird weiter berechnet und ausgewiesen, nur nicht gewichtet.
+    assert steigend["dramaturgy"] == 90.0
+    assert fallend["dramaturgy"] == 60.0
+
+
+def test_overall_folgt_den_gemessenen_teilen():
+    """Gegenprobe: harmonic und energy_shape muessen die Note bewegen -
+    sonst haette die Aenderung sie ganz entwertet."""
+    from app.audio.pipeline.pipeline import score_set_quality_v2
+
+    energie = {"points": [{"time": float(t), "rms": 0.5} for t in range(60)]}
+    dram = {"energy_trend": "stable"}
+
+    gut = score_set_quality_v2(energie, dram, [_transition(50, 50, 100, 100)])
+    schlecht = score_set_quality_v2(energie, dram, [_transition(50, 50, 10, 10)])
+
+    assert gut["overall"] > schlecht["overall"]

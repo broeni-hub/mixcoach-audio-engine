@@ -46,6 +46,7 @@ export function toReportView(a: LegacyAnalysisResult): ReportView {
     skills,
     energyCurve: a.energyCurve ?? [],
     volumeCurve: a.volumeCurve ?? [],
+    energyArc: a.energyArc ?? null,
     frequency: a.frequency
       ? { bass: a.frequency.bass, mid: a.frequency.mid, high: a.frequency.high }
       : null,
@@ -103,10 +104,15 @@ function toFullSetView(base: ReportView, a: LegacyAnalysisResult): FullSetAnalys
     bpmDrift: num(t.bpm_drift),
     qualityScore: num(t.quality_score),
     label: t.label,
+    // beatmatching und timing werden hier NICHT mehr abgeleitet (31.07.2026).
+    // Diese Stelle rechnete am Mapper vorbei: sie bildete die Noten aus
+    // bpm_drift und phrase_alignment_score selbst nach, sodass ein null aus
+    // dem Backend sie nicht erreicht haette. Begruendung und Zahlen:
+    // NOT_YET_MEASURED in app/api/analysis_mapper.py.
     scores: {
-      beatmatching: num(t.bpm_drift) === null ? undefined : Math.max(0, 100 - (t.bpm_drift ?? 0) * 10),
+      beatmatching: undefined,
       eq: num(t.bass_overlap_score) === null ? undefined : 100 - (t.bass_overlap_score ?? 0),
-      timing: num(t.phrase_alignment_score) ?? undefined,
+      timing: undefined,
     },
     note: undefined,
   }));
@@ -133,9 +139,12 @@ function toFullSetView(base: ReportView, a: LegacyAnalysisResult): FullSetAnalys
   const mistakes = new Set<string>();
   for (const t of transitions) {
     if (t.label === "rough") {
-      if ((t.bpmDrift ?? 0) > 2) mistakes.add(`Your tracks drifted out of sync around ${formatTime(t.midSec)}`);
+      // "drifted out of sync" aus bpmDrift entfaellt (31.07.2026) - der Wert
+      // ist in 89 % der Uebergaenge exakt 0, und die Ausreisser sind Spruenge
+      // des Tempo-Schaetzers zwischen seinen 14 Kandidatenwerten.
       if ((t.scores?.eq ?? 100) < 60) mistakes.add(`The low end got crowded around ${formatTime(t.midSec)}`);
-      if ((t.scores?.timing ?? 100) < 60) mistakes.add(`The drop landed off the phrase around ${formatTime(t.midSec)}`);
+      // "landed off the phrase" ebenfalls entfallen: scores.timing wird oben
+      // nicht mehr befuellt, die Bedingung waere ohnehin nie wahr geworden.
     }
   }
 

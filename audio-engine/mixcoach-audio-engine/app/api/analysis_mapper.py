@@ -2,10 +2,40 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from uuid import uuid4
 
+from app.audio.dramaturgie import bogen
+
 # Scores, die die Set-Pipeline derzeit NICHT misst, werden bewusst als
 # None (null) ausgegeben statt mit erfundenen Zahlen befuellt.
 # Grundsatz: Nur anzeigen, was wirklich gemessen wurde.
-NOT_YET_MEASURED = ["eq", "creativity", "frequency"]
+#
+# beatmatching und timing sind am 31.07.2026 dazugekommen. Beide waren
+# befuellt, aber die Zahl dahinter traegt nicht (gemessen an 19 echten
+# Aufnahmen / 258 Uebergaengen, Testfixtures mix.wav + synthetic_mix.wav
+# ausgeschlossen):
+#
+#   beatmatching = Mittel des Tempo-Scores aus bpm_drift. bpm_drift ist in
+#   89 % der Uebergaenge exakt 0,0, weil die Tempo-Schaetzung fuer
+#   benachbarte Segmente denselben Wert liefert - ueber ALLE 19 Aufnahmen
+#   gibt es nur 14 verschiedene Tempowerte. Ergebnis: beatmatching lag bei
+#   12 von 19 Aufnahmen auf exakt 100, Spanne 91-100. Eine Kopfzahl, die
+#   keinen DJ von einem anderen unterscheiden kann.
+#
+#   timing = Mittel des Phrasen-Scores aus phrase_beats_off. Das Raster
+#   wird in phrase_grid.py am ersten Beat des erkannten Segments verankert;
+#   genau diese Grenze verfehlt die Engine mit sigma = 52,87 s, das sind
+#   bei 125 BPM rund 3,4 Phrasen. Der Bezugspunkt wandert also weiter als
+#   die Groesse, die er messen soll (0-16 Beats).
+#
+# Unabhaengig bestaetigt, mit anderer Methode und anderer Datenbasis:
+# app/audio/scoring/composite.py haelt fest, dass der alte quality_score
+# (zu 70 % aus genau diesen beiden Groessen) gegen 239 menschliche
+# Bewertungen eine Spearman-Korrelation von ~0 hat, und setzt
+# phrase_timing im gefitteten Composite auf Gewicht 0,0.
+#
+# Die Rohwerte bleiben im Payload (phrase_beats_off, phrase_alignment_score,
+# bpm_drift je Uebergang) - sie werden fuer Auswertung und Export gebraucht.
+# Was entfaellt, ist die NOTE und die daraus abgeleitete Handlungsanweisung.
+NOT_YET_MEASURED = ["eq", "creativity", "frequency", "beatmatching", "timing"]
 
 
 def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
@@ -18,6 +48,7 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
 
     bpm = _measured_bpm(tempo)
     overall = _measured_int(quality.get("overall"))
+    verlauf = _map_loudness_curve(analysis) or _map_energy_curve(energy)
     dominant = analysis.get("dominant_key") or {}
 
     return {
@@ -37,15 +68,31 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
         # Messungen (Sebastians Frage 2026-07-17). Fallback auf die
         # Energiekurve nur fuer Analysen, die vor der Einfuehrung von
         # loudness_curve im Pipeline-Result entstanden sind.
-        "volumeCurve": _map_loudness_curve(analysis) or _map_energy_curve(energy),
+        "volumeCurve": verlauf,
+
+        # Beschreibung genau DER Kurve, die auch gezeichnet wird - nicht
+        # einer zweiten, intern gerechneten. Sonst koennte der Text etwas
+        # anderes behaupten als das Bild daneben zeigt.
+        #
+        # Rein beschreibend, ohne Note: siehe app/audio/dramaturgie.py.
+        # Nachgemessen an 19 echten Aufnahmen (31.07.2026): der Verlauf ist
+        # deterministisch (zwei Analysen derselben Aufnahme ergeben
+        # identische Kurven, Median-Abstand 0,000 ueber 66 Paare) und
+        # unterscheidet die Aufnahmen (Median-Abstand 0,180 zwischen
+        # verschiedenen). Das ist der Unterschied zu den Groessen in
+        # NOT_YET_MEASURED.
+        "energyArc": bogen(verlauf, round(float(analysis.get("duration", 0))) or None),
 
         "frequency": None,
 
         "scores": {
             # v2: echte Messwerte aus der Uebergangs-Bewertung.
-            "beatmatching": _measured_int(quality.get("beatmatching")),
+            # beatmatching/timing: siehe NOT_YET_MEASURED oben. Bewusst None
+            # und nicht der berechnete Wert - eine Note, die bei 12 von 19
+            # Aufnahmen 100 lautet, ist keine Messung.
+            "beatmatching": None,
             "eq": None,
-            "timing": _measured_int(quality.get("phrase_timing")),
+            "timing": None,
             "creativity": None,
             "flow": _measured_int(quality.get("energy_flow")),
             "musicality": _measured_int(quality.get("harmonic")),

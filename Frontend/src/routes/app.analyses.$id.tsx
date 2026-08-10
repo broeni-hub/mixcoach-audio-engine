@@ -25,7 +25,7 @@ import { MetricsExplainer } from "@/components/MetricsExplainer";
 import { TrackLane } from "@/components/TrackLane";
 import { useEffect, useState } from "react";
 import { useLang } from "@/lib/i18n";
-import type { FullSetAnalysisResult, SingleTransitionAnalysisResult, ExerciseRecommendation } from "@/lib/report-types";
+import type { EnergyArc, FullSetAnalysisResult, SingleTransitionAnalysisResult, ExerciseRecommendation } from "@/lib/report-types";
 import { isFullSet } from "@/lib/report-types";
 import { NextActionBar } from "@/components/NextActionBar";
 
@@ -298,6 +298,7 @@ function AnalysisDetail() {
               </CardHeader>
               <CardContent>
                 <Waveform analysisId={view.id} peaks={view.volumeCurve ?? []} markers={waveformMarkers} height={140} remoteAudioUrl={remoteAudioUrl} onMarkMissed={markMissed} />
+                <EnergyArcNote arc={view.energyArc} />
               </CardContent>
             </Card>
           )}
@@ -485,10 +486,15 @@ function AnalysisDetail() {
               </p>
             </CardHeader>
             <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-              <Stat label="Timing drift" value={singleView.transition.bpmDrift != null ? `${singleView.transition.bpmDrift.toFixed(2)} BPM` : "—"} />
+              {/* "Timing drift" und "Phrase landing" zeigen seit 31.07.2026
+                  bewusst nichts mehr an - siehe NOT_YET_MEASURED in
+                  app/api/analysis_mapper.py. Die Kacheln bleiben stehen, damit
+                  sichtbar ist, DASS die Groesse existiert und nicht gemessen
+                  wird; das ist der Unterschied zwischen Weg B und Loeschen. */}
+              <Stat label="Timing drift" value="nicht gemessen" />
               <Stat label="Key pairing" value={singleView.transition.camelotA && singleView.transition.camelotB ? `${singleView.transition.camelotA} → ${singleView.transition.camelotB}` : "—"} />
               <Stat label="Low-end clash" value={singleView.transition.bassClashScore != null ? `${singleView.transition.bassClashScore}/100` : "—"} />
-              <Stat label="Phrase landing" value={singleView.transition.phraseAlignmentScore != null ? `${singleView.transition.phraseAlignmentScore}/100` : "—"} />
+              <Stat label="Phrase landing" value="nicht gemessen" />
 
             </CardContent>
           </Card>
@@ -739,6 +745,50 @@ function Stat({ label, value }: { label: string; value: string }) {
     <div className="rounded-lg border border-border bg-card/40 p-2">
       <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
       <div className="font-display text-sm font-bold mt-1">{value}</div>
+    </div>
+  );
+}
+
+// Energiebogen ueber das ganze Set - BESCHREIBEND, ohne Note.
+//
+// Absicht: das hier ist der Gegenentwurf zu den Werten, die am 31.07.2026
+// aus der Anzeige genommen wurden. Kein "/100", kein gut/schlecht, keine
+// Handlungsanweisung. Der Verlauf ist nachgemessen deterministisch und
+// unterscheidet die Aufnahmen; wo ein Hoehepunkt zu LIEGEN hat, ist dagegen
+// nicht gemessen - also wird es auch nicht behauptet.
+//
+// Wird nichts gerendert, wenn kein Bogen vorliegt: eine Aufnahme ohne Kurve
+// hat keinen gemessenen Verlauf, und das ist kein Grund fuer einen Platzhalter.
+function EnergyArcNote({ arc }: { arc?: EnergyArc | null }) {
+  if (!arc) return null;
+
+  const mmss = (s: number) => {
+    const m = Math.floor(s / 60);
+    return `${m}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  };
+  const teile: string[] = [];
+  if (Math.abs(arc.anstieg_gesamt) >= 5) {
+    teile.push(
+      `letztes Drittel ${Math.abs(arc.anstieg_gesamt).toFixed(0)} Punkte ` +
+        `${arc.anstieg_gesamt > 0 ? "höher" : "niedriger"} als das erste`,
+    );
+  } else {
+    teile.push("erstes und letztes Drittel auf gleicher Höhe");
+  }
+  if (arc.laengster_aufbau_sec && arc.laengster_aufbau_anteil >= 0.15) {
+    teile.push(
+      `längster durchgehender Aufbau ${(arc.laengster_aufbau_sec / 60).toFixed(0)} min`,
+    );
+  }
+  if (arc.peak_sec != null) teile.push(`höchste Energie bei ${mmss(arc.peak_sec)}`);
+
+  return (
+    <div className="mt-3 rounded-lg border border-border bg-card/40 px-3 py-2">
+      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+        Energieverlauf
+      </div>
+      <div className="text-sm mt-1">{arc.form}</div>
+      <div className="text-xs text-muted-foreground mt-1">{teile.join(" · ")}</div>
     </div>
   );
 }

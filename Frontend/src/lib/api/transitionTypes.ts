@@ -145,7 +145,6 @@ export function classifyTransition(t: {
 }): TransitionType {
   const dur = t.duration_sec ?? 16;
   const dip = t.energy_dip_pct ?? 20;
-  const drift = Math.abs(t.bpm_drift ?? 0);
 
   if (dur < 4 && dip < 10) return "hard_cut";
   if (dur < 4 && dip > 30) return "drop_swap";
@@ -153,6 +152,10 @@ export function classifyTransition(t: {
   if (dip > 45) return "echo_out";
   if (dip > 25 && dur >= 8 && dur <= 24) return "bass_swap";
   if (dip < 15 && dur >= 16) return "eq_blend";
-  if (drift > 1.5) return "filter";
+  // Die Regel 'drift > 1.5 -> filter' ist am 31.07.2026 entfallen: sie hat
+  // Uebergaenge als Filter-Uebergang eingestuft, weil der Tempo-Schaetzer
+  // zwischen zwei seiner 14 Kandidatenwerte gesprungen ist. Die Felder
+  // bpm_drift/phrase_alignment_score bleiben im Eingabetyp, damit die
+  // Aufrufer unveraendert bleiben - sie werden nur nicht mehr ausgewertet.
   return "unknown";
 }

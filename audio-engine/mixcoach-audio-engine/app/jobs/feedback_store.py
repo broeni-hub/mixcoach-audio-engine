@@ -26,8 +26,10 @@ def _path(analysis_id: str) -> Path:
 def _empty(analysis_id: str) -> Dict:
     return {
         "analysisId": analysis_id,
-        "verdicts": {},   # transition_index (str) -> {"midSec", "verdict"}
+        # transition_index (str) -> {"midSec", "verdict", "at", ggf. "correctedSec"}
+        "verdicts": {},
         "missed": [],     # Sekunden, an denen ein Uebergang fehlte
+        "missedAt": [],   # Klickzeitpunkt je missed-Eintrag (parallel, additiv)
         "updatedAt": None,
     }
 
@@ -60,6 +62,15 @@ def save_verdict(
         entry = {
             "midSec": round(float(mid_sec), 2),
             "verdict": verdict,
+            # Zeitstempel je EINZELNEM Handgriff. updatedAt daneben ist nur
+            # der letzte Speicherzeitpunkt der ganzen Datei und sagt nichts
+            # darueber, wie lange ein Label-Durchgang gedauert hat - die
+            # Angabe "15-35 min je Set" in ZUKUNFTSWEGE_2026-07-30.md ist
+            # darum ausdruecklich eine Schaetzung aus Handgriffzahl und
+            # Setlaenge. Mit diesem Feld wird daraus eine Messung: die
+            # Abstaende aufeinanderfolgender at-Werte sind die Bearbeitungs-
+            # zeit je Uebergang.
+            "at": time.time(),
         }
         if corrected_sec is not None:
             entry["correctedSec"] = round(float(corrected_sec), 2)
@@ -80,6 +91,17 @@ def save_missed(analysis_id: str, sec: float) -> Dict:
         if all(abs(sec - existing) > 15.0 for existing in data["missed"]):
             data["missed"].append(sec)
             data["missed"].sort()
+            # Zeitstempel PARALLEL statt im missed-Eintrag selbst: missed ist
+            # eine Liste von Sekundenwerten, und darauf verlassen sich
+            # analyze_timing_bias (len) und retrain_model/load_truth. Ein
+            # Umbau auf Objekte waere ein Schema-Bruch fuer eine Messgroesse.
+            # missedAt ist bewusst nur additiv und wird nicht sortiert - es
+            # protokolliert die Reihenfolge der KLICKS, nicht der Zeitpunkte
+            # im Set. Ohne diese Werte waere die Kostenrechnung schief:
+            # 'missed' ist laut ZUKUNFTSWEGE 1.5 der teuerste Handgriff
+            # (98 Stueck), er verlangt das Finden einer Stelle, die die
+            # Engine gar nicht angeboten hat.
+            data.setdefault("missedAt", []).append(time.time())
         data["updatedAt"] = time.time()
         _write(data)
     return data

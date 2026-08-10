@@ -90,17 +90,41 @@ def test_unmeasured_scores_are_null_not_fake():
 
 
 def test_v2_measured_scores_come_from_analysis():
-    """Beatmatching, Timing und Musicality sind jetzt echte Messwerte."""
+    """Musicality, Flow und Overall sind echte Messwerte."""
     result = map_set_analysis_to_frontend_result("test.mp3", _fake_analysis())
 
     assert result["bpm"] == 126
     assert result["key"] == "C Major"
     assert result["camelot"] == "8B"
-    assert result["scores"]["beatmatching"] == 65
-    assert result["scores"]["timing"] == 80
     assert result["scores"]["musicality"] == 90
     assert result["scores"]["flow"] == 80
     assert result["scores"]["overall"] == 72
+
+
+def test_beatmatching_und_timing_werden_nicht_mehr_als_note_ausgegeben():
+    """Regression zur Ehrlichkeitslinie (31.07.2026).
+
+    Beide Noten waren befuellt, trugen aber nicht: beatmatching ist das
+    Mittel des Tempo-Scores, und bpm_drift ist in 89 % der Uebergaenge
+    exakt 0 (nur 14 verschiedene Tempowerte ueber 19 Aufnahmen) - die Note
+    lag bei 12 von 19 Aufnahmen auf exakt 100. timing ist das Mittel des
+    Phrasen-Scores, dessen Raster am erkannten Segmentanfang haengt, und
+    der streut um sigma = 52,87 s = rund 3,4 Phrasen.
+
+    Die Analyse liefert die Werte weiter (hier 65 bzw. 80, siehe
+    _fake_analysis) - der Mapper darf sie nur nicht mehr als Note
+    durchreichen. Genau das prueft dieser Test.
+    """
+    analyse = _fake_analysis()
+    assert analyse["quality"]["beatmatching"] == 65.0
+    assert analyse["quality"]["phrase_timing"] == 80.0
+
+    result = map_set_analysis_to_frontend_result("test.mp3", analyse)
+
+    assert result["scores"]["beatmatching"] is None
+    assert result["scores"]["timing"] is None
+    assert "beatmatching" in result["notMeasured"]
+    assert "timing" in result["notMeasured"]
 
 
 def test_set_transitions_use_frontend_contract():
@@ -210,3 +234,32 @@ def test_result_has_stable_top_level_shape():
         "totalDurationSec", "findings",
     ):
         assert field in result, f"Feld {field} fehlt im Frontend-Result"
+
+
+def test_energy_arc_beschreibt_die_gezeichnete_kurve():
+    """Der Bogen muss auf DERSELBEN Kurve rechnen, die als volumeCurve
+    ausgeliefert wird - sonst behauptet der Text etwas anderes, als das
+    Bild daneben zeigt."""
+    result = map_set_analysis_to_frontend_result("test.mp3", _fake_analysis())
+    arc = result["energyArc"]
+
+    assert arc is not None
+    assert arc["punkte"] == len(result["volumeCurve"])
+    assert set(arc) >= {"form", "drittel", "anstieg_gesamt", "peak_anteil"}
+
+
+def test_energy_arc_traegt_keine_note():
+    """Gegenprobe zur Ehrlichkeitslinie: der Bogen ist beschreibend. Kaeme
+    hier eine Note dazu, waere es derselbe Fehler wie bei beatmatching."""
+    result = map_set_analysis_to_frontend_result("test.mp3", _fake_analysis())
+    arc = result["energyArc"]
+    assert not ({"score", "quality", "rating", "note"} & set(arc))
+
+
+def test_energy_arc_ist_none_ohne_kurve():
+    analyse = _fake_analysis()
+    analyse["energy"] = {"points": []}
+    analyse.pop("loudness_curve", None)
+    result = map_set_analysis_to_frontend_result("test.mp3", analyse)
+    assert result["volumeCurve"] == []
+    assert result["energyArc"] is None

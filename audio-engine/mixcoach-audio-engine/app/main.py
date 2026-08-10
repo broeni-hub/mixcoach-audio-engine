@@ -27,6 +27,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Zweite, blinde Labelrunde (K1) - eigener Router, eigene Seite, damit die
+# bestehenden Endpoints und Frontend-Seiten unberuehrt bleiben. Siehe
+# app/api/relabel.py fuer die Blindheits-Anforderungen.
+from app.api.relabel import router as relabel_router  # noqa: E402
+
+app.include_router(relabel_router)
+
 
 @app.get("/health")
 def health():

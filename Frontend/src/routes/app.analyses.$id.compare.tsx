@@ -129,9 +129,9 @@ function ComparisonBody({ tA, tB, analysisId }: { tA: SetTransition; tB: SetTran
   const sideA = useMemo(() => deriveSide(tA), [tA]);
   const sideB = useMemo(() => deriveSide(tB), [tB]);
 
+  // Achsen "Beatmatch" und "Phrase" entfallen (31.07.2026) - deriveSide
+  // liefert sie nicht mehr, siehe Kommentar dort.
   const radarData = [
-    { skill: "Beatmatch", A: sideA.metrics.beatmatch, B: sideB.metrics.beatmatch },
-    { skill: "Phrase", A: sideA.metrics.phrase, B: sideB.metrics.phrase },
     { skill: "EQ", A: sideA.metrics.eq, B: sideB.metrics.eq },
     { skill: "Energy", A: sideA.metrics.energy, B: sideB.metrics.energy },
     { skill: "Smoothness", A: sideA.metrics.smoothness, B: sideB.metrics.smoothness },
@@ -265,9 +265,8 @@ function ScoreCard({
         <Row label="Type" value={meta.label} />
         <Row label="Duration" value={`${Math.round(t.end_sec - t.start_sec)}s`} />
         <Row label="BPM" value={`${t.bpm_before || "?"}→${t.bpm_after || "?"}`} />
-        <Row label="Drift" value={t.bpm_drift.toFixed(2)} />
         <Row label="Energy dip" value={`${t.energy_dip_pct}%`} />
-        <Row label="Phrase" value={`${t.phrase_alignment_score}/100`} />
+        <Row label="Bass clash risk" value={`${t.bass_overlap_score}/100`} />
       </CardContent>
     </Card>
   );
@@ -322,7 +321,8 @@ function Row({ label, value }: { label: string; value: string }) {
 
 interface Side {
   type: ReturnType<typeof classifyTransition>;
-  metrics: { beatmatch: number; phrase: number; eq: number; energy: number; smoothness: number };
+  // beatmatch und phrase sind am 31.07.2026 entfallen, siehe deriveSide.
+  metrics: { eq: number; energy: number; smoothness: number };
   overall: number;
   strengths: string[];
   weaknesses: string[];
@@ -336,20 +336,19 @@ function deriveSide(t: SetTransition): Side {
     phrase_alignment_score: t.phrase_alignment_score,
     label: t.label,
   });
-  const beatmatch = clamp(100 - Math.min(100, t.bpm_drift * 25));
-  const phrase = clamp(t.phrase_alignment_score);
+  // beatmatch und phrase sind hier am 31.07.2026 entfallen: beide waren aus
+  // bpm_drift bzw. phrase_alignment_score abgeleitet, die nicht messen, was
+  // ihr Name sagt (siehe NOT_YET_MEASURED in app/api/analysis_mapper.py).
+  // beatmatch lag durch die 89 % Nullwerte praktisch immer bei 100 und hat
+  // den overall-Mittelwert damit systematisch nach oben gezogen.
   const eq = clamp(100 - t.bass_overlap_score);
   const energy = clamp(100 - t.energy_dip_pct);
   const smoothness = clamp(t.quality_score);
-  const metrics = { beatmatch, phrase, eq, energy, smoothness };
-  const overall = Math.round((beatmatch + phrase + eq + energy + smoothness) / 5);
+  const metrics = { eq, energy, smoothness };
+  const overall = Math.round((eq + energy + smoothness) / 3);
 
   const strengths: string[] = [];
   const weaknesses: string[] = [];
-  if (beatmatch >= 80) strengths.push(`Tight beatmatch — drift only ${t.bpm_drift.toFixed(2)} BPM.`);
-  else if (beatmatch < 60) weaknesses.push(`BPM drift of ${t.bpm_drift.toFixed(2)} is audible.`);
-  if (phrase >= 80) strengths.push(`Locked to the 16-bar phrase (${phrase}/100).`);
-  else if (phrase < 60) weaknesses.push(`Off-phrase entry (${phrase}/100) — bring the swap to a bar line.`);
   if (eq >= 80) strengths.push("Clean low-end swap, no bass clash.");
   else if (eq < 60) weaknesses.push(`Bass overlap risk ${t.bass_overlap_score}/100 — cut the outgoing bass earlier.`);
   if (energy >= 80) strengths.push("Energy held through the blend.");
@@ -360,8 +359,14 @@ function deriveSide(t: SetTransition): Side {
   return { type, metrics, overall, strengths, weaknesses };
 }
 
+// "Pitch-fader micro-trim" und "16-Bar Phrase Lock" sind hier entfallen
+// (31.07.2026). Sie wurden aus beatmatch/phrase zugewiesen, also aus
+// bpm_drift und phrase_alignment_score - siehe NOT_YET_MEASURED in
+// app/api/analysis_mapper.py. Einen DJ eine Uebungseinheit in ein Problem
+// investieren zu lassen, das die Engine nicht belegen kann, ist der
+// schwerste Fall der Ehrlichkeitsverletzung, nicht der leichteste.
 function recommendDrills(a: Side, b: Side): { title: string; description: string; xp: number }[] {
-  const skills: Array<keyof Side["metrics"]> = ["beatmatch", "phrase", "eq", "energy", "smoothness"];
+  const skills: Array<keyof Side["metrics"]> = ["eq", "energy", "smoothness"];
   const gaps = skills
     .map((s) => ({ skill: s, weakest: Math.min(a.metrics[s], b.metrics[s]) }))
     .sort((x, y) => x.weakest - y.weakest);
@@ -370,8 +375,6 @@ function recommendDrills(a: Side, b: Side): { title: string; description: string
 }
 
 const DRILLS: Record<keyof Side["metrics"], { title: string; description: string; xp: number }> = {
-  beatmatch: { title: "Pitch-fader micro-trim", description: "Practice nudging ±0.05% over 32 bars without touching the jog wheel.", xp: 30 },
-  phrase: { title: "16-Bar Phrase Lock", description: "Count phrases out loud and only trigger the new track on bar 1.", xp: 40 },
   eq: { title: "Perfect EQ Swap", description: "Cut outgoing bass at the exact moment you bring in the new bass — same fader move, mirrored.", xp: 30 },
   energy: { title: "Energy Hold Drill", description: "Use a high-pass sweep to keep perceived energy flat through a long blend.", xp: 35 },
   smoothness: { title: "Long-Blend Builder", description: "Stretch a single transition to 64 bars, layering EQ, filter, and FX gradually.", xp: 45 },
