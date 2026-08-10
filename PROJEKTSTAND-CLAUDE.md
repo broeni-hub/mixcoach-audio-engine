@@ -29,9 +29,12 @@ C:\Projekte\Projekte\MixCoach\          <- Projekt-Root (KEIN Git-Repo — kein 
 ├── ROADMAP.md, PRODUKTVISION.md         <- Produktplan, Stand 06.07. — hinkt dem Code hinterher
 ├── PROJEKTSTAND-CLAUDE.md               <- diese Datei
 ├── MixCoach-Start.bat                   <- Hauptstart: Engine (Port 8000) + App (Port 8080), öffnet Browser
-├── MixCoach-Retrain.bat                 <- Modell-Retrain, nur wenn genug neue Labels (gated, real-only)
-├── MixCoach-Retrain-Jetzt.bat           <- Retrain sofort erzwingen (--force, real-only)
-├── MixCoach-Modell-Zurueck.bat          <- 1-Klick-Revert auf letztes Modell-Backup
+├── MixCoach-Retrain.bat / .command      <- Modell-Retrain, nur wenn genug neue Labels (gated, real-only)
+├── MixCoach-Retrain-Jetzt.bat/.command  <- Retrain sofort erzwingen (--force, real-only)
+├── MixCoach-Modell-Zurueck.bat/.command <- 1-Klick-Revert auf letztes Modell-Backup
+│                                           (.command-Fassungen seit 10.08.2026; die .bat
+│                                            laufen auf dem Mac NICHT - fester C:\-Pfad
+│                                            und "python" = System-Python 3.9)
 ├── audio-engine/
 │   └── mixcoach-audio-engine/           <- Python-Backend (FastAPI)
 │       ├── requirements.txt             <- NEU erzeugt (30.07.2026) für die Übertragung, siehe Abschnitt 6
@@ -105,7 +108,9 @@ Mehrere Retrain-Läufe mit synthetischen Zusatzdaten (Negatives, Mixes) haben di
 **Der einzige gemessen wirksame Hebel für höhere Precision bleibt: mehr echte gelabelte Sets**, nicht weiteres Tuning an vorhandenen Daten. MixCoach1 ist vermutlich unvollständig gelabelt (nur 2 Positives) und verzerrt die Precision-Messung.
 
 ### Retrain-Automatik (17.07., real-only seit 28.07.)
-`app/calibration/auto_retrain.py`: zählt neue/korrigierte Ground-Truth-Dateien, Schwelle 10, startet Retrain automatisch bei genug Neuem (Gate entscheidet weiter über Export — nur besseres Modell wird aktiv). Frontend-Karte auf der Progress-Seite zeigt Fortschritt ("X von 10 neuen Sets"). Bedienung: `MixCoach-Retrain.bat` (gated) / `MixCoach-Retrain-Jetzt.bat` (sofort, real-only).
+`app/calibration/auto_retrain.py`: zählt neue/korrigierte Ground-Truth-Dateien, Schwelle 10, startet Retrain automatisch bei genug Neuem (Gate entscheidet weiter über Export — nur besseres Modell wird aktiv). Frontend-Karte auf der Progress-Seite zeigt Fortschritt ("X von 10 neuen Sets"). Bedienung auf dem Mac: `MixCoach-Retrain.command` (gated) / `MixCoach-Retrain-Jetzt.command` (sofort, real-only), auf Windows die gleichnamigen `.bat`.
+
+**Gittersuche seit 10.08.2026 einmalig statt je Zelle.** `run_retrain` rief für jede der Kombinationen aus `min_p` und `gap` ein volles `loso_metrics()` auf — obwohl beide Parameter reine Nachbearbeitung der Wahrscheinlichkeiten sind und kein Modell-Fitting beeinflussen. Bei 25 Aufnahmen waren das 300 Fits (nach der Gitter-Erweiterung wären es 500 geworden). Jetzt läuft `loso_predictions()` **einmal** und das Gitter wird daraus bewertet: **25 Fits, gemessen 5,1 s statt ~102 s** fürs Gitter. `random_state=0` — die Zahlen sind identisch, nicht nur ähnlich.
 
 ### Fallback-Falle & Upload-Preflight (17.07.)
 Siehe Abschnitt 3. Drei Fixes: Backend `GET /analysis` listet gespeicherte Analysen serverseitig, Analysen-Seite bietet Import per Klick an, Fallback-Reports tragen `engine:"local"` + roten Warnbanner. Am 17.07. abends zusätzlich: **Upload-Preflight** (`engineReachable()`-Ping vor Upload, klare Fehlermeldung statt stillem Fallback), Fallback-Reports werden nicht mehr unter dem Datei-Hash gecacht.

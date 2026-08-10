@@ -429,10 +429,23 @@ def run_retrain(include_synthetic: bool = False) -> dict:
     # 4 s Luft - ein schneller mixendes Set wuerde strukturell Uebergaenge
     # verlieren, und das sieht die F1-Zahl nicht. 150 s laesst 34 s Luft und
     # holt zwei Drittel des Gewinns.
+    #
+    # Die LOSO laeuft EINMAL, nicht je Gitterzelle. min_p und gap sind reine
+    # Nachbearbeitung der Wahrscheinlichkeiten - sie beeinflussen kein einziges
+    # Modell-Fitting. Vorher rief jede Zelle loso_metrics() auf und damit eine
+    # volle LOSO: bei 25 Aufnahmen waren das 12 Zellen x 25 = 300 Fits, nach der
+    # Gitter-Erweiterung waeren es 500 geworden. Jetzt sind es 25, und das
+    # groessere Gitter kostet nichts mehr. Genau dafuer wurde loso_predictions()
+    # herausgeloest (siehe seinen Docstring).
+    print("  LOSO laeuft einmal, danach ist das ganze Gitter gratis...")
+    vorhersagen = loso_predictions(all_rows, make)
+
     results = []
     for min_p in (0.4, 0.5, 0.6, 0.7):
         for gap in (60.0, 75.0, 90.0, 120.0, 150.0):
-            r, p, f1, per_set = loso_metrics(all_rows, make, min_p=min_p, min_gap=gap)
+            per_set = {name: _score_selection(test, probs, min_p, gap)
+                       for name, (test, probs) in vorhersagen.items()}
+            r, p, f1 = _aggregate(per_set.values())
             results.append((f1, r, p, min_p, gap, per_set))
             print(f"  p>={min_p} gap={gap:.0f}s: F1={f1:.2f} R={r*100:.0f}% P={p*100:.0f}%")
     high_recall = [x for x in results if x[1] >= MIN_RECALL]
