@@ -2,6 +2,21 @@
 
 *Erstellt am 30.07.2026 — ersetzt das USB-Stick-Verfahren für Code. Für die Audio-Daten bleibt der Stick nötig, siehe Abschnitt 4.*
 
+> **Nachtrag 10.08.2026 — die Richtung hat sich gedreht.** Dieses Dokument ging
+> davon aus, dass der Windows-PC hochlädt und der Mac herunterlädt. Tatsächlich
+> ist der Umzug längst gelaufen: **der Mac ist der Arbeitsrechner, und es wurde
+> nie etwas hochgeladen.** Es gibt bis heute keinen Remote — die gesamte
+> Historie liegt auf einer Platte, und am 10.08. lag ein ganzer Tag Arbeit zehn
+> Tage lang unbemerkt auf einem lokalen Branch.
+>
+> Für den Mac gilt deshalb **Abschnitt 2a** statt Abschnitt 2 und 3. Die
+> Abschnitte 1 (Repository anlegen, Token) und 4 (was NICHT übertragen wird)
+> gelten unverändert.
+>
+> Zwei Korrekturen an den Zahlen: das Repository ist inzwischen **8,2 MB mit 860
+> Dateien** (nicht 916 KB / 401), und `daten/ground_truth/` hat 45 Dateien, die
+> sich auf **28 Aufnahmen** verteilen.
+
 ## Warum
 
 Bisher gab es keinen gemeinsamen Ablageort: jede Übertragung war Handarbeit per Stick,
@@ -38,7 +53,44 @@ Diesen Token gibst Du später ein, wenn Git nach dem *Passwort* fragt.
 
 ---
 
-## 2. Auf dem Windows-PC hochladen
+## 2a. Vom Mac aus einrichten — der aktuelle Weg
+
+Nachdem Schritt 1 erledigt ist (leeres privates Repository plus Access Token):
+
+**Doppelklick auf `MixCoach-GitHub-Einrichten.command`**, die Repository-URL
+einfügen, Enter. Danach fragt Git nach Login — Username ist dein GitHub-Name,
+**als Passwort der Access Token**, nicht dein echtes Passwort.
+
+Das Skript legt den Token im macOS-Schlüsselbund ab, du wirst also nur dieses
+eine Mal gefragt. Es lädt **alle Branches** hoch, nicht nur den aktuellen — der
+Zweck ist Sicherung, und dabei soll keine Arbeit zurückbleiben.
+
+**Ab jetzt im Alltag:** `MixCoach-Hochladen.command` doppelklicken, kurz
+beschreiben was sich geändert hat, fertig.
+
+### Was dabei nach außen geht
+
+Es ist wenig, aber es ist persönlich — deshalb muss das Repository **privat**
+sein:
+
+- `daten/library/index.json` listet **6113 Titel deiner Sammlung** mit vollem
+  Pfad unter `/Users/sebastianbroening/Music/`
+- die Namen von **21 Set-Aufnahmen**, darunter fremde Mitschnitte (Dixon,
+  Four Tet, RÜFÜS DU SOL, Be Svendsen, Joris Voorn)
+- `labels_prefilled.csv` mit deinen eigenen Bewertungen
+
+Geprüft am 10.08.2026: **keine Zugangsdaten im Repo.** Es wurde nie eine `.env`
+committet, und in keiner versionierten Datei steht ein echter Schlüssel — die
+Treffer bei einer Suche nach `SUPABASE_SERVICE_ROLE_KEY` sind alle nur
+Variablennamen. Das Einrichtungsskript prüft das vor dem Push noch einmal und
+bricht ab, falls `Frontend/.env` doch im Index landet.
+
+Wichtig zu wissen: Ein Push lässt sich **nicht zurücknehmen.** Auch aus einem
+später gelöschten Repository kann Inhalt zwischengespeichert bleiben.
+
+---
+
+## 2. Auf dem Windows-PC hochladen *(historisch, siehe Nachtrag oben)*
 
 Doppelklick auf **`MixCoach-GitHub-Einrichten.bat`**, die kopierte URL einfügen, Enter.
 
