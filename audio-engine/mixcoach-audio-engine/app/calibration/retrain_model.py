@@ -409,9 +409,29 @@ def run_retrain(include_synthetic: bool = False) -> dict:
 
     # Gridsearch ueber Auswahl-Parameter: Recall hat Prioritaet
     # (Nutzerfeedback: verpasste Uebergaenge sind schlimmer als Fehlalarme).
+    #
+    # Das gap-Gitter reichte bis 2026-08-10 nur bis 90 s - und der aktive
+    # Betriebspunkt lag am oberen Rand. Der Retrain konnte den besseren Punkt
+    # also gar nicht finden. Gemessen (tools/eval/nms2.py, 25 Aufnahmen, LOSO):
+    #
+    #   gap  90s (aktiv) -> R 94,1%  P 50,5%  F1 0,657   317 Marker
+    #   gap 120s         -> R 93,5%  P 56,2%  F1 0,702   283 Marker
+    #   gap 150s         -> R 92,4%  P 62,8%  F1 0,748   250 Marker
+    #   gap 180s         -> R 91,8%  P 68,4%  F1 0,784   228 Marker
+    #
+    # Der Gewinn ist NICHT bessere Trennung, sondern Entdopplung: die Auswahl
+    # schoepft bei jedem dieser Punkte 93-95 % ihrer Orakel-Schranke aus, sie
+    # setzt nur zu viele Marker auf denselben Uebergang (317 auf 170 echte).
+    #
+    # 180 s schnitte am besten ab und ist trotzdem NICHT im Gitter: der
+    # kuerzeste Abstand zwischen zwei echten Uebergaengen im ganzen Bestand
+    # betraegt 184 s (146 Abstaende, p1 = 184 s, p5 = 220 s). Bei 180 s bleiben
+    # 4 s Luft - ein schneller mixendes Set wuerde strukturell Uebergaenge
+    # verlieren, und das sieht die F1-Zahl nicht. 150 s laesst 34 s Luft und
+    # holt zwei Drittel des Gewinns.
     results = []
     for min_p in (0.4, 0.5, 0.6, 0.7):
-        for gap in (60.0, 75.0, 90.0):
+        for gap in (60.0, 75.0, 90.0, 120.0, 150.0):
             r, p, f1, per_set = loso_metrics(all_rows, make, min_p=min_p, min_gap=gap)
             results.append((f1, r, p, min_p, gap, per_set))
             print(f"  p>={min_p} gap={gap:.0f}s: F1={f1:.2f} R={r*100:.0f}% P={p*100:.0f}%")
