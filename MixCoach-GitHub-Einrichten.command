@@ -65,7 +65,13 @@ echo "    - labels_prefilled.csv mit deinen eigenen Bewertungen"
 echo ""
 echo "  Genau deshalb: das Repository MUSS privat sein."
 echo ""
-read -r -p "  Repository-URL (z.B. https://github.com/DEINNAME/mixcoach.git): " URL
+# Von Sebastian am 10.08.2026 genannt. Einfach Enter druecken uebernimmt sie;
+# eine andere URL eintippen ueberschreibt sie.
+VORGABE="https://github.com/broeni-hub/mixcoach-audio-engine.git"
+
+echo "  Hinterlegt: $VORGABE"
+read -r -p "  Enter zum Uebernehmen, oder andere URL eingeben: " URL
+URL="${URL:-$VORGABE}"
 
 if [ -z "${URL:-}" ]; then
   echo ""
@@ -73,6 +79,7 @@ if [ -z "${URL:-}" ]; then
   read -r -p "  Enter zum Beenden..."
   exit 1
 fi
+echo "  Verwende: $URL"
 
 echo ""
 echo "  --- Schritt 1: Zugangsdaten im Schluesselbund merken -------"
