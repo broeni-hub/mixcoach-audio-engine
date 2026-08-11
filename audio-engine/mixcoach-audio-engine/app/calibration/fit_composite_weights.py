@@ -40,6 +40,8 @@ from typing import Dict, List, Optional, Tuple
 
 from scipy.stats import spearmanr
 
+from app.paths import RESULTS_DIR
+
 DIMENSIONS = ["harmonic_clash", "vocal_overlap", "exit_quality", "beat_alignment", "phrase_timing"]
 MATCH_TOLERANCE_SECONDS = 15.0
 N_RANDOM_SAMPLES = 4000
@@ -213,7 +215,14 @@ def fit_weights(examples: List[Example], seed: int = RANDOM_SEED):
 def main() -> int:
     parser = argparse.ArgumentParser(description="Fittet Composite-Score-Gewichte gegen labels_prefilled.csv.")
     parser.add_argument("--labels-csv", type=Path, default=Path("labels_prefilled.csv"))
-    parser.add_argument("--results-dir", type=Path, default=Path("analysis_results"))
+    # Vorgabe war bis 11.08.2026 das relative "analysis_results" - und das ist
+    # im Engine-Ordner die VERALTETE Kopie von vor der Migration (CLAUDE.md).
+    # Das Skript las damit einen Stand von vor dem 17.07., fand keine
+    # composite_breakdowns und meldete "vorhandene Sets muessten neu analysiert
+    # werden" - obwohl im echten Datenstamm alles vorlag. Eine Fehlmeldung, die
+    # nach einem Datenproblem aussieht und keines ist. Jetzt derselbe Weg wie
+    # ueberall sonst: app/paths.py, gesteuert ueber MIXCOACH_DATA_DIR.
+    parser.add_argument("--results-dir", type=Path, default=RESULTS_DIR)
     args = parser.parse_args()
 
     if not args.labels_csv.exists():
