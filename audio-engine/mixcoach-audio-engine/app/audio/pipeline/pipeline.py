@@ -230,6 +230,18 @@ def run_set_pipeline(audio, progress=None) -> Dict:
         report("transition_analysis", 88)
         try:
             annotate_stem_based_scores(transitions_detailed, audio.waveform, audio.sample_rate)
+        except ImportError as exc:
+            # Nicht dasselbe wie "Trennung fehlgeschlagen": hier FEHLT das
+            # Werkzeug. Auf diesem Mac sind torch und demucs nicht installiert
+            # (requirements.txt fuehrt sie, das venv hat 99 von 142 Paketen).
+            # Der Schalter MIXCOACH_ENABLE_STEM_SCORING waere dann wirkungslos,
+            # und das Ergebnis saehe genauso aus wie mit ausgeschaltetem
+            # Schalter - eine stille Luege gegenueber dem, der ihn gesetzt hat.
+            # Deshalb laut, einmal, statt gar nicht (Ehrlichkeitslinie).
+            print(f"[stem-scoring] AUS: {exc}. MIXCOACH_ENABLE_STEM_SCORING ist "
+                  f"gesetzt, aber die Stem-Trennung fehlt - harmonic_clash und "
+                  f"vocal_overlap bleiben leer, und damit auch "
+                  f"composite_quality_score. Abhilfe: pip install torch demucs")
         except Exception:
             pass  # Demucs darf die Analyse nie abbrechen - Felder bleiben None
     annotate_composite_scores(transitions_detailed)
