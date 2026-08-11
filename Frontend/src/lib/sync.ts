@@ -33,8 +33,23 @@ export async function persistAnalysis(a: AnalysisResult, archived = false) {
   try {
     await upsertAnalysisFn({ data: toUpsertPayload(a, archived) });
   } catch (e) {
-    // Non-fatal: local cache still has it.
-    console.warn("[mixcoach] failed to persist analysis", e);
+    // Non-fatal fuer diesen Aufruf - der lokale Cache hat die Analyse noch.
+    // Aber es ist NICHT folgenlos: schlaegt das dauerhaft fehl, existiert die
+    // Historie nur in diesem Browser, und "die Historie ueberlebt einen
+    // Geraetewechsel" ist Bedingung 2 der Live-Schwelle.
+    //
+    // Die zwei Ursachen, die es am 11.08.2026 tatsaechlich waren, stehen hier
+    // beim Namen - eine allgemeine Warnung haette monatelang niemand gedeutet:
+    //   - SUPABASE_SERVICE_ROLE_KEY fehlt in Frontend/.env -> der Server-Client
+    //     wirft, jede Server-Funktion scheitert
+    //   - DEV_BYPASS_AUTH in routes/app.tsx -> niemand ist angemeldet, und
+    //     analyses.user_id ist NOT NULL
+    console.warn(
+      "[mixcoach] Analyse NICHT in die Cloud gespeichert - sie existiert nur " +
+      "in diesem Browser. Haeufigste Ursachen: SUPABASE_SERVICE_ROLE_KEY fehlt " +
+      "in Frontend/.env, oder niemand ist angemeldet (DEV_BYPASS_AUTH in " +
+      "routes/app.tsx). Fehler:", e,
+    );
   }
 }
 

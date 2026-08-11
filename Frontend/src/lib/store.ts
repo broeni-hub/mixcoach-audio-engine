@@ -8,8 +8,17 @@ import {
 } from "./analyses.functions";
 import { getAnalysisProvider } from "./api/provider";
 
+// "fire and forget" gilt fuer den EINZELNEN Aufruf - die lokale Anzeige soll
+// nicht an einem DB-Fehler haengen. Es gilt NICHT fuer die Diagnose: schlaegt
+// das dauerhaft fehl, laufen lokaler Stand und Datenbank auseinander, ohne
+// dass es jemand sieht. Deshalb wird die Ursache benannt statt nur gemeldet.
 function fireAndForget<T>(p: Promise<T>) {
-  p.catch((e) => console.warn("[mixcoach] DB sync failed", e));
+  p.catch((e) => console.warn(
+    "[mixcoach] Aenderung NICHT in die Cloud uebernommen - lokaler Stand und " +
+    "Datenbank laufen auseinander. Pruefen: SUPABASE_SERVICE_ROLE_KEY in " +
+    "Frontend/.env, und ob jemand angemeldet ist (DEV_BYPASS_AUTH in " +
+    "routes/app.tsx). Fehler:", e,
+  ));
 }
 
 // Engine-sourced analyses have a result file on the audio-engine backend
