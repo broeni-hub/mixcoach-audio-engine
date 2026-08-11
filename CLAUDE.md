@@ -70,6 +70,24 @@ verschiedene md5-Summen und damit verschiedene Track-IDs. Pfade, die in
 Track-IDs eingehen, immer auf die Schreibweise bringen, die `os.scandir`
 zurückgibt.
 
+## Selbsttest — zuerst laufen lassen
+
+```bash
+.venv/bin/python -m tools.selbsttest       # oder MixCoach-Selbsttest.command
+```
+
+Prüft nicht, ob der Code läuft, sondern ob die **Voraussetzungen für jede
+Messung** da sind: Datenstamm, Modell, Library-Pfade, Stem-Trennung,
+Befüllungsgrade, Cloud-Anbindung. `FEHLT` heißt: an dieser Stelle wird nicht
+gemessen, auch wenn alles normal aussieht.
+
+Anlass waren drei Vorfälle an einem Tag (11.08.2026), die alle denselben
+Bauplan hatten — ein **stiller Ausfall, der sich als Datenproblem tarnt**:
+ein Schalter ohne Werkzeug dahinter, ein Skript das den veralteten Ordner las
+und „zu wenig Daten" meldete, und eine Cloud-Anbindung, die bei jedem Aufruf
+scheiterte, während die App normal aussah. Der verschluckte Fehler ist in
+diesem Projekt die teuerste Codezeile.
+
 ## Referenzmetrik
 
 `tools/analyze_timing_bias.py` ist die Messlatte für die Erkennung. Läuft
