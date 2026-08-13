@@ -235,12 +235,35 @@ def pruefe_cloud() -> None:
         if zeile and not zeile.startswith("#") and "=" in zeile:
             namen.add(zeile.split("=", 1)[0].strip())
 
+    # Zwei verschiedene Schluessel, zwei verschiedene Wege - am 11.08.2026 habe
+    # ich sie verwechselt und den Service-Role-Key als Blocker der Historie
+    # gemeldet. Falsch: die sechs analyses-Funktionen laufen ueber
+    # context.supabase aus requireSupabaseAuth, und das ist der PUBLISHABLE
+    # Key plus das JWT des angemeldeten Nutzers - RLS-gedeckt
+    # ("Users manage own analyses" USING auth.uid() = user_id).
+    # Der Service-Role-Key umgeht RLS und wird nur von beta.functions.ts und
+    # coach-feedback.functions.ts gebraucht.
+    fehlend_hist = [k for k in ("SUPABASE_URL", "SUPABASE_PUBLISHABLE_KEY")
+                    if k not in namen]
+    if fehlend_hist:
+        sag(FEHLT, "Schluessel fuer die Historie fehlen",
+            f"nicht gesetzt: {', '.join(fehlend_hist)}\n"
+            "Ohne sie wirft requireSupabaseAuth, und keine Analyse wird "
+            "gespeichert.",
+            "Supabase-Projekt -> Project Settings -> API")
+    else:
+        sag(OK, "Schluessel fuer die Historie gesetzt",
+            "SUPABASE_URL + SUPABASE_PUBLISHABLE_KEY (Werte werden nicht "
+            "angezeigt).\nDie sechs analyses-Funktionen brauchen nur diese - "
+            "sie laufen RLS-gedeckt ueber das JWT des Nutzers.")
+
     if "SUPABASE_SERVICE_ROLE_KEY" not in namen:
-        sag(FEHLT, "SUPABASE_SERVICE_ROLE_KEY fehlt in Frontend/.env",
-            "createSupabaseAdminClient() wirft - JEDE Server-Funktion "
-            "scheitert, und die Fehler werden im Frontend gefangen.\n"
-            "Die Historie existiert dann nur im jeweiligen Browser.",
-            "Supabase-Projekt -> Project Settings -> API -> Service Role Key")
+        sag(WARN, "SUPABASE_SERVICE_ROLE_KEY fehlt",
+            "Blockiert NICHT die Historie. Betroffen sind nur die "
+            "Beta-Anmeldung (beta.functions.ts) und das Fehlerprotokoll in "
+            "coach-feedback.functions.ts.",
+            "nur eintragen, wenn eine dieser zwei Funktionen gebraucht wird - "
+            "der Key umgeht Row Level Security")
     else:
         sag(OK, "SUPABASE_SERVICE_ROLE_KEY gesetzt", "(Wert wird nicht angezeigt)")
 
@@ -248,10 +271,12 @@ def pruefe_cloud() -> None:
     if app_tsx.exists():
         text = app_tsx.read_text(encoding="utf-8", errors="replace")
         if "DEV_BYPASS_AUTH = true" in text:
-            sag(FEHLT, "DEV_BYPASS_AUTH steht auf true",
+            sag(FEHLT, "DEV_BYPASS_AUTH steht auf true - DER Blocker",
                 "Der Sync-Aufruf steht HINTER einem 'if (DEV_BYPASS_AUTH) return'.\n"
-                "Niemand meldet sich an, also laeuft syncAnalysesWithDb() nie,\n"
-                "und analyses.user_id ist NOT NULL.",
+                "Niemand meldet sich an -> kein authorization-Header ->\n"
+                "requireSupabaseAuth wirft 'Unauthorized' -> jede der sechs\n"
+                "analyses-Funktionen scheitert, und der Fehler wird gefangen.\n"
+                "Alles andere fuer die Historie ist fertig und angebunden.",
                 "auf false setzen - Preis: Anmeldung wird Pflicht, auch fuer dich")
         else:
             sag(OK, "DEV_BYPASS_AUTH ist aus", "Anmeldung wird verlangt, Sync laeuft")

@@ -38,7 +38,24 @@ function AppLayout() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
-  const DEV_BYPASS_AUTH = true;
+  // Seit 13.08.2026 aus. Solange er an war, stand er als frueher 'return' VOR
+  // dem Aufruf von syncAnalysesWithDb() - niemand meldete sich an, also gab es
+  // keinen authorization-Header, requireSupabaseAuth warf 'Unauthorized', und
+  // jede der sechs analyses-Funktionen scheiterte. Der Fehler wurde gefangen:
+  // die App sah aus, als arbeite sie, waehrend die Historie ausschliesslich im
+  // jeweiligen Browser lag.
+  //
+  // Das war der einzige Blocker fuer Bedingung 2 der Live-Schwelle ("die
+  // Historie ueberlebt einen Geraetewechsel"). Alles andere - Tabelle,
+  // Server-Funktionen, Sync-Modul samt Merge - war die ganze Zeit fertig.
+  //
+  // Preis: Anmeldung ist jetzt Pflicht, auch fuer Sebastian. Das ist bewusst
+  // so entschieden - ohne Nutzerkonto gibt es niemanden, an dem eine Historie
+  // haengen koennte (analyses.user_id ist NOT NULL, RLS scoped auf auth.uid()).
+  //
+  // NICHT verwechseln mit der Bezahlschranke: PAYWALL_DISABLED in lib/billing.ts
+  // bleibt true, jeder Beta-Tester bekommt "pro" und kann alles ausprobieren.
+  const DEV_BYPASS_AUTH = false;
 
   useEffect(() => {
     if (DEV_BYPASS_AUTH) return;
