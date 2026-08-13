@@ -12,6 +12,7 @@ import { persistAnalysis } from "./sync";
 import { hashFilesCombined, getCachedResultId, setCachedResultId } from "./file-hash";
 import { evaluateRules, loadKb, metricsFromMeasurements, persistFindings } from "./coaching";
 import { saveAudio } from "./audio-store";
+import { loestAb, mitNutzerstand } from "./scoring-version";
 
 
 const JOBS_KEY = "mixcoach.jobs.v1";
@@ -110,17 +111,10 @@ export async function startJob(
   return id;
 }
 
-function localAnalysisExists(id: string): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    const raw = localStorage.getItem("mixcoach.state.v1");
-    if (!raw) return false;
-    const state = JSON.parse(raw);
-    return Array.isArray(state?.analyses) && state.analyses.some((a: { id: string }) => a.id === id);
-  } catch {
-    return false;
-  }
-}
+// localAnalysisExists() stand hier bis zum 13.08.2026 und hat nur noch
+// verhindert, dass eine neuere Fassung ankommt. Die Frage "kenne ich das
+// schon?" beantwortet jetzt mergeRemoteAnalysisIntoStore selbst, und zwar
+// zusammen mit der Frage, die wirklich zaehlt: "ist es neuer?".
 
 // Ein gecachter Browser-Fallback-Report (engine:"local") darf NIE als
 // Cache-Treffer wiederverwendet werden - sonst liefert ein erneuter Upload
@@ -149,9 +143,26 @@ export function mergeRemoteAnalysisIntoStore(remote: import("./analysis").Analys
   try {
     const raw = localStorage.getItem("mixcoach.state.v1") || "{}";
     const state = JSON.parse(raw);
-    const list = Array.isArray(state.analyses) ? state.analyses : [];
-    if (list.some((a: { id: string }) => a.id === remote.id)) return;
-    state.analyses = [remote, ...list];
+    const list: import("./analysis").AnalysisResult[] =
+      Array.isArray(state.analyses) ? state.analyses : [];
+
+    // Bis zum 13.08.2026 stand hier ein blankes `return`, sobald die id
+    // bekannt war. Damit war eine einmal angesehene Analyse fuer immer
+    // eingefroren: keine Korrektur auf der Platte hat den Browser je
+    // erreicht, und es gab keinen Weg, einen falschen Report zu
+    // berichtigen - ausser den Cache zu loeschen. Jetzt entscheidet die
+    // Rechenvorschrift: hoehere scoringVersion loest ab, Gleichstand
+    // bleibt (siehe scoring-version.ts).
+    const idx = list.findIndex((a) => a.id === remote.id);
+    if (idx >= 0) {
+      if (!loestAb(list[idx], remote)) return;
+      const neu = list.slice();
+      neu[idx] = mitNutzerstand(remote, list[idx]);
+      state.analyses = neu;
+    } else {
+      state.analyses = [remote, ...list];
+    }
+
     localStorage.setItem("mixcoach.state.v1", JSON.stringify(state));
     window.dispatchEvent(new Event("mixcoach:update"));
   } catch (err) {
@@ -184,7 +195,13 @@ export async function findCachedResult(
     const res = await lookupHashFn({ data: { hash } });
     if (res.hit) {
       const remote = res.analysis as unknown as import("./analysis").AnalysisResult;
-      if (!localAnalysisExists(remote.id)) mergeRemoteAnalysisIntoStore(remote);
+      // Frueher stand hier `if (!localAnalysisExists(remote.id))` - eine
+      // zweite Sperre vor derselben Wand. Beim erneuten Hochladen derselben
+      // Datei liefert der Hash-Cache absichtlich die alte id zurueck; steckt
+      // in der Wolke inzwischen eine hoehere scoringVersion, muss sie
+      // trotzdem durchkommen. Die Entscheidung faellt jetzt an genau einer
+      // Stelle, in mergeRemoteAnalysisIntoStore.
+      mergeRemoteAnalysisIntoStore(remote);
       setCachedResultId(hash, remote.id);
       return { hash, resultId: remote.id };
     }

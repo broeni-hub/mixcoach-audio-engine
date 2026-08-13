@@ -3,6 +3,7 @@
 // the local cache with the union. DB is the source of truth.
 import type { AnalysisResult } from "./analysis";
 import { listAnalysesFn, upsertAnalysisFn } from "./analyses.functions";
+import { loestAb, mitNutzerstand } from "./scoring-version";
 
 type Stored = AnalysisResult & { archived?: boolean };
 
@@ -106,10 +107,21 @@ export async function syncAnalysesWithDb(userId: string) {
     localOnly.map((a) => persistAnalysis(a, localArchived.has(a.id))),
   );
 
-  // Merge: DB wins for shared ids; local-only kept too (now also in DB).
+  // Merge: bei gemeinsamen ids gewinnt die HOEHERE scoringVersion, bei
+  // Gleichstand weiter die DB. Bis zum 13.08.2026 gewann die DB
+  // bedingungslos, ohne jede Pruefung, ob ihre Kopie ueberhaupt neuer ist -
+  // ein frisch korrigierter lokaler Stand konnte damit beim naechsten Sync
+  // von einer aelteren Cloud-Fassung ueberschrieben werden, und die
+  // Korrektur war wieder weg.
   const dbAnalyses: Stored[] = remote.map((r) => r as unknown as Stored);
+  const lokalById = new Map<string, Stored>(localAll.map((a) => [a.id, a]));
   const mergedById = new Map<string, Stored>();
-  for (const a of dbAnalyses) mergedById.set(a.id, a);
+  for (const db of dbAnalyses) {
+    const lokal = lokalById.get(db.id);
+    // `archived` haengt am Objekt und ist Nutzerzustand, keine Messung -
+    // beim Austausch mitnehmen, sonst taucht Archiviertes wieder auf.
+    mergedById.set(db.id, lokal && loestAb(db, lokal) ? mitNutzerstand(lokal, db) : db);
+  }
   for (const a of localOnly) mergedById.set(a.id, a);
 
   const merged = Array.from(mergedById.values()).sort((a, b) => {

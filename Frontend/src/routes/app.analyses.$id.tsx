@@ -73,6 +73,34 @@ function AnalysisDetail() {
   const [missedMarks, setMissedMarks] = useState<number[]>([]);
   const legacyId = legacy?.id;
 
+  // Der Korrekturweg: einmal beim Oeffnen bei der Engine nachfragen.
+  //
+  // Ohne das bleibt jede Verbesserung auf der Platte liegen. Diese Seite
+  // rendert aus dem localStorage (state.analyses oben), und bis zum
+  // 13.08.2026 gab es KEINEN Pfad, der einen Report je neu geholt haette -
+  // ein einmal angesehener Report war eingefroren, korrigierbar nur durch
+  // Cache-Loeschen. Uebernommen wird nur, was eine hoehere scoringVersion
+  // traegt (mergeRemoteAnalysisIntoStore); ist die Engine nicht erreichbar,
+  // bleibt schlicht der gespeicherte Stand stehen.
+  //
+  // Kosten: ein GET je geoeffnetem Report, derselbe Aufruf, den der Knopf
+  // "Mit meinen Korrekturen neu erkennen" schon macht.
+  useEffect(() => {
+    if (!id) return;
+    let abgebrochen = false;
+    void (async () => {
+      try {
+        const { getAnalysisProvider } = await import("@/lib/api/provider");
+        const { mergeRemoteAnalysisIntoStore } = await import("@/lib/analysis-engine");
+        const frisch = await getAnalysisProvider().getAnalysis(id);
+        if (!abgebrochen && frisch) mergeRemoteAnalysisIntoStore(frisch);
+      } catch {
+        /* Engine aus oder offline - der gespeicherte Stand gilt weiter. */
+      }
+    })();
+    return () => { abgebrochen = true; };
+  }, [id]);
+
   // Coach-Uebung: ?listen=<sec> springt nach dem Laden direkt an die Stelle.
   const { listen } = Route.useSearch();
   useEffect(() => {

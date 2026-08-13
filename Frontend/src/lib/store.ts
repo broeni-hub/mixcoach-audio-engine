@@ -7,6 +7,7 @@ import {
   deleteArchivedAnalysesFn,
 } from "./analyses.functions";
 import { getAnalysisProvider } from "./api/provider";
+import { loestAb, mitNutzerstand } from "./scoring-version";
 
 // "fire and forget" gilt fuer den EINZELNEN Aufruf - die lokale Anzeige soll
 // nicht an einem DB-Fehler haengen. Es gilt NICHT fuer die Diagnose: schlaegt
@@ -109,8 +110,18 @@ export function useAppState(): [AppState, (updater: (s: AppState) => AppState) =
 export function addAnalysis(result: AnalysisResult) {
   const s = read();
 
-  // Idempotent: dieselbe Analyse (per id) nicht doppelt anlegen.
-  if (s.analyses.some((a) => a.id === result.id)) {
+  // Idempotent: dieselbe Analyse (per id) nicht doppelt anlegen - aber eine
+  // NEUERE Fassung derselben Analyse loest die alte ab. Vorher stand hier ein
+  // blankes `return`, und damit war jede einmal gespeicherte Analyse
+  // unkorrigierbar (siehe scoring-version.ts).
+  const idx = s.analyses.findIndex((a) => a.id === result.id);
+  if (idx >= 0) {
+    if (!loestAb(s.analyses[idx], result)) return;
+    const analyses = s.analyses.slice();
+    analyses[idx] = mitNutzerstand(result, s.analyses[idx]);
+    // Kein XP beim Ersetzen: die Analyse ist nicht neu, sie ist nur richtiger
+    // geworden. Sonst waere jede Korrektur eine Punktequelle.
+    write({ ...s, analyses });
     return;
   }
 

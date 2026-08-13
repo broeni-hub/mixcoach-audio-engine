@@ -69,6 +69,12 @@ export interface AnalysisResult {
   source?: "engine" | "browser";
   /** Backend-Pfad zum Original-Audio (Nachhoeren im Report). */
   audioPath?: string | null;
+  /** Nach welcher Rechenvorschrift die Zahlen entstanden sind
+   *  (app/audio/pipeline/scoring_version.py). Fehlt bei Reports von vor dem
+   *  13.08.2026 - die gelten als UNSTAMPED. Entscheidet, ob eine eingehende
+   *  Fassung eine gespeicherte abloest, siehe lib/scoring-version.ts.
+   *  Zur Laufzeit kam der Wert schon immer mit, er war nur nie deklariert. */
+  scoringVersion?: number;
   scores: AnalysisScores;
   timeline: TimelineEvent[];
   strengths: string[];
