@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 from uuid import uuid4
 
 from app.audio.dramaturgie import bogen
+from app.audio.pipeline.scoring_version import scoring_stamp
 
 # Scores, die die Set-Pipeline derzeit NICHT misst, werden bewusst als
 # None (null) ausgegeben statt mit erfundenen Zahlen befuellt.
@@ -56,6 +57,16 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
         "fileName": filename,
         "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "mapperVersion": "honest-v2",
+        # Welche Rechenvorschrift die Messwerte erzeugt hat. Ohne diese Angabe
+        # ist kein Vergleich ueber Zeit zulaessig - und der Vergleich ueber Zeit
+        # IST das Produkt (Erlebnis-Punkt 4). Herleitung und Changelog:
+        # app/audio/pipeline/scoring_version.py
+        #
+        # Nicht verwechseln mit dem alten quality["scoring_version"]: das steht
+        # seit jeher fest auf "v2-transition-quality", wird nie erhoeht und hat
+        # es nie in einen gespeicherten Report geschafft (50 von 50 ohne Spur).
+        # Wer danach gesucht hat, hat sich in Sicherheit gewiegt.
+        **scoring_stamp(),
 
         "bpm": bpm,
         "key": dominant.get("key"),

@@ -217,6 +217,76 @@ def pruefe_messwerte() -> None:
         "unter 50 % heisst: der Wert fehlt in der Mehrheit der Uebergaenge "
         "und taugt nicht als Kopfzahl" if duenn else "")
 
+    # Befuellt allein reicht nicht - ein Wert muss auch UNTERSCHEIDEN. Ein
+    # Merkmal, das fast immer denselben Wert hat, kann keine Entwicklung
+    # zeigen, egal wie sauber es gemessen ist.
+    import statistics
+    for feld, mindest_sigma in (("beat_alignment_score", 5.0),
+                                ("bass_overlap_score", 5.0)):
+        werte = []
+        for pfad in RESULTS_DIR.glob("*.json"):
+            try:
+                d = json.loads(pfad.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            werte += [t[feld] for t in (d.get("setTransitions") or [])
+                      if t.get(feld) is not None]
+        if len(werte) < 10:
+            continue
+        sigma = statistics.pstdev(werte)
+        am_rand = sum(1 for w in werte if w in (0, 100)) / len(werte)
+        if sigma < mindest_sigma:
+            sag(WARN, f"{feld} streut kaum",
+                f"n={len(werte)}  Median {statistics.median(werte):.0f}  "
+                f"sigma {sigma:.2f}  Spanne {min(werte)}-{max(werte)}",
+                "traegt keine Entwicklung ueber Sets - Bedingung 3 der "
+                "Live-Schwelle kann darauf nicht ruhen")
+        elif am_rand > 0.6:
+            sag(WARN, f"{feld} sitzt an den Raendern",
+                f"n={len(werte)}  {100*am_rand:.0f} % der Werte sind exakt "
+                f"0 oder 100 - das ist ein Schalter, keine Abstufung")
+
+
+# --------------------------------------------------------------------------
+def pruefe_vergleichbarkeit() -> None:
+    abschnitt("5a - Sind die Messwerte ueber Zeit vergleichbar?")
+
+    from app.audio.pipeline.scoring_version import SCORING_VERSION, UNSTAMPED
+
+    versionen: dict[int, int] = {}
+    for pfad in RESULTS_DIR.glob("*.json"):
+        try:
+            d = json.loads(pfad.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not d.get("setTransitions"):
+            continue
+        v = d.get("scoringVersion", UNSTAMPED)
+        versionen[v] = versionen.get(v, 0) + 1
+
+    if not versionen:
+        return
+    ungestempelt = versionen.get(UNSTAMPED, 0)
+    detail = "\n".join(
+        f"Version {v if v else '(ohne Stempel)'}: {n} Reports"
+        for v, n in sorted(versionen.items())
+    )
+    if ungestempelt:
+        sag(WARN, "Reports ohne Scoring-Version", detail,
+            f"Sie stammen aus der Zeit vor {SCORING_VERSION} und sind "
+            "untereinander NICHT sicher vergleichbar.\n"
+            "          Nachgezaehlt am 13.08.2026: composite_quality_score lag bei "
+            "Analysen vom 12.07. bei 68-82,\n"
+            "          ab 17.07. bei 94-97 - das ist ein Gewichtswechsel, keine "
+            "bessere Leistung.\n"
+            "          Ein Fortschritts-Radar darauf zeigt einen Sprung, den "
+            "niemand gemacht hat.")
+    elif len(versionen) > 1:
+        sag(WARN, "Mehrere Scoring-Versionen im Bestand", detail,
+            "nur Reports gleicher Version gegeneinander stellen")
+    else:
+        sag(OK, "Alle Reports auf einer Scoring-Version", detail)
+
 
 # --------------------------------------------------------------------------
 def pruefe_cloud() -> None:
@@ -290,7 +360,8 @@ def main() -> int:
     print("fuer jede Messung tatsaechlich gegeben sind.")
 
     for pruefung in (pruefe_datenstamm, pruefe_modell, pruefe_library,
-                     pruefe_stems, pruefe_messwerte, pruefe_cloud):
+                     pruefe_stems, pruefe_messwerte, pruefe_vergleichbarkeit,
+                     pruefe_cloud):
         try:
             pruefung()
         except Exception as exc:
