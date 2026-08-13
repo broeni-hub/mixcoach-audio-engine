@@ -10,6 +10,8 @@ scikit-learn installiert: pip install scikit-learn):
    zugehoerige Audio aus analysis_results/ geholt und in Trainingszeilen
    verwandelt (build_features.py). Ergebnisse werden gecacht, damit
    Wiederholungslaeufe nicht jedes Mal Minuten an Audio-Analyse kosten.
+   Der Cache-Schluessel haengt am INHALT der Labels, nicht an ihrer
+   Aenderungszeit - sonst ueberlebt er keinen Checkout (siehe _gt_stamp).
 3. Trainiert neu und vergleicht FAIR mit dem aktiven Modell: beide werden
    auf den NEUEN Feedback-Sets bewertet, die keins von beiden im Training
    gesehen hat (das neue via Leave-One-Set-Out, das alte direkt).
@@ -17,6 +19,7 @@ scikit-learn installiert: pip install scikit-learn):
    Prioritaet), wird es exportiert (das alte wird als .backup gesichert).
 """
 
+import hashlib
 import json
 import shutil
 from collections import defaultdict
@@ -84,6 +87,34 @@ AUDIO_SUFFIXES = [".wav", ".mp3", ".flac", ".m4a", ".aiff", ".aif"]
 # _score_selection). Ohne Argument verhalten sie sich exakt wie bisher,
 # damit alte Log-Werte vergleichbar bleiben.
 CLUSTER_GAP = 105.0
+
+# Praefix des Cache-Schluessels. Versioniert das FORMAT des Schluessels:
+# alte Stempel (Analyse-Id + mtime) koennen einen neuen nie treffen und
+# fallen damit aus dem Cache, statt stillschweigend als gueltig
+# durchzugehen. Wer die Schluesselbildung erneut aendert, zaehlt hoch.
+STAMP_VERSION = "sha256-v1"
+
+
+def _gt_stamp(entries: list[tuple[str, Path, bool]]) -> str:
+    """Cache-Schluessel einer Aufnahme: Analyse-Ids + sha256 ihrer
+    Ground-Truth-Dateien, nach Id sortiert.
+
+    Frueher stand hier die mtime der Ground-Truth-Datei. Git stellt
+    Zeitstempel nicht wieder her - jeder Checkout, Merge und frische Clone
+    hat damit den kompletten Cache entwertet, obwohl sich an den Labels
+    nichts geaendert hatte. Der Neuaufbau kostet Minuten und braucht das
+    echte Audio, das nicht versioniert ist. Ueber den Inhalt gebildet
+    ergibt gleicher Inhalt denselben Schluessel, egal wie die Datei auf
+    die Platte gekommen ist.
+
+    Bewusst der rohe Bytes-Inhalt und nicht das geparste JSON: eine reine
+    Umformatierung baut damit einmal zu viel neu, aber eine echte
+    Aenderung kann nie durchrutschen. Der Fehler faellt auf die teure,
+    nicht auf die falsche Seite.
+    """
+    teile = [f"{aid}:{hashlib.sha256(gt.read_bytes()).hexdigest()}"
+             for aid, gt, _ in sorted(entries, key=lambda e: e[0])]
+    return "|".join([STAMP_VERSION, *teile])
 
 
 def _row_vector(row: dict) -> list:
@@ -171,6 +202,23 @@ def collect_feedback_rows():
 
     for file_name, entries in sorted(groups.items()):
         entries.sort(key=lambda e: (e[2], e[0]))  # nicht-archiviert zuerst
+
+        # Cache VOR der Audio-Suche fragen. Das Audio wird nur zum Bauen
+        # gebraucht (build_set_rows unten) - bei einem Treffer nie. Stand
+        # die Suche davor, half der Cache genau dort nicht, wo er gebraucht
+        # wird: auf einem frischen Clone ohne die (nicht versionierten)
+        # Audiodateien wurde jede Aufnahme uebersprungen, obwohl fertige
+        # Zeilen vorlagen - collect_feedback_rows() lieferte 0 Zeilen, und
+        # der Retrain lief still nur auf den Basisdaten weiter.
+        ids = sorted(aid for aid, _, _ in entries)
+        stamp = _gt_stamp(entries)
+        entry = cache.get(file_name)
+        if entry and entry.get("stamp") == stamp:
+            print(f"  {file_name}: aus Cache ({len(entry['rows'])} Kandidaten, "
+                  f"{len(ids)} Duplikat(e) zusammengefuehrt)")
+            rows.extend(entry["rows"])
+            continue
+
         canonical_id = entries[0][0]
         audio_path = _find_audio(canonical_id)
         if audio_path is None:
@@ -181,16 +229,6 @@ def collect_feedback_rows():
         if audio_path is None:
             print(f"  UEBERSPRUNGEN {file_name}: kein Audio fuer keine der "
                   f"{len(entries)} Analyse(n) gefunden")
-            continue
-
-        ids = sorted(aid for aid, _, _ in entries)
-        stamp = "|".join(f"{aid}:{gt.stat().st_mtime_ns}" for aid, gt, _ in
-                         sorted(entries, key=lambda e: e[0]))
-        entry = cache.get(file_name)
-        if entry and entry.get("stamp") == stamp:
-            print(f"  {file_name}: aus Cache ({len(entry['rows'])} Kandidaten, "
-                  f"{len(ids)} Duplikat(e) zusammengefuehrt)")
-            rows.extend(entry["rows"])
             continue
 
         truth = _merge_truth([load_truth(gt) for _, gt, _ in entries])
