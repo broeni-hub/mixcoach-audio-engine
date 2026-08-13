@@ -71,12 +71,21 @@ export function CoachFeedbackCard({ analysis }: { analysis: AnalysisResult }) {
         rule_slug: f.rule_slug, title: f.title, diagnosis: f.diagnosis, fix: f.fix,
         severity: f.severity, metric: f.metric, value: f.value,
       }));
+      // null heisst "nicht gemessen" - der Prompt laesst die Zeile dann weg.
+      // Hier standen bis zum 13.08.2026 feste Zahlen (bpm_confidence 0.8,
+      // key_confidence 0.6, bass_stability 70, dynamic_range_db 8,
+      // loudness_dbfs -12, peak_count 0), weil das Schema Pflichtzahlen
+      // verlangte. Der Report der Engine enthaelt diese Groessen nicht; sie
+      // waren erfunden und standen im Prompt unter "Measurements". Die
+      // Ehrlichkeitslinie gilt auch dort, wo nur ein Modell mitliest.
       const m = {
-        bpm: analysis.bpm, bpm_confidence: 0.8,
-        key: analysis.key, key_confidence: 0.6,
-        bass_pct: analysis.frequency?.bass ?? null, mid_pct: analysis.frequency?.mid ?? null, high_pct: analysis.frequency?.high ?? null,
-        bass_stability: 70, dynamic_range_db: 8, loudness_dbfs: -12,
-        peak_count: 0, duration_sec: analysis.transitionLength,
+        bpm: analysis.bpm, bpm_confidence: null,
+        key: analysis.key, key_confidence: null,
+        bass_pct: analysis.frequency?.bass ?? null,
+        mid_pct: analysis.frequency?.mid ?? null,
+        high_pct: analysis.frequency?.high ?? null,
+        bass_stability: null, dynamic_range_db: null, loudness_dbfs: null,
+        peak_count: null, duration_sec: analysis.transitionLength,
       };
       const res = await generateCoachFeedbackFn({
         data: {

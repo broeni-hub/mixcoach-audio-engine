@@ -21,18 +21,33 @@ const FindingZ = z.object({
   value: z.number().nullable().optional(),
 });
 
+// Nicht jeder Aufrufer misst alles. Der Browser-Notpfad (analysis-engine.ts)
+// rechnet alle Werte selbst und schickt Zahlen; der Engine-Pfad
+// (CoachFeedbackCard) hat nur, was im Report steht - Konfidenzen, Bass-
+// Stabilitaet, Dynamikumfang, Lautheit und Peak-Zahl gehoeren nicht dazu.
+// Bis zum 13.08.2026 waren alle Felder Pflicht-Zahlen, und die Karte hat die
+// fehlenden mit festen Werten aufgefuellt (bpm_confidence 0.8, bass_stability
+// 70, dynamic_range_db 8, loudness_dbfs -12, peak_count 0). Damit stand
+// unter "Measurements" im Prompt eine erfundene Zahl, und die Hedging-Regel
+// ("bei Konfidenz < 50% absichern") konnte nie greifen - 0.8 ist immer hoch
+// genug. Ein Modell, dem man Erfundenes als Messung vorlegt, kann gar nicht
+// ehrlich antworten.
+//
+// Deshalb: null heisst "nicht gemessen", und der Prompt laesst die Zeile dann
+// weg. Der Notpfad schickt weiterhin echte Zahlen - fuer ihn aendert sich
+// nichts.
 const MeasurementsZ = z.object({
   bpm: z.number(),
-  bpm_confidence: z.number(),
+  bpm_confidence: z.number().nullable(),
   key: z.string(),
-  key_confidence: z.number(),
-  bass_pct: z.number(),
-  mid_pct: z.number(),
-  high_pct: z.number(),
-  bass_stability: z.number(),
-  dynamic_range_db: z.number(),
-  loudness_dbfs: z.number(),
-  peak_count: z.number(),
+  key_confidence: z.number().nullable(),
+  bass_pct: z.number().nullable(),
+  mid_pct: z.number().nullable(),
+  high_pct: z.number().nullable(),
+  bass_stability: z.number().nullable(),
+  dynamic_range_db: z.number().nullable(),
+  loudness_dbfs: z.number().nullable(),
+  peak_count: z.number().nullable(),
   duration_sec: z.number(),
 });
 
@@ -137,9 +152,16 @@ function buildFallbackCoachOutput(data: z.infer<typeof InputZ>): ReturnType<type
   // formuliert daraus selbstbewusste Ratschlaege, und die Ueberschrift des
   // Prompts lautet ausgerechnet "STRICT GROUNDING RULES (violations =
   // hallucination)". Begruendung: NOT_YET_MEASURED, analysis_mapper.py.
+  // Auch der deterministische Ausweichtext nennt nur Gemessenes. Stand hier
+  // ein nicht gemessener Wert, las sich das als "null/100 bass stability" -
+  // und ohne die Nullpruefung haette die Karte vorher eine erfundene 70
+  // ausgegeben.
+  const stabilitaetTeil = m.bass_stability !== null && m.dynamic_range_db !== null
+    ? ` with ${m.bass_stability}/100 bass stability and ${m.dynamic_range_db} dB dynamic range`
+    : "";
   const transitionFocus = t
     ? `Your transition shows ${t.bass_clash_score}/100 bass clash.`
-    : `Your mix measures ${m.bpm} BPM with ${m.bass_stability}/100 bass stability and ${m.dynamic_range_db} dB dynamic range.`;
+    : `Your mix measures ${m.bpm} BPM${stabilitaetTeil}.`;
 
   return {
     summary: `${transitionFocus} Focus the next practice pass on the highest-impact measurable weakness instead of changing several things at once.`,
@@ -151,7 +173,9 @@ function buildFallbackCoachOutput(data: z.infer<typeof InputZ>): ReturnType<type
           ? `${primaryFinding.diagnosis} The measured value was ${primaryFinding.value ?? "available in the report"} for ${primaryFinding.metric ?? primaryFinding.rule_slug}.`
           : t
             ? `The transition currently has ${t.bass_clash_score}/100 bass clash.`
-            : `The track analysis shows ${m.bass_stability}/100 bass stability and ${m.loudness_dbfs} dBFS loudness.`,
+            : m.bass_stability !== null && m.loudness_dbfs !== null
+              ? `The track analysis shows ${m.bass_stability}/100 bass stability and ${m.loudness_dbfs} dBFS loudness.`
+              : `The analysis reports ${m.bpm} BPM; no further measured values are available for this recording.`,
         why: t
           ? "Small timing, phrase, or low-end mismatches become most obvious during the overlap, where both tracks compete for space."
           : "A stable foundation makes later transition practice easier because timing and energy changes become more predictable.",
@@ -160,6 +184,52 @@ function buildFallbackCoachOutput(data: z.infer<typeof InputZ>): ReturnType<type
       },
     ],
   };
+}
+
+// Nur gemessene Werte in den Prompt. Was null ist, taucht gar nicht auf -
+// weder als Zahl noch als "unbekannt", damit das Modell nicht in Versuchung
+// kommt, die Luecke zu fuellen. Zusaetzlich wird unten ausdruecklich benannt,
+// was fehlt (siehe missingLine).
+function measurementLines(m: z.infer<typeof MeasurementsZ>): string {
+  const zeilen: string[] = [];
+  const bpmTeil = m.bpm_confidence !== null
+    ? `BPM ${m.bpm} (confidence ${(m.bpm_confidence * 100).toFixed(0)}%)`
+    : `BPM ${m.bpm}`;
+  const keyTeil = m.key_confidence !== null
+    ? `Key ${m.key} (confidence ${(m.key_confidence * 100).toFixed(0)}%)`
+    : `Key ${m.key}`;
+  zeilen.push(`- ${bpmTeil}, ${keyTeil}`);
+
+  if (m.bass_pct !== null && m.mid_pct !== null && m.high_pct !== null) {
+    zeilen.push(`- Frequency mix: bass ${m.bass_pct}% / mid ${m.mid_pct}% / high ${m.high_pct}%`);
+  }
+
+  const rest: string[] = [];
+  if (m.bass_stability !== null) rest.push(`bass stability ${m.bass_stability}/100`);
+  if (m.dynamic_range_db !== null) rest.push(`dynamic range ${m.dynamic_range_db} dB`);
+  if (m.loudness_dbfs !== null) rest.push(`loudness ${m.loudness_dbfs} dBFS`);
+  if (m.peak_count !== null) rest.push(`${m.peak_count} energy peaks`);
+  rest.push(`duration ${m.duration_sec.toFixed(0)}s`);
+  zeilen.push(`- ${rest.join(", ")}`);
+
+  return zeilen.join("\n");
+}
+
+// Was diesem Aufrufer fehlt, wird benannt statt verschwiegen: ein Modell, das
+// eine Groesse nicht erwaehnt findet, erfindet sie sonst gern aus dem Kontext.
+function missingLine(m: z.infer<typeof MeasurementsZ>): string {
+  const fehlt = [
+    m.bpm_confidence === null && "BPM confidence",
+    m.key_confidence === null && "key confidence",
+    m.bass_pct === null && "frequency mix",
+    m.bass_stability === null && "bass stability",
+    m.dynamic_range_db === null && "dynamic range",
+    m.loudness_dbfs === null && "loudness",
+    m.peak_count === null && "energy peak count",
+  ].filter((x): x is string => typeof x === "string");
+  return fehlt.length
+    ? `\nNOT measured for this recording: ${fehlt.join(", ")}. Do not mention, estimate or hedge about them.`
+    : "";
 }
 
 function buildPrompt(data: z.infer<typeof InputZ>) {
@@ -190,16 +260,14 @@ STRICT GROUNDING RULES (violations = hallucination):
 - NEVER invent numbers, BPM values, key names, timestamps, bar counts, or events that are not literally in the data below.
 - NEVER claim the user "improved", "got worse", or "changed" anything — you only see ONE snapshot, no history.
 - NEVER reference crowd reaction, mood, genre, energy "story", or anything you cannot derive from the numbers.
-- If BPM confidence < 50% or key confidence < 40%, explicitly hedge ("the detected key may be wrong").
+- If a confidence value is given and BPM confidence < 50% or key confidence < 40%, explicitly hedge ("the detected key may be wrong"). If no confidence is given, do not hedge and do not guess one.
 - If a value isn't in the data, do not mention it. Prefer fewer, accurate sentences over padded ones.
 - Use a direct second-person voice.
 
 Track A: "${data.filename}"${data.track_b_filename ? `\nTrack B: "${data.track_b_filename}"` : ""}
 
 Measurements:
-- BPM ${m.bpm} (confidence ${(m.bpm_confidence * 100).toFixed(0)}%), Key ${m.key} (confidence ${(m.key_confidence * 100).toFixed(0)}%)
-- Frequency mix: bass ${m.bass_pct}% / mid ${m.mid_pct}% / high ${m.high_pct}%
-- Bass stability ${m.bass_stability}/100, dynamic range ${m.dynamic_range_db} dB, loudness ${m.loudness_dbfs} dBFS, ${m.peak_count} energy peaks over ${m.duration_sec.toFixed(0)}s
+${measurementLines(m)}${missingLine(m)}
 ${transitionBlock}
 
 Triggered coaching rules:
@@ -235,7 +303,13 @@ function buildRetryPrompt(data: z.infer<typeof InputZ>, previousError: string) {
   const topFinding = findings[0];
   const transitionLine = t
     ? `Transition: A=${t.bpm_a}, B=${t.bpm_b} BPM, Camelot distance ${t.camelot_distance} (${t.harmonic_label}), bass clash ${t.bass_clash_score}/100. Tempo drift and phrase alignment are NOT measured - do not comment on them.`
-    : `Single track: BPM ${m.bpm}, key ${m.key}, bass stability ${m.bass_stability}/100, loudness ${m.loudness_dbfs} dBFS.`;
+    : `Single track: ${[
+        `BPM ${m.bpm}`,
+        `key ${m.key}`,
+        // Auch hier nur, was wirklich gemessen wurde - siehe measurementLines.
+        m.bass_stability !== null ? `bass stability ${m.bass_stability}/100` : null,
+        m.loudness_dbfs !== null ? `loudness ${m.loudness_dbfs} dBFS` : null,
+      ].filter(Boolean).join(", ")}.`;
   const findingLine = topFinding
     ? `Top triggered rule: ${topFinding.title} — ${topFinding.diagnosis} Fix hint: ${topFinding.fix}`
     : "No specific rule triggered.";
