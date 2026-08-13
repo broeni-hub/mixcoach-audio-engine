@@ -32,6 +32,17 @@ sich (unterschiedliche Bewertungsstaende desselben Sets).
 Das ist fuer die Metrik kein Detail, sondern ein Messfehler - siehe
 --mode weiter unten.
 
+Stand 13.08.2026: die zwei Staemme sind zusammengefuehrt
+(tools/staemme_zusammenfuehren.py). Die drei nur im zweiten Stamm
+vorhandenen missed-Angaben stehen jetzt in daten/, die neun
+widerspruechlichen Urteile in daten/ground_truth/KONFLIKTE.md. Der zweite
+Ordner ist nach _archiv_2026-08-13/ verschoben und wird nur noch von
+dieser Metrik gelesen - bewusst: '--mode spec' zaehlt beide Ordner roh
+und reproduziert damit die eingefrorenen Zahlen aus
+CLAUDE_CODE_SPEC_2026-07-29.md. Wuerde man den Ordner hier weglassen,
+verschoebe sich genau der Anker, an dem jede Aenderung gemessen wird.
+Geschrieben wird dorthin nichts mehr.
+
 Die drei Sichten (--mode)
 -------------------------
 spec      Beide Ordner roh. Zaehlt die 24 gemeinsamen Sets doppelt und
@@ -66,7 +77,9 @@ from tools.eval import gt_status  # noqa: E402
 # tools/ liegt direkt unter mixcoach-audio-engine/
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 GT_DIRS = [
-    ENGINE_ROOT / "ground_truth",
+    # Seit 13.08.2026 im Archiv, siehe Docstring. Nur lesend, nur damit
+    # '--mode spec' seinen eingefrorenen Anker behaelt.
+    ENGINE_ROOT / "_archiv_2026-08-13" / "ground_truth",
     ENGINE_ROOT.parents[1] / "daten" / "ground_truth",
 ]
 
@@ -120,8 +133,10 @@ def _read_gt_files(mode: str, nur_verwertbar: bool = False) -> tuple[list[dict],
     doppelt = _count_duplicates(roh)
     if doppelt:
         hinweise.append(
-            f"{doppelt} Set(s) liegen in BEIDEN Ground-Truth-Ordnern. "
-            f"In --mode spec zaehlen sie doppelt."
+            f"{doppelt} Set(s) liegen zusaetzlich im Archiv "
+            f"(_archiv_2026-08-13/, seit 13.08.2026 zusammengefuehrt). "
+            f"In --mode spec zaehlen sie doppelt - das ist dort gewollt, "
+            f"damit die eingefrorenen Zahlen reproduzierbar bleiben."
         )
 
     # Ausschlussliste aus der Bestandsaufnahme (tools/eval/gt_status.py).

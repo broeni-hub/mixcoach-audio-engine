@@ -36,8 +36,15 @@ PROJEKT_ROOT = ENGINE_ROOT.parents[1]
 # MIXCOACH_DATA_DIR war mal gesetzt und mal nicht, dadurch sind sie
 # auseinandergelaufen. Bewusst NICHT ueber app.paths aufgeloest - die
 # Metrik soll auch ohne gesetzte Umgebungsvariable dasselbe messen.
+#
+# Seit 13.08.2026 sind sie zusammengefuehrt, der zweite liegt unter
+# _archiv_2026-08-13/. Der Pfad bleibt hier stehen, damit
+# analyze_timing_bias '--mode spec' weiter dieselben Zahlen liefert -
+# entfiele er, verschoebe sich der eingefrorene Anker. Geschrieben wird
+# dorthin nichts mehr.
+ARCHIV = ENGINE_ROOT / "_archiv_2026-08-13"
 GT_DIRS = [
-    ENGINE_ROOT / "ground_truth",
+    ARCHIV / "ground_truth",
     PROJEKT_ROOT / "daten" / "ground_truth",
 ]
 
@@ -45,11 +52,14 @@ GT_DIRS = [
 # retrain_model._find_result_json/_find_audio benutzt. archived/ gehoert
 # dazu: der Aufraeum-Knopf verschiebt Analysen dorthin, ein gelabeltes Set
 # darf dadurch nicht aus der Auswertung fallen.
+#
+# Der Archiv-Ordner traegt die einzigen Kopien von 67 .wav - Audio war nie
+# versioniert (.gitignore), es gibt sie nirgends sonst.
 RESULT_DIRS = [
     PROJEKT_ROOT / "daten" / "analysis_results",
     PROJEKT_ROOT / "daten" / "analysis_results" / "archived",
-    ENGINE_ROOT / "analysis_results",
-    ENGINE_ROOT / "analysis_results" / "archived",
+    ARCHIV / "analysis_results",
+    ARCHIV / "analysis_results" / "archived",
 ]
 AUDIO_SUFFIXES = [".wav", ".mp3", ".flac", ".m4a", ".aiff", ".aif"]
 

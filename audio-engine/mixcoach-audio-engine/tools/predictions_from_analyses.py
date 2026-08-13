@@ -32,13 +32,19 @@ from pathlib import Path
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 PROJEKT_ROOT = ENGINE_ROOT.parents[1]
 
+# Der zweite Stamm ist am 13.08.2026 zusammengefuehrt und nach
+# _archiv_2026-08-13/ verschoben worden (tools/staemme_zusammenfuehren.py).
+# Er wird nur noch gelesen: die Ground Truth dort ist vollstaendig in
+# daten/ eingearbeitet, die 67 .wav daneben gibt es nirgends sonst.
+ARCHIV = ENGINE_ROOT / "_archiv_2026-08-13"
+
 ANALYSE_DIRS = [
     PROJEKT_ROOT / "daten" / "analysis_results",
-    ENGINE_ROOT / "analysis_results",
+    ARCHIV / "analysis_results",
 ]
 GT_DIRS = [
     PROJEKT_ROOT / "daten" / "ground_truth",
-    ENGINE_ROOT / "ground_truth",
+    ARCHIV / "ground_truth",
 ]
 
 # Toleranz beim Abgleich von mid_sec gegen den im Verdict gespeicherten

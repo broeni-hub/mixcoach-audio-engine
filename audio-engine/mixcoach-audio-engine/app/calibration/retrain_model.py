@@ -34,7 +34,15 @@ from app.paths import GROUND_TRUTH_DIR
 
 # Zweiter, aelterer Ergebnis-Ordner (siehe Task-1-Aufraeumen 2026-07-12) -
 # ein paar Testlauf-Analysen (z.B. mix.wav) liegen nur dort.
-LEGACY_RESULTS_DIR = Path(__file__).resolve().parents[2] / "analysis_results"
+#
+# Am 13.08.2026 nach _archiv_2026-08-13/ verschoben
+# (tools/staemme_zusammenfuehren.py). Der Pfad zieht mit, denn dort liegen
+# die einzigen Kopien von 67 .wav: Audio war nie versioniert
+# (.gitignore:33), es gibt sie nirgends sonst. Ohne diesen Pfad verloere
+# das Training den Zugriff auf das Audio dieser Aufnahmen - still, ohne
+# Fehlermeldung, nur mit weniger Trainingszeilen. Gelesen, nie geschrieben.
+LEGACY_RESULTS_DIR = (Path(__file__).resolve().parents[2]
+                      / "_archiv_2026-08-13" / "analysis_results")
 
 # Recall-Untergrenze fuer die Konfigurationsauswahl UND den Export-Gate.
 # War fest 0.90 ("Recall hat Prioritaet, verpasste Uebergaenge sind
