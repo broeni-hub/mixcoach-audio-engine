@@ -25,6 +25,9 @@ function AuthPage() {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   const [googleBusy, setGoogleBusy] = useState(false);
+  // Wird gesetzt, sobald feststeht, dass eine Bestaetigungsmail im Spiel ist -
+  // nach der Registrierung oder nach einem Login-Versuch vor der Bestaetigung.
+  const [awaitingConfirm, setAwaitingConfirm] = useState(false);
   const [hasInvite, setHasInvite] = useState<boolean>(() =>
     typeof window === "undefined" ? !WAITLIST_MODE : !WAITLIST_MODE || !!localStorage.getItem(INVITE_KEY),
   );
@@ -53,13 +56,54 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        toast.success("Account created. Check your email to confirm.");
+        // Bei aktivierter E-Mail-Bestaetigung (Vorgabe bei Lovable Cloud)
+        // liefert signUp KEINE Sitzung - der Tester haengt fest, bis er die
+        // Mail bestaetigt hat. Und wenn die Mail nie ankommt, sieht die App
+        // genauso aus wie im Erfolgsfall. Deshalb hier ausdruecklich der
+        // naechste Schritt UND der Ausweg, statt nur "check your email".
+        setAwaitingConfirm(true);
+        toast.success("Account created — confirm the link in your email to sign in.");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Authentication failed");
+      const msg = err instanceof Error ? err.message : "Authentication failed";
+      // Supabase meldet das englisch und technisch. Der Fall ist haeufig genug,
+      // um ihn zu uebersetzen und den Ausweg gleich anzubieten.
+      if (/not confirmed|confirm/i.test(msg)) {
+        setAwaitingConfirm(true);
+        toast.error("Email not confirmed yet. Check your inbox — or resend below.");
+      } else {
+        toast.error(msg);
+      }
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function onResendConfirm() {
+    if (!email) {
+      toast.error("Enter your email address first.");
+      return;
+    }
+    setBusy(true);
+    try {
+      const { error } = await supabase.auth.resend({ type: "signup", email });
+      if (error) throw error;
+      toast.success("Confirmation email sent again.");
+    } catch (err) {
+      // Der wahrscheinlichste Fehler ist ein Rate-Limit: der eingebaute
+      // Mailversand von Supabase ist auf wenige Nachrichten pro Stunde
+      // begrenzt und nicht fuer den Produktivbetrieb gedacht. Bei mehreren
+      // Testern gleichzeitig laeuft man dagegen - und ohne diese Meldung
+      // waere es ununterscheidbar von "Mail unterwegs".
+      const msg = err instanceof Error ? err.message : "Could not resend";
+      toast.error(
+        /rate|limit|too many/i.test(msg)
+          ? "Too many emails for now — the built-in mail service is rate-limited. Try again later."
+          : msg,
+      );
     } finally {
       setBusy(false);
     }
@@ -136,6 +180,26 @@ function AuthPage() {
                 {mode === "signin" ? "Sign in" : "Create account"}
               </Button>
             </form>
+
+            {/* Erscheint erst, wenn eine Bestaetigungsmail tatsaechlich im
+                Spiel ist - sonst waere es ein Hinweis auf ein Problem, das
+                gar nicht besteht. */}
+            {awaitingConfirm && (
+              <div className="rounded-md border border-border bg-muted/40 p-3 text-sm">
+                <p className="text-muted-foreground">
+                  Waiting for the confirmation link. It can take a few minutes,
+                  and it sometimes lands in spam.
+                </p>
+                <button
+                  type="button"
+                  onClick={onResendConfirm}
+                  disabled={busy}
+                  className="mt-2 text-primary hover:underline disabled:opacity-50"
+                >
+                  Send the confirmation email again
+                </button>
+              </div>
+            )}
 
             <p className="text-center text-sm text-muted-foreground">
               {mode === "signin" ? "New to MixCoach?" : "Already have an account?"}{" "}
