@@ -18,10 +18,15 @@ def _result(id_, created, overall, transitions):
     }
 
 
-def _t(index, quality, beats_off=2.0, bpm=(126, 128), camelot=("8A", "9A")):
+def _t(index, quality, beats_off=2.0, bpm=(126, 128), camelot=("8A", "9A"), jump=0.0):
+    # jump = loudness_jump_db. Seit dem 14.08.2026 rankt das Profil danach
+    # (profile._highlights_and_exercises). Ohne diesen Wert gibt es bewusst
+    # kein best/worst - quality_score korreliert mit dem menschlichen Urteil
+    # zu rho -0,008 und taugt nicht als Rangfolge.
     return {
         "index": index, "mid_sec": 100.0 * index, "start_sec": 100.0 * index - 10,
         "quality_score": quality, "phrase_beats_off": beats_off,
+        "loudness_jump_db": jump,
         "bpm_before": bpm[0], "bpm_after": bpm[1], "bpm_drift": abs(bpm[1] - bpm[0]),
         "camelot_before": camelot[0], "camelot_after": camelot[1],
         "feedback": "Test.",
@@ -44,23 +49,32 @@ def test_leeres_profil_ist_ehrlich(results_dir):
 
 
 def test_trends_und_uebungen_aus_echten_reports(results_dir):
+    # Der Pegelsprung faellt ueber die Sets: das erste Set mixt am
+    # unsaubersten (6 dB), das letzte am saubersten (0,5 dB).
     for i, score in enumerate([50, 55, 60, 70, 75, 80]):
-        transitions = [_t(1, score), _t(2, score + 5)]
+        sprung = 6.0 - i
+        transitions = [_t(1, score, jump=sprung), _t(2, score + 5, jump=sprung / 2)]
         (results_dir / f"set{i}.json").write_text(
             json.dumps(_result(f"id{i}", f"2026-07-0{i+1}T10:00:00Z", score, transitions)))
 
     p = profile.build_profile()
     assert p["setsAnalyzed"] == 6
     assert p["trends"]["overall"]["delta"] > 0  # klar steigender Trend
-    assert p["best"]["quality"] == 85
+    # Am besten sitzt der kleinste Pegelsprung, am schlechtesten der groesste.
+    assert abs(p["best"]["loudnessJumpDb"]) == 0.5
+    assert abs(p["worst"]["loudnessJumpDb"]) == 6.0
     assert 1 <= len(p["exercises"]) <= 3
     assert p["exercises"][0]["analysisId"]  # anspringbar
+    # Jede Uebung traegt ihren Beleg.
+    for u in p["exercises"]:
+        assert u["metric"] == "loudness_jump_db"
+        assert abs(u["value"]) >= 3.0
 
 
 def test_fehlalarm_verdicts_werden_ausgeschlossen(results_dir):
     (results_dir / "s.json").write_text(
         json.dumps(_result("abcd1234", "2026-07-01T10:00:00Z", 70,
-                           [_t(1, 20), _t(2, 90)])))
+                           [_t(1, 20, jump=8.0), _t(2, 90, jump=1.5)])))
     gt = results_dir / "gt"
     gt.mkdir()
     (gt / "abcd1234.json").write_text(json.dumps(
@@ -69,7 +83,10 @@ def test_fehlalarm_verdicts_werden_ausgeschlossen(results_dir):
 
     p = profile.build_profile()
     assert p["transitionsMeasured"] == 1
-    assert p["worst"]["quality"] == 90  # der Fehlalarm (20) zaehlt nicht
+    # Der Fehlalarm haette mit 8,0 dB den groessten Sprung - er zaehlt nicht,
+    # also bleibt nur der zweite Uebergang uebrig.
+    assert p["worst"]["index"] == 2
+    assert p["worst"]["loudnessJumpDb"] == 1.5
 
 
 def test_muster_nur_mit_genug_belegen(results_dir):

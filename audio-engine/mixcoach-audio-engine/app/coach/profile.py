@@ -18,6 +18,9 @@ from typing import Dict, List, Optional
 
 from app.jobs.job_manager import RESULTS_DIR
 from app.jobs import feedback_store
+# Eine Quelle fuer Schwelle und Ziel - sonst mahnt der Report bei 3 dB und
+# das Profil bei einem anderen Wert (siehe app/coach/uebungen.py).
+from app.coach.uebungen import SCHWELLE_PEGELSPRUNG_DB, ZIEL_PEGELSPRUNG_DB
 
 # Mindest-Belege, bevor ein Muster behauptet wird.
 MIN_PATTERN_SAMPLES = 4
@@ -40,10 +43,15 @@ TEXTS = {
                         "der Dancefloor spuert das als Loch."),
         "tname": "Uebergang T{index}",
         "ex_title": "Mixe diesen Uebergang neu: {name}",
-        "ex_desc": ("Aus '{file}' (Score {quality}). Hoere zuerst die Original-Stelle an, "
-                    "dann mixe dieselben Tracks erneut. {target}."),
-        "ex_target_phrase": "Ziel: unter 4 Beats Phrasen-Abweichung",
-        "ex_target_score": "Ziel: Score ueber 75",
+        # Frueher: "Aus '{file}' (Score {quality})" mit dem Ziel "Score ueber
+        # 75". Der quality_score korreliert mit Sebastians Bewertungen zu
+        # rho -0,008 - ein Ziel darauf ist eine Zahl ohne Bedeutung. Jetzt
+        # steht der Pegelsprung da: echte Einheit, am Mixer erreichbar.
+        "ex_desc": ("Aus '{file}': der neue Track kam {jump} dB {richtung} rein. "
+                    "Hoere zuerst die Original-Stelle an, dann mixe dieselben "
+                    "Tracks erneut. {target}."),
+        "ex_target": "Ziel: unter {ziel} dB",
+        "lauter": "lauter", "leiser": "leiser",
     },
     "en": {
         "p1_title": "Phrase timing suffers when switching to {worse} tracks",
@@ -61,10 +69,11 @@ TEXTS = {
                         "the dancefloor feels that as a hole."),
         "tname": "Transition T{index}",
         "ex_title": "Re-mix this transition: {name}",
-        "ex_desc": ("From '{file}' (score {quality}). Listen to the original spot first, "
-                    "then mix the same tracks again. {target}."),
-        "ex_target_phrase": "Goal: under 4 beats phrase deviation",
-        "ex_target_score": "Goal: score above 75",
+        "ex_desc": ("From '{file}': the incoming track came in {jump} dB {richtung}. "
+                    "Listen to the original spot first, then mix the same tracks "
+                    "again. {target}."),
+        "ex_target": "Goal: under {ziel} dB",
+        "lauter": "louder", "leiser": "quieter",
     },
 }
 
@@ -231,10 +240,22 @@ def _transition_name(t: Dict, lang: str = "de") -> str:
 
 def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
     T = TEXTS.get(lang, TEXTS["de"])
+
+    # Sortiert wird seit dem 14.08.2026 nach dem Pegelsprung, nicht mehr nach
+    # quality_score. Gemessen an 230 zugeordneten Bewertungen (Spearman gegen
+    # human_rating): |loudness_jump_db| -0,339, quality_score -0,008,
+    # phrase_beats_off ebenfalls ~0. Die alte Auswahl hat also die drei
+    # Uebergaenge gezogen, die eine Zahl ohne Zusammenhang am schlechtesten
+    # bewertet - und sie mit einer zweiten Zahl ohne Zusammenhang begruendet.
+    #
+    # Die Struktur bleibt: drei Uebungen aus moeglichst verschiedenen Sets,
+    # Tracknamen wo vorhanden, startSec/midSec zum Anspringen. Alle bisherigen
+    # Felder bleiben ebenfalls stehen, damit die Seite nichts verliert.
     scored = []
     for r in results:
         for t in _filtered_transitions(r):
-            if t.get("quality_score") is None:
+            sprung = t.get("loudness_jump_db")
+            if not isinstance(sprung, (int, float)):
                 continue
             scored.append({
                 "analysisId": r.get("id"),
@@ -245,32 +266,42 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
                 "name": _transition_name(t, lang),
                 "quality": t.get("quality_score"),
                 "phraseBeatsOff": t.get("phrase_beats_off"),
+                "loudnessJumpDb": round(float(sprung), 2),
                 "feedback": t.get("feedback"),
             })
     if not scored:
         return {"best": None, "worst": None, "exercises": []}
 
-    best = max(scored, key=lambda s: s["quality"])
-    worst_sorted = sorted(scored, key=lambda s: s["quality"])
+    # Am besten sitzt der Uebergang mit dem kleinsten Pegelsprung.
+    best = min(scored, key=lambda s: abs(s["loudnessJumpDb"]))
+    worst_sorted = sorted(scored, key=lambda s: -abs(s["loudnessJumpDb"]))
 
-    # Uebungen: die 3 schwaechsten Uebergaenge aus MOEGLICHST verschiedenen Sets.
     exercises = []
     used_sets = set()
     for s in worst_sorted:
+        # Unter der Schwelle gibt es nichts zu ueben - lieber weniger als
+        # drei Uebungen als eine, die keinen Anlass hat.
+        if abs(s["loudnessJumpDb"]) < SCHWELLE_PEGELSPRUNG_DB:
+            break
         if s["analysisId"] in used_sets and len(worst_sorted) > 3:
             continue
-        target = (
-            T["ex_target_phrase"]
-            if s.get("phraseBeatsOff") is not None and abs(s["phraseBeatsOff"]) >= 4
-            else T["ex_target_score"]
-        )
+        betrag = abs(s["loudnessJumpDb"])
         exercises.append({
             "title": T["ex_title"].format(name=s["name"]),
             "description": T["ex_desc"].format(
-                file=s["fileName"], quality=s["quality"], target=target),
+                file=s["fileName"],
+                jump=f"{betrag:.1f}".replace(".", ","),
+                richtung=T["lauter"] if s["loudnessJumpDb"] > 0 else T["leiser"],
+                target=T["ex_target"].format(
+                    ziel=f"{ZIEL_PEGELSPRUNG_DB:.1f}".replace(".", ",")),
+            ),
             "analysisId": s["analysisId"],
             "midSec": s["midSec"],
             "startSec": s["startSec"],
+            # Der Beleg, wie bei den Report-Uebungen auch.
+            "metric": "loudness_jump_db",
+            "value": s["loudnessJumpDb"],
+            "target": ZIEL_PEGELSPRUNG_DB,
         })
         used_sets.add(s["analysisId"])
         if len(exercises) == 3:
