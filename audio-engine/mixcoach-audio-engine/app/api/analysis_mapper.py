@@ -123,8 +123,13 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
 
         "timeline": _map_timeline(analysis),
 
-        "strengths": coach.get("positives", ["Set analysis completed."]),
-        "weaknesses": coach.get("improvements", ["No major issues detected."]),
+        # Kein Ersatztext mehr, wenn gar keine Coach-Zusammenfassung vorliegt.
+        # "Set analysis completed." und "No major issues detected." haben wie
+        # Befunde ausgesehen und waren keine - genau der Fall, den
+        # coach_summary seit dem 14.08.2026 ausdruecklich benennt, statt ihn
+        # zu fuellen.
+        "strengths": coach.get("positives", []),
+        "weaknesses": coach.get("improvements", []),
 
         "feedback": {
             "worked": coach.get("positives", [])[:2],

@@ -120,7 +120,34 @@ def test_evaluate_transitions_full():
     assert t["quality_score"] is not None
     assert 0 <= t["quality_score"] <= 100
     assert t["label"] in {"smooth", "neutral", "rough"}
-    assert "Uebergang bei 00:50" in t["feedback"]
+
+    # Hier ist nichts Belegtes zu sagen: harmonisch ist der Wechsel eng
+    # (95), und die zwei Groessen, aus denen frueher ein Satz entstand,
+    # sind entfallen - phrase_beats_off (4,3 Beats) und bpm_drift (2,0).
+    # Beide Rohwerte stehen weiter im Payload, sie erzeugen nur keinen
+    # Ratschlag mehr. Siehe transition_quality._feedback.
+    assert t["feedback"] == ""
+    assert t["feedback_en"] == ""
+    # Die Rohwerte bleiben, damit Auswertung und Export weiter rechnen.
+    assert t["bpm_drift"] == 2.0
+    assert t["phrase_beats_off"] is not None
+
+
+def test_weiter_harmonischer_wechsel_bekommt_einen_satz():
+    """Die eine Aussage, die bleibt - sie nennt Tonart und Camelot-Feld."""
+    from app.audio.transition_quality import _feedback, _feedback_en
+
+    vor = {"key": "C major", "camelot": "8B"}
+    nach = {"key": "F# minor", "camelot": "11A"}
+
+    de = _feedback(50.0, vor, nach, harmonic_score=20)
+    en = _feedback_en(50.0, vor, nach, harmonic_score=20)
+    assert "00:50" in de and "8B" in de and "11A" in de
+    assert "00:50" in en and "8B" in en and "11A" in en
+
+    # Enger Wechsel -> kein Satz.
+    assert _feedback(50.0, vor, nach, harmonic_score=95) == ""
+    assert _feedback_en(50.0, vor, nach, harmonic_score=95) == ""
 
 
 def test_unmeasurable_parts_stay_none():

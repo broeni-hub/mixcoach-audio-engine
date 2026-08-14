@@ -106,14 +106,8 @@ def evaluate_transitions(
                 "energy_dip_pct": energy_dip_pct,
                 "quality_score": quality,
                 "label": _label(quality),
-                "feedback": _feedback(
-                    center, beats_off, bpm_before, bpm_after, bpm_drift,
-                    key_before, key_after, harmonic_score, quality,
-                ),
-                "feedback_en": _feedback_en(
-                    center, beats_off, bpm_before, bpm_after, bpm_drift,
-                    key_before, key_after, harmonic_score, quality,
-                ),
+                "feedback": _feedback(center, key_before, key_after, harmonic_score),
+                "feedback_en": _feedback_en(center, key_before, key_after, harmonic_score),
             }
         )
 
@@ -233,87 +227,63 @@ def _mmss(seconds: float) -> str:
 
 def _feedback(
     center: float,
-    beats_off: Optional[float],
-    bpm_before: Optional[float],
-    bpm_after: Optional[float],
-    bpm_drift: Optional[float],
     key_before: Dict,
     key_after: Dict,
     harmonic_score: Optional[int],
-    quality: Optional[int],
 ) -> str:
-    """Ein konkreter, umsetzbarer Satz pro Uebergang - mit echten Zahlen."""
+    """Ein konkreter Satz pro Uebergang - oder gar keiner.
+
+    Am 14.08.2026 sind zwei Zweige entfallen, und mit ihnen zwei
+    Abschlusssaetze:
+
+    * phrase_beats_off ("liegt N Beats neben dem Phrasenstart"). Das Raster
+      wird am ersten Beat des erkannten Segments verankert, und genau diese
+      Grenze verfehlt die Erkennung mit sigma 54,58 s - bei 125 BPM rund
+      3,5 Phrasen. Der Bezugspunkt wandert weiter als die Groesse, die er
+      messen soll.
+    * bpm_drift ("springt von X auf Y BPM"). In 89 % der Uebergaenge exakt
+      0,0, weil die Tempo-Schaetzung fuer benachbarte Segmente denselben
+      Wert liefert.
+
+    "Uebergang bei MM:SS sitzt: Timing, Tempo und Energie passen zusammen"
+    ist damit ebenfalls weg - der Satz hat den DJ fuer genau diese zwei
+    Zahlen gelobt. Und "ist solide, aber nicht herausragend" nannte gar
+    keine Zahl.
+
+    Bleibt nichts Belegtes, kommt ein LEERER Text zurueck. Das ist gewollt:
+    coach_summary uebernimmt nur nicht-leere Saetze, und wo nichts steht,
+    sagt der Report das lieber, als etwas zu behaupten. Der Pegelsprung -
+    die einzige belegte Groesse - wird nicht hier verdoppelt, er traegt die
+    Uebungen (app/coach/uebungen.py).
+    """
     at = _mmss(center)
-    issues: List[str] = []
-
-    if beats_off is not None and beats_off > 4:
-        issues.append(
-            f"liegt {beats_off:.0f} Beats neben dem Phrasenstart - "
-            f"starte den Uebergang ca. {beats_off:.0f} Beats frueher oder spaeter, "
-            "damit er auf der 8-Bar-Grenze landet"
-        )
-
-    if bpm_drift is not None and bpm_drift > 4:
-        issues.append(
-            f"springt von {bpm_before:.0f} auf {bpm_after:.0f} BPM - "
-            "gleiche die Tempi vor dem Blend an oder nutze einen Cut statt eines Blends"
-        )
 
     if harmonic_score is not None and harmonic_score <= 40:
-        issues.append(
-            f"wechselt harmonisch weit ({key_before.get('key')} -> {key_after.get('key')}, "
+        return (
+            f"Uebergang bei {at} wechselt harmonisch weit "
+            f"({key_before.get('key')} -> {key_after.get('key')}, "
             f"Camelot {key_before.get('camelot')} -> {key_after.get('camelot')}) - "
-            "waehle einen Track im Nachbarfeld des Camelot-Rads"
+            "waehle einen Track im Nachbarfeld des Camelot-Rads."
         )
 
-    if issues:
-        return f"Uebergang bei {at} " + "; ausserdem ".join(issues) + "."
-
-    if quality is not None and quality >= 75:
-        return f"Uebergang bei {at} sitzt: Timing, Tempo und Energie passen zusammen."
-
-    return f"Uebergang bei {at} ist solide, aber nicht herausragend - vergleiche ihn im Player mit deinem besten Uebergang."
+    return ""
 
 
 def _feedback_en(
     center: float,
-    beats_off: Optional[float],
-    bpm_before: Optional[float],
-    bpm_after: Optional[float],
-    bpm_drift: Optional[float],
     key_before: Dict,
     key_after: Dict,
     harmonic_score: Optional[int],
-    quality: Optional[int],
 ) -> str:
-    """Englische Variante von _feedback - identische Logik und Zahlen."""
+    """Englische Variante von _feedback - identische Logik, siehe dort."""
     at = _mmss(center)
-    issues: List[str] = []
-
-    if beats_off is not None and beats_off > 4:
-        issues.append(
-            f"lands {beats_off:.0f} beats off the phrase start - "
-            f"start the transition about {beats_off:.0f} beats earlier or later "
-            "so it hits the 8-bar boundary"
-        )
-
-    if bpm_drift is not None and bpm_drift > 4:
-        issues.append(
-            f"jumps from {bpm_before:.0f} to {bpm_after:.0f} BPM - "
-            "match tempos before the blend or use a cut instead"
-        )
 
     if harmonic_score is not None and harmonic_score <= 40:
-        issues.append(
-            f"makes a distant key change ({key_before.get('key')} -> {key_after.get('key')}, "
+        return (
+            f"Transition at {at} makes a distant key change "
+            f"({key_before.get('key')} -> {key_after.get('key')}, "
             f"Camelot {key_before.get('camelot')} -> {key_after.get('camelot')}) - "
-            "pick a track from a neighbouring Camelot field"
+            "pick a track from a neighbouring Camelot field."
         )
 
-    if issues:
-        return f"Transition at {at} " + "; also ".join(issues) + "."
-
-    if quality is not None and quality >= 75:
-        return f"Transition at {at} sits: timing, tempo and energy line up."
-
-    return f"Transition at {at} is solid but not outstanding - compare it in the player with your best one."
+    return ""

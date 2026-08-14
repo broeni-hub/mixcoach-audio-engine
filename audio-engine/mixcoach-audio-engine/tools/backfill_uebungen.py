@@ -33,9 +33,30 @@ import json
 import sys
 from pathlib import Path
 
+from app.audio.coach_summary import LEER_POSITIV, LEER_VERBESSERUNG
 from app.audio.pipeline.scoring_version import naechste_revision, revision_von
+from app.audio.segment_keys import camelot_compatibility_score
+from app.audio.transition_quality import _feedback, _feedback_en
 from app.coach.uebungen import baue
 from app.paths import RESULTS_DIR
+
+# Saetze, die auf einer widerlegten Groesse ruhen oder gar keine Zahl nennen.
+# Sie stehen in den gespeicherten Reports (289x der Phrasen-Satz, 52x der
+# "sitzt"-Satz) und verschwinden mit diesem Lauf.
+UNBELEGTE_SAETZE = (
+    "Beats neben dem Phrasenstart",
+    "beats off the phrase start",
+    "Timing, Tempo und Energie passen zusammen",
+    "timing, tempo and energy line up",
+    "solide, aber nicht herausragend",
+    "solid but not outstanding",
+    "gleiche die Tempi vor dem Blend an",
+    "match tempos before the blend",
+    "Es gibt eine auswertbare Struktur",
+    "Keine großen Probleme erkannt",
+    "Set analysis completed",
+    "No major issues detected",
+)
 
 
 def _nicht_gemessen(report: dict) -> list:
@@ -60,13 +81,67 @@ def _nicht_gemessen(report: dict) -> list:
     return sorted(fehlend)
 
 
+def _saetze_neu(uebergaenge: list) -> int:
+    """Feedback je Uebergang neu bilden. Liefert, wie viele sich aendern.
+
+    Faithful nachgerechnet, nicht per Textchirurgie: _feedback braucht die
+    Camelot-Kompatibilitaet, und die ist eine reine Funktion von
+    camelot_before/camelot_after - beides steht im Report. Achtung, das ist
+    NICHT harmonic_clash_score: der kommt aus dem Composite-Scoring und ist
+    eine andere Groesse, auch wenn der Name aehnlich klingt.
+    """
+    geaendert = 0
+    for t in uebergaenge:
+        if not isinstance(t, dict):
+            continue
+        harmonisch = camelot_compatibility_score(t.get("camelot_before"),
+                                                 t.get("camelot_after"))
+        mid = t.get("mid_sec")
+        if not isinstance(mid, (int, float)):
+            continue
+        # Im gespeicherten Report sind key_before/key_after flache Strings
+        # ("A# Major"), in der Live-Kette dagegen Dicts mit key+camelot.
+        # _feedback erwartet die Dict-Form, also hier zusammensetzen.
+        vor = {"key": t.get("key_before"), "camelot": t.get("camelot_before")}
+        nach = {"key": t.get("key_after"), "camelot": t.get("camelot_after")}
+
+        de = _feedback(float(mid), vor, nach, harmonisch)
+        en = _feedback_en(float(mid), vor, nach, harmonisch)
+        if t.get("feedback") != de or t.get("feedback_en") != en:
+            t["feedback"], t["feedback_en"] = de, en
+            geaendert += 1
+    return geaendert
+
+
+def _liste_saeubern(eintraege: list, leer_satz: str) -> list:
+    """Unbelegte Saetze entfernen - und sagen, wenn nichts bleibt."""
+    behalten = [s for s in (eintraege or [])
+                if not any(m in s for m in UNBELEGTE_SAETZE)]
+    return behalten or [leer_satz]
+
+
 def nachziehen(report: dict) -> tuple[dict, list]:
     """Report mit Uebungen versehen. Liefert (neu, was geaendert wurde)."""
     neu = dict(report)
     aenderungen: list = []
 
     aid = str(report.get("id") or "")
-    uebergaenge = report.get("setTransitions") or []
+    # Kopie, damit die Saetze im Original erst beim Schreiben landen.
+    uebergaenge = [dict(t) if isinstance(t, dict) else t
+                   for t in (report.get("setTransitions") or [])]
+
+    saetze = _saetze_neu(uebergaenge)
+    if saetze:
+        aenderungen.append(f"feedback je Uebergang: {saetze} neu gebildet")
+        neu["setTransitions"] = uebergaenge
+
+    for feld, leer in (("strengths", LEER_POSITIV), ("weaknesses", LEER_VERBESSERUNG)):
+        gesaeubert = _liste_saeubern(report.get(feld) or [], leer)
+        if gesaeubert != (report.get(feld) or []):
+            aenderungen.append(
+                f"{feld}: {len(report.get(feld) or [])} -> {len(gesaeubert)}")
+            neu[feld] = gesaeubert
+
     uebungen, beobachtungen = baue(aid, uebergaenge)
 
     alt_uebungen = report.get("exercises") or []

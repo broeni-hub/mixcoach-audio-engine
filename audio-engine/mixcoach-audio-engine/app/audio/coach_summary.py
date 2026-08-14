@@ -1,5 +1,13 @@
 from typing import Dict, List
 
+# Was dasteht, wenn nichts Belegtes dasteht. Bewusst zwei verschiedene
+# Saetze: "nichts hervorzuheben" und "nichts anzumahnen" sind nicht
+# dasselbe, und derselbe Text an zwei Stellen liest sich wie ein Fehler.
+LEER_POSITIV = ("Zu diesem Set laesst sich aus den vorhandenen Messungen "
+                "nichts Konkretes hervorheben.")
+LEER_VERBESSERUNG = ("Zu diesem Set laesst sich aus den vorhandenen Messungen "
+                     "nichts Konkretes anmahnen.")
+
 
 def generate_coach_summary(set_analysis: Dict) -> Dict:
     quality = set_analysis.get("quality", {})
@@ -27,6 +35,16 @@ def generate_coach_summary(set_analysis: Dict) -> Dict:
         best = max(smooth, key=lambda x: x.get("quality_score") or 0)
         if best.get("feedback"):
             positives.insert(0, best["feedback"])
+
+    # Bleibt eine Liste leer, wird das gesagt - nicht gefuellt. Seit dem
+    # 14.08.2026 kommt das haeufiger vor: die Uebergangs-Saetze aus
+    # phrase_beats_off und bpm_drift sind entfallen (transition_quality.
+    # _feedback), und was uebrig bleibt, ist weniger Text. Das ist richtig
+    # so - ein Allgemeinplatz sieht aus wie ein Befund.
+    if not positives:
+        positives = [LEER_POSITIV]
+    if not improvements:
+        improvements = [LEER_VERBESSERUNG]
 
     return {
         "overall_score": overall,
@@ -71,9 +89,10 @@ def _build_positives(set_analysis: Dict) -> List[str]:
     if quality.get("transition_density", 0) >= 70:
         positives.append("Die Übergangsdichte wirkt brauchbar.")
 
-    if not positives:
-        positives.append("Es gibt eine auswertbare Struktur, auf der MixCoach weiter aufbauen kann.")
-
+    # Frueher stand hier "Es gibt eine auswertbare Struktur, auf der MixCoach
+    # weiter aufbauen kann." - ein Satz, der nichts misst und immer passt.
+    # Wenn nichts belegt ist, sagt das generate_coach_summary am Ende
+    # ausdruecklich, statt die Liste zu fuellen.
     return positives
 
 
@@ -88,7 +107,7 @@ def _build_improvements(rule_findings: List[Dict], dramaturgy: Dict) -> List[str
     if dramaturgy.get("energy_trend") == "stable":
         improvements.append("Mehr bewusste Energiebewegung einbauen: Aufbau, Peak und kurze Entspannung.")
 
-    if not improvements:
-        improvements.append("Keine großen Probleme erkannt. Feintuning bei Übergängen und Track-Auswahl lohnt sich trotzdem.")
-
+    # Frueher: "Keine großen Probleme erkannt. Feintuning bei Übergängen und
+    # Track-Auswahl lohnt sich trotzdem." Das klang nach einem Befund, war
+    # aber nur der Fall "es wurde nichts gefunden" - siehe _build_positives.
     return improvements
