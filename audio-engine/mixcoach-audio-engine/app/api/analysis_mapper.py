@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from app.audio.dramaturgie import bogen
 from app.audio.pipeline.scoring_version import scoring_stamp
+from app.coach.uebungen import baue as baue_uebungen
 
 # Scores, die die Set-Pipeline derzeit NICHT misst, werden bewusst als
 # None (null) ausgegeben statt mit erfundenen Zahlen befuellt.
@@ -52,8 +53,15 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
     verlauf = _map_loudness_curve(analysis) or _map_energy_curve(energy)
     dominant = analysis.get("dominant_key") or {}
 
+    # Uebungen entstehen aus den Uebergaengen, die muessen also vorher da
+    # sein - und die id ebenso, weil jede Uebung sie traegt (der Player
+    # springt darueber an die Stelle).
+    analysis_id = str(uuid4())
+    uebergaenge = _map_set_transitions(analysis)
+    uebungen, beobachtungen = baue_uebungen(analysis_id, uebergaenge)
+
     return {
-        "id": str(uuid4()),
+        "id": analysis_id,
         "fileName": filename,
         "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "mapperVersion": "honest-v2",
@@ -125,15 +133,20 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
             "confidence": overall if overall is not None else 0,
         },
 
-        "exercises": [
-            {
-                "title": "Transition Review",
-                "description": "Listen to the detected transition points and check whether the phrase timing feels natural.",
-                "xp": 40,
-            }
-        ],
+        # Bis zum 14.08.2026 stand hier EINE fest verdrahtete Vorlage
+        # ("Transition Review - listen to the detected transition points"),
+        # und die stand damit in allen 51 Reports, unabhaengig davon, was
+        # gemessen wurde. Jetzt entsteht jede Uebung aus einer Zahl, die im
+        # selben Report steht - und wo es keine gibt, bleibt die Liste leer.
+        # Herleitung der Regel: app/coach/uebungen.py.
+        "exercises": uebungen,
+        # Getrennt von den Uebungen: festgestellt, nicht bewertet. Camelot-
+        # Abstand und Energieloch sind messbar, aber es ist nicht belegt,
+        # dass sie stoeren (rho +0,05 / +0,07). Als Aufgabe formuliert
+        # waeren sie eine Behauptung.
+        "observations": beobachtungen,
 
-        "setTransitions": _map_set_transitions(analysis),
+        "setTransitions": uebergaenge,
         "library": analysis.get("library"),
         "loudness": analysis.get("loudness"),
         "totalDurationSec": round(float(analysis.get("duration", 0))),
