@@ -51,6 +51,8 @@ from app.audio.pipeline.scoring_version import (
     SCORING_CHANGELOG,
     SCORING_VERSION,
     UNSTAMPED,
+    naechste_revision,
+    revision_von,
 )
 from app.paths import RESULTS_DIR
 
@@ -101,6 +103,18 @@ def nachziehen(report: dict) -> tuple[dict, list[str]]:
         # richtige Reports anfassen, nur um einen Text zu duplizieren, der
         # aus der Version ableitbar ist (SCORING_CHANGELOG).
         neu["scoringNote"] = SCORING_CHANGELOG[soll]
+
+    # Revision hochzaehlen, sobald etwas berichtigt wurde - sonst bleibt die
+    # Korrektur auf der Platte liegen und erreicht keinen Browser, der die
+    # Analyse schon kennt (siehe scoring_version.ERSTE_REVISION).
+    #
+    # Auch wenn SONST nichts zu tun war: ein Report ganz ohne Revision kann
+    # nichts weitergeben, denn 0 > 0 ist falsch. Die erste Revision ist
+    # deshalb selbst eine Aenderung - einmalig, fuer den ganzen Bestand.
+    if aenderungen or revision_von(neu) == 0:
+        alt_rev = revision_von(neu)
+        neu["reportRevision"] = naechste_revision(neu)
+        aenderungen.append(f"reportRevision: {alt_rev or 'fehlt'} -> {neu['reportRevision']}")
 
     return neu, aenderungen
 

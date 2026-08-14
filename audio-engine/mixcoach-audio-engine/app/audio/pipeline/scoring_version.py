@@ -49,11 +49,48 @@ SCORING_CHANGELOG: dict[int, str] = {
 UNSTAMPED = 0
 
 
+# --- Die zweite Frage: ist diese Datei neuer als deine Kopie? -------------
+#
+# scoringVersion beantwortet "nach welcher Rechenvorschrift sind die Zahlen
+# entstanden". Der Korrekturweg (lib/scoring-version.ts im Frontend) braucht
+# aber eine andere Antwort: "ist die Fassung auf der Platte neuer als die im
+# Browser". Bis zum 13.08.2026 war beides dasselbe Feld, und das ging schief:
+#
+#   * Eine Rechenvorschrift-Aenderung erhoeht die Version -> kommt an.
+#   * Eine reine DATENKORREKTUR darf die Version nicht erhoehen (Regel oben:
+#     "wer eine Rechenvorschrift aendert, erhoeht sie") -> kommt NIE an.
+#
+# Genau der zweite Fall ist der haeufige. Der Ehrlichkeits-Backfill vom
+# 13.08. hat 23 Reports berichtigt; keine dieser Korrekturen haette einen
+# Browser erreicht, der die Analyse schon kannte. Dass die 44 anderen
+# durchkamen, war Zufall - jener Lauf hat Ehrlichkeit und Stempel in einem
+# Schreibvorgang gesetzt (0 -> 3) und sich damit versehentlich selbst
+# weitergabefaehig gemacht.
+#
+# Deshalb ein zweites, unabhaengiges Feld: reportRevision zaehlt, wie oft
+# DIESE Datei berichtigt wurde. Es sagt nichts ueber Vergleichbarkeit -
+# dafuer bleibt scoringVersion allein zustaendig.
+ERSTE_REVISION = 1
+
+
+def revision_von(report: dict) -> int:
+    """Wie oft wurde dieser Report berichtigt? Fehlend = 0."""
+    wert = report.get("reportRevision")
+    return wert if isinstance(wert, int) and wert > 0 else 0
+
+
+def naechste_revision(report: dict) -> int:
+    """Die Revision, die ein Berichtigungslauf schreiben muss."""
+    return max(revision_von(report), 0) + 1
+
+
 def scoring_stamp() -> dict:
     """Der Block, den die Pipeline in jeden Report schreibt."""
     return {
         "scoringVersion": SCORING_VERSION,
         "scoringNote": SCORING_CHANGELOG[SCORING_VERSION],
+        # Frisch gerechnet heisst Revision 1 - es gibt nichts zu berichtigen.
+        "reportRevision": ERSTE_REVISION,
     }
 
 

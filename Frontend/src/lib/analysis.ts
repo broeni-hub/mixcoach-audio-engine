@@ -75,6 +75,12 @@ export interface AnalysisResult {
    *  Fassung eine gespeicherte abloest, siehe lib/scoring-version.ts.
    *  Zur Laufzeit kam der Wert schon immer mit, er war nur nie deklariert. */
   scoringVersion?: number;
+  /** Wie oft DIESE Datei berichtigt wurde (app/audio/pipeline/
+   *  scoring_version.py). Unabhaengig von scoringVersion: die sagt, nach
+   *  welcher Rechenvorschrift die Zahlen entstanden, diese hier sagt, ob
+   *  die Fassung auf der Platte neuer ist als deine Kopie. Fehlt bei
+   *  Reports von vor dem 13.08.2026 - die gelten als Revision 0. */
+  reportRevision?: number;
   scores: AnalysisScores;
   timeline: TimelineEvent[];
   strengths: string[];

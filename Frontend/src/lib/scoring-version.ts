@@ -19,7 +19,10 @@
 /** Kein Stempel. Entspricht UNSTAMPED in scoring_version.py. */
 export const UNSTAMPED = 0;
 
-type MitVersion = { scoringVersion?: number | null } | null | undefined;
+type MitVersion = {
+  scoringVersion?: number | null;
+  reportRevision?: number | null;
+} | null | undefined;
 
 /** Version eines Reports, 0 wenn ungestempelt oder unbrauchbar. */
 export function versionVon(report: MitVersion): number {
@@ -27,15 +30,48 @@ export function versionVon(report: MitVersion): number {
   return typeof v === "number" && Number.isFinite(v) && v > 0 ? v : UNSTAMPED;
 }
 
+/** Wie oft dieser Report berichtigt wurde. Fehlend = 0. */
+export function revisionVon(report: MitVersion): number {
+  const r = report?.reportRevision;
+  return typeof r === "number" && Number.isFinite(r) && r > 0 ? r : 0;
+}
+
 /**
  * Loest `eingehend` die gespeicherte Fassung ab?
  *
- * Nur bei ECHT hoeherer Version. Gleichstand heisst ausdruecklich "nein":
- * zwei Reports derselben Rechenvorschrift sind gleichwertig, und ein
- * unnoetiger Austausch wuerde nur Flackern erzeugen. Ein ungestempelter
- * Eingang (0) loest nie etwas ab - er koennte aus jeder Epoche stammen.
+ * Zwei Fragen, zwei Felder:
+ *
+ *   scoringVersion  - nach welcher Rechenvorschrift sind die Zahlen
+ *                     entstanden? Hoehere Version loest ab.
+ *   reportRevision  - wie oft wurde DIESE Datei berichtigt? Bei gleicher
+ *                     Rechenvorschrift loest die hoehere Revision ab.
+ *
+ * Bis zum 13.08.2026 gab es nur die Version, und damit kam genau der
+ * haeufige Fall nie an: eine reine Datenkorrektur darf die Version nicht
+ * erhoehen (siehe scoring_version.py), also konnte sie sich auch nicht
+ * weitergeben. Der Ehrlichkeits-Backfill hat 23 Reports berichtigt, von
+ * denen kein einziger einen Browser erreicht haette, der sie schon kannte.
+ *
+ * Die Revision entscheidet ZUERST, und das ist kein Kompromiss, sondern die
+ * genauere Ordnung: innerhalb EINER Analyse-id ist sie eine echte
+ * Zeitreihenfolge. Die Pipeline schreibt die Datei genau einmal (Revision 1,
+ * dabei entsteht die id ueberhaupt erst), danach schreibt nur noch ein
+ * Berichtigungslauf, und jeder zaehlt hoch. Eine hoehere Revision ist damit
+ * immer die spaetere Fassung derselben Analyse - auch dann, wenn die
+ * Berichtigung die scoringVersion GESENKT hat.
+ *
+ * Genau dieser Fall ist real: sechs Reports trugen einen Stempel 3, den
+ * niemand belegen konnte (Werte vom 02.07., kein composite_quality_score).
+ * Ihn zu entfernen war richtig - aber nach einer reinen Versionsordnung
+ * haette diese Korrektur nie einen Browser erreicht, weil 0 > 3 falsch ist.
+ *
+ * Die scoringVersion bleibt der Rueckfall fuer Altbestand, den noch nie ein
+ * revisionsbewusstes Werkzeug angefasst hat (beide Revisionen 0).
  */
 export function loestAb(gespeichert: MitVersion, eingehend: MitVersion): boolean {
+  const altR = revisionVon(gespeichert);
+  const neuR = revisionVon(eingehend);
+  if (neuR !== altR) return neuR > altR;
   return versionVon(eingehend) > versionVon(gespeichert);
 }
 

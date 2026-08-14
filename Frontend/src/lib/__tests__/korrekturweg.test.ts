@@ -12,7 +12,7 @@
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-import { UNSTAMPED, versionVon, loestAb, mitNutzerstand } from "../scoring-version";
+import { UNSTAMPED, versionVon, revisionVon, loestAb, mitNutzerstand } from "../scoring-version";
 
 const KEY = "mixcoach.state.v1";
 
@@ -27,10 +27,15 @@ function speicherStellen() {
   });
   // addEventListener wird gebraucht, weil api/provider.ts sich schon beim
   // Import auf "mixcoach:engine-status" anmeldet (ueber store.ts mitgezogen).
+  // location ebenso: remoteProvider.getBaseUrl() liest beim Import
+  // window.location.hostname. Ohne diese Felder haengt der Test an der
+  // Import-Reihenfolge - ist window noch gar nicht gestellt, greift dort der
+  // "typeof window === undefined"-Zweig und alles geht gut.
   vi.stubGlobal("window", {
     dispatchEvent: () => true,
     addEventListener: () => {},
     removeEventListener: () => {},
+    location: { hostname: "localhost", origin: "http://localhost" },
   });
   return daten;
 }
@@ -57,10 +62,38 @@ describe("scoring-version: die Regel selbst", () => {
     expect(versionVon({ scoringVersion: null })).toBe(UNSTAMPED);
   });
 
-  it("loest nur bei echt hoeherer Version ab", () => {
+  it("loest ohne Revisionen nur bei echt hoeherer Version ab", () => {
     expect(loestAb({}, { scoringVersion: 3 })).toBe(true);
     expect(loestAb({ scoringVersion: 3 }, { scoringVersion: 3 })).toBe(false);
     expect(loestAb({ scoringVersion: 3 }, {})).toBe(false);
+    expect(loestAb({ scoringVersion: 3 }, { scoringVersion: 2 })).toBe(false);
+  });
+
+  it("liest die Revision, fehlend gilt als 0", () => {
+    expect(revisionVon({ reportRevision: 2 })).toBe(2);
+    expect(revisionVon({})).toBe(0);
+    expect(revisionVon({ reportRevision: null })).toBe(0);
+  });
+
+  it("die hoehere Revision entscheidet vor der Version", () => {
+    // Der Kern von B: eine Datenkorrektur darf die scoringVersion nicht
+    // erhoehen, muss aber trotzdem ankommen.
+    expect(loestAb({ scoringVersion: 3, reportRevision: 1 },
+                   { scoringVersion: 3, reportRevision: 2 })).toBe(true);
+    expect(loestAb({ scoringVersion: 3, reportRevision: 2 },
+                   { scoringVersion: 3, reportRevision: 1 })).toBe(false);
+    expect(loestAb({ scoringVersion: 3, reportRevision: 2 },
+                   { scoringVersion: 3, reportRevision: 2 })).toBe(false);
+  });
+
+  it("eine gesenkte Version kommt mit hoeherer Revision trotzdem an", () => {
+    // Die sechs Reports, deren unbelegter Stempel 3 entfernt wurde. Nach
+    // reiner Versionsordnung waeren sie fuer immer unkorrigierbar gewesen.
+    expect(loestAb({ scoringVersion: 3, reportRevision: 0 },
+                   { reportRevision: 2 })).toBe(true);
+  });
+
+  it("ein Altbestand ohne Revision verdraengt keine hoehere Version", () => {
     expect(loestAb({ scoringVersion: 3 }, { scoringVersion: 2 })).toBe(false);
   });
 
