@@ -64,6 +64,16 @@ const TransitionZ = z
     harmonic_label: z.string(),
     bass_clash_score: z.number(),
     phrase_alignment_score: z.number(),
+    // Die zwei Groessen mit belegtem Zusammenhang zum menschlichen Urteil -
+    // und ausgerechnet die kannte der Prompt bis zum 15.08.2026 nicht.
+    // Gemessen an 230 zugeordneten Bewertungen (Spearman):
+    //   |loudness_jump_db|    -0,339   <- der staerkste
+    //   beat_alignment_score  +0,325
+    //   bass_clash_score      nie erhoben, steht aber seit jeher drin
+    // Nullable wie der Rest seit dem 13.08.: fehlt der Wert, laesst der
+    // Prompt die Zeile weg, statt eine Zahl zu erfinden.
+    loudness_jump_db: z.number().nullable().optional(),
+    beat_alignment_score: z.number().nullable().optional(),
   })
   .optional();
 
@@ -242,13 +252,34 @@ function buildPrompt(data: z.infer<typeof InputZ>) {
     )
     .join("\n") || "(no rule-engine findings triggered)";
 
+  // Die belegten Groessen zuerst und ausdruecklich als solche benannt - das
+  // Modell soll den Pegelsprung PRIORISIEREN, nicht nur erwaehnen. Fehlt ein
+  // Wert, faellt die Zeile weg (nullable seit 13.08.), statt eine Zahl zu
+  // erfinden.
+  const belegteZeilen = t
+    ? [
+        t.loudness_jump_db != null
+          ? `- Level jump into the incoming track: ${t.loudness_jump_db > 0 ? "+" : ""}`
+            + `${t.loudness_jump_db.toFixed(1)} dB (0 dB is a seamless match; `
+            + `3 dB or more is clearly audible). THIS IS THE STRONGEST SIGNAL `
+            + `available - of everything measured here it tracks the DJ's own `
+            + `judgement best. Lead with it when it is 3 dB or more.`
+          : null,
+        t.beat_alignment_score != null
+          ? `- Beat alignment during the blend: ${t.beat_alignment_score}/100 `
+            + `(higher is better). Second strongest signal, but it varies little `
+            + `between transitions - do not build the whole answer on it.`
+          : null,
+      ].filter(Boolean).join("\n")
+    : "";
+
   const transitionBlock = t
     ? `
 Transition (Track A → Track B):
 - Cue point: ${t.cue_point_sec.toFixed(1)}s, overlap window: ${t.overlap_sec.toFixed(1)}s
 - BPM: A=${t.bpm_a} vs B=${t.bpm_b}
 - Key: A=${t.key_a} vs B=${t.key_b} (Camelot distance ${t.camelot_distance}, ${t.harmonic_label})
-- Bass clash score: ${t.bass_clash_score}/100 (lower is better)
+- Bass clash score: ${t.bass_clash_score}/100 (lower is better)${belegteZeilen ? "\n" + belegteZeilen : ""}
 - NOT measured for this transition: tempo drift and phrase alignment. Do not
   comment on beatmatching accuracy or phrase/bar alignment - there is no
   reliable measurement behind them.`
