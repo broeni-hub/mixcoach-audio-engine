@@ -34,6 +34,14 @@ from app.api.relabel import router as relabel_router  # noqa: E402
 
 app.include_router(relabel_router)
 
+# Blinder Vergleich alte Vorlage / belegte Uebung (J7) - dieselbe Bauart und
+# derselbe Grund wie oben. Ebenfalls ein lokales Messwerkzeug ohne Sitzung:
+# bringt F2 die Auth-Pflicht, gehoert dieser Router in dieselbe Ausnahme wie
+# der Relabel-Router.
+from app.api.uebungen_bewertung import router as uebungen_bewertung_router  # noqa: E402
+
+app.include_router(uebungen_bewertung_router)
+
 
 @app.get("/health")
 def health():
