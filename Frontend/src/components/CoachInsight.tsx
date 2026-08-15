@@ -6,6 +6,7 @@ import {
   Sparkles, Play, BarChart3, Clock, Zap, Upload,
 } from "lucide-react";
 import type { CoachExercise, CoachInsightBundle } from "@/lib/coach";
+import { KRITERIUM_NICHT_PRUEFBAR } from "@/lib/coach";
 
 /**
  * The Coach Card.
@@ -164,6 +165,18 @@ export function ExerciseCard({
                 <li key={i} className="text-foreground/90">· {c}</li>
               ))}
             </ul>
+            {/* 6 der 10 Uebungen nennen hier eine Groesse, die die Analyse
+                nicht berechnet ("EQ score >= 85", "Creativity score >= 80").
+                Die App versprach damit ein Ziel, das sie nicht nachpruefen
+                kann. Der Text bleibt stehen - er sagt jetzt nur dazu, dass
+                die Einschaetzung beim DJ liegt. Welche Kriterien stattdessen
+                gelten sollen, steht in ENTSCHEIDUNG_UEBUNGSBIBLIOTHEK.md und
+                ist Sebastians Entscheidung. */}
+            {exercise.criterionVerifiable === false && (
+              <p className="mt-2 border-t border-border/60 pt-2 text-xs leading-snug text-muted-foreground">
+                {KRITERIUM_NICHT_PRUEFBAR}
+              </p>
+            )}
           </div>
         </div>
 

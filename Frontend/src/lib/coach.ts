@@ -23,13 +23,36 @@ export interface CoachExercise {
   instructions: string[];
   uploadAsk: string;
   successCriteria: string[];
+  /**
+   * Kann MixCoach das Erfolgskriterium ueberhaupt nachpruefen?
+   *
+   * false heisst: es nennt eine Groesse, die die Analyse nicht berechnet.
+   * 6 der 10 Uebungen sind so - sie versprechen ein Ziel, das die App nicht
+   * messen kann ("Phrase alignment score >= 85", "EQ score >= 85",
+   * "Creativity score >= 80", "BPM drift <= 1.5 %"). Dieselbe Klasse wie
+   * die alte Vorlage "Transition Review", eine Seite weiter.
+   *
+   * Gesetzt nur dort, wo BELEGT ist, dass die Groesse nicht misst. Wie die
+   * Kriterien stattdessen lauten sollen, ist eine Inhaltsentscheidung -
+   * siehe ENTSCHEIDUNG_UEBUNGSBIBLIOTHEK.md.
+   */
+  criterionVerifiable?: false;
+  /** Warum nicht - kurz, fuer die Anzeige daneben. */
+  criterionNote?: string;
 }
+
+/** Der Hinweis, den die Trainingsseite bei criterionVerifiable: false zeigt. */
+export const KRITERIUM_NICHT_PRUEFBAR =
+  "Dieses Ziel kann MixCoach nicht nachprüfen — schätz selbst ein.";
 
 // ---------- Exercise library ----------
 
 export const EXERCISE_LIBRARY: CoachExercise[] = [
   {
     id: "phrase-16",
+    criterionVerifiable: false,
+    criterionNote:
+      "phrase_alignment_score korreliert mit rho -0,037; die Note timing steht seit 31.07.2026 auf None (K1)",
     name: "16-Bar Phrase Challenge",
     targetSkill: "phrase",
     targetSkillTitle: "Transition Flow",
@@ -46,6 +69,9 @@ export const EXERCISE_LIBRARY: CoachExercise[] = [
   },
   {
     id: "bass-swap",
+    criterionVerifiable: false,
+    criterionNote:
+      "eq wird nicht berechnet - 0 von 51 Reports",
     name: "16-Bar Bass Swap",
     targetSkill: "eq",
     targetSkillTitle: "Clean Mixing",
@@ -62,6 +88,9 @@ export const EXERCISE_LIBRARY: CoachExercise[] = [
   },
   {
     id: "bass-patience",
+    criterionVerifiable: false,
+    criterionNote:
+      "eq wird nicht berechnet; bass_overlap_score ist zu 15,5 % befuellt und zu 90 % exakt 0 oder 100",
     name: "Bass Patience Drill",
     targetSkill: "eq",
     targetSkillTitle: "Clean Mixing",
@@ -110,6 +139,9 @@ export const EXERCISE_LIBRARY: CoachExercise[] = [
   },
   {
     id: "warmup-flow",
+    criterionVerifiable: false,
+    criterionNote:
+      "bpm_drift ist in 89 % der Uebergaenge exakt 0,0 - das Kriterium ist immer erfuellt",
     name: "Club Warm-Up Flow",
     targetSkill: "energy",
     targetSkillTitle: "Crowd Momentum",
@@ -126,6 +158,9 @@ export const EXERCISE_LIBRARY: CoachExercise[] = [
   },
   {
     id: "freestyle-review",
+    criterionVerifiable: false,
+    criterionNote:
+      "creativity wird nicht berechnet - 0 von 51 Reports",
     name: "Freestyle Set Review",
     targetSkill: "creativity",
     targetSkillTitle: "Creativity",
@@ -142,6 +177,9 @@ export const EXERCISE_LIBRARY: CoachExercise[] = [
   },
   {
     id: "sync-hold",
+    criterionVerifiable: false,
+    criterionNote:
+      "beruft sich auf die Note timing, die seit 31.07.2026 auf None steht (K1)",
     name: "60-Second Sync Hold",
     targetSkill: "beatmatching",
     targetSkillTitle: "Your Timing",
