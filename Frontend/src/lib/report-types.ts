@@ -57,6 +57,39 @@ export interface ExerciseRecommendation {
   difficulty?: number;
   /** Optional CTA target */
   href?: string;
+
+  // --- Der Beleg (app/coach/uebungen.py, seit 14.08.2026) -----------------
+  // Jede Uebung aus der Engine ruht auf genau einer gemessenen Zahl. Diese
+  // Felder tragen sie mit, damit die Seite die Stelle anspringen und den
+  // Beleg zeigen kann - report-view.ts hat sie bis zum 15.08.2026
+  // weggeworfen, und damit war eine Uebung nur noch Text.
+  /** Sekunde im Set, an der die Uebung ansetzt - anspringbar im Player. */
+  atSec?: number;
+  /** Nummer des Uebergangs im selben Report. */
+  transitionIndex?: number;
+  /** Name der Messgroesse, z.B. "loudness_jump_db". */
+  metric?: string;
+  /** Der gemessene Wert. Steht so auch im Report unter transitionIndex. */
+  value?: number;
+  /** Der anzustrebende Wert. */
+  target?: number;
+}
+
+/**
+ * Festgestellt, nicht bewertet.
+ *
+ * Camelot-Abstand und Energieloch sind messbar, aber es ist NICHT belegt,
+ * dass sie den DJ stoeren (Spearman +0,05 und +0,07 gegen 230 Bewertungen).
+ * Sie stehen deshalb getrennt von den Uebungen und ohne Handlungs-
+ * aufforderung. Wer sie in dieselbe Liste kippt, macht aus einer
+ * Beobachtung eine Behauptung.
+ */
+export interface Observation {
+  text: string;
+  atSec?: number;
+  transitionIndex?: number;
+  metric?: string;
+  value?: number;
 }
 
 export interface CurvePoint {
@@ -134,6 +167,8 @@ export interface AnalysisResult {
   weaknesses?: string[];
   coach?: CoachFeedback | null;
   exercises?: ExerciseRecommendation[];
+  /** Beobachtungen - getrennt von den Uebungen, siehe Observation. */
+  observations?: Observation[];
   /** Provider name — "local", "remote", "mock". Used for diagnostics. */
   source?: "local" | "remote" | "mock" | "cache";
 }

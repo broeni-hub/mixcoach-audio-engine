@@ -25,6 +25,11 @@ function num(n: unknown): number | null {
   return typeof n === "number" && isFinite(n) ? n : null;
 }
 
+/** Wie num(), aber fuer optionale Felder: fehlt heisst fehlt, nicht null. */
+function numOpt(n: unknown): number | undefined {
+  return typeof n === "number" && isFinite(n) ? n : undefined;
+}
+
 export function toReportView(a: LegacyAnalysisResult): ReportView {
   const skills: SkillScore[] = (["beatmatching", "eq", "flow", "timing", "musicality", "creativity"] as const).map((k) => ({
     key: k,
@@ -61,7 +66,28 @@ export function toReportView(a: LegacyAnalysisResult): ReportView {
           confidence: num(a.feedback.confidence),
         }
       : null,
-    exercises: (a.exercises ?? []).map((e) => ({ title: e.title, description: e.description, xp: e.xp })),
+    // Bis zum 15.08.2026 standen hier nur title/description/xp - der Beleg
+    // (metric, value, target) und die Sprungmarke (atSec, transitionIndex)
+    // fielen still weg. Die Zahl stand zwar im Text, aber die Seite konnte
+    // nichts damit anfangen: kein Anspringen, keine Anzeige des Belegs.
+    exercises: (a.exercises ?? []).map((e) => ({
+      title: e.title,
+      description: e.description,
+      xp: e.xp,
+      atSec: numOpt(e.atSec),
+      transitionIndex: numOpt(e.transitionIndex),
+      metric: e.metric,
+      value: numOpt(e.value),
+      target: numOpt(e.target),
+    })),
+    // Getrennte Liste, nicht dieselbe: "das ist so" ist keine Aufgabe.
+    observations: (a.observations ?? []).map((o) => ({
+      text: o.text,
+      atSec: numOpt(o.atSec),
+      transitionIndex: numOpt(o.transitionIndex),
+      metric: o.metric,
+      value: numOpt(o.value),
+    })),
   };
 
   if (isSet) {

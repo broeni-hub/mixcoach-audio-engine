@@ -86,7 +86,22 @@ export interface AnalysisResult {
   strengths: string[];
   weaknesses: string[];
   feedback: AIFeedback;
-  exercises: { title: string; description: string; xp: number }[];
+  /** Uebungen aus der Engine (app/coach/uebungen.py). Jede ruht auf genau
+   *  einer gemessenen Zahl: metric/value sind dort Pflicht, atSec macht die
+   *  Stelle anspringbar. Die Felder sind optional, weil Reports von vor dem
+   *  14.08.2026 sie nicht haben - dort stand eine feste Vorlage. */
+  exercises: {
+    title: string; description: string; xp: number;
+    atSec?: number; transitionIndex?: number;
+    metric?: string; value?: number; target?: number;
+  }[];
+  /** Festgestellt, nicht bewertet - und ausdruecklich ohne Aufforderung.
+   *  Getrennt von exercises, weil fuer diese Groessen kein Zusammenhang mit
+   *  dem menschlichen Urteil belegt ist (Spearman +0,05 / +0,07). */
+  observations?: {
+    text: string; atSec?: number; transitionIndex?: number;
+    metric?: string; value?: number;
+  }[];
   // Optional 2-track transition data
   trackB?: { fileName: string; bpm: number; key: string };
   transition?: TransitionMetrics;

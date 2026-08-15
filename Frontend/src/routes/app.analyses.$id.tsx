@@ -186,6 +186,7 @@ function AnalysisDetail() {
   const topWin = trimLine(wins[0]);
   const topIssue = trimLine(issues[0]);
   const exercises = view.exercises ?? [];
+  const observations = view.observations ?? [];
   const focusExercise: ExerciseRecommendation | null = exercises[0] ?? null;
   const todaysFocus = trimLine(focusExercise?.title ?? issues[0] ?? "Run another transition to surface a focus.") ?? "Run another transition to surface a focus.";
 
@@ -566,9 +567,38 @@ function AnalysisDetail() {
                       {ex.xp != null && <Badge variant="secondary">+{ex.xp} XP</Badge>}
                     </div>
                     <p className="text-sm text-muted-foreground mt-2">{ex.description}</p>
+                    <UebungAnhoeren atSec={ex.atSec} />
                   </div>
                 ))}
               </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Beobachtungen: festgestellt, nicht bewertet. Bewusst eine eigene
+            Karte und nicht die Uebungsliste - fuer Camelot-Abstand und
+            Energieloch ist kein Zusammenhang mit dem menschlichen Urteil
+            belegt (Spearman +0,05 / +0,07). Als Aufgabe formuliert waeren
+            sie eine Behauptung. */}
+        {observations.length > 0 && (
+          <Card className="glass">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Activity className="h-4 w-4 text-muted-foreground" /> Aufgefallen ist noch
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-xs text-muted-foreground mb-3">
+                Gemessen, aber ohne Beleg, dass es stört — deshalb keine Aufgabe.
+              </p>
+              <ul className="space-y-2">
+                {observations.map((o, i) => (
+                  <li key={i} className="flex items-start justify-between gap-3 text-sm text-muted-foreground">
+                    <span>{o.text}</span>
+                    <UebungAnhoeren atSec={o.atSec} />
+                  </li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
         )}
@@ -592,6 +622,36 @@ function trimLine(s?: string | null): string | null {
   if (!s) return null;
   const first = s.split(/(?<=[.!?])\s+/)[0]?.trim() ?? s.trim();
   return first.length > 160 ? first.slice(0, 157) + "…" : first;
+}
+
+/**
+ * Springt im Player an die Stelle, auf die sich eine Uebung bezieht.
+ *
+ * Dieselbe Konvention wie SetTransitionsExplorer und TrackLane: das Event
+ * "mixcoach:listen" mit 10 s Vorlauf, Waveform.tsx hoert darauf. Ohne
+ * atSec kommt gar nichts - die Uebung bleibt dann Text, aber sie
+ * behauptet auch keine Sprungmarke, die es nicht gibt.
+ *
+ * atSec wurde bis zum 15.08.2026 in report-view.ts weggeworfen; die
+ * Engine liefert es seit dem 14.08. fuer jede Uebung mit.
+ */
+function UebungAnhoeren({ atSec }: { atSec?: number }) {
+  if (atSec == null) return null;
+  const springen = () =>
+    window.dispatchEvent(
+      new CustomEvent("mixcoach:listen", { detail: { sec: Math.max(0, atSec - 10) } }),
+    );
+  return (
+    <Button variant="ghost" size="sm" className="mt-2 gap-1.5 px-2" onClick={springen}>
+      <Timer className="h-3.5 w-3.5" />
+      {mmss(atSec)} anhören
+    </Button>
+  );
+}
+
+function mmss(sec: number): string {
+  const g = Math.max(0, Math.round(sec));
+  return `${Math.floor(g / 60)}:${String(g % 60).padStart(2, "0")}`;
 }
 
 function estimateMinutes(ex: ExerciseRecommendation | null): number {
