@@ -123,15 +123,38 @@ export function CareerPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold leading-tight">{s.def.title}</h3>
-                        <p className="text-xs text-muted-foreground">Lv {s.level} · {s.xp} XP</p>
+                        {/* Level und XP nur, wo etwas gemessen wurde - sonst
+                            behauptet "Lv 1 · 0 XP" einen Anfang, den es nicht
+                            gibt. */}
+                        {s.measured && (
+                          <p className="text-xs text-muted-foreground">Lv {s.level} · {s.xp} XP</p>
+                        )}
                       </div>
                     </div>
-                    <Badge variant="outline" className={`gap-1 ${trendColor}`}>
-                      <Trend className="h-3 w-3" />
-                      {s.recentDelta > 0 ? `+${s.recentDelta}` : s.recentDelta}
-                    </Badge>
+                    {s.measured && (
+                      <Badge variant="outline" className={`gap-1 ${trendColor}`}>
+                        <Trend className="h-3 w-3" />
+                        {s.recentDelta > 0 ? `+${s.recentDelta}` : s.recentDelta}
+                      </Badge>
+                    )}
                   </div>
 
+                  {/* Vier der sechs Achsen sind in JEDEM der 51 Reports leer.
+                      Fuer sie Level, Fortschrittsbalken und "Weak spot" zu
+                      zeigen hiesse: gemessen, und du stehst ganz unten.
+                      Gemessen wurde aber nichts. Die Achse bleibt stehen und
+                      sagt, was Sache ist. */}
+                  {!s.measured ? (
+                    <div className="rounded-lg border border-border/60 bg-secondary/20 p-3">
+                      <div className="text-sm font-medium">Nicht gemessen</div>
+                      {s.notMeasuredReason && (
+                        <div className="mt-1 text-xs leading-snug text-muted-foreground">
+                          {s.notMeasuredReason}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                  <>
                   <div>
                     <div className="flex justify-between text-xs text-muted-foreground mb-1.5">
                       <span>Progress</span>
@@ -158,6 +181,8 @@ export function CareerPage() {
                       <div>{s.exercise.title} — {s.exercise.description}</div>
                     </div>
                   </div>
+                  </>
+                  )}
                 </CardContent>
               </Card>
             );

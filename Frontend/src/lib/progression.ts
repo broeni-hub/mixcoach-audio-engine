@@ -109,9 +109,30 @@ export interface SkillStat {
   avgScore: number; // 0..100 across history
   recentDelta: number; // recent avg − older avg
   sampleCount: number;
+  /** Gibt es ueberhaupt einen gemessenen Wert auf dieser Achse?
+   *
+   *  Vier der sechs Achsen sind in JEDEM der 51 Reports leer
+   *  (beatmatching, eq, timing, creativity - je 0/51). Ohne dieses Feld
+   *  zeigt die Oberflaeche fuer sie Level 1 und 0 % Fortschritt, und das
+   *  liest sich wie "gemessen, und du bist ganz unten" statt wie "nicht
+   *  gemessen". Dieselbe Ehrlichkeitslinie wie bei notMeasured im Report
+   *  und bei den Beobachtungen. */
+  measured: boolean;
+  /** Warum die Achse leer ist - kurz, fuer die Anzeige daneben. */
+  notMeasuredReason?: string;
   weakness: string;
   exercise: SkillDef["exercise"];
 }
+
+/** Warum eine Achse nichts zeigt. Nach scoreField, nicht nach Anzeigename. */
+const NICHT_GEMESSEN: Record<string, string> = {
+  beatmatching: "seit 31.07.2026 bewusst ohne Wert: bpm_drift ist in 89 % der "
+    + "Übergänge exakt 0,0 und unterscheidet keine zwei DJs (K1)",
+  timing: "seit 31.07.2026 bewusst ohne Wert: das Phrasenraster wandert weiter "
+    + "als die Größe, die es messen soll (K1)",
+  eq: "wird von der Analyse noch nicht berechnet",
+  creativity: "wird von der Analyse noch nicht berechnet",
+};
 
 const SKILL_XP_PER_LEVEL = 200;
 
@@ -126,12 +147,20 @@ export function computeSkillStats(state: AppState): SkillStat[] {
   const older = all.slice(5);
 
   return SKILLS.map((def) => {
-    const scores = all
-      .map((a) => Number(a.scores[def.scoreField]))
-      .filter((n) => Number.isFinite(n));
+    // ACHTUNG, hier steckte ein stiller Fehler: Number(null) ist 0, und
+    // Number.isFinite(0) ist true. Die vier nie befuellten Achsen bekamen
+    // damit fuer JEDE Analyse eine 0 als Messwert - die Karriere-Seite
+    // meldete "Samples: 51" fuer etwas, das nie gemessen wurde, und der
+    // Durchschnitt wurde von erfundenen Nullen gebildet. Erst pruefen, ob
+    // ueberhaupt eine Zahl dasteht, dann umwandeln.
+    const werte = (liste: typeof all) => liste
+      .map((a) => a.scores[def.scoreField])
+      .filter((n): n is number => typeof n === "number" && Number.isFinite(n));
+
+    const scores = werte(all);
     const avgScore = Math.round(avg(scores));
-    const recentAvg = avg(recent.map((a) => Number(a.scores[def.scoreField])).filter(Number.isFinite));
-    const olderAvg = avg(older.map((a) => Number(a.scores[def.scoreField])).filter(Number.isFinite));
+    const recentAvg = avg(werte(recent));
+    const olderAvg = avg(werte(older));
     const recentDelta = older.length > 0 && recent.length > 0
       ? Math.round(recentAvg - olderAvg)
       : 0;
@@ -143,6 +172,7 @@ export function computeSkillStats(state: AppState): SkillStat[] {
     const xpToNext = SKILL_XP_PER_LEVEL - inLevel;
     const progress = Math.round((inLevel / SKILL_XP_PER_LEVEL) * 100);
 
+    const measured = scores.length > 0;
     return {
       def,
       level,
@@ -152,6 +182,13 @@ export function computeSkillStats(state: AppState): SkillStat[] {
       avgScore,
       recentDelta,
       sampleCount: scores.length,
+      measured,
+      // Rueckfalltext, damit keine Achse je ein blankes "Nicht gemessen"
+      // ohne Grund zeigt - auch eine, die heute immer befuellt ist.
+      notMeasuredReason: measured
+        ? undefined
+        : (NICHT_GEMESSEN[def.scoreField]
+           ?? "für die vorliegenden Aufnahmen wurde dieser Wert nicht berechnet"),
       weakness: def.weaknessCopy,
       exercise: def.exercise,
     };
