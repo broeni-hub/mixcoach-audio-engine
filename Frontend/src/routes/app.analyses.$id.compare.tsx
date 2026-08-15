@@ -18,10 +18,15 @@ import type { SetTransition } from "@/lib/set-analysis";
 
 export const Route = createFileRoute("/app/analyses/$id/compare")({
   head: () => ({ meta: [{ title: "Compare transitions — MixCoach" }] }),
-  validateSearch: (s: Record<string, unknown>) => ({
-    a: typeof s.a === "string" ? s.a : undefined,
-    b: typeof s.b === "string" ? s.b : undefined,
-  }),
+  // Optionaler Rueckgabetyp - sonst haelt der Router ?a= und ?b= fuer
+  // Pflichtparameter und verlangt an jedem Link ein search-Prop. Gleiche
+  // Ursache wie in app.analyses.$id.tsx.
+  validateSearch: (s: Record<string, unknown>): { a?: string; b?: string } => {
+    const raus: { a?: string; b?: string } = {};
+    if (typeof s.a === "string") raus.a = s.a;
+    if (typeof s.b === "string") raus.b = s.b;
+    return raus;
+  },
   component: CompareTransitions,
   notFoundComponent: () => (
     <div className="max-w-md mx-auto text-center py-16">

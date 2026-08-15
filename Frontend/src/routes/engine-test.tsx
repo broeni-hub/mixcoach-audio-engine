@@ -64,7 +64,10 @@ function EngineTestPage() {
         </pre>
       )}
 
-      {result && (
+      {/* result ist unknown - `result && (...)` haette selbst den Typ
+          unknown, und das ist kein ReactNode. Der Vergleich macht daraus
+          ein boolean. */}
+      {result != null && (
         <pre style={{ marginTop: 24, whiteSpace: "pre-wrap" }}>
           {JSON.stringify(result, null, 2)}
         </pre>

@@ -31,12 +31,15 @@ import { NextActionBar } from "@/components/NextActionBar";
 
 export const Route = createFileRoute("/app/analyses/$id")({
   head: () => ({ meta: [{ title: "Analysis Report — MixCoach" }] }),
-  validateSearch: (search: Record<string, unknown>) => ({
-    listen:
-      search.listen != null && !Number.isNaN(Number(search.listen))
-        ? Number(search.listen)
-        : undefined,
-  }),
+  // Rueckgabetyp mit OPTIONALEM listen. Vorher stand hier ein Objekt, das
+  // den Schluessel immer trug (Wert ggf. undefined) - damit hielt der Router
+  // ?listen= fuer einen Pflicht-Suchparameter und verlangte an JEDEM Link
+  // auf diese Route ein search-Prop. Das waren 15 der 16 tsc-Fehler, quer
+  // durch 11 Dateien. Die Ursache sass hier, nicht dort.
+  validateSearch: (search: Record<string, unknown>): { listen?: number } => {
+    const sekunde = Number(search.listen);
+    return search.listen != null && !Number.isNaN(sekunde) ? { listen: sekunde } : {};
+  },
   component: AnalysisDetail,
 });
 
