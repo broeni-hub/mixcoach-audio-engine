@@ -21,6 +21,10 @@ from app.jobs import feedback_store
 # Eine Quelle fuer Schwelle und Ziel - sonst mahnt der Report bei 3 dB und
 # das Profil bei einem anderen Wert (siehe app/coach/uebungen.py).
 from app.coach.uebungen import SCHWELLE_PEGELSPRUNG_DB, ZIEL_PEGELSPRUNG_DB
+# Nur vergleichbare Reports duerfen in eine Verlaufskurve - siehe
+# pegel_zeitreihe(). Zwei Zahlen aus verschiedenen Rechenvorschriften
+# nebeneinander zu zeichnen ist genau der Fehler, gegen den das Modul steht.
+from app.audio.pipeline.scoring_version import SCORING_VERSION, vergleichbar
 
 # Mindest-Belege, bevor ein Muster behauptet wird.
 MIN_PATTERN_SAMPLES = 4
@@ -161,6 +165,162 @@ def _trends(timeline: List[Dict]) -> Dict:
             "delta": round(_mean(recent) - _mean(before), 1),
         }
     return trends
+
+
+# Reine Testaufnahmen. Sie stehen mit Pegelsprung 0,00 dB im Bestand (13
+# Reports) und wuerden als makellose Sets ganz rechts in der Kurve landen -
+# also genau dort, wo der Fortschritt abgelesen wird.
+TESTDATEIEN = {"mix.wav", "synthetic_mix.wav"}
+
+
+def _selbst_aufgenommen(dateiname: str) -> bool:
+    """Ist das eine eigene Aufnahme - oder ein fremdes Set zum Studieren?
+
+    Das ist eine HEURISTIK, und sie braucht Sebastians Bestaetigung. Sie
+    steht hier trotzdem, weil die Alternative schlechter ist: im Bestand
+    liegen 19 Aufnahmen mit Pegelwerten, sechs davon sind fremde DJ-Sets
+    (Dixon, Four Tet, Joris Voorn, RUEFUEUS DU SOL, Be Svendsen). Die sind
+    professionell gemastert UND liegen zeitlich vorn:
+
+        Joris Voorn  0,50 dB      Dixon WE2  0,95 dB
+        eigene Aufnahmen derselben Woche  2,10 bis 3,60 dB
+
+    Nimmt man sie mit, faellt der Trend von deutlich auf -0,30 dB
+    zusammen - die Kurve sagte dann "kaum Fortschritt", obwohl die eigenen
+    Aufnahmen etwas anderes zeigen. Das waere keine neutrale Messung,
+    sondern eine falsche.
+
+    Unterschieden wird an der Endung: eigene Aufnahmen kommen als .wav vom
+    Recorder, studierte Sets als .mp3 aus dem Netz. Im Bestand trennt das
+    exakt 13 zu 6. Es ist trotzdem nur ein Indiz - wer ein eigenes Set als
+    mp3 ablegt, faellt heraus. Jede Aufnahme traegt deshalb ownRecording
+    mit, und der Zaehler steht in der Antwort: nichts davon ist unsichtbar.
+    """
+    return dateiname.lower().endswith(".wav")
+
+# Die Schwelle (SCHWELLE_PEGELSPRUNG_DB) kommt aus app/coach/uebungen.py und
+# ist oben schon importiert: dieselbe Grenze wie bei den Uebungen und bei der
+# Fortschrittsmeldung in fdb1780 - eine Grenze fuer Messung und Coaching.
+
+
+def _pegelspruenge(result: Dict) -> List[float]:
+    """Betraege aller gemessenen Pegelspruenge eines Reports."""
+    raus = []
+    for t in _filtered_transitions(result):
+        wert = t.get("loudness_jump_db")
+        if isinstance(wert, (int, float)):
+            raus.append(abs(float(wert)))
+    return raus
+
+
+def _median(werte: List[float]) -> Optional[float]:
+    if not werte:
+        return None
+    s = sorted(werte)
+    m = len(s) // 2
+    return s[m] if len(s) % 2 else (s[m - 1] + s[m]) / 2
+
+
+def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
+    """Pegel-Sauberkeit je AUFNAHME ueber die Zeit.
+
+    Drei Regeln, jede gegen einen Fehler, der die Kurve verfaelschen wuerde:
+
+    1. ENTDOPPELN nach fileName. Es gibt 51 Reports, aber nur 21 Aufnahmen -
+       REC001 allein liegt elfmal vor. Eine Kurve ueber Reports zaehlt sie
+       elfmal. Denselben Fehler hat die Referenzmetrik einmal gemacht und
+       faehrt seitdem --mode dedup.
+       Bei mehreren Analysen derselben Aufnahme gilt die NEUESTE (sie rechnet
+       nach der aktuellsten Vorschrift); als Zeitpunkt gilt der FRUEHESTE
+       Lauf, denn das ist, wann diese Aufnahme entstanden ist. Ohne die
+       Trennung wanderte eine alte Aufnahme allein durch ein Nachrechnen
+       nach rechts.
+    2. TESTDATEIEN raus (siehe TESTDATEIEN).
+    3. NUR VERGLEICHBARE Reports. vergleichbar() ist genau dafuer da. Im
+       Bestand sind sieben ungestempelt, und das sind zufaellig genau die
+       ohne Pegelwerte - darauf ist aber kein Verlass, deshalb wird es
+       geprueft statt angenommen.
+
+    Median statt Mittelwert: die Verteilung hat einen langen rechten Rand
+    (Maximum 10,1 dB), ein Ausreisser wuerde den Mittelwert einer ganzen
+    Aufnahme verschieben.
+    """
+    je_aufnahme: Dict[str, List[Dict]] = {}
+    for r in results:
+        name = r.get("fileName") or r.get("id") or ""
+        if name in TESTDATEIEN:
+            continue
+        if not vergleichbar(r.get("scoringVersion"), SCORING_VERSION):
+            continue
+        if not _pegelspruenge(r):
+            continue
+        je_aufnahme.setdefault(name, []).append(r)
+
+    reihe = []
+    for name, laeufe in je_aufnahme.items():
+        laeufe.sort(key=lambda r: str(r.get("createdAt") or ""))
+        neuester = laeufe[-1]
+        spruenge = _pegelspruenge(neuester)
+        ueber = sum(1 for s in spruenge if s >= SCHWELLE_PEGELSPRUNG_DB)
+        reihe.append({
+            "fileName": name,
+            "analysisId": neuester.get("id"),
+            # Frueheste Analyse = wann diese Aufnahme in MixCoach kam.
+            "createdAt": laeufe[0].get("createdAt"),
+            "medianJumpDb": round(_median(spruenge) or 0.0, 2),
+            "shareAboveThresholdPct": round(100 * ueber / len(spruenge), 1),
+            "transitions": len(spruenge),
+            "analyses": len(laeufe),
+            "ownRecording": _selbst_aufgenommen(name),
+        })
+    reihe.sort(key=lambda e: str(e["createdAt"] or ""))
+    return reihe
+
+
+def pegel_trend(reihe: List[Dict]) -> Dict:
+    """Letzte drei Aufnahmen gegen die drei davor.
+
+    ACHTUNG VORZEICHEN: hier ist NIEDRIGER BESSER. Ein negatives delta
+    heisst Fortschritt. Die Skill-Trends daneben laufen andersherum (mehr
+    ist besser), deshalb traegt die Antwort ausdruecklich lowerIsBetter -
+    sonst zeigt die Oberflaeche einen Fortschritt als Rueckschritt an.
+    """
+    # Nur eigene Aufnahmen - fremde Sets sind fremdes Handwerk und wuerden
+    # den eigenen Fortschritt ueberdecken (siehe _selbst_aufgenommen).
+    eigene = [e for e in reihe if e.get("ownRecording")]
+    fremd = len(reihe) - len(eigene)
+
+    mediane = [e["medianJumpDb"] for e in eigene]
+    anteile = [e["shareAboveThresholdPct"] for e in eigene]
+    if not mediane:
+        return {"current": None, "delta": None, "lowerIsBetter": True,
+                "recordings": 0, "excludedForeign": fremd,
+                "currentSharePct": None, "deltaSharePct": None}
+
+    if len(mediane) < 4:
+        # Zu wenig fuer einen Vergleich. Keine erfundene Null - None heisst
+        # "noch nicht sagbar", 0.0 hiesse "keine Veraenderung".
+        return {"current": round(_mean(mediane[-3:]) or 0.0, 2), "delta": None,
+                "lowerIsBetter": True, "recordings": len(mediane),
+                "excludedForeign": fremd,
+                "currentSharePct": round(_mean(anteile[-3:]) or 0.0, 1),
+                "deltaSharePct": None}
+
+    def vergleich(werte):
+        return _mean(werte[-3:]), (_mean(werte[-6:-3]) or _mean(werte[:-3]))
+
+    m_jetzt, m_vorher = vergleich(mediane)
+    a_jetzt, a_vorher = vergleich(anteile)
+    return {
+        "current": round(m_jetzt, 2),
+        "delta": round(m_jetzt - m_vorher, 2),
+        "lowerIsBetter": True,
+        "recordings": len(mediane),
+        "excludedForeign": fremd,
+        "currentSharePct": round(a_jetzt, 1),
+        "deltaSharePct": round(a_jetzt - a_vorher, 1),
+        "thresholdDb": SCHWELLE_PEGELSPRUNG_DB,
+    }
 
 
 def _patterns(all_transitions: List[Dict], lang: str = "de") -> List[Dict]:
@@ -315,11 +475,19 @@ def build_profile(lang: str = "de") -> Dict:
     timeline = _skill_timeline(results)
     all_transitions = [t for r in results for t in _filtered_transitions(r)]
 
+    # Die Pegel-Sauberkeit ist die einzige Groesse im Profil, die gegen
+    # Sebastians Bewertungen belegt ist (Spearman -0,339 ueber 230
+    # zugeordnete Urteile). Sie laeuft ueber AUFNAHMEN, nicht ueber Reports -
+    # deshalb eine eigene Reihe neben timeline, nicht darin.
+    pegel = pegel_zeitreihe(results)
+
     return {
         "setsAnalyzed": len(results),
         "transitionsMeasured": len(all_transitions),
         "timeline": timeline,
         "trends": _trends(timeline),
+        "loudnessSeries": pegel,
+        "loudnessTrend": pegel_trend(pegel),
         "patterns": _patterns(all_transitions, lang),
         **_highlights_and_exercises(results, lang),
         "enoughData": len(results) >= 3,

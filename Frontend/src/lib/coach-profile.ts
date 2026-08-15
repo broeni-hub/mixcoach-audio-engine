@@ -33,11 +33,47 @@ export interface CoachHighlight {
   feedback: string | null;
 }
 
+/** Ein Punkt der Pegel-Sauberkeit: eine AUFNAHME, nicht ein Report. */
+export interface LoudnessPoint {
+  fileName: string;
+  analysisId: string;
+  createdAt: string;
+  /** Median des Pegelsprungs dieser Aufnahme in dB. Niedriger ist besser. */
+  medianJumpDb: number;
+  shareAboveThresholdPct: number;
+  transitions: number;
+  /** Wie viele Analysen dieser Aufnahme zusammengefasst wurden. */
+  analyses: number;
+  /** Eigene Aufnahme oder fremdes Set zum Studieren (Heuristik, siehe
+   *  profile._selbst_aufgenommen). Nur eigene zaehlen in den Trend. */
+  ownRecording: boolean;
+}
+
+export interface LoudnessTrend {
+  /** Aktueller Median in dB, Mittel der letzten drei Aufnahmen. */
+  current: number | null;
+  /** Veraenderung gegen die drei davor. NEGATIV IST FORTSCHRITT. */
+  delta: number | null;
+  /** Immer true - steht hier, damit die Anzeige es nicht raten muss. */
+  lowerIsBetter: boolean;
+  /** Auf wie vielen eigenen Aufnahmen der Trend ruht. */
+  recordings: number;
+  /** Wie viele fremde Sets nicht mitgezaehlt wurden. */
+  excludedForeign?: number;
+  currentSharePct: number | null;
+  deltaSharePct: number | null;
+  thresholdDb?: number;
+}
+
 export interface CoachProfile {
   setsAnalyzed: number;
   transitionsMeasured: number;
   timeline: Array<Record<string, unknown>>;
   trends: Record<string, CoachTrend>;
+  /** Die einzige Groesse im Profil mit belegtem Zusammenhang zum
+   *  menschlichen Urteil (Spearman -0,339). Siehe profile.pegel_zeitreihe. */
+  loudnessSeries?: LoudnessPoint[];
+  loudnessTrend?: LoudnessTrend;
   patterns: CoachPattern[];
   best: CoachHighlight | null;
   worst: CoachHighlight | null;

@@ -57,6 +57,8 @@ export function CoachProfilePanel() {
   if (!loaded) return null;
   if (!profile || profile.setsAnalyzed === 0) return null;
 
+  const pegel = profile.loudnessTrend;
+
   return (
     <Card className="border-primary/30">
       <CardHeader>
@@ -90,6 +92,50 @@ export function CoachProfilePanel() {
             );
           })}
         </div>
+
+        {/* Pegel-Sauberkeit.
+            Eigene Karte statt eines Chips oben, aus einem Grund: dort faerbt
+            delta > 0 gruen ("mehr ist besser"). Hier ist NIEDRIGER BESSER -
+            dieselbe Logik wuerde Fortschritt als Rueckschritt anzeigen.
+            Der Name sagt, was gemessen wird: der Pegelsprung, in dB. Nicht
+            "Qualitaet" - ein Composite, der zu 98 % aus einer Dimension
+            besteht, war schon einmal der Fehler. */}
+        {pegel && pegel.current != null && (
+          <div className="rounded-lg border border-primary/30 bg-card/50 p-3">
+            <div className="flex items-baseline justify-between gap-2">
+              <p className="text-sm font-semibold">Pegel-Sauberkeit</p>
+              <p className="text-[11px] text-muted-foreground">niedriger ist besser</p>
+            </div>
+            <p className="mt-1 flex items-center gap-2 text-sm font-semibold">
+              {pegel.current.toFixed(2).replace(".", ",")} dB
+              {pegel.delta != null && pegel.delta !== 0 && (
+                <span className={`flex items-center gap-0.5 text-xs ${
+                  pegel.delta < 0 ? "text-green-500" : "text-red-400"}`}>
+                  {pegel.delta < 0 ? <TrendingDown className="h-3 w-3" />
+                                   : <TrendingUp className="h-3 w-3" />}
+                  {pegel.delta > 0 ? "+" : ""}{pegel.delta.toFixed(2).replace(".", ",")} dB
+                </span>
+              )}
+            </p>
+            {pegel.currentSharePct != null && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                {pegel.currentSharePct.toFixed(0)} % der Übergänge über{" "}
+                {(pegel.thresholdDb ?? 3).toFixed(0)} dB
+                {pegel.deltaSharePct != null && pegel.deltaSharePct !== 0 && (
+                  <> ({pegel.deltaSharePct > 0 ? "+" : ""}
+                  {pegel.deltaSharePct.toFixed(0)} pp)</>
+                )}
+              </p>
+            )}
+            {/* Die Unsicherheit gehoert daneben, nicht in eine Fussnote. */}
+            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+              Median des Pegelsprungs, über {pegel.recordings}{" "}
+              {pegel.recordings === 1 ? "eigene Aufnahme" : "eigene Aufnahmen"}
+              {pegel.excludedForeign ? ` (${pegel.excludedForeign} fremde Sets zählen nicht mit)` : ""}.
+              {" "}Ein deutlicher Hinweis, keine Gewissheit — ein Bewerter, wenige Wochen.
+            </p>
+          </div>
+        )}
 
         {!profile.enoughData && (
           <p className="text-xs text-muted-foreground">
