@@ -142,6 +142,27 @@ def nachziehen(report: dict) -> tuple[dict, list]:
                 f"{feld}: {len(report.get(feld) or [])} -> {len(gesaeubert)}")
             neu[feld] = gesaeubert
 
+    # feedback.worked/improve ist eine ZWEITE Kopie derselben Saetze - der
+    # Mapper fuellt sie aus denselben positives/improvements. Genau die
+    # rendert das "Coach-Fazit" ganz oben im Report.
+    #
+    # Der erste Lauf hat sie uebersehen: strengths war sauber, das Fazit
+    # zeigte weiter "Uebergang bei 36:43 sitzt: Timing, Tempo und Energie
+    # passen zusammen." Aufgefallen ist es erst beim Oeffnen der laufenden
+    # App - die Tests waren gruen. Das ist die Lehre aus F1 noch einmal:
+    # ein Test belegt die Regel, nicht den Weg durch die Anwendung.
+    fb = report.get("feedback")
+    if isinstance(fb, dict):
+        neu_fb = dict(fb)
+        for feld, leer in (("worked", LEER_POSITIV), ("improve", LEER_VERBESSERUNG)):
+            gesaeubert = _liste_saeubern(fb.get(feld) or [], leer)
+            if gesaeubert != (fb.get(feld) or []):
+                aenderungen.append(
+                    f"feedback.{feld}: {len(fb.get(feld) or [])} -> {len(gesaeubert)}")
+                neu_fb[feld] = gesaeubert
+        if neu_fb != fb:
+            neu["feedback"] = neu_fb
+
     uebungen, beobachtungen = baue(aid, uebergaenge)
 
     alt_uebungen = report.get("exercises") or []
