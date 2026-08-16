@@ -41,13 +41,27 @@ function ProgressPage() {
 
   const skills = ["beatmatching", "eq", "timing", "creativity", "flow", "musicality"] as const;
   const skillChanges = skills.map((key) => {
+    const alle = measured(analyses.map((a) => a.scores[key]));
     const prev = hasEnough ? avg(measured(firstHalf.map((a) => a.scores[key]))) : 0;
-    const cur = hasEnough ? avg(measured(secondHalf.map((a) => a.scores[key]))) : avg(measured(analyses.map((a) => a.scores[key])));
-    return { key, label: SKILL_LABELS[key], prev, cur, delta: cur - prev };
+    const cur = hasEnough ? avg(measured(secondHalf.map((a) => a.scores[key]))) : avg(alle);
+    // Gibt es ueberhaupt einen Messwert? Vier der sechs Achsen sind in JEDEM
+    // der 51 Reports leer (beatmatching, eq, timing, creativity). avg([])
+    // liefert 0 - ohne diese Unterscheidung standen sie als Balken auf 0 im
+    // Diagramm "Where you stand right now", und holdingBack waehlte das
+    // Minimum, also IMMER eine nie gemessene Achse. Die Seite nannte dem DJ
+    // damit "Your timing - Score 0 %" als das, was ihn zurueckhaelt.
+    return { key, label: SKILL_LABELS[key], prev, cur, delta: cur - prev,
+             gemessen: alle.length > 0 };
   });
 
-  const biggestImprovement = skillChanges.reduce((best, s) => (s.delta > best.delta ? s : best), skillChanges[0]);
-  const holdingBack = skillChanges.reduce((worst, s) => (s.cur < worst.cur ? s : worst), skillChanges[0]);
+  const gemesseneSkills = skillChanges.filter((s) => s.gemessen);
+  const biggestImprovement = gemesseneSkills.length
+    ? gemesseneSkills.reduce((best, s) => (s.delta > best.delta ? s : best))
+    : null;
+  const holdingBack = gemesseneSkills.length
+    ? gemesseneSkills.reduce((worst, s) => (s.cur < worst.cur ? s : worst))
+    : null;
+  const ungemessen = skillChanges.filter((s) => !s.gemessen);
 
   // weekly trend for chart
   const weeks: { week: string; count: number; avg: number }[] = [];
@@ -65,7 +79,9 @@ function ProgressPage() {
     });
   }
 
-  const skillDist = skillChanges.map((s) => ({ name: s.label, value: s.cur }));
+  // Nur gemessene Achsen ins Diagramm. Ein Balken auf 0 fuer etwas, das nie
+  // berechnet wurde, ist keine Luecke - er ist eine Behauptung.
+  const skillDist = gemesseneSkills.map((s) => ({ name: s.label, value: s.cur }));
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -108,27 +124,47 @@ function ProgressPage() {
               </CardContent>
             </Card>
 
+            {/* Nur ueber gemessene Achsen. Vorher lief die Auswahl ueber alle
+                sechs - und weil vier davon nie befuellt sind und avg([]) = 0
+                ergibt, war "Still holding you back" IMMER eine nie gemessene
+                Achse mit "Score 0 %". */}
             <Card className="glass relative overflow-hidden">
               <CardContent className="p-6">
                 <div className="text-muted-foreground text-sm font-medium uppercase tracking-wide">Biggest improvement</div>
-                <div className="mt-3 font-display text-3xl font-bold">{biggestImprovement.label}</div>
-                <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-400">
-                  <TrendingUp className="h-4 w-4" />
-                  +{biggestImprovement.delta}%
-                </div>
-                <p className="text-muted-foreground mt-3 text-sm">This is where your practice is paying off the most.</p>
+                {biggestImprovement ? (
+                  <>
+                    <div className="mt-3 font-display text-3xl font-bold">{biggestImprovement.label}</div>
+                    <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-400">
+                      <TrendingUp className="h-4 w-4" />
+                      +{biggestImprovement.delta}%
+                    </div>
+                    <p className="text-muted-foreground mt-3 text-sm">This is where your practice is paying off the most.</p>
+                  </>
+                ) : (
+                  <p className="text-muted-foreground mt-3 text-sm">
+                    Dafür ist noch nichts gemessen.
+                  </p>
+                )}
               </CardContent>
             </Card>
 
             <Card className="glass relative overflow-hidden">
               <CardContent className="p-6">
                 <div className="text-muted-foreground text-sm font-medium uppercase tracking-wide">Still holding you back</div>
-                <div className="mt-3 font-display text-3xl font-bold">{holdingBack.label}</div>
-                <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-sm font-medium text-amber-400">
-                  <Target className="h-4 w-4" />
-                  Score {holdingBack.cur}%
-                </div>
-                <p className="text-muted-foreground mt-3 text-sm">Put your attention here next and the rest of your sets lift with it.</p>
+                {holdingBack ? (
+                  <>
+                    <div className="mt-3 font-display text-3xl font-bold">{holdingBack.label}</div>
+                    <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-sm font-medium text-amber-400">
+                      <Target className="h-4 w-4" />
+                      Score {holdingBack.cur}%
+                    </div>
+                    <p className="text-muted-foreground mt-3 text-sm">Put your attention here next and the rest of your sets lift with it.</p>
+                  </>
+                ) : (
+                  <p className="text-muted-foreground mt-3 text-sm">
+                    Dafür ist noch nichts gemessen.
+                  </p>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -167,7 +203,18 @@ function ProgressPage() {
                   <TrendingUp className="h-4 w-4 text-primary" />
                   <h3 className="font-display text-lg font-semibold">Where you stand right now</h3>
                 </div>
-                <p className="text-muted-foreground text-sm mt-1">A snapshot of the six things that make a DJ feel complete.</p>
+                <p className="text-muted-foreground text-sm mt-1">
+                  {ungemessen.length === 0
+                    ? "A snapshot of the six things that make a DJ feel complete."
+                    : `Gezeigt wird, was gemessen wurde — ${gemesseneSkills.length} von ${skillChanges.length} Achsen.`}
+                </p>
+                {/* Weglassen allein waere auch nicht ehrlich: dann fehlten vier
+                    Achsen kommentarlos. Sie werden benannt. */}
+                {ungemessen.length > 0 && (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Nicht gemessen: {ungemessen.map((s) => s.label).join(", ")}.
+                  </p>
+                )}
               </div>
               <CardContent className="h-72 pt-5">
                 <ResponsiveContainer width="100%" height="100%">

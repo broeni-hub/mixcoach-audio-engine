@@ -5,6 +5,34 @@ und warum musste zuletzt so viel korrigiert werden?"
 
 ---
 
+> ## Fortgeschrieben am 13.08.2026, abends — nach dem F1-Lauf
+>
+> Zwischen der ersten und dieser Fassung liegen neun Commits
+> (`fdb1780` … `4b2ced8`), abgearbeitet nach
+> `PROMPT_ARCHITEKTUR_F1_F2_2026-08-13.md`. **Abschnitt 3, 4, 5, 7, 8 und 11
+> sind neu gerechnet**, alle Zahlen heute Abend am Repo nachgemessen.
+> Abschnitt 0, 2, 6, 9 und 10 stehen unverändert.
+>
+> Drei Dinge, die man beim Lesen wissen muss:
+>
+> 1. **Es ist mehr passiert als beauftragt, und es ist gut.** Neben der
+>    Stamm-Zusammenführung wurde die Ehrlichkeitslinie in die Daten gezogen
+>    (B1), der Pegelsprung nachgetragen (B4) — und dabei ist zum ersten Mal
+>    eine belegte Entwicklung über Sets herausgekommen.
+> 2. **F1 ist vollständig gelöst** — einschließlich des Korrekturwegs
+>    (`819ee71`, nachgereicht am Abend, und `3002c11` am Morgen des 14.08.).
+>    **F2 ist nicht begonnen**, wie vorgesehen. Siehe **Abschnitt 5f**.
+> 3. **Eine Aussage aus `ARCHITEKTUR_BEWERTUNG_2026-08-13.md` ist widerlegt.**
+>    Dort steht, `beat_alignment_score` sei „die einzige Dimension mit Signal".
+>    Das stimmt nicht: `|loudness_jump_db|` trägt stärker (ρ −0,377 gegen
+>    +0,315, gleiches n). Heute unabhängig nachgerechnet, Abschnitt 4.
+>
+> **Namenskollision aufgelöst:** Die Fortschritts-Aufgaben heißen ab jetzt
+> `E1`/`E2` (vorher `F1`/`F2`). `F1`/`F2` bezeichnen ausschließlich die beiden
+> fundamentalen Architektur-Änderungen.
+
+---
+
 ## 0 · Wie dieses Dokument entstanden ist
 
 Jede Zahl unten ist **heute am Repo nachgemessen**, nicht aus `PROJEKTSTAND`,
@@ -30,27 +58,31 @@ Vorhandensein der 6112 Musikdateien (der Composite-Backfill vom 11.08. hat 239
 
 ## 1 · Die kurze Fassung
 
-Das Projekt ist **weiter, als es sich anfühlt**, und **an einer Stelle ehrlicher
-im Code als im Produkt**.
+**Der 13.08. ist der erste Tag, an dem das Produkt einen belegten Fortschritt
+zeigen kann.**
 
-Was seit der Standortbestimmung vom 30.07. echt gewonnen wurde: Der
-Betriebspunkt des Modells steht auf `gap=150` (LOSO-Precision **62,8 %** statt
-50,5 %). Der Composite ist von 30 % auf **86 %** der Übergänge befüllt. Die
-Historie in Supabase ist **nicht ungebaut, sondern war abgeschaltet** — der
-letzte Blocker (`DEV_BYPASS_AUTH`) ist heute gefallen. Und es gibt seit dem
-11.08. einen Selbsttest, der stille Ausfälle sichtbar macht.
+`|loudness_jump_db|` ist über 13 eigene Aufnahmen vom 06.07. bis 28.07.
+gefallen: Median 2,80 dB in den ersten drei Sets, **1,85 dB in den letzten
+drei**, Anteil über 3 dB von ~50 % auf ~22 %, Trend r = −0,622. Damit ist
+**Bedingung 3 der Live-Schwelle** — „drei Sets desselben DJs machen eine
+Entwicklung sichtbar" — zum ersten Mal nicht behauptet, sondern gemessen.
 
-Was dagegen unbemerkt geblieben ist — und der wichtigste Befund dieses Reviews:
-**Die Ehrlichkeitslinie ist im Code gezogen, aber nicht in den Daten
-angekommen.** Alle 50 gespeicherten Reports tragen weiter `beatmatching: 100`
-und `timing: 61` — die zwei Zahlen, die K1 als nicht messend belegt hat. Der
-Mapper setzt sie auf `None`, aber seit dem 31.07. wurde **keine einzige Analyse
-neu gerechnet**. Was der DJ in seiner Historie sieht, ist unverändert der alte,
-unehrliche Stand. Ein halber Tag Backfill behebt das.
+Dass ausgerechnet der Pegelsprung es ist, war nicht der Plan: Er ist mit
+ρ = **−0,377** gegen die eigenen Bewertungen der stärkste Zusammenhang im ganzen
+Bestand — stärker als `beat_alignment` (+0,315), das bis heute als die einzige
+tragende Größe galt. Nachgerechnet und bestätigt.
 
-**Gegenüber der Vision stehen rund 45 %** (30.07.: 40 %). Der Zuwachs kommt fast
-vollständig aus Punkt 2 (Report) und Burggraben 3 (Ehrlichkeit) — nicht aus
-Punkt 1 (Erkennung).
+Weiter gewonnen: Ein Ergebnis- und ein Ground-Truth-Stamm statt je zwei, drei
+verschollene Labels eingesammelt, neun Bewertungskonflikte dokumentiert statt
+geraten. Die Ehrlichkeitslinie ist in den Daten angekommen — 50 von 51 Reports
+tragen `beatmatching: null` und `scoringVersion 3`. Und die Kopfzahl
+unterscheidet endlich: σ von 2,6 auf **12,5**.
+
+**Und der Korrekturweg steht** (`819ee71`, `3002c11`). Damit ist **F1
+vollständig gelöst** — die fundamentale Änderung, die heute blockierte. F2
+(Nutzerbegriff in der Engine) ist nicht begonnen; das war so vorgesehen.
+
+**Gegenüber der Vision stehen rund 50 %** (13.08. mittags: 45 %, 30.07.: 40 %).
 
 ---
 
@@ -83,33 +115,33 @@ sondern „was steht zwischen dir und einer geschlossenen Beta".
 
 ### Die fünf Erlebnis-Punkte
 
-| Punkt | 30.07. | **13.08.** | Was sich bewegt hat |
-|---|---|---|---|
-| 1 · Erkennung | 55 % | **58 %** | Betriebspunkt `gap=150`: LOSO-Precision 50,5 → 62,8 %. In der Praxis noch nicht nachgewiesen (Abschnitt 5e). |
-| 2 · Report | 65 % | **72 %** | Composite 30 → 86 %, `beat_alignment` 86 %, Set-Dramaturgie neu. Bass-Overlap unverändert 15 %. |
-| 3 · Coach | 30 % | **30 %** | Unverändert. Alle 50 Reports tragen dieselbe eine Vorlage-Übung. |
-| 4 · Fortschritt | 25 % | **40 %** | Supabase-Historie ist gebaut und der Login ist seit heute an. Fehlt: einmal vorführen. |
-| 5 · Teilen | 10 % | **10 %** | Unverändert. Keine Export-Bibliothek im Projekt. |
+| Punkt | 30.07. | 13.08. früh | **13.08. abends** | Was sich bewegt hat |
+|---|---|---|---|---|
+| 1 · Erkennung | 55 % | 58 % | **58 %** | Unverändert. Die Zusammenführung hat Recall 71 → 70 % geschoben (drei zusätzliche `missed`), σ und Precision blieben. |
+| 2 · Report | 65 % | 72 % | **78 %** | `loudness_jump_db` 50 → 86 %, Kopfzahl streut endlich (σ 2,6 → 12,5), `notMeasured` benennt fünf statt drei Lücken. Bass-Overlap weiter 16 %. |
+| 3 · Coach | 30 % | 30 % | **32 %** | Der LLM-Prompt bekommt keine erfundenen Zahlen mehr. Die Übungen sind weiter Vorlagen. |
+| 4 · Fortschritt | 25 % | 40 % | **50 %** | **Bedingung 3 ist erstmals belegt** (r = −0,622 über 13 Aufnahmen). Die Historie überlebt den Gerätewechsel weiterhin nicht vorgeführt. |
+| 5 · Teilen | 10 % | 10 % | **10 %** | Unverändert. |
 
 ### Die drei Burggräben
 
-| Burggraben | 30.07. | **13.08.** | Begründung |
-|---|---|---|---|
-| 1 · Daten-Schleife | 30 % | **35 %** | Halb belegt: mehr Labels kaufen Recall (+17,4 pp von 4→24 Sets), keine Precision (+1,6 pp bei ±6,0 pp Streuung). Die Mechanik greift, das Wachstumsargument trägt nur zur Hälfte. |
-| 2 · Library-Verbindung | 70 % | **72 %** | 6112 von 6113 Pfaden auf macOS aufgelöst, `uint16`-Überlauf im Landmark-Pfad behoben. Weiter brach: 6673 rekordbox-Beatgrids und 432 Cue-Punkte. |
-| 3 · Ehrlichkeit | 60 % | **70 %** | Im Code belegt (Job 1, Selbsttest, `scoringVersion`). In den Daten **nicht angekommen** — siehe Abschnitt 5a. Deshalb kein „belegt". |
+| Burggraben | 30.07. | 13.08. früh | **13.08. abends** | Begründung |
+|---|---|---|---|---|
+| 1 · Daten-Schleife | 30 % | 35 % | **40 %** | Drei von Hand gesetzte Labels aus dem zweiten Stamm eingesammelt, neun Konflikte in `KONFLIKTE.md` dokumentiert statt geraten. Die Schleife verliert keine Arbeit mehr. |
+| 2 · Library-Verbindung | 70 % | 72 % | **72 %** | Unverändert. Weiter brach: 6673 rekordbox-Beatgrids, 432 Cue-Punkte. |
+| 3 · Ehrlichkeit | 60 % | 70 % | **90 %** | In den Daten angekommen (51/51 `beatmatching: null`, auch die 16 archivierten), und ab jetzt korrigierbar (5f). Kein „belegt", weil die Vorführung durch die laufende App aussteht. |
 
 ### Die Roadmap-Teile
 
-| | 30.07. | **13.08.** |
-|---|---|---|
-| Teil 1 · Audio-Engine | 60 % | **65 %** |
-| Teil 2 · Frontend | 55 % | **60 %** |
-| Teil 3 · Online gehen | 10 % | **15 %** |
+| | 30.07. | 13.08. früh | **13.08. abends** |
+|---|---|---|---|
+| Teil 1 · Audio-Engine | 60 % | 65 % | **70 %** |
+| Teil 2 · Frontend | 55 % | 60 % | **62 %** |
+| Teil 3 · Online gehen | 10 % | 15 % | **15 %** |
 
-**Gesamt: rund 45 % der Vision** (30.07.: 40 %). Wie zuvor gilt: Die
-verbleibenden 55 % sind nicht gleich schwer. Der Forschungsteil (sekundengenaue
-Erkennung) ist ein Bruchteil davon — der Rest ist absehbare Handwerksarbeit.
+**Gesamt: rund 48 % der Vision** (13.08. früh: 45 %, 30.07.: 40 %). Der
+Forschungsteil (sekundengenaue Erkennung) ist unverändert ein Bruchteil des
+Rests — und hat sich heute kein Stück bewegt, ohne dass es geschadet hätte.
 
 ---
 
@@ -122,8 +154,8 @@ Erkennung) ist ein Bruchteil davon — der Rest ist absehbare Handwerksarbeit.
 | Aktiver Betriebspunkt | `min_p = 0,6`, `gap = 150 s` | `track_change_gbm.json` |
 | LOSO-Validierung | **R 92,4 % · P 62,8 % · F1 0,748** | ebd., 25 Sets / 3537 Kandidaten |
 | Vorheriger Punkt (`gap=90`) | R 94,1 % · P 50,5 % · F1 0,657 | `SITZUNG_2026-08-10.md` |
-| Referenzmetrik in der Praxis | Recall 71 % · Precision 74 % · strikt korrekt 29 % | `analyze_timing_bias --check`, 28 Aufnahmen, 286 Übergänge |
-| Timing-Streuung | **σ = 54,58 s**, Median −29,43 s, 85 % zu spät | ebd. |
+| Referenzmetrik in der Praxis | Recall **70 %** · Precision 74 % · strikt korrekt 29 % | `analyze_timing_bias --check`, 28 Aufnahmen, 286 Übergänge, **91 `missed`** (vorher 88) |
+| Timing-Streuung | **σ = 54,58 s**, Median −29,43 s, 85 % zu spät | ebd., unverändert nach der Zusammenführung |
 | Innerhalb 8 s | **5 %** | ebd. |
 | Markerzahl vs. echte Übergänge | 317 auf 170 | `tools/eval/nms2.py` |
 | Ausschöpfung der Orakel-Schranke | 93–95 % | ebd. |
@@ -133,57 +165,102 @@ Erkennung) ist ein Bruchteil davon — der Rest ist absehbare Handwerksarbeit.
 > Analysen, die mit `gap=90` gefahren wurden. Der neue Betriebspunkt ist darin
 > **nicht enthalten**. Was der Retrain praktisch gebracht hat, ist ungemessen.
 
-### Report — Befüllung über alle 431 Übergänge in 50 Reports
+### Report — Befüllung über alle 432 Übergänge in 51 Reports
 
-| Messwert | 30.07. | **13.08.** |
+| Messwert | 30.07. | 13.08. früh | **13.08. abends** |
+|---|---|---|---|
+| BPM, Tonart, Camelot | 100 % | 100 % | **100 %** |
+| `quality_score` | 100 % | 100 % | **100 %** (ρ +0,018) |
+| `phrase_alignment_score` | 100 % | 100 % | **100 %** (misst nichts) |
+| `composite_quality_score` | 30 % | 86,3 % | **86,1 %** |
+| `loudness_jump_db` | 50 % | 49,7 % | **86,1 %** ⬆⬆ |
+| `beat_alignment_score` | — | 86,3 % | **86,1 %** |
+| `harmonic_clash_score` | — | 80,7 % | **80,6 %** |
+| `vocal_overlap_score` | — | 80,7 % | **80,6 %** |
+| `exit_quality_score` | — | 76,6 % | **76,4 %** |
+| `energy_dip_pct` | 50 % | 50,3 % | **50,5 %** |
+| `bass_overlap_score` | **15 %** | 15,5 % | **15,5 %** ← unverändert |
+| `track_in` / `track_out` | — | 19,0 % | **19,0 %** ← unverändert |
+| `scoringVersion 3` gestempelt | — | 0 von 50 | **50 von 51** ⬆⬆ |
+| `scores.beatmatching = null` | — | 0 von 50 | **50 von 51** ⬆⬆ |
+
+### Welcher Messwert trägt — heute unabhängig nachgerechnet
+
+Zuordnung Report-Übergang zu Bewertung über `mid_sec`, Fenster < 5 s, gegen
+`labels_prefilled.csv`:
+
+| Messwert | Spearman gegen `human_rating` | n |
 |---|---|---|
-| BPM, Tonart, Camelot | 100 % | **100 %** |
-| `quality_score` | 100 % | **100 %** (Spearman +0,014 gegen menschliches Urteil) |
-| `phrase_alignment_score` | 100 % | **100 %** (misst nichts, ρ = 0,014) |
-| `composite_quality_score` | 30 % | **86,3 %** ⬆ |
-| `beat_alignment_score` | — | **86,3 %** |
-| `harmonic_clash_score` | — | **80,7 %** |
-| `vocal_overlap_score` | — | **80,7 %** (Median 100 — feuert praktisch nie) |
-| `exit_quality_score` | — | **76,6 %** |
-| `energy_dip_pct` | 50 % | **50,3 %** |
-| `loudness_jump_db` | 50 % | **49,7 %** |
-| `bass_overlap_score` | **15 %** | **15,5 %** ← unverändert |
-| `track_in` / `track_out` (echte Tracknamen) | — | **19,0 %** |
-| `scoringVersion` gestempelt | — | **0 von 50** |
+| **`\|loudness_jump_db\|`** | **−0,377** | 146 |
+| `beat_alignment_score` | +0,315 | 146 |
+| `composite_quality_score` | +0,146 | 146 |
+| `quality_score` (die Kopfzahl) | +0,018 | 206 |
 
-Composite-Gewichte nach dem Refit vom 11.08. auf 170 bewerteten Übergängen:
+**Das kippt eine Aussage aus `ARCHITEKTUR_BEWERTUNG_2026-08-13.md`**, die
+`beat_alignment_score` als „die einzige Dimension mit Signal" führt. Der
+Pegelsprung trägt stärker, hat das physikalisch richtige Vorzeichen, eine echte
+Einheit und eine Spannweite von −9,0 bis +9,3 dB. `beat_alignment` streut auf
+einer 0–100-Skala mit σ = 2,59 — es unterscheidet kaum. `bass_overlap` ist zu
+90 % exakt 0 oder 100, also ein Schalter, keine Abstufung.
+
+**Für den Coach heißt das:** Der Pegelsprung, nicht `beat_alignment`, ist die
+erste Regel. Die Übungstabelle in `PROMPT_PUNKT3_COACH_2026-08-13.md` Job 1
+listet ihn als Regel 2 — die Reihenfolge dreht sich.
+
+### Die Kopfzahl unterscheidet endlich
+
+`scores.overall` wurde beim Backfill aus den Teilen neu gebildet, die im Report
+stehen (`musicality`, `flow`) — kein neuer Rechenweg, nur ohne die zwei
+gestrichenen Größen:
 
 ```
-beat_alignment  0,980   ← die einzige Dimension mit Signal (Spearman +0,315)
-exit_quality    0,020
-harmonic_clash  0,000   ← Demucs, Gewicht null
-vocal_overlap   0,000   ← Demucs, Gewicht null
-phrase_timing   0,000
+alt   Median 71   Spanne 65–77   sigma  2,6
+neu   Median 62   Spanne 53–90   sigma 12,5
 ```
 
-Spearman gegen menschliches Urteil: Training 0,421 / **unabhängiger Test 0,220**.
+Die alte Note spannte über 51 Sets zwölf Punkte. `pipeline.py` nennt sie selbst
+„eine Kopfzahl, die keinen DJ von einem anderen unterscheiden kann". Die neue
+streut fünfmal so weit. Welche Eingänge je Report zur Verfügung standen, steht
+jetzt in `overallInputs` — geraten wird nichts.
 
 ### Betrieb und Technik
 
 | Größe | Wert |
 |---|---|
 | Library-Index | 6113 Tracks · 6112 macOS-Pfade · 1 Rest-Windows-Pfad · fp/ + lm/ je 6113 · 1,7 GB |
-| Datenstamm | 50 Reports · 45 Ground-Truth-Dateien · 13 GB (40 wav, 6 mp3) |
-| Ground Truth doppelt | `daten/ground_truth` 45 · `audio-engine/.../ground_truth` 24 · **24 Sets in beiden** |
+| Datenstamm | **51 Reports · 45 Ground-Truth-Dateien · ein Stamm** |
+| Zweiter Stamm | **archiviert** in `_archiv_2026-08-13/` (93 Reports, 24 Bewertungen, 67 wav), mit `LIESMICH.md`; bewusst weiter in git — die JSON wiegen 2,2 MB und git hat alles als Umbenennung erkannt |
+| Bewertungskonflikte | **9 offen**, dokumentiert in `daten/ground_truth/KONFLIKTE.md` |
 | Backend | 19 Endpoints · 10.732 LOC in `app/` · 39 Dateien toter Code in `app/experimental/` |
-| Tests | 226 (30 Dateien) — laut `CLAUDE.md` grün, hier nicht nachgefahren |
-| Frontend | 29 Routen · TanStack Start + React 19 + Supabase · `node_modules` vorhanden |
-| Login | `DEV_BYPASS_AUTH = false` ✅ (seit heute) |
+| Tests | **235** (vorher 226) |
+| Frontend | 29 Routen · TanStack Start + React 19 + Supabase |
+| Login | `DEV_BYPASS_AUTH = false` ✅ |
 | Bezahlschranke | `PAYWALL_DISABLED = true` (bewusst) |
 | `.env` | `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `VITE_*` ✅ · **`SUPABASE_SERVICE_ROLE_KEY` fehlt** |
-| Git-Remote | `github.com/broeni-hub/mixcoach-audio-engine` |
-| Push-Stand | **7 Commits nicht gepusht**, `main` 13 Commits hinterher, letzter Fetch 10.08. |
+| Engine-Auth | **keine** — 0 `Depends`, `allow_origins=["*"]`, kein `user_id` (F2 nicht begonnen) |
+| Korrekturweg | **gebaut** — `lib/scoring-version.ts`, vier Stellen, 15 Frontend-Tests (vorher 7) |
+| Toter Code | `app/experimental/` unverändert 39 Dateien, von außen 0 Importe |
+| Push-Stand | **`main` 10 Commits hinterher** — nichts gepusht, drei Dokumente uncommittet |
 
 ---
 
 ## 5 · Fünf Befunde, die heute in keinem Projektdokument stehen
 
-### 5a · Die Ehrlichkeitslinie ist im Code, nicht in den Daten
+### 5a · Die Ehrlichkeitslinie ist im Code, nicht in den Daten — **erledigt**
+
+> **Nachtrag abends:** Behoben in `177ce79`. Nachgezählt: `beatmatching = null`
+> und `scoringVersion 3` in **50 von 51** Reports, `notMeasured` mit fünf
+> Einträgen. Der eine ungestempelte Report ist `11da05af…` (`mix.wav`, eine
+> Testaufnahme mit einem Übergang, deren Audio nur im Archiv liegt) — er blieb
+> bewusst stehen statt einen unsicheren Stempel zu bekommen. Das ist die
+> richtige Entscheidung.
+>
+> **Die Ursache unten war zu eng formuliert.** „Seit dem 31.07. wurde nichts neu
+> gerechnet" ist die halbe Wahrheit; der strukturelle Grund ist das Fehlen eines
+> Korrekturwegs — und der fehlt weiter (**5f**). Der Backfill ist auf der Platte
+> angekommen, im Browser nicht.
+
+
 
 `analysis_mapper.py:104/106` setzt `beatmatching` und `timing` auf `None`,
 `NOT_YET_MEASURED` listet fünf Einträge. Nachgezählt in den 50 gespeicherten
@@ -245,17 +322,57 @@ sagt erst eine gemeinsame Metrik über beide Gruppen.
 **Kosten der Klärung: etwa ein Tag.** Für den mit Abstand größten offenen Hebel
 in Punkt 1 ist das billig — und die Werkzeuge dafür liegen bereits im Repo.
 
-### 5d · Die Arbeit vom 11.–13.08. liegt nur auf dieser Platte
+### 5d · Die Arbeit vom 11.–13.08. liegt nur auf dieser Platte — **unverändert**
 
 ```
-nicht gepusht (HEAD vs origin/setup/macos-umzug):  7 Commits
-main hinterher:                                   13 Commits
-letzter Fetch:                                    10.08.2026, 19:10
+main hinterher:                    8 Commits   (vormittags: 13)
+setup/macos-umzug hinterher:       5 Commits
+letzter Fetch:                     10.08.2026, 19:10
 ```
 
-Betroffen sind unter anderem der Composite-Backfill, der Selbsttest, die
-Supabase-Korrektur und die Scoring-Version. Das GitHub-Repo wurde am 10.08.
-genau gegen dieses Risiko eingerichtet — und ist seither nicht benutzt worden.
+Betroffen sind jetzt zusätzlich die Stamm-Zusammenführung, der
+Ehrlichkeits-Backfill und der Pegelsprung-Nachtrag — also **genau die Arbeit,
+die heute den ersten belegten Fortschritt erzeugt hat**. Das GitHub-Repo wurde
+am 10.08. gegen dieses Risiko eingerichtet und ist seither nicht benutzt worden.
+
+Dazu kommt: Die drei Dokumente dieses Tages (`ARCHITEKTUR_BEWERTUNG`,
+`PROMPT_ARCHITEKTUR_F1_F2`, `PROMPT_PUNKT3_COACH`) sind noch nicht einmal
+committet.
+
+### 5f · Der Korrekturweg — **gebaut**, und er hat einen tieferen Fund freigelegt
+
+Nachgeprüft am Code, nicht an der Commit-Meldung:
+
+- `Frontend/src/lib/scoring-version.ts` (neu) — `versionVon()`, `loestAb()`,
+  `mitNutzerstand()`. Gegenstück zu `scoring_version.py`. Höhere Version löst
+  ab, Gleichstand bleibt, ungestempelt löst nie ab.
+- Angewendet an **allen vier** Stellen: `store.ts:117`,
+  `analysis-engine.ts:156`, die zweite Sperre bei Zeile 187 entfernt,
+  `sync.ts:119–123` („DB gewinnt" nur noch bei Gleichstand).
+- `__tests__/korrekturweg.test.ts` deckt alle vier Fälle aus dem Auftrag ab
+  plus `archived`. Frontend-Tests **7 → 15**.
+
+**Der eigentliche Fund lag tiefer, als ich ihn beschrieben hatte.** Die
+Merge-Regeln allein hätten nichts bewirkt: Es gab **überhaupt keinen Pfad**, der
+einen Report je neu von der Engine geholt hätte. Selbst der Knopf „Mit meinen
+Korrekturen neu erkennen" rief `mergeRemoteAnalysisIntoStore` auf und lief dort
+ins blanke `return` — er hat seit jeher nichts aktualisiert. Die Report-Seite
+fragt jetzt beim Öffnen einmal nach (`app.analyses.$id.tsx:88–96`); ist die
+Engine aus, bleibt der gespeicherte Stand stehen.
+
+**Stand der Daten nach dem Backfill** (`177ce79`, `3002c11`), heute nachgezählt:
+
+```
+51 Reports:  beatmatching = null   51 / 51
+             scoringVersion 3      44 / 51
+16 archivierte Reports: ebenfalls nachgezogen
+```
+
+Die sieben ohne Stempel sind **kein Rückstand, sondern die richtige
+Entscheidung**: Es sind genau die Reports ohne `loudness_jump_db` — sechs ohne
+Audio (`REC001`, `REC010`) und die Testaufnahme `mix.wav`. Ein Wert der
+Rechenvorschrift 3 fehlt ihnen, also tragen sie deren Stempel nicht. Genau
+dafür ist `UNSTAMPED` gebaut.
 
 ### 5e · Die Referenzmetrik misst noch das alte Modell
 
@@ -336,78 +453,95 @@ Vertrauen in jede neue Zahl.
 
 ## 7 · Offene Posten, sortiert nach der Live-Schwelle
 
+> **Umbenannt:** Die Fortschritts-Aufgaben heißen jetzt `E1`/`E2`. `F1`/`F2` sind
+> ausschließlich die fundamentalen Architektur-Änderungen.
+
+### Zuerst — die Architektur-Schuld aus dem heutigen Lauf
+
+| | Aufgabe | Aufwand | Status |
+|---|---|---|---|
+| ~~**F1**~~ | ~~Korrekturweg / eine Wahrheit je Analyse~~ | — | **gelöst** (`a814117`, `4b2ced8`, `819ee71`, `3002c11`) |
+| **F1-Rest** | **Einmal vorführen:** Report öffnen → Backfill fahren → neu laden ohne Cache zu löschen. Die Tests belegen die Regel, nicht den Weg durch die laufende App | ½ h | offen |
+| **F2** | **Nutzerbegriff in der Engine** — JWT durchreichen, `user_id`, Ablage trennen, CORS. Heute: 0 `Depends`, `allow_origins=["*"]`, kein `user_id` | 1–2 Wochen | nicht begonnen, **vor Teil 3** |
+| **A2** | **`app/experimental/` archivieren + `CLAUDE.md` korrigieren** — 39 Dateien, von außen 0 Importe; die Karte in `CLAUDE.md:33` nennt sie weiter als Kandidatensuche | 1 h | offen |
+
 ### Bedingung 1 — jeder angezeigte Wert ist gemessen
 
 | | Aufgabe | Aufwand | Status |
 |---|---|---|---|
-| **B1** | **Ehrlichkeits-Backfill über die 50 Reports** — `beatmatching`/`timing` auf `None`, `notMeasured` auf die Fünferliste | ½ Tag | offen, unbemerkt |
-| **B2** | **`quality_score` entscheiden** — C′ liegt seit 11.08. vor: `composite` als Kopfzahl, ohne Stems, mit ehrlichem Namen | **deine Entscheidung** | wartet |
-| **B3** | **`bass_overlap_score` von 15,5 % auf ~100 %** — der Wert, den sonst niemand anbietet. Ursache klären (laut Refit **nicht** Demucs) | 2–3 Tage | offen |
-| **B4** | **`loudness_jump_db` von 49,7 % hoch** | 1–2 Tage | offen |
-| **B5** | **`notMeasured` dynamisch machen** statt fester Dreier-/Fünferliste | 1 Tag | offen |
+| ~~**B1**~~ | ~~Ehrlichkeits-Backfill~~ | — | **erledigt** (`177ce79`), 50 von 51 — Wirkung wartet auf F1.2 |
+| **B2** | **`quality_score` entscheiden** — die Grundlage hat sich geändert: nicht mehr `composite` gegen `quality_score`, sondern **der Pegelsprung als tragende Größe**. Vorlage gehört neu geschrieben | **deine Entscheidung** | wartet, neu zu fassen |
+| **B3** | **`bass_overlap_score`** — nicht mehr „von 16 % auf 100 %". Der Wert ist zu 90 % exakt 0 oder 100: **ein Schalter, keine Abstufung.** Erst klären, ob er überhaupt abstuft, dann füllen | 1 Tag Klärung | offen, neu gefasst |
+| ~~**B4**~~ | ~~`loudness_jump_db` hochziehen~~ | — | **erledigt** (`fdb1780`), 50 % → 86 %, 158 von 158 in 36 s |
+| **B5** | **`notMeasured` dynamisch machen** statt fester Liste | 1 Tag | offen (die Fünferliste steht, der Mechanismus fehlt) |
+| **B6** | **`energy_dip_pct` von 50,5 % hoch** — dieselbe blockweise Lücke wie beim Pegelsprung, vermutlich derselbe Grund | 1 Tag | **neu** |
 
 ### Bedingung 2 — die Historie überlebt einen Gerätewechsel
 
 | | Aufgabe | Aufwand | Status |
 |---|---|---|---|
 | **H1** | **Vorführen:** Analyse hochladen → Browser-Profil wechseln → anmelden → nachsehen | ½ Tag | Blocker gefallen, nicht vorgeführt |
-| **H2** | **`SUPABASE_SERVICE_ROLE_KEY` in `Frontend/.env`** — schaltet LLM-Coaching (`coach-feedback.functions.ts`) und Beta-Funktionen frei. Für die Historie **nicht** nötig | 10 min | **nur du** |
+| **H2** | **`SUPABASE_SERVICE_ROLE_KEY` in `Frontend/.env`** | 10 min | **nur du** |
 
 ### Bedingung 3 — drei Sets zeigen eine Entwicklung
 
 | | Aufgabe | Aufwand | Status |
 |---|---|---|---|
-| **F1** | **Drei Sets desselben DJs neu analysieren** — mit `gap=150` und `scoringVersion 3`. Ohne gestempelte Reports gilt jeder Vergleich als unzulässig (`vergleichbar()` gibt `False`) | 1 Tag | offen |
-| **F2** | **Fortschritts-Radar auf tragende Größen** stellen — `beat_alignment`, `loudness_jump_db`, `bass_overlap`. Phrasen-Timing bleibt draußen | 2–3 Tage | offen |
+| **E1** | ~~Drei Sets neu analysieren~~ | — | **entfällt in dieser Form.** Der Nachweis ist über 13 vorhandene Aufnahmen gelungen, ohne Neuanalyse — und Neuanalyse hätte die Ground Truth entwertet |
+| **E2** | **Fortschritts-Radar auf den Pegelsprung stellen** — die Kurve existiert in den Daten, nicht in der Oberfläche. `beat_alignment` (σ 2,59) und `bass_overlap` (Schalter) tragen sie nicht | 2–3 Tage | offen, **jetzt belegt machbar** |
+| **E3** | **Die Vorbehalte prüfen** — 13 Aufnahmen über 22 Tage, r = −0,622 bei n = 13 ist ein Hinweis, keine Gewissheit. Ob sich frühe und späte Sets nur im Können unterscheiden, sagen die Daten nicht | ½ Tag | **neu** |
 
 ### Parallel, nicht blockierend
 
 | | Aufgabe | Aufwand |
 |---|---|---|
 | **P1** | **`start_sec` vs. `mid_sec` zu Ende messen** (Abschnitt 5c) — gemeinsame Metrik über `correct` **und** `timing_off` | 1 Tag |
-| **P2** | **Referenzmetrik gegen `gap=150` neu erheben** (Abschnitt 5e) | ½ Tag, braucht F1 |
-| **P3** | **Zweite, blinde Labelrunde** — Instrument steht seit 31.07., `MixCoach-Zweitrunde.command` | **dein Abend** |
-| **P4** | **Aufräumen** — 7 Commits pushen, Doppelstamm, Streudateien, `app/experimental/` (39 Dateien tot) | ½ Tag |
+| **P2** | **Referenzmetrik gegen `gap=150` neu erheben** (Abschnitt 5e) — braucht neu analysierte Sets und damit neue Labels | ½ Tag + Labelarbeit |
+| **P3** | **Zweite, blinde Labelrunde** — `MixCoach-Zweitrunde.command` | **dein Abend** |
+| ~~**P4**~~ | ~~Doppelstamm, Streudateien~~ | **erledigt** (`a814117`, `4b2ced8`) |
+| **P5** | **Neun Bewertungskonflikte entscheiden** — `daten/ground_truth/KONFLIKTE.md`. Auffällig: in `04804f27` setzt der neuere Stand 5 von 6 auf `not_a_transition`, wo der ältere `correct` sagte | **eine halbe Stunde, nur du** |
+| **P6** | **Pushen** — 8 Commits und drei uncommittete Dokumente | 5 min |
 
 ---
 
 ## 8 · Ausblick — die nächsten acht Wochen
 
-Die Reihenfolge folgt der Live-Schwelle, nicht der Schwierigkeit.
+Die Reihenfolge folgt der Live-Schwelle, nicht der Schwierigkeit. Gegenüber der
+Vormittagsfassung hat sich der Plan **verkürzt**, nicht verlängert: Woche 1 und
+3 sind zum großen Teil schon abgearbeitet.
 
-**Woche 1 — Ehrlichkeit fertig machen.** B1, B5, P4. Am Ende zeigt kein Report
-mehr eine Zahl, die nicht misst, und die Arbeit liegt auf GitHub. Kein
-Forschungsrisiko, hoher Symbolwert: erst danach ist Burggraben 3 wirklich belegt.
+**Woche 1 — abschließen, was steht.** Vorführung des Korrekturwegs, A2, B5, P5,
+P6. Der Weg ist gebaut und getestet; was fehlt, ist der eine Durchlauf durch die
+laufende App. Dazu `app/experimental/` archivieren und `CLAUDE.md` berichtigen,
+die neun Bewertungskonflikte entscheiden und pushen. Danach ist Burggraben 3
+belegt.
 
-**Woche 2 — Historie beweisen.** H1, H2, F1. Am Ende gibt es drei gestempelte
-Reports desselben DJs in der Cloud, und Bedingung 2 ist einmal vorgeführt statt
-behauptet. **Das ist der höchste Hebel im ganzen Projekt** — ohne Historie kann
-Erlebnis-Punkt 4 nicht existieren, und Punkt 4 ist laut eurem eigenen
-Geschäftsmodell der Abo-Grund.
+**Woche 2 — die Entwicklung sichtbar machen.** E2, E3, H1, H2. Die Kurve, die
+seit heute in den Daten steckt, gehört in die Oberfläche — und zwar mit ihren
+Vorbehalten, nicht als Werbeversprechen. Danach Bedingung 2 einmal vorführen.
+Am Ende dieser Woche sind **alle drei Bedingungen der Live-Schwelle erfüllt
+oder vorgeführt**.
 
-**Woche 3 — Messwerte füllen.** B3, B4. Bass-Overlap ist der Wert, den die
-Vision namentlich als Alleinstellung nennt und der in fünf von sechs Übergängen
-fehlt.
+**Woche 3 — den Coach auf messbaren Boden stellen.** Der Auftrag liegt fertig in
+`PROMPT_PUNKT3_COACH_2026-08-13.md`, mit **einer Korrektur**: Der Pegelsprung
+ist Regel 1, nicht Regel 2 — er ist mit 86 % befüllt und trägt am stärksten.
+Damit hat der Coach zum ersten Mal einen Satz, der stimmt: *„Bei 32:14 kam der
+neue Track 4,2 dB lauter rein. Mix ihn nochmal, Ziel unter 1 dB."* Punkt 3
+steht seit sechs Wochen bei ~30 % und ist die größte Einzellücke.
 
-**Woche 4 — die Timing-Frage einmal sauber beantworten.** P1, P2. Nicht als
-Forschungsprojekt, sondern als eintägige Messung mit vorhandenen Werkzeugen.
-Danach weißt du, ob `start_sec` der Ausweg ist oder ob die Erkennung so bleibt,
-wie sie ist. **Beides ist ein Ergebnis.**
+**Woche 4 — die zwei offenen Messfragen.** B3 (stuft Bass-Overlap überhaupt ab?),
+B6 (`energy_dip_pct`), P1 (`start_sec` vs. `mid_sec`). Alles eintägige
+Messungen mit vorhandenen Werkzeugen, keine Forschungsprojekte.
 
-**Woche 5–6 — den Coach auf messbaren Boden stellen.** Übungen aus eigenem
-Material, aber nur aus Größen, die tragen: „Bei deinem Übergang von X nach Y kam
-B 4,2 dB lauter rein. Mix ihn nochmal, Ziel unter 1 dB." Das LLM ist verdrahtet
-und braucht nur H2. Punkt 3 steht seit sechs Wochen bei 30 % — das ist die
-größte Einzellücke zur Vision.
+**Woche 5 — Demo-Report, Onboarding, Teilen.** Ab hier kann jemand anderes als du
+das Produkt verstehen, ohne dass du daneben sitzt.
 
-**Woche 7 — Demo-Report, Onboarding, Teilen.** Ab hier kann jemand anderes als du
-das Produkt verstehen, ohne dass du daneben sitzt. Vorher ist jeder Beta-Test
-verschenkt.
+**Woche 6–8 — online gehen.** Und hier liegt die eine Verlängerung: **F2 gehört
+an den Anfang dieser Phase**, nicht ans Ende. Erst Nutzerbegriff in der Engine,
+dann Hosting, DSGVO, Stripe.
 
-**Woche 8+ — online gehen.** Hosting, DSGVO-Basics, dann Stripe.
-
-**Ziel: geschlossene Beta in rund 8 Wochen**, in der jeder angezeigte Wert
-gemessen ist — ohne dass die Timing-Frage vorher gelöst sein muss.
+**Ziel: geschlossene Beta in rund 8 Wochen** — unverändert, obwohl F2 dazukommt.
+Woche 1 und 3 des alten Plans sind heute in großen Teilen abgearbeitet worden.
 
 ---
 
@@ -454,16 +588,30 @@ das Projekt bekommen kann.
 
 ## 11 · Das größte Risiko
 
-Unverändert seit dem 30.07., und dieses Review bestätigt es: **Nicht die
-Technik, sondern die Aufmerksamkeitsverteilung.** Die Übergangserkennung ist die
-interessanteste Frage im Projekt und zieht die Zeit an, die Punkt 3, 4 und 5
-bräuchten.
+Die Vormittagsfassung nannte hier die **Aufmerksamkeitsverteilung**: dass die
+Übergangserkennung die interessanteste Frage bleibt und die Zeit anzieht, die
+Punkt 3, 4 und 5 bräuchten. Und sie schloss mit der Behauptung, ein halber Tag
+Backfill würde mehr für das Produkt tun als zwei Wochen Messarbeit.
 
-Der Beleg steht in diesem Dokument: Punkt 3 (Coach) steht seit sechs Wochen
-unverändert bei 30 %, Punkt 5 (Teilen) bei 10 % — während in derselben Zeit
-sieben Sitzungen an der Erkennung gearbeitet haben. Der Composite-Backfill vom
-11.08. hat 78 Minuten GPU gekostet und ergeben, dass die Stems Gewicht null
-haben. Das war richtig zu messen. Es hat den DJ keinen Schritt weitergebracht.
+**Der heutige Nachmittag hat das bestätigt** — deutlicher, als mir lieb ist. In
+einem Lauf ohne eine einzige Zeile an der Erkennung sind entstanden: die
+Ehrlichkeit in den Daten, ein Messwert von 50 auf 86 % befüllt, eine Kopfzahl
+die unterscheidet, und der erste belegte Fortschrittsnachweis des Projekts. σ
+steht unverändert bei 54,58 s, und es hat nichts gekostet.
 
-Ein halber Tag Backfill (B1) würde mehr für das Produkt tun als die letzten
-zwei Wochen Messarbeit zusammen.
+**Das Risiko hat sich damit verschoben, nicht aufgelöst.** Die neue Fassung
+lautet:
+
+> Der Fortschrittsnachweis ruht auf **einer** Größe, in **einer** Stichprobe von
+> 13 Aufnahmen über 22 Tage, von **einem** Rater bewertet. r = −0,622 bei n = 13
+> ist ein deutlicher Hinweis und keine Gewissheit.
+
+Die Versuchung ist jetzt, diese Zahl als Beweis zu behandeln, weil sie die erste
+gute Nachricht seit Wochen ist. Der Markenkern verlangt das Gegenteil: E3 steht
+nicht ohne Grund in der Liste, und die Vorbehalte gehören in die Oberfläche,
+nicht nur in den Sitzungsbericht.
+
+Das zweite Risiko ist unscheinbarer und heute größer geworden: **Der Fortschritt
+dieses Tages existiert auf genau einer Festplatte.** Acht ungepushte Commits,
+drei uncommittete Dokumente — darunter der Nachweis, auf den seit dem 30.07.
+hingearbeitet wurde.
