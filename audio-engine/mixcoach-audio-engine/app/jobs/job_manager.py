@@ -89,7 +89,10 @@ def create_job(temp_path: str, file_name: str, file_size: int) -> Job:
     )
     with _lock:
         _jobs[job.job_id] = job
-    _executor.submit(_run_job, job.job_id)
+    # RESULTS_DIR HIER festhalten, nicht erst im Thread lesen - der
+    # Patch aus conftest.py ist beim Schreiben womoeglich schon
+    # zurueckgenommen. Siehe _run_job.
+    _executor.submit(_run_job, job.job_id, RESULTS_DIR)
     return job
 
 
@@ -148,11 +151,39 @@ def retry_job(job_id: str) -> Optional[Job]:
     )
     with _lock:
         _jobs[job.job_id] = job
-    _executor.submit(_run_job, job.job_id)
+    # RESULTS_DIR HIER festhalten, nicht erst im Thread lesen - der
+    # Patch aus conftest.py ist beim Schreiben womoeglich schon
+    # zurueckgenommen. Siehe _run_job.
+    _executor.submit(_run_job, job.job_id, RESULTS_DIR)
     return job
 
 
-def _run_job(job_id: str) -> None:
+def _run_job(job_id: str, ziel_ordner: Path | None = None) -> None:
+    """Analyse im Hintergrund-Thread.
+
+    ziel_ordner wird BEIM ABSCHICKEN uebergeben, nicht hier aus dem
+    Modul-Global gelesen. Der Grund ist ein Fehler, der genau einmal
+    aufgetreten und schwer zu sehen ist:
+
+    Der Executor lebt prozessweit und ueberdauert jeden einzelnen Test.
+    tests/conftest.py biegt job_manager.RESULTS_DIR per monkeypatch in
+    einen tmp-Ordner um und nimmt den Patch beim Teardown zurueck. Laeuft
+    der Job-Thread dann noch - was unter Last passiert, wenn der Test in
+    seinen Timeout laeuft -, liest er beim Schreiben den WIEDERHERGESTELLTEN
+    Wert und legt die Analyse im echten Datenstamm ab.
+
+    Am 15.08.2026 so passiert: caf8ee17 (mix.wav) lag danach in
+    daten/analysis_results/. Genau dagegen ist conftest.py geschrieben - am
+    31.07. waren 62 solcher Dateien aufgelaufen und haben eine
+    Verteilungsmessung um 1,8 Beats verschoben. Der Fehler faellt nicht auf,
+    weil er wie ein Befund aussieht.
+
+    Mit dem Wert vom Absenden haengt das Ziel nicht mehr am Zeitpunkt des
+    Schreibens. Fuer den Betrieb aendert sich nichts: dort ist RESULTS_DIR
+    ueber die Laufzeit konstant.
+    """
+    if ziel_ordner is None:
+        ziel_ordner = RESULTS_DIR
     job = _jobs[job_id]
     job.status = "running"
     job.stage = "preprocessing"
@@ -184,7 +215,7 @@ def _run_job(job_id: str) -> None:
         # Report nachhoeren kann (GET /analysis/{id}/audio).
         suffix = Path(job.file_name or "").suffix.lower() or ".wav"
         try:
-            audio_target = RESULTS_DIR / f"{analysis_id}{suffix}"
+            audio_target = ziel_ordner / f"{analysis_id}{suffix}"
             shutil.move(job.temp_path, audio_target)
             result["audioPath"] = f"/analysis/{analysis_id}/audio"
         except OSError:
@@ -193,7 +224,7 @@ def _run_job(job_id: str) -> None:
         _results[analysis_id] = result
 
         try:
-            (RESULTS_DIR / f"{analysis_id}.json").write_text(
+            (ziel_ordner / f"{analysis_id}.json").write_text(
                 json.dumps(result), encoding="utf-8",
             )
         except OSError:
