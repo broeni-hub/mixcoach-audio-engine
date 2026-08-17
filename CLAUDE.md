@@ -1,15 +1,28 @@
 # MixCoach — Projektkontext
 
 DJ-Set-Analyse: Aufnahme rein, Report mit bewerteten Übergängen raus.
-Der USP ist die Transition, nicht der Track — siehe `PRODUKTVISION.md`
-und `ROADMAP.md`.
+Der USP ist die Transition, nicht der Track.
 
-**Stand 10.08.2026:** `PROMPT_K1_2026-07-30.md` ist abgearbeitet, Ergebnis in
-`K1_AUFBAU_2026-07-31.md`. Nachgemessen und zusammengeführt am 10.08.:
-`SITZUNG_2026-08-10.md`. Offen und wartend auf Sebastian: die zweite,
-blinde Labelrunde (`MixCoach-Zweitrunde.command`) und die Entscheidung zu
-`quality_score`. Nächster Bauschritt laut Standortbestimmung: die Historie
-aus `localStorage` nach Supabase.
+**Maßgeblich für Ziel und Tor ist `PRODUKTVISION.md`** — dort stehen seit der
+Zusammenführung am 17.08.2026 beide: das Fernziel und die Live-Schwelle.
+`ROADMAP.md` sagt, in welcher Reihenfolge.
+
+**Stand 17.08.2026:** Der Korrekturweg steht — eine Änderung auf der Platte
+erreicht den Browser, ohne dass jemand seinen Cache löscht (`reportRevision`,
+vorgeführt am 16.08.). Punkt 3 hat zum ersten Mal Übungen, die eine gemessene
+Zahl aus dem eigenen Set nennen; die Vorlage „Transition Review" steht in
+keinem Report mehr. Ein Ergebnis-Stamm, ein Ground-Truth-Stamm.
+
+Offen und wartend auf Sebastian:
+
+- **Bedingung 2 der Live-Schwelle ist nicht vorgeführt** — dass die Historie
+  einen Gerätewechsel übersteht, ist gebaut, aber nie in der laufenden App
+  gezeigt worden.
+- **J7, der blinde Übungsvergleich** (`MixCoach-Uebungen-Bewerten.command`):
+  20 Paare, alte Vorlage gegen belegte Übung. Ohne diesen Abend ist „Punkt 3
+  auf 50 %" eine Behauptung, keine Messung.
+- Die Entscheidungen zu `quality_score`, zur Übungsbibliothek
+  (`ENTSCHEIDUNG_UEBUNGSBIBLIOTHEK.md`) und zum LLM-Coach.
 
 ## Die Live-Schwelle — Maßstab für jede Priorisierung
 
@@ -30,7 +43,7 @@ Stand: `STANDORTBESTIMMUNG_2026-07-30.md`, Befund: `ZUKUNFTSWEGE_2026-07-30.md`.
 ```
 audio-engine/mixcoach-audio-engine/   FastAPI-Backend + Analyse
   app/audio/scoring/                  Composite-Bewertung — NICHT ANFASSEN
-  app/experimental/detection/         Kandidatensuche für Übergänge
+  app/audio/set_analyzer_helpers.py   Kandidatensuche für Übergänge
   app/library/manager.py              Fingerprint-/Index-Verwaltung
   app/paths.py                        Datenstamm, siehe unten
   tools/                              Auswertungs- und Wartungsskripte
@@ -51,9 +64,15 @@ per `~/.zshrc` im PATH.
 `MIXCOACH_DATA_DIR` **muss gesetzt sein** und auf `daten/` zeigen. Ohne die
 Variable fällt `app/paths.py` auf den Engine-Ordner zurück, und die App sucht
 Library, Ergebnisse und Ground Truth am falschen Ort. Genau so ist die Ground
-Truth auf zwei Stämme auseinandergelaufen — `daten/ground_truth/` (45 Dateien)
-und `audio-engine/mixcoach-audio-engine/ground_truth/` (24, davon 18
-byteidentisch). Beim Auswerten immer bewusst entscheiden, welcher Stand gilt.
+Truth einmal auf zwei Stämme auseinandergelaufen.
+
+**Seit dem 13.08.2026 gibt es wieder einen Stamm:** `daten/ground_truth/`,
+45 Dateien. Der zweite liegt unter `_archiv_2026-08-13/` und wird nicht mehr
+gelesen; seine abweichenden Bewertungen sind eingearbeitet
+(`tools/staemme_zusammenfuehren.py`). Die neun widersprechenden Urteile, die
+dabei herauskamen, sind am 17.08. entschieden — `daten/ground_truth/
+KONFLIKTE.md` führt „Offen: 0". Die Variable bleibt trotzdem Pflicht: ohne sie
+entsteht derselbe Doppelstamm von vorn.
 
 Details und offene Blocker: `SETUP_MACOS.md`.
 
@@ -101,29 +120,54 @@ Seit dem 31.07.2026 ist `--mode dedup` die **Vorgabe**: gezählt werden
 Aufnahmen (`fileName`), nicht Ground-Truth-Dateien — sonst zählt REC001 elfmal.
 `--check` sagt an, gegen welchen Stand es prüft.
 
-Stand 31.07.2026, Sicht `dedup`: 28 Aufnahmen, 286 bewertete Übergänge,
-Recall 71 %, Precision 74 %, strikt korrekt 29 %, **σ = 54,58 s**, Median
-−29,43 s, 85 % zu spät. Die alte Sicht `spec` (69 „Sets", σ = 52,87 s) bleibt
-über `--mode spec` abrufbar — **das Entdoppeln hat σ erhöht**, die
-Doppelzählung hatte die Streuung geschönt.
+Stand 17.08.2026, Sicht `dedup`: 28 Aufnahmen, 286 bewertete Übergänge,
+91 zusätzlich als `missed` erfasst, Recall 70 %, Precision 74 %, strikt
+korrekt 29 %, **σ = 54,58 s**, Median −29,43 s, 85 % zu spät. Die alte Sicht
+`spec` (69 „Sets", σ = 52,87 s) bleibt über `--mode spec` abrufbar — **das
+Entdoppeln hat σ erhöht**, die Doppelzählung hatte die Streuung geschönt.
 
-Nur die 19 verwertbaren Aufnahmen (`dedup --nur-verwertbar`): Recall 74 %,
+Nur die 19 verwertbaren Aufnahmen (`dedup --nur-verwertbar`): Recall 73 %,
 Precision 80 %, σ = 45,85 s.
 
-Die Diagnose dazu: `detect_transition_zones()` sucht eine RMS-Delle — das ist
-im DJ-Mix der Breakdown vor dem Drop, also das *Ende* des Blends. Der Mensch
-labelt den *Anfang*. Die Differenz ist die Transitionslänge (8–64 Takte),
-daher die große Streuung. Ein globaler Offset behebt das nicht und lässt σ
-unverändert. **σ ist die Zahl, an der sich jede Änderung messen lassen muss.**
+Gegenüber dem 31.07. haben sich **nur Recall und `missed`** bewegt (71 → 70 %,
+88 → 91; verwertbar 74 → 73 %). Ursache ist die Stamm-Zusammenführung vom
+13.08.: aus dem archivierten Ordner kamen drei zusätzliche `missed`-Angaben
+dazu, also mehr Wahrheit bei gleicher Erkennung. Precision, σ und Median sind
+unverändert — die Erkennung selbst wurde nicht angefasst.
+
+Die Diagnose dazu: `detect_set_transition_zones()` in
+`app/audio/set_analyzer_helpers.py` sucht eine RMS-Delle — das ist im DJ-Mix
+der Breakdown vor dem Drop, also das *Ende* des Blends. Der Mensch labelt den
+*Anfang*. Die Differenz ist die Transitionslänge (8–64 Takte), daher die große
+Streuung. Ein globaler Offset behebt das nicht und lässt σ unverändert.
+**σ ist die Zahl, an der sich jede Änderung messen lassen muss.**
+
+Bis zum 17.08.2026 stand hier `detect_transition_zones()` — ein 46-Zeiler in
+`app/experimental/`, der von nichts importiert wurde und inzwischen unter
+`_archiv_2026-08-17/` liegt. Der Befund gilt unverändert für die lebende
+Fassung; sie ist nur differenzierter (geglättete Kurve, drei Fenster im
+Vergleich, eigene Bewertung für Blend, Drop und Bass-Swap).
 
 ## Arbeitsregeln
 
 - `app/audio/scoring/*` nicht anfassen (Composite-Rebuild).
 - Bestehende API-Endpoints und Frontend-Seiten nicht verändern.
-- Keine Grid-Search über die Schwellwerte in `detect_transition_zones()` —
+- Keine Grid-Search über die Schwellwerte in `detect_set_transition_zones()` —
   belegt falscher Hebel, siehe oben.
 - Ehrlichkeitslinie: nichts anzeigen, was nicht gemessen wurde. Das ist
   Markenkern, kein Stilmittel.
+- **Ein Test belegt die Regel, nicht den Weg durch die Anwendung.** Zu jeder
+  Abnahme gehört eine Vorführung in der laufenden App. Zweimal an einem Tag
+  gelernt: bei F1.2 waren die Tests grün, während die Report-Seite den
+  korrigierten Stand gar nicht erst holte — und beim Coach zeigte das
+  Fazit weiter einen Satz, den der Backfill entfernt hatte, weil er in einem
+  zweiten Feld nochmal stand. Beide Male hat erst das Öffnen der Seite es
+  gezeigt.
+- **Jede Information hat genau einen Ort, an dem sie wahr ist.** Zwei
+  Ergebnis-Stämme, zwei Ground-Truth-Stämme, zwei Kopien derselben
+  Coach-Sätze, eine Schwelle an zwei Stellen — jedes Mal lief einer der
+  beiden Stände davon, und jedes Mal hat es Tage gekostet. Wer eine zweite
+  Kopie anlegt, muss sagen, welche gilt.
 - Kommentare und Doku auf Deutsch, wie im Bestand.
 
 ## Was gemessen erledigt ist — nicht nochmal aufmachen
@@ -148,9 +192,18 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 226 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 294 Tests, alle grün
 ```
+
+Dazu 42 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
+--noEmit`, das seit dem 15.08. bei **0 Fehlern** steht.
 
 `tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm
 hinterlassen. Vor dem 31.07. taten sie das — 62 Stück waren aufgelaufen und
 haben eine Messung verschoben.
+
+Der Schutz hatte bis zum 16.08. ein Loch, das nur unter Last aufging: der
+Job-Executor lebt prozessweit, und `_run_job` las das Zielverzeichnis erst
+beim Schreiben. Lief ein Test in seinen Timeout, war der Patch da schon
+zurückgenommen und die Analyse landete im echten Datenstamm. Der Zielordner
+wird jetzt beim Absenden festgehalten (`job_manager._run_job`).
