@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -109,56 +110,53 @@ function AuthPage() {
   }
 
   /**
-   * Anmeldung mit Google - ueber Supabase, wie alles andere auch.
+   * Anmeldung mit Google - ueber den OAuth-Broker von Lovable.
    *
-   * WARUM DAS VORHER NICHT GING: hier stand lovable.auth.signInWithOAuth.
-   * Der Wrapper (integrations/lovable) brueckt zwar zu Supabase - er ruft
-   * supabase.auth.setSession(result.tokens) -, aber NUR im Zweig ohne
-   * Weiterleitung. Ein OAuth-Flug leitet immer weiter, kommt also mit
-   * `redirected` zurueck und verlaesst die Seite; die Tokens werden nie
-   * gesetzt. Fuer die Rueckkehr gab es keinen Handler.
+   * WARUM NICHT DIREKT UEBER SUPABASE: das Supabase-Projekt gehoert Lovable.
+   * Am 16.08.2026 nachgemessen an /auth/v1/settings und /auth/v1/authorize:
    *
-   * Der Rest dieser Seite haengt an Supabase (getSession und
-   * onAuthStateChange oben), und app.tsx laesst nur mit einer SUPABASE-
-   * Sitzung durch. Zwei Anmeldesysteme nebeneinander konnten also gar
-   * nicht zusammenpassen - der Knopf hat den Nutzer bestenfalls
-   * weitergeleitet und wieder auf der Anmeldeseite abgesetzt.
+   *   external.google = true          Google ist im Projekt eingeschaltet
+   *   authorize       = 400           "Unsupported provider: missing OAuth secret"
    *
-   * Jetzt derselbe Weg fuer beide: Supabase leitet zu Google, Google
-   * zurueck nach /auth, der Client liest die Sitzung aus der URL
-   * (detectSessionInUrl ist Vorgabe), onAuthStateChange oben feuert und
-   * navigiert weiter. Kein zweiter Handler noetig.
+   * Eingeschaltet, aber ohne Zugangsdaten - das ist kein halbfertiger
+   * Zustand, sondern Absicht. Lovable behaelt die OAuth-Anwendung bei sich
+   * und liefert nur fertige Tokens, die der Wrapper per
+   * supabase.auth.setSession() einsetzt. In das Projekt laesst sich also
+   * gar kein Secret eintragen, und supabase.auth.signInWithOAuth kann dort
+   * nie funktionieren. (Ich hatte genau das kurzzeitig eingebaut - falsch,
+   * siehe Commit 5519a9b und dessen Revert.)
    *
-   * NOCH NOETIG, UND NUR SEBASTIAN KANN DAS: Google muss im Supabase-
-   * Dashboard freigeschaltet sein (Authentication -> Providers -> Google)
-   * mit Client-ID und Secret aus der Google Cloud Console, und die
-   * Redirect-URLs muessen eingetragen sein. Fehlt das, antwortet Supabase
-   * "Unsupported provider" - das wird unten ausdruecklich uebersetzt,
-   * statt es als "Google sign-in failed" zu verschlucken.
+   * WAS DAS FUER LOKAL HEISST: der Broker liegt unter /~oauth/initiate auf
+   * der eigenen Domain und wird von Lovables Hosting bereitgestellt. Der
+   * Vite-Dev-Server kennt die Route nicht - nachgemessen: HTTP 404, waehrend
+   * /auth 200 liefert. Google kann lokal also NICHT gehen, und zwar aus
+   * einem Grund, an dem kein Code etwas aendert.
+   *
+   * Genau das sagt der Knopf jetzt, statt still nichts zu tun. Vorher ist
+   * der Nutzer weitergeleitet worden, kam ohne Sitzung zurueck und stand
+   * wieder auf der Anmeldeseite - ohne eine einzige Meldung. Der
+   * verschluckte Fehler ist in diesem Projekt die teuerste Codezeile.
    */
   async function onGoogle() {
+    const lokal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+    if (lokal) {
+      toast.error(
+        "Google-Anmeldung gibt es nur in der veröffentlichten App — der "
+        + "OAuth-Dienst läuft bei Lovable und ist lokal nicht erreichbar. "
+        + "Hier bitte mit E-Mail und Passwort anmelden.",
+      );
+      return;
+    }
+
     setGoogleBusy(true);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          // Zurueck auf DIESE Seite - der Listener oben uebernimmt von dort.
-          redirectTo: `${window.location.origin}/auth`,
-        },
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
       });
-      if (error) {
-        const nichtEingerichtet = /unsupported provider|not enabled|provider is not/i
-          .test(error.message || "");
-        toast.error(
-          nichtEingerichtet
-            ? "Google-Anmeldung ist im Supabase-Projekt noch nicht freigeschaltet "
-              + "(Authentication → Providers → Google)."
-            : error.message || "Google sign-in failed",
-        );
+      if (result.error) {
+        toast.error(result.error.message || "Google sign-in failed");
         setGoogleBusy(false);
       }
-      // Kein setGoogleBusy(false) im Erfolgsfall: der Browser verlaesst die
-      // Seite, der Knopf soll bis dahin belegt aussehen.
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Google sign-in failed");
       setGoogleBusy(false);
