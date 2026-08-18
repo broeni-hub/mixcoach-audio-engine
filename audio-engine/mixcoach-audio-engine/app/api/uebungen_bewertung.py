@@ -184,14 +184,38 @@ def post_antwort(lauf: str, payload: AntwortPayload) -> dict:
     return {"ok": True, "beantwortet": len(daten["antworten"])}
 
 
+def _fuer_script_block(rohes_json: str) -> str:
+    """JSON so einbetten, dass ein <script>-Element es zurueckgibt.
+
+    Hier stand bis zum 17.08.2026 html.escape(..., quote=True), und die Seite
+    blieb dadurch leer: Der HTML-Parser behandelt den Inhalt eines
+    <script>-Elements als ROHTEXT und loest Entitaeten NICHT auf. `textContent`
+    lieferte also woertlich `&quot;index&quot;: 0`, JSON.parse warf, die
+    Schleife darunter lief nie - sichtbar blieb nur die statische
+    Ueberschrift. Der Fehler war unsichtbar, weil die Aufgaben serverseitig
+    korrekt gebaut wurden (20 Paare in der Laufdatei) und die Tests genau das
+    pruefen: die Regel, nicht den Weg durch die Anwendung.
+
+    Richtig ist das Gegenteil von Escapen: Das JSON bleibt roh, nur `<` wird
+    zu `\\u003c`. Damit kann kein `</script>` den Block vorzeitig schliessen,
+    und weil `<` in json.dumps-Ausgabe ausschliesslich innerhalb von
+    Zeichenketten vorkommt, bleibt das Ergebnis gueltiges JSON.
+    """
+    return rohes_json.replace("<", "\\u003c")
+
+
 @router.get("/{lauf}", response_class=HTMLResponse)
 def get_seite(lauf: str) -> HTMLResponse:
     daten = _lauf_laden(lauf)
     aufgaben = json.dumps([_blind(a) for a in daten["aufgaben"]], ensure_ascii=False)
     beantwortet = json.dumps(daten.get("antworten") or {}, ensure_ascii=False)
-    return HTMLResponse(_SEITE.replace("__AUFGABEN__", html.escape(aufgaben, quote=True))
-                        .replace("__ANTWORTEN__", html.escape(beantwortet, quote=True))
-                        .replace("__LAUF__", html.escape(lauf, quote=True)))
+    # Der Laufname steht im Template zwischen Anfuehrungszeichen und ist damit
+    # ein JS-String-Literal - dieselbe Rohtext-Regel wie oben. html.escape war
+    # auch hier falsch; es fiel nur nicht auf, weil "abend1" keine Sonderzeichen
+    # hat. json.dumps liefert die Anfuehrungszeichen gleich mit.
+    return HTMLResponse(_SEITE.replace("__AUFGABEN__", _fuer_script_block(aufgaben))
+                        .replace("__ANTWORTEN__", _fuer_script_block(beantwortet))
+                        .replace('"__LAUF__"', _fuer_script_block(json.dumps(lauf))))
 
 
 # Zwei Knoepfe, zwei Texte, sonst nichts. Bewusst ohne Reihenfolge-Hinweis

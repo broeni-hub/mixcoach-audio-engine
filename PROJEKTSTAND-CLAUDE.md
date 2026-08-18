@@ -8,13 +8,27 @@ Stand: 28.–30.07.2026. Alle Zeitangaben im Format TT.MM.JJJJ.
 
 ## 1. Vision (nicht antasten ohne Rücksprache mit Sebastian)
 
+> **Maßgeblich ist `PRODUKTVISION.md`.** Dieser Abschnitt ist eine Kurzfassung
+> und darf ihr nicht widersprechen. Steht hier etwas anderes, gilt dort.
+> (Nachgezogen am 17.08.2026 — bis dahin führte dieser Abschnitt ">90 %
+> Erkennung" als Arbeitsziel und stand damit gegen die Live-Schwelle.)
+
 "Andere Tools analysieren deine Musik. MixCoach analysiert dein DJing." USP ist **Mix-Analyse** (was zwischen den Tracks passiert), nicht Track-Analyse (Tonart/BPM — das machen Mixed In Key/rekordbox/Serato schon).
 
-Erlebnis: Set hochladen → per Fingerprinting automatisch erkennen, welcher Track wann lief (sekundengenau, echte Tracknamen) → Report mit nachhörbaren Messwerten (Phrasen-Timing, Tempo-Drift, Harmonie, Pegelsprung in dB, Bass-Overlap) → personalisiertes Coaching → Übungen aus eigenem Material → Fortschritts-Radar über Wochen.
+Erlebnis: Set hochladen → per Fingerprinting automatisch erkennen, welcher Track wann lief (echte Tracknamen) → Report mit nachhörbaren Messwerten (Phrasen-Timing, Tempo-Drift, Harmonie, Pegelsprung in dB, Bass-Overlap) → personalisiertes Coaching → Übungen aus eigenem Material → Fortschritts-Radar über Wochen.
 
 Drei Burggräben: (1) **Daten-Schleife** — jeder Feedback-Klick verbessert das Erkennungsmodell; (2) **Library-Verbindung** — Fingerprinting macht Erkennung exakt UND ermöglicht sonst unmögliche Messungen; (3) **radikale Ehrlichkeit** — nichts anzeigen, was nicht gemessen wurde, keine erfundenen Scores, Unsicherheit klar kennzeichnen (z.B. "≈ Position geschätzt").
 
-**Wichtigste Arbeitsregel:** Vor tiefem Einstieg in eine technische Baustelle immer kurz prüfen, ob sie dem übergeordneten Ziel dient (>90% Übergangs-Erkennung, "perfekter DJ-Coach") — siehe `ROADMAP.md`/`PRODUKTVISION.md`, aber Vorsicht: **der Code ist oft weiter als diese Dokumente** (Stand 06.07.2026, nicht durchgängig aktualisiert). Vor Planung immer den tatsächlichen Code-/Datenstand prüfen (Dateidaten in `daten/analysis_results`, `app/models/`, `app/calibration/`), nicht nur die Docs.
+**Zwei Zeitpunkte, und die Unterscheidung ist verbindlich:**
+
+- **Fernziel:** >90 % Übergangserkennung, sekundengenau. Bleibt das Ziel — ist
+  aber **kein Tor** mehr (gemessen widerlegt: 20 Sets bringen +0,1 pp
+  Precision, R² = 0,011 für die Zeit).
+- **Tor zur geschlossenen Beta — die Live-Schwelle:** jeder angezeigte Wert ist
+  gemessen · die Historie überlebt einen Gerätewechsel · drei Sets desselben
+  DJs zeigen eine Entwicklung.
+
+**Wichtigste Arbeitsregel:** Vor tiefem Einstieg in eine technische Baustelle prüfen, ob sie auf **eine der drei Bedingungen** einzahlt — oder einen anderen genannten Grund hat. Und: **der Code ist oft weiter als die Dokumente.** Vor Planung immer den tatsächlichen Code-/Datenstand prüfen (Dateidaten in `daten/analysis_results`, `app/models/`, `app/calibration/`), nicht nur die Docs.
 
 **Zweite wichtige Arbeitsregel:** Bei Audio-/DSP-Fixes (Timing, Schwellwerte, Vorzeichen) IMMER empirisch vor/nach an echtem Audio messen, nicht nur theoretisch herleiten oder Code-Review allein vertrauen. Mehrfach hat sich eine plausible Herleitung im Test als falsch erwiesen (siehe Abschnitt 4).
 

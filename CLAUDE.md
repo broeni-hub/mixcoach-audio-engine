@@ -7,22 +7,43 @@ Der USP ist die Transition, nicht der Track.
 Zusammenführung am 17.08.2026 beide: das Fernziel und die Live-Schwelle.
 `ROADMAP.md` sagt, in welcher Reihenfolge.
 
-**Stand 17.08.2026:** Der Korrekturweg steht — eine Änderung auf der Platte
+**Stand 18.08.2026:** Der Korrekturweg steht — eine Änderung auf der Platte
 erreicht den Browser, ohne dass jemand seinen Cache löscht (`reportRevision`,
 vorgeführt am 16.08.). Punkt 3 hat zum ersten Mal Übungen, die eine gemessene
 Zahl aus dem eigenen Set nennen; die Vorlage „Transition Review" steht in
 keinem Report mehr. Ein Ergebnis-Stamm, ein Ground-Truth-Stamm.
 
+**Bedingung 2 ist vorgeführt** (18.08.). Eine bei angemeldetem Nutzer über die
+Engine entstandene Analyse steht ohne Neuladen in `public.analyses`; danach
+wurde jeder `mixcoach.*`-Schlüssel aus `localStorage` entfernt, und nach dem
+Neuladen war sie wieder da — sie kann nur aus der Datenbank gekommen sein.
+Hergang und Messwerte: `SITZUNG_2026-08-14.md`, Abschnitt N5.
+
+Bis dahin hing die Persistenz an genau einer Stelle: `runPipeline()`, dem
+Browser-Notpfad, den der Preflight gar nicht erst laufen lässt. Der
+Engine-Pfad schrieb nur in `localStorage`. Es fehlte kein Feature — die Kette
+riss eine Stelle vor dem Ziel. Sie hängt jetzt in `store.ts:addAnalysis()`,
+dem gemeinsamen Punkt aller Wege, und ein Test hält fest, dass keine zweite
+Stelle entsteht.
+
 Offen und wartend auf Sebastian:
 
-- **Bedingung 2 der Live-Schwelle ist nicht vorgeführt** — dass die Historie
-  einen Gerätewechsel übersteht, ist gebaut, aber nie in der laufenden App
-  gezeigt worden.
-- **J7, der blinde Übungsvergleich** (`MixCoach-Uebungen-Bewerten.command`):
-  20 Paare, alte Vorlage gegen belegte Übung. Ohne diesen Abend ist „Punkt 3
-  auf 50 %" eine Behauptung, keine Messung.
+- **J7 ist gelaufen, und das Ergebnis ist unentschieden.** 20 Paare, blind:
+  **13 zu 7** für die belegte Übung (65 %), zweiseitiger Binomialtest
+  **p = 0,263**. Nötig für 5 % wären 15 von 20 gewesen. Von einem Münzwurf ist
+  das nicht zu unterscheiden (`tools/uebungen_bewertung_auswerten.py`,
+  Lauf `abend1`).
+
+  **Punkt 3 bleibt damit bei 50 %, aber aus einem anderen Grund als bisher:**
+  nicht mehr, weil die Messung fehlt, sondern weil sie stattgefunden hat und
+  nichts belegt. Wer die Übungen für besser hält, braucht eine größere
+  Stichprobe — nicht dieselbe Behauptung nochmal.
 - Die Entscheidungen zu `quality_score`, zur Übungsbibliothek
   (`ENTSCHEIDUNG_UEBUNGSBIBLIOTHEK.md`) und zum LLM-Coach.
+- Neu gefunden am 18.08., beides klein und außerhalb jedes Auftrags: die App
+  hat **keinen Weg, ein Passwort zurückzusetzen**, und verspricht nach der
+  Registrierung eine Bestätigungsmail, die bei `mailer_autoconfirm: true`
+  nie kommt.
 
 ## Die Live-Schwelle — Maßstab für jede Priorisierung
 
@@ -37,6 +58,35 @@ der Zeitvarianz. Präzision und Timing bleiben Ziele, sind aber **kein Tor** meh
 Praktisch heißt das bei jeder Aufgabe: Sie zahlt auf eine der drei Bedingungen
 ein, oder sie hat einen anderen genannten Grund. Herleitung und ausgezählter
 Stand: `STANDORTBESTIMMUNG_2026-07-30.md`, Befund: `ZUKUNFTSWEGE_2026-07-30.md`.
+
+## Widerspruch ist Teil des Auftrags
+
+**Sebastians Anweisung vom 17.08.2026, gilt für jede Sitzung — hier und in
+Cowork:**
+
+> Wenn eine Anweisung, eine Frage oder ein Prompt das Projekt in eine falsche
+> Richtung rückt oder in der falschen Reihenfolge kommt, sag das **sehr klar
+> und deutlich** — bevor du anfängst. Nenn die Aufgabe, die stattdessen dran
+> wäre, und warum.
+
+Das ist keine Höflichkeitsformel, sondern eine Arbeitsanweisung. Konkret:
+
+- **Vor jedem Auftrag prüfen:** Zahlt er auf eine der drei Bedingungen der
+  Live-Schwelle ein? Gibt es eine Aufgabe, die vorher fällig ist, weil dieser
+  Auftrag sonst wirkungslos bleibt?
+- **Wenn ja: zuerst widersprechen, dann liefern.** Nicht anfangen und
+  unterwegs einen Nebensatz einbauen.
+- **Beispiele aus der Projektgeschichte, an denen es teuer war:** Ein Backfill
+  ohne Korrekturweg (13.08.) korrigiert Dateien, die niemand mehr liest — die
+  Reihenfolge war falsch, nicht die Aufgabe. Eine Vorführung ohne die
+  Persistenz im Engine-Pfad (17.08.) hätte einen Abend gekostet und wie ein
+  Produktfehler ausgesehen.
+- **Auch gegen den Auftraggeber.** „Sebastian hat es so gesagt" ist kein Grund,
+  eine falsche Reihenfolge auszuführen. Der Widerspruch gehört in den Chat,
+  bevor der erste Commit entsteht.
+- **Und gegen sich selbst:** Wenn eine frühere eigene Empfehlung durch eine
+  Messung widerlegt ist, wird das ausgesprochen und die alte Zahl daneben
+  gestellt — nicht still korrigiert.
 
 ## Aufbau
 
@@ -195,7 +245,7 @@ cd audio-engine/mixcoach-audio-engine
 ../../.venv/bin/python -m pytest tests/ -q      # 294 Tests, alle grün
 ```
 
-Dazu 42 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
+Dazu 54 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
 --noEmit`, das seit dem 15.08. bei **0 Fehlern** steht.
 
 `tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm

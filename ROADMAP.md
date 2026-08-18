@@ -1,6 +1,11 @@
 # MixCoach Roadmap: Vom Prototyp zum bezahlten Produkt
 
-Stand: 06.07.2026 · Modell v4 aktiv (Erkennung ~98% Recall / ~62% Präzision auf schweren Sets)
+Stand des Dokuments: 06.07.2026, Zahlen nachgezogen am 17.08.2026 ·
+Betriebspunkt `min_p 0,6 / gap 150 s` · LOSO **Recall 92,4 % / Precision 62,8 %**
+· in der Praxis (Referenzmetrik, `dedup`) **Recall 70 % / Precision 74 %**, σ 54,58 s
+
+> Maßgeblich für Ziel und Tor ist `PRODUKTVISION.md`. Die Live-Schwelle unten
+> ist dort wortgleich verankert.
 
 ---
 
