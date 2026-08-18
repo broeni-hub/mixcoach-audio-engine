@@ -55,6 +55,13 @@ function PasswortNeuPage() {
     const fehler = fragment.get("error_description") || fragment.get("error");
     if (fehler) setGrund(fehler.replace(/\+/g, " "));
 
+    // Sagt der Anmeldedienst, dass der Link nicht ging, dann GILT das - auch
+    // wenn in diesem Browser noch eine alte Sitzung liegt. Sonst klickt jemand
+    // einen abgelaufenen Link und bekommt trotzdem das Formular: Die Seite
+    // saehe aus wie im Erfolgsfall, obwohl der Link gescheitert ist. Genau
+    // dieser Bauplan hat das Projekt schon dreimal Zeit gekostet.
+    if (fehler) { setLage("kein-link"); return; }
+
     // getSession() wartet die Auswertung der Adresse ab - der Client verarbeitet
     // das Fragment beim Aufbau.
     supabase.auth.getSession().then(({ data }) => {
