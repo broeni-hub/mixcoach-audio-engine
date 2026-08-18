@@ -1,0 +1,248 @@
+{
+ "lauf": "abend1",
+ "startwert": 20260814,
+ "aufgaben": [
+  {
+   "index": 0,
+   "fileName": "Be Svendsen live at Mount Nemrut, in Türkiye for Cercle.mp3",
+   "atSec": 6590.22,
+   "a": "Bei 110:10 (Übergang 22) kam der neue Track 9,0 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 1,
+   "fileName": "Dec25.WAV",
+   "atSec": 686.5,
+   "a": "Bei 12:14 (Übergang 3) kam der neue Track 6,3 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 2,
+   "fileName": "Dixon WE2  Tomorrowland 2025.mp3",
+   "atSec": 5361.4,
+   "a": "Bei 91:24 (Übergang 30) kam der neue Track 8,0 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 3,
+   "fileName": "Dixon at Cercle Festival 2024 (Ariane Stage).mp3",
+   "atSec": 1894.96,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 31:47 (Übergang 8) kam der neue Track 7,0 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 4,
+   "fileName": "Four Tet - Sónar 2025 - ARTE Concert.mp3",
+   "atSec": 1474.63,
+   "a": "Bei 24:41 (Übergang 6) kam der neue Track 7,8 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 5,
+   "fileName": "MixCoach1.WAV",
+   "atSec": 1020.1,
+   "a": "Bei 17:14 (Übergang 4) kam der neue Track 8,2 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 6,
+   "fileName": "MixCoach2.WAV",
+   "atSec": 1490.54,
+   "a": "Bei 24:53 (FaltyDL - Stay I'm Changed → Lone - Blue Moon Tree) kam der neue Track 4,0 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 7,
+   "fileName": "MixCoach3.WAV",
+   "atSec": 280.87,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 4:45 (Two Another - Stronger → Busty and the Bass,Macy Gray,Harrison - Out Of Love - Harrison Remix) kam der neue Track 4,1 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 8,
+   "fileName": "MixCoach4.WAV",
+   "atSec": 815.35,
+   "a": "Bei 13:50 (George FitzGerald - Every Inch - Deetron Remix → Swindle - Summer Fruits) kam der neue Track 6,7 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 9,
+   "fileName": "MixCoach5.WAV",
+   "atSec": 1035.05,
+   "a": "Bei 17:30 (Kelpe - Bags of Time - Neon Jung's Wormhole Remix → Nikki Nair - Startrack) kam der neue Track 9,3 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 10,
+   "fileName": "REC001.WAV",
+   "atSec": 999.66,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 18:46 (Übergang 6) kam der neue Track 5,4 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 11,
+   "fileName": "REC002.WAV",
+   "atSec": 332.83,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 5:53 (Übergang 1) kam der neue Track 3,4 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 12,
+   "fileName": "REC003.WAV",
+   "atSec": 324.99,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 5:47 (Übergang 2) kam der neue Track 5,0 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 13,
+   "fileName": "REC004.WAV",
+   "atSec": 379.18,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 6:35 (Übergang 2) kam der neue Track 4,2 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 14,
+   "fileName": "REC010.WAV",
+   "atSec": 748.45,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 12:44 (Übergang 5) kam der neue Track 7,0 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 15,
+   "fileName": "REC012.WAV",
+   "atSec": 1418.02,
+   "a": "Bei 24:22 (Übergang 6) kam der neue Track 5,6 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 16,
+   "fileName": "REC013.WAV",
+   "atSec": 1454.36,
+   "a": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "b": "Bei 24:26 (Übergang 5) kam der neue Track 5,6 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "_vorlage_ist": "a"
+  },
+  {
+   "index": 17,
+   "fileName": "RÜFÜS DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024.mp3",
+   "atSec": 5715.01,
+   "a": "Bei 95:51 (Übergang 23) kam der neue Track 10,1 dB leiser rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 18,
+   "fileName": "Be Svendsen live at Mount Nemrut, in Türkiye for Cercle.mp3",
+   "atSec": 1733.67,
+   "a": "Bei 29:15 (Übergang 7) kam der neue Track 5,0 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  },
+  {
+   "index": 19,
+   "fileName": "Dec25.WAV",
+   "atSec": 686.5,
+   "a": "Bei 12:14 (Übergang 3) kam der neue Track 6,3 dB lauter rein. Mix ihn nochmal, Ziel: unter 1,0 dB.",
+   "b": "Listen to the detected transition points and check whether the phrase timing feels natural.",
+   "_vorlage_ist": "b"
+  }
+ ],
+ "antworten": {
+  "0": {
+   "gewaehlt": "b",
+   "herkunft": "vorlage"
+  },
+  "1": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "2": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "3": {
+   "gewaehlt": "b",
+   "herkunft": "belegt"
+  },
+  "4": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "5": {
+   "gewaehlt": "b",
+   "herkunft": "vorlage"
+  },
+  "6": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "7": {
+   "gewaehlt": "a",
+   "herkunft": "vorlage"
+  },
+  "8": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "9": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "10": {
+   "gewaehlt": "a",
+   "herkunft": "vorlage"
+  },
+  "11": {
+   "gewaehlt": "b",
+   "herkunft": "belegt"
+  },
+  "12": {
+   "gewaehlt": "a",
+   "herkunft": "vorlage"
+  },
+  "13": {
+   "gewaehlt": "b",
+   "herkunft": "belegt"
+  },
+  "14": {
+   "gewaehlt": "b",
+   "herkunft": "belegt"
+  },
+  "15": {
+   "gewaehlt": "b",
+   "herkunft": "vorlage"
+  },
+  "16": {
+   "gewaehlt": "a",
+   "herkunft": "vorlage"
+  },
+  "17": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "18": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  },
+  "19": {
+   "gewaehlt": "a",
+   "herkunft": "belegt"
+  }
+ }
+}
