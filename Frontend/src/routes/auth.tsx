@@ -10,6 +10,9 @@ import { Waves, Loader2, KeyRound, Check } from "lucide-react";
 import { toast } from "sonner";
 import { WAITLIST_MODE } from "@/lib/billing";
 import { joinWaitlistFn, verifyInviteCodeFn } from "@/lib/beta.functions";
+import { useLang } from "@/lib/i18n";
+import { TEXTE, RESET_ZIEL } from "@/lib/auth-texte";
+import { lageNachRegistrierung, deuteAnmeldefehler, istWiederherstellung } from "@/lib/auth-logik";
 
 const INVITE_KEY = "mixcoach.inviteCode.v1";
 
@@ -19,7 +22,9 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const lang = useLang();
+  const T = TEXTE[lang];
+  const [mode, setMode] = useState<"signin" | "signup" | "reset">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -28,15 +33,37 @@ function AuthPage() {
   // Wird gesetzt, sobald feststeht, dass eine Bestaetigungsmail im Spiel ist -
   // nach der Registrierung oder nach einem Login-Versuch vor der Bestaetigung.
   const [awaitingConfirm, setAwaitingConfirm] = useState(false);
+  // Nach einer abgelehnten Anmeldung: Supabase sagt absichtlich NICHT, ob das
+  // Passwort falsch ist oder das Konto fehlt (sonst koennte jemand fremde
+  // Adressen durchprobieren). Der Nutzer darf trotzdem nicht raten - deshalb
+  // beide Auswege nebeneinander, statt den Fall aufzuloesen.
+  const [beideWege, setBeideWege] = useState(false);
+  // Gesetzt, sobald resetPasswordForEmail angenommen wurde. Bewusst NICHT
+  // "E-Mail gesendet" - das weiss der Browser nicht (siehe auth-texte.ts).
+  const [resetAngefragt, setResetAngefragt] = useState(false);
   const [hasInvite, setHasInvite] = useState<boolean>(() =>
     typeof window === "undefined" ? !WAITLIST_MODE : !WAITLIST_MODE || !!localStorage.getItem(INVITE_KEY),
   );
 
   useEffect(() => {
+    // Ein Wiederherstellungslink erzeugt eine SITZUNG - und ohne diese Weiche
+    // wuerde die Zeile darunter den Nutzer schnurstracks ins Dashboard
+    // schieben, statt ihn sein Passwort setzen zu lassen. Der Link landet nur
+    // dann hier, wenn die Adresse nicht in der Redirect-Allowlist des
+    // Supabase-Projekts steht und auf die SITE_URL zurueckfaellt; dass das
+    // passieren kann, ist von hier aus nicht pruefbar (siehe Bericht).
+    const wiederherstellung = () =>
+      typeof window !== "undefined" && istWiederherstellung(window.location.hash);
+
     supabase.auth.getSession().then(({ data }) => {
+      if (wiederherstellung()) { navigate({ to: "/passwort-neu" }); return; }
       if (data.session) navigate({ to: "/app/dashboard" });
     });
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((e, s) => {
+      if (e === "PASSWORD_RECOVERY" || wiederherstellung()) {
+        navigate({ to: "/passwort-neu" });
+        return;
+      }
       if (s) navigate({ to: "/app/dashboard" });
     });
     return () => sub.subscription.unsubscribe();
@@ -46,8 +73,24 @@ function AuthPage() {
     e.preventDefault();
     setBusy(true);
     try {
+      if (mode === "reset") {
+        // Supabase antwortet hier IMMER freundlich, auch wenn es die Adresse
+        // gar nicht gibt (am 18.08.2026 nachgemessen: HTTP 200, leerer Koerper,
+        // fuer existierende wie erfundene Adresse gleich). Das ist Absicht und
+        // richtig - sonst liesse sich durchprobieren, wer ein Konto hat.
+        // Deshalb steht in der Meldung "falls es ein Konto gibt", nicht "Mail
+        // gesendet".
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + RESET_ZIEL,
+        });
+        if (error) throw error;
+        setResetAngefragt(true);
+        setBeideWege(false);
+        return;
+      }
+
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -56,26 +99,46 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        // Bei aktivierter E-Mail-Bestaetigung (Vorgabe bei Lovable Cloud)
-        // liefert signUp KEINE Sitzung - der Tester haengt fest, bis er die
-        // Mail bestaetigt hat. Und wenn die Mail nie ankommt, sieht die App
-        // genauso aus wie im Erfolgsfall. Deshalb hier ausdruecklich der
-        // naechste Schritt UND der Ausweg, statt nur "check your email".
-        setAwaitingConfirm(true);
-        toast.success("Account created — confirm the link in your email to sign in.");
+
+        // Die ANTWORT entscheidet, nicht eine Annahme. Steht am Projekt
+        // mailer_autoconfirm=true (am 18.08.2026 an /auth/v1/settings
+        // nachgemessen), liefert signUp sofort eine Sitzung - der Nutzer ist
+        // drin. Bis dahin stand hier unbedingt "confirm the link in your
+        // email", und jeder neue Tester wartete auf eine Mail, die es nicht
+        // gibt. So ist der Text in BEIDEN Servereinstellungen richtig, ohne
+        // dass jemand eine Konstante pflegen muss.
+        if (lageNachRegistrierung(data) === "angemeldet") {
+          toast.success(T.kontoAngelegtDrin);
+          // onAuthStateChange leitet weiter.
+        } else {
+          setAwaitingConfirm(true);
+          toast.success(T.kontoAngelegtBestaetigen);
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Authentication failed";
-      // Supabase meldet das englisch und technisch. Der Fall ist haeufig genug,
-      // um ihn zu uebersetzen und den Ausweg gleich anzubieten.
-      if (/not confirmed|confirm/i.test(msg)) {
-        setAwaitingConfirm(true);
-        toast.error("Email not confirmed yet. Check your inbox — or resend below.");
-      } else {
-        toast.error(msg);
+      // Supabase meldet das englisch und technisch. Die Faelle sind haeufig
+      // genug, um sie zu uebersetzen und den Ausweg gleich anzubieten.
+      switch (deuteAnmeldefehler(msg)) {
+        case "nicht-bestaetigt":
+          setAwaitingConfirm(true);
+          toast.error(T.nichtBestaetigt);
+          break;
+        case "zu-viele-mails":
+          // Am 18.08.2026 gemessen: der zweite recover-Aufruf innerhalb einer
+          // Minute liefert 429 over_email_send_rate_limit. Ohne diese Meldung
+          // ist das von "Mail unterwegs" nicht zu unterscheiden.
+          toast.error(T.zuVieleMails);
+          break;
+        case "beide-wege":
+          setBeideWege(true);
+          toast.error(T.anmeldungAbgelehnt);
+          break;
+        default:
+          toast.error(msg);
       }
     } finally {
       setBusy(false);
@@ -84,14 +147,14 @@ function AuthPage() {
 
   async function onResendConfirm() {
     if (!email) {
-      toast.error("Enter your email address first.");
+      toast.error(lang === "de" ? "Gib zuerst deine E-Mail-Adresse ein." : "Enter your email address first.");
       return;
     }
     setBusy(true);
     try {
       const { error } = await supabase.auth.resend({ type: "signup", email });
       if (error) throw error;
-      toast.success("Confirmation email sent again.");
+      toast.success(T.erneutGesendet);
     } catch (err) {
       // Der wahrscheinlichste Fehler ist ein Rate-Limit: der eingebaute
       // Mailversand von Supabase ist auf wenige Nachrichten pro Stunde
@@ -101,7 +164,7 @@ function AuthPage() {
       const msg = err instanceof Error ? err.message : "Could not resend";
       toast.error(
         /rate|limit|too many/i.test(msg)
-          ? "Too many emails for now — the built-in mail service is rate-limited. Try again later."
+          ? T.zuVieleMails
           : msg,
       );
     } finally {
@@ -178,44 +241,61 @@ function AuthPage() {
         <Card className="glass">
           <CardHeader>
             <CardTitle className="text-center text-xl">
-              {mode === "signin" ? "Welcome back" : "Create your account"}
+              {mode === "signin" ? T.willkommen : mode === "signup" ? T.kontoAnlegen : T.passwortNeuSetzen}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              onClick={onGoogle}
-              disabled={googleBusy}
-            >
-              {googleBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
-              Continue with Google
-            </Button>
+            {mode !== "reset" && (
+              <>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={onGoogle}
+                  disabled={googleBusy}
+                >
+                  {googleBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <GoogleIcon />}
+                  {T.mitGoogle}
+                </Button>
 
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
-              <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground">or</span></div>
-            </div>
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-border" /></div>
+                  <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground">{T.oder}</span></div>
+                </div>
+              </>
+            )}
 
             <form onSubmit={onSubmit} className="space-y-3">
               {mode === "signup" && (
                 <div>
-                  <Label htmlFor="name">Display name</Label>
+                  <Label htmlFor="name">{T.anzeigename}</Label>
                   <Input id="name" value={name} onChange={(e) => setName(e.target.value)} className="mt-1" placeholder="DJ Alias" />
                 </div>
               )}
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{T.email}</Label>
                 <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1" />
               </div>
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1" />
-              </div>
+              {mode !== "reset" && (
+                <div>
+                  <div className="flex items-baseline justify-between">
+                    <Label htmlFor="password">{T.passwort}</Label>
+                    {mode === "signin" && (
+                      <button
+                        type="button"
+                        onClick={() => { setMode("reset"); setBeideWege(false); setResetAngefragt(false); }}
+                        className="text-xs text-primary hover:underline"
+                      >
+                        {T.passwortVergessen}
+                      </button>
+                    )}
+                  </div>
+                  <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1" />
+                </div>
+              )}
               <Button type="submit" disabled={busy} className="w-full bg-[image:var(--gradient-primary)] border-0 hover:opacity-90">
                 {busy && <Loader2 className="h-4 w-4 animate-spin" />}
-                {mode === "signin" ? "Sign in" : "Create account"}
+                {mode === "signin" ? T.anmelden : mode === "signup" ? T.kontoAnlegen : T.linkAnfordern}
               </Button>
             </form>
 
@@ -225,8 +305,7 @@ function AuthPage() {
             {awaitingConfirm && (
               <div className="rounded-md border border-border bg-muted/40 p-3 text-sm">
                 <p className="text-muted-foreground">
-                  Waiting for the confirmation link. It can take a few minutes,
-                  and it sometimes lands in spam.
+                  <strong className="text-foreground">{T.wartenTitel}</strong> {T.wartenText}
                 </p>
                 <button
                   type="button"
@@ -234,20 +313,72 @@ function AuthPage() {
                   disabled={busy}
                   className="mt-2 text-primary hover:underline disabled:opacity-50"
                 >
-                  Send the confirmation email again
+                  {T.erneutSenden}
                 </button>
               </div>
             )}
 
+            {/* J3: Der Anmeldedienst sagt absichtlich nicht, welcher der beiden
+                Faelle vorliegt. Wir loesen das nicht auf - wir bieten beide
+                Auswege an, damit der Nutzer so oder so weiterkommt. */}
+            {beideWege && mode === "signin" && (
+              <div className="rounded-md border border-destructive/40 bg-destructive/10 p-3 text-sm">
+                <p className="font-medium text-foreground">{T.beideWegeTitel}</p>
+                <p className="mt-1 text-muted-foreground">{T.beideWegeErklaerung}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => { setMode("signup"); setBeideWege(false); }}
+                  >
+                    {T.kontoAnlegen}
+                  </Button>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => { setMode("reset"); setBeideWege(false); }}
+                  >
+                    {T.passwortNeuSetzen}
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {/* J1a: "Anfrage ist raus" - NICHT "E-Mail gesendet". Ob eine Mail
+                hinausgeht, weiss der Browser nicht; angenommen wurde nur der
+                Auftrag. Und der Ausweg steht gleich dabei, mit dem am
+                18.08.2026 gemessenen Grund (429 nach dem zweiten Aufruf). */}
+            {resetAngefragt && (
+              <div className="rounded-md border border-accent/40 bg-accent/10 p-3 text-sm">
+                <p className="font-medium text-foreground">{T.resetTitel}</p>
+                <p className="mt-1 text-muted-foreground">{T.resetText}</p>
+                <p className="mt-2 text-muted-foreground">{T.resetAusweg}</p>
+              </div>
+            )}
+
             <p className="text-center text-sm text-muted-foreground">
-              {mode === "signin" ? "New to MixCoach?" : "Already have an account?"}{" "}
-              <button
-                type="button"
-                onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-                className="text-primary hover:underline"
-              >
-                {mode === "signin" ? "Create an account" : "Sign in"}
-              </button>
+              {mode === "reset" ? (
+                <button
+                  type="button"
+                  onClick={() => { setMode("signin"); setResetAngefragt(false); }}
+                  className="text-primary hover:underline"
+                >
+                  {T.zurueckZurAnmeldung}
+                </button>
+              ) : (
+                <>
+                  {mode === "signin" ? T.neuHier : T.schonKonto}{" "}
+                  <button
+                    type="button"
+                    onClick={() => { setMode(mode === "signin" ? "signup" : "signin"); setBeideWege(false); }}
+                    className="text-primary hover:underline"
+                  >
+                    {mode === "signin" ? T.kontoAnlegen : T.anmelden}
+                  </button>
+                </>
+              )}
             </p>
           </CardContent>
         </Card>

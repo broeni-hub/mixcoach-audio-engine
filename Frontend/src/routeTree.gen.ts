@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PasswortNeuRouteImport } from './routes/passwort-neu'
 import { Route as EngineTestRouteImport } from './routes/engine-test'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/app'
@@ -40,6 +41,11 @@ import { Route as AppAnalysesIdTransitionsTIdxRouteImport } from './routes/app.a
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswortNeuRoute = PasswortNeuRouteImport.update({
+  id: '/passwort-neu',
+  path: '/passwort-neu',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EngineTestRoute = EngineTestRouteImport.update({
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/engine-test': typeof EngineTestRoute
+  '/passwort-neu': typeof PasswortNeuRoute
   '/pricing': typeof PricingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/analyses': typeof AppAnalysesRouteWithChildren
@@ -207,6 +214,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/engine-test': typeof EngineTestRoute
+  '/passwort-neu': typeof PasswortNeuRoute
   '/pricing': typeof PricingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/analyses': typeof AppAnalysesRouteWithChildren
@@ -237,6 +245,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/engine-test': typeof EngineTestRoute
+  '/passwort-neu': typeof PasswortNeuRoute
   '/pricing': typeof PricingRoute
   '/app/achievements': typeof AppAchievementsRoute
   '/app/analyses': typeof AppAnalysesRouteWithChildren
@@ -268,6 +277,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/engine-test'
+    | '/passwort-neu'
     | '/pricing'
     | '/app/achievements'
     | '/app/analyses'
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/engine-test'
+    | '/passwort-neu'
     | '/pricing'
     | '/app/achievements'
     | '/app/analyses'
@@ -325,6 +336,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/engine-test'
+    | '/passwort-neu'
     | '/pricing'
     | '/app/achievements'
     | '/app/analyses'
@@ -355,6 +367,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   EngineTestRoute: typeof EngineTestRoute
+  PasswortNeuRoute: typeof PasswortNeuRoute
   PricingRoute: typeof PricingRoute
   AnalysisProcessingJobIdRoute: typeof AnalysisProcessingJobIdRoute
 }
@@ -366,6 +379,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwort-neu': {
+      id: '/passwort-neu'
+      path: '/passwort-neu'
+      fullPath: '/passwort-neu'
+      preLoaderRoute: typeof PasswortNeuRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engine-test': {
@@ -628,6 +648,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   EngineTestRoute: EngineTestRoute,
+  PasswortNeuRoute: PasswortNeuRoute,
   PricingRoute: PricingRoute,
   AnalysisProcessingJobIdRoute: AnalysisProcessingJobIdRoute,
 }
