@@ -4,6 +4,7 @@
 import type { AnalysisResult } from "./analysis";
 import { listAnalysesFn, upsertAnalysisFn } from "./analyses.functions";
 import { loestAb, mitNutzerstand } from "./scoring-version";
+import { supabase } from "@/integrations/supabase/client";
 
 type Stored = AnalysisResult & { archived?: boolean };
 
@@ -30,27 +31,92 @@ function toUpsertPayload(a: AnalysisResult, archived: boolean) {
   };
 }
 
-export async function persistAnalysis(a: AnalysisResult, archived = false) {
+/**
+ * Was beim Hochschieben herauskam. Drei Faelle, und nur EINER davon ist ein
+ * Fehler - deshalb sind es drei Werte und kein boolean.
+ */
+export type Hochschiebe_Ergebnis = "gespeichert" | "keine-sitzung" | "fehlgeschlagen";
+
+/**
+ * Steht eine angemeldete Sitzung? Antwortet mit dem Grund, wenn nicht.
+ *
+ * Der Grund ist nicht Zierde: ohne ihn sieht "keine Sitzung" identisch aus,
+ * egal ob niemand angemeldet ist (normal) oder der Supabase-Client mangels
+ * VITE_SUPABASE_URL gar nicht erst entsteht (kaputt). Genau diese zwei Faelle
+ * auseinanderzuhalten hat am 11.08.2026 einen Tag gekostet.
+ */
+async function sitzung(): Promise<{ da: boolean; grund?: string }> {
+  if (typeof window === "undefined") return { da: false, grund: "kein Browser (SSR)" };
+  try {
+    const { data, error } = await supabase.auth.getSession();
+    if (error) return { da: false, grund: `Supabase meldet: ${error.message}` };
+    return data.session ? { da: true } : { da: false };
+  } catch (e) {
+    // createSupabaseClient() wirft, wenn VITE_SUPABASE_URL oder
+    // VITE_SUPABASE_PUBLISHABLE_KEY in Frontend/.env fehlen.
+    return { da: false, grund: `Supabase-Client nicht aufgebaut: ${(e as Error).message}` };
+  }
+}
+
+/**
+ * Der EINE Weg, auf dem eine Analyse in `public.analyses` landet.
+ *
+ * Aufgerufen von store.ts:addAnalysis() - also bei JEDER neu entstandenen und
+ * jeder abgeloesten Analyse - und von syncAnalysesWithDb() fuer den Nachzug
+ * beim Anmelden. Zwei Anlaesse, eine Stelle.
+ *
+ * Bis zum 18.08.2026 hing der einzige Aufruf in analysis-engine.ts:runPipeline(),
+ * dem Browser-Notpfad, den app.upload.tsx per Preflight gar nicht erst laufen
+ * laesst. Eine ueber die Engine analysierte Aufnahme erreichte die Wolke damit
+ * NIE beim Entstehen, sondern fruehestens beim naechsten Anmelden - wer danach
+ * das Geraet wechselte, fand dort nichts. Von aussen sah das aus, als
+ * ueberlebte die Historie keinen Geraetewechsel (Bedingung 2 der Live-Schwelle).
+ */
+export async function persistAnalysis(
+  a: AnalysisResult,
+  archived = false,
+): Promise<Hochschiebe_Ergebnis> {
+  const s = await sitzung();
+  if (!s.da) {
+    // NICHT angemeldet ist kein Fehler, sondern ein gueltiger Zustand:
+    // analyses.user_id ist NOT NULL und RLS scoped auf auth.uid(), es gibt
+    // also niemanden, an dem die Zeile haengen koennte. Deshalb info statt
+    // warn - und trotzdem mit Grund, damit niemand raten muss.
+    console.info(
+      "[mixcoach] Analyse bleibt vorerst lokal - " +
+      (s.grund ?? "niemand ist angemeldet") + ". Kein Fehler: ohne Sitzung " +
+      "gibt es keinen Nutzer, an dem die Zeile haengen koennte " +
+      "(analyses.user_id ist NOT NULL). Beim naechsten Anmelden holt " +
+      "syncAnalysesWithDb() sie nach.",
+    );
+    return "keine-sitzung";
+  }
+
   try {
     await upsertAnalysisFn({ data: toUpsertPayload(a, archived) });
+    return "gespeichert";
   } catch (e) {
     // Non-fatal fuer diesen Aufruf - der lokale Cache hat die Analyse noch.
     // Aber es ist NICHT folgenlos: schlaegt das dauerhaft fehl, existiert die
     // Historie nur in diesem Browser, und "die Historie ueberlebt einen
     // Geraetewechsel" ist Bedingung 2 der Live-Schwelle.
     //
-    // Die zwei Ursachen, die es am 11.08.2026 tatsaechlich waren, stehen hier
-    // beim Namen - eine allgemeine Warnung haette monatelang niemand gedeutet:
-    //   - SUPABASE_SERVICE_ROLE_KEY fehlt in Frontend/.env -> der Server-Client
-    //     wirft, jede Server-Funktion scheitert
-    //   - DEV_BYPASS_AUTH in routes/app.tsx -> niemand ist angemeldet, und
-    //     analyses.user_id ist NOT NULL
+    // Die Ursachen stehen beim Namen - eine allgemeine Warnung haette
+    // monatelang niemand gedeutet. Hier stand bis zum 18.08.2026
+    // SUPABASE_SERVICE_ROLE_KEY; das war seit dem Umbau auf
+    // requireSupabaseAuth die falsche Faehrte: upsertAnalysisFn laeuft ueber
+    // den Publishable Key plus das Bearer-Token des Nutzers, den
+    // Service-Role-Key benutzen nur beta.functions.ts und
+    // coach-feedback.functions.ts. "Nicht angemeldet" faengt jetzt der
+    // Zweig darueber ab, es bleiben die Server- und Token-Ursachen.
     console.warn(
       "[mixcoach] Analyse NICHT in die Cloud gespeichert - sie existiert nur " +
-      "in diesem Browser. Haeufigste Ursachen: SUPABASE_SERVICE_ROLE_KEY fehlt " +
-      "in Frontend/.env, oder niemand ist angemeldet (DEV_BYPASS_AUTH in " +
-      "routes/app.tsx). Fehler:", e,
+      "in diesem Browser. Haeufigste Ursachen: SUPABASE_URL oder " +
+      "SUPABASE_PUBLISHABLE_KEY fehlen in Frontend/.env (requireSupabaseAuth " +
+      "wirft dann beim Start), oder das Zugangstoken ist abgelaufen - dann " +
+      "hilft neu anmelden. Fehler:", e,
     );
+    return "fehlgeschlagen";
   }
 }
 

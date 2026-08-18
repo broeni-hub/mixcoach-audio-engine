@@ -8,11 +8,9 @@
 
 import { ANALYSIS_STAGES, buildAnalysisResult } from "./analysis";
 import { addAnalysis } from "./store";
-import { persistAnalysis } from "./sync";
 import { hashFilesCombined, getCachedResultId, setCachedResultId } from "./file-hash";
 import { evaluateRules, loadKb, metricsFromMeasurements, persistFindings } from "./coaching";
 import { saveAudio } from "./audio-store";
-import { loestAb, mitNutzerstand } from "./scoring-version";
 
 
 const JOBS_KEY = "mixcoach.jobs.v1";
@@ -141,30 +139,22 @@ function usableCachedAnalysis(id: string): boolean {
 export function mergeRemoteAnalysisIntoStore(remote: import("./analysis").AnalysisResult) {
   if (typeof window === "undefined") return;
   try {
-    const raw = localStorage.getItem("mixcoach.state.v1") || "{}";
-    const state = JSON.parse(raw);
-    const list: import("./analysis").AnalysisResult[] =
-      Array.isArray(state.analyses) ? state.analyses : [];
-
     // Bis zum 13.08.2026 stand hier ein blankes `return`, sobald die id
     // bekannt war. Damit war eine einmal angesehene Analyse fuer immer
     // eingefroren: keine Korrektur auf der Platte hat den Browser je
     // erreicht, und es gab keinen Weg, einen falschen Report zu
     // berichtigen - ausser den Cache zu loeschen. Jetzt entscheidet die
-    // Rechenvorschrift: hoehere scoringVersion loest ab, Gleichstand
-    // bleibt (siehe scoring-version.ts).
-    const idx = list.findIndex((a) => a.id === remote.id);
-    if (idx >= 0) {
-      if (!loestAb(list[idx], remote)) return;
-      const neu = list.slice();
-      neu[idx] = mitNutzerstand(remote, list[idx]);
-      state.analyses = neu;
-    } else {
-      state.analyses = [remote, ...list];
-    }
-
-    localStorage.setItem("mixcoach.state.v1", JSON.stringify(state));
-    window.dispatchEvent(new Event("mixcoach:update"));
+    // Rechenvorschrift: hoehere reportRevision loest ab, dann die
+    // scoringVersion, Gleichstand bleibt (siehe scoring-version.ts).
+    //
+    // Bis zum 18.08.2026 stand genau diese Regel hier ein ZWEITES Mal, Zeile
+    // fuer Zeile neben store.ts:addAnalysis() - inklusive eigener
+    // localStorage-Schreiberei. Die beiden Fassungen unterschieden sich in
+    // nichts ausser den Punkten. Jetzt ist es ein Aufruf: dieselbe
+    // Ablauf-Regel, dieselbe Wolken-Anbindung, an einem Ort. Genau dadurch
+    // erreicht eine BERICHTIGUNG von der Platte jetzt auch die Datenbank -
+    // vorher blieb sie im Browser stehen.
+    void addAnalysis(remote, { xp: false });
   } catch (err) {
     console.warn("[engine] failed to merge remote analysis", err);
   }
@@ -277,24 +267,30 @@ async function runPipeline(
     // Browser-Pfad = Fallback ohne Analyse-Engine: im Report deutlich
     // kennzeichnen (siehe AnalysisResult.engine).
     result.engine = "local";
-    addAnalysis(result);
+    // addAnalysis() schiebt selbst in die Wolke - hier stand bis zum
+    // 18.08.2026 zusaetzlich ein eigener persistAnalysis()-Aufruf. Das war
+    // der EINZIGE im ganzen Frontend, und er lag ausgerechnet im Notpfad, den
+    // der Preflight in app.upload.tsx gar nicht erst laufen laesst.
+    const inDerWolke = addAnalysis(result);
     // Browser-Fallback-Ergebnisse NICHT unter dem Datei-Hash cachen: sonst
     // liefert ein erneuter Upload derselben Datei den schwachen Fallback aus
     // dem Cache zurueck, statt ihn (bei jetzt laufender Engine) richtig neu
     // zu analysieren (genau die Falle bei MixCoach2, 2026-07-17). Nur echte
     // Engine-Reports duerfen gecacht werden.
-    void persistAnalysis(result, false);
     void saveAudio(result.id, file);
     if (opts?.fileB) void saveAudio(`${result.id}:B`, opts.fileB);
     if (findings && findings.length > 0) void persistFindings(result.id, findings);
 
-    // LLM coach — generate after persistAnalysis so the row exists in DB
-    // (RLS check passes). Best-effort: failure is non-fatal.
+    // LLM coach — erst nach dem Hochschieben, damit die Zeile in der DB
+    // existiert (die RLS-Pruefung braucht sie). Best-effort: ein Fehlschlag
+    // ist nicht fatal.
     patch(id, { stageIndex: 6, stageProgress: 70, overall: computeOverall(6, 70) });
     try {
       const { generateCoachFeedbackFn } = await import("./coach-feedback.functions");
-      // give the upsert a tick to land before the LLM call
-      await new Promise((r) => setTimeout(r, 250));
+      // Vorher: 250 ms warten und hoffen. Jetzt wird das Hochschieben selbst
+      // abgewartet - inDerWolke lehnt nie ab, sondern endet auch bei
+      // "keine-sitzung" oder Fehlschlag.
+      await inDerWolke;
       await generateCoachFeedbackFn({
         data: {
           analysis_id: result.id,

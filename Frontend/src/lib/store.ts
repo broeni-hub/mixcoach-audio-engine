@@ -16,9 +16,11 @@ import { loestAb, mitNutzerstand } from "./scoring-version";
 function fireAndForget<T>(p: Promise<T>) {
   p.catch((e) => console.warn(
     "[mixcoach] Aenderung NICHT in die Cloud uebernommen - lokaler Stand und " +
-    "Datenbank laufen auseinander. Pruefen: SUPABASE_SERVICE_ROLE_KEY in " +
-    "Frontend/.env, und ob jemand angemeldet ist (DEV_BYPASS_AUTH in " +
-    "routes/app.tsx). Fehler:", e,
+    "Datenbank laufen auseinander. Pruefen: ob jemand angemeldet ist, und ob " +
+    "SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY in Frontend/.env stehen. " +
+    "(Hier stand bis zum 18.08.2026 SUPABASE_SERVICE_ROLE_KEY - falsche " +
+    "Faehrte: diese sechs Funktionen laufen ueber requireSupabaseAuth, also " +
+    "Publishable Key plus Bearer-Token des Nutzers.) Fehler:", e,
   ));
 }
 
@@ -107,7 +109,54 @@ export function useAppState(): [AppState, (updater: (s: AppState) => AppState) =
   return [state, update];
 }
 
-export function addAnalysis(result: AnalysisResult) {
+/**
+ * Die Analyse dorthin schieben, wo sie einen Geraetewechsel ueberlebt.
+ *
+ * Fire-and-forget fuer den Ablauf - die Anzeige darf nicht an der Wolke
+ * haengen -, aber NICHT fuer die Diagnose: persistAnalysis() benennt selbst,
+ * warum es nicht ging, und unterscheidet dabei "niemand angemeldet" (kein
+ * Fehler) von "Aufruf gescheitert" (einer). Das zurueckgegebene Promise
+ * lehnt nie ab; wer es abwartet, wartet nur auf das Ende des Versuchs.
+ *
+ * Dynamischer Import, damit store.ts nicht beim Laden schon den
+ * Supabase-Client mitzieht - der wirft, wenn Frontend/.env fehlt, und dann
+ * waere die App tot statt bloss cloud-los.
+ */
+function inDieWolke(a: AnalysisResult, archiviert: boolean): Promise<void> {
+  if (typeof window === "undefined") return Promise.resolve();
+  return import("./sync")
+    .then((m) => m.persistAnalysis(a, archiviert))
+    .then(() => undefined)
+    .catch((e) => console.warn(
+      "[mixcoach] Cloud-Modul nicht ladbar - die Analyse bleibt lokal. Fehler:", e,
+    ));
+}
+
+/**
+ * Der EINE Punkt, an dem eine Analyse in diese Anwendung kommt.
+ *
+ * Beide Entstehungswege laufen hier durch: der Engine-Pfad ueber
+ * analysis.processing.$jobId.tsx und der Browser-Notpfad ueber
+ * analysis-engine.ts:runPipeline(). Dazu jede Auffrischung von der Platte
+ * ueber mergeRemoteAnalysisIntoStore(). Weil sie alle hier durchkommen, haengt
+ * das Hochschieben in die Wolke genau hier - und nirgends sonst.
+ *
+ * Bis zum 18.08.2026 hing es in runPipeline(), also ausschliesslich im
+ * Notpfad, den der Preflight in app.upload.tsx gar nicht erst laufen laesst.
+ * Ergebnis: keine ueber die Engine erzeugte Analyse erreichte die Wolke beim
+ * Entstehen.
+ *
+ * Warum auch die ABLOESUNG hochgeschoben wird und nicht nur der neue Eintrag:
+ * sonst behaelt die Wolke die berichtigte Fassung nicht, und lokaler Stand und
+ * Datenbank laufen genau dort auseinander, wo eine Korrektur stattgefunden
+ * hat. Eine Schleife mit syncAnalysesWithDb() kann daraus nicht werden: der
+ * Sync schreibt am Store vorbei direkt in localStorage, kommt hier also nie
+ * an - und bei gleichem Stand steigt loestAb() ohnehin vorher aus.
+ *
+ * @param opts.xp `false` unterdrueckt den Punktgewinn (Auffrischung statt
+ *   Neuzugang). Der Wert stand vorher als getrennte Funktion daneben.
+ */
+export function addAnalysis(result: AnalysisResult, opts?: { xp?: boolean }): Promise<void> {
   const s = read();
 
   // Idempotent: dieselbe Analyse (per id) nicht doppelt anlegen - aber eine
@@ -116,22 +165,31 @@ export function addAnalysis(result: AnalysisResult) {
   // unkorrigierbar (siehe scoring-version.ts).
   const idx = s.analyses.findIndex((a) => a.id === result.id);
   if (idx >= 0) {
-    if (!loestAb(s.analyses[idx], result)) return;
+    if (!loestAb(s.analyses[idx], result)) return Promise.resolve();
     const analyses = s.analyses.slice();
-    analyses[idx] = mitNutzerstand(result, s.analyses[idx]);
+    const abloesung = mitNutzerstand(result, s.analyses[idx]);
+    analyses[idx] = abloesung;
     // Kein XP beim Ersetzen: die Analyse ist nicht neu, sie ist nur richtiger
     // geworden. Sonst waere jede Korrektur eine Punktequelle.
     write({ ...s, analyses });
-    return;
+    return inDieWolke(abloesung, istArchiviert(s, abloesung));
   }
 
-  const xpGain = Math.round((result.scores.overall ?? 0) / 2);
+  const xpGain = opts?.xp === false ? 0 : Math.round((result.scores.overall ?? 0) / 2);
   const next: AppState = {
     ...s,
     analyses: [result, ...s.analyses],
     profile: { ...s.profile, xp: s.profile.xp + xpGain },
   };
   write(next);
+  return inDieWolke(result, istArchiviert(s, result));
+}
+
+/** Archiviert steht an zwei Stellen: in `archivedIds` und (aus sync.ts) am
+ *  Objekt selbst. Beim Hochschieben zaehlt jede von beiden, sonst taucht eine
+ *  archivierte Analyse auf dem zweiten Geraet wieder auf. */
+function istArchiviert(s: AppState, a: AnalysisResult): boolean {
+  return s.archivedIds.includes(a.id) || (a as { archived?: boolean }).archived === true;
 }
 
 export function archiveAnalysis(id: string) {
