@@ -96,6 +96,40 @@ export async function persistAnalysis(
     await upsertAnalysisFn({ data: toUpsertPayload(a, archived) });
     return "gespeichert";
   } catch (e) {
+    // 42501 = insufficient_privilege. Zwei verschiedene Lagen, und die
+    // Unterscheidung steht im Wortlaut, den Postgres mitschickt:
+    //
+    //   "... (USING expression) ..."  -> Es GIBT schon eine Zeile mit dieser
+    //      id, und sie gehoert einem anderen Konto. Postgres meldet diese
+    //      Variante ausschliesslich beim ON CONFLICT DO UPDATE, wenn die
+    //      vorhandene Zeile unter der USING-Bedingung unsichtbar ist. Das ist
+    //      KEIN Defekt - RLS arbeitet richtig. Der Weg dahin: dieselbe
+    //      Analyse-id wurde unter einem anderen Konto hochgeschoben.
+    //   ohne den Zusatz              -> WITH CHECK schlaegt fehl, auth.uid()
+    //      passt nicht zu user_id. Dann stimmt die Anmeldekette nicht.
+    //
+    // Am 18.08.2026 hat genau das eine Stunde gekostet, weil hier nur von
+    // fehlenden Umgebungsvariablen die Rede war - und die waren in Ordnung.
+    const meldung = (e as { message?: string })?.message ?? String(e);
+    const code = (e as { code?: string })?.code;
+    if (code === "42501" || /row-level security/i.test(meldung)) {
+      const fremd = /USING expression/i.test(meldung);
+      console.warn(
+        fremd
+          ? "[mixcoach] Analyse NICHT gespeichert: unter dieser id existiert " +
+            "bereits eine Zeile, die einem ANDEREN Konto gehoert. RLS arbeitet " +
+            "hier richtig - dieselbe Analyse wurde schon einmal von einem " +
+            "anderen Nutzer hochgeschoben. Abhilfe: mit dem urspruenglichen " +
+            "Konto anmelden. Analyse: " + a.fileName + " (" + a.id + ")"
+          : "[mixcoach] Analyse NICHT gespeichert: die Datenbank ordnet die " +
+            "Zeile keinem Nutzer zu (auth.uid() passt nicht zu user_id). Das " +
+            "ist die Anmeldekette, nicht die Analyse - Token pruefen, ggf. neu " +
+            "anmelden. Analyse: " + a.fileName + " (" + a.id + ")",
+        e,
+      );
+      return "fehlgeschlagen";
+    }
+
     // Non-fatal fuer diesen Aufruf - der lokale Cache hat die Analyse noch.
     // Aber es ist NICHT folgenlos: schlaegt das dauerhaft fehl, existiert die
     // Historie nur in diesem Browser, und "die Historie ueberlebt einen
@@ -111,10 +145,11 @@ export async function persistAnalysis(
     // Zweig darueber ab, es bleiben die Server- und Token-Ursachen.
     console.warn(
       "[mixcoach] Analyse NICHT in die Cloud gespeichert - sie existiert nur " +
-      "in diesem Browser. Haeufigste Ursachen: SUPABASE_URL oder " +
-      "SUPABASE_PUBLISHABLE_KEY fehlen in Frontend/.env (requireSupabaseAuth " +
-      "wirft dann beim Start), oder das Zugangstoken ist abgelaufen - dann " +
-      "hilft neu anmelden. Fehler:", e,
+      "in diesem Browser. Verbleibende Ursachen (RLS ist oben schon " +
+      "abgefangen): SUPABASE_URL oder SUPABASE_PUBLISHABLE_KEY fehlen in " +
+      "Frontend/.env (requireSupabaseAuth wirft dann beim Start), das " +
+      "Zugangstoken ist abgelaufen - dann hilft neu anmelden -, oder die " +
+      "Engine/das Netz ist weg. Fehler:", e,
     );
     return "fehlgeschlagen";
   }
