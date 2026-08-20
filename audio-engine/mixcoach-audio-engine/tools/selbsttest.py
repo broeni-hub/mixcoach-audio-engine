@@ -236,11 +236,22 @@ def pruefe_messwerte() -> None:
         sigma = statistics.pstdev(werte)
         am_rand = sum(1 for w in werte if w in (0, 100)) / len(werte)
         if sigma < mindest_sigma:
+            # Nachtrag 20.08.2026: "streut kaum" heisst nicht immer "misst
+            # nichts". Bei beat_alignment_score lag es an der SKALA - ihr
+            # Nullpunkt entspricht 164 ms Jitter, gemessen werden 2,9-26,2 ms.
+            # Dieselbe Messung als beat_jitter_ms hat p10 8,1 / p90 18,8 ms
+            # und traegt seitdem eine Uebung. Die Warnung bleibt trotzdem
+            # richtig: der SCORE taugt nicht als Kopfzahl.
+            zusatz = ""
+            if feld == "beat_alignment_score":
+                zusatz = (" - die Skala, nicht die Messung: als beat_jitter_ms "
+                          "(app/audio/beat_jitter.py) traegt dieselbe Groesse "
+                          "eine Uebung")
             sag(WARN, f"{feld} streut kaum",
                 f"n={len(werte)}  Median {statistics.median(werte):.0f}  "
                 f"sigma {sigma:.2f}  Spanne {min(werte)}-{max(werte)}",
                 "traegt keine Entwicklung ueber Sets - Bedingung 3 der "
-                "Live-Schwelle kann darauf nicht ruhen")
+                "Live-Schwelle kann darauf nicht ruhen" + zusatz)
         elif am_rand > 0.6:
             sag(WARN, f"{feld} sitzt an den Raendern",
                 f"n={len(werte)}  {100*am_rand:.0f} % der Werte sind exakt "

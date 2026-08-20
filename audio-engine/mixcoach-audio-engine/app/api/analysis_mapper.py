@@ -360,6 +360,11 @@ def _map_set_transitions(analysis: Dict) -> List[Dict]:
                 "vocal_overlap_score": t.get("vocal_overlap_score"),
                 "exit_quality_score": t.get("exit_quality_score"),
                 "beat_alignment_score": t.get("beat_alignment_score"),
+                # Dieselbe Messung in ms - die Fassung, die eine Uebung
+                # tragen kann (app/audio/beat_jitter.py).
+                "beat_jitter_ms": t.get("beat_jitter_ms"),
+                "beat_jitter_beats": t.get("beat_jitter_beats"),
+                "beat_jitter_quelle": t.get("beat_jitter_quelle"),
                 "label": t.get("label", "neutral"),
                 "feedback": t.get("feedback"),
                 "feedback_en": t.get("feedback_en"),

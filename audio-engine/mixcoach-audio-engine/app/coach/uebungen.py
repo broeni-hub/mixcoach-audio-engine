@@ -7,9 +7,9 @@ Die Regel, die dieses Modul traegt:
     ein Ziel Sinn ergibt. Alles andere darf als BEOBACHTUNG erscheinen -
     nie als Aufgabe.
 
-Beide Bedingungen sind noetig, und genau eine Groesse erfuellt sie.
-Nachgemessen am 14.08.2026 ueber 230 zugeordnete Bewertungen aus
-labels_prefilled.csv (Spearman gegen human_rating):
+Beide Bedingungen sind noetig. Nachgemessen am 14.08.2026 ueber 230
+zugeordnete Bewertungen aus labels_prefilled.csv (Spearman gegen
+human_rating):
 
     |loudness_jump_db|      -0,339   n=170   <- belegt
     beat_alignment_score    +0,325   n=170   <- belegt, aber ohne Spannweite
@@ -19,11 +19,27 @@ labels_prefilled.csv (Spearman gegen human_rating):
     quality_score           -0,008   n=230   <- kein Zusammenhang
     bass_overlap_score      +0,009   n=8     <- nicht pruefbar
 
-beat_alignment_score erfuellt (a), aber nicht (b): sigma 2,59 auf einer
-0-100-Skala, gemessene Spanne 83-98. Ein Ziel "von 91 auf 95" ist keine
-Uebung, die jemand ausfuehren kann. Der Pegelsprung erfuellt beides -
-echte Einheit, Spanne 0 bis 10,1 dB, und ein Ziel, das am Mixer
-umsetzbar ist.
+KORREKTUR VOM 20.08.2026 - hier stand bis heute "genau eine Groesse
+erfuellt sie". Das war richtig beobachtet und falsch geschlossen.
+beat_alignment_score erfuellt (a) und scheiterte an (b): sigma 2,56 auf
+einer 0-100-Skala, Spanne 83-98. Der Grund liegt aber in der SKALA, nicht
+in der Messung - ihr Nullpunkt entspricht 164 ms Jitter bei 128 BPM,
+gemessen werden 2,9 bis 26,2 ms. Dieselbe Messung in Millisekunden
+(app/audio/beat_jitter.py) hat p10 8,1 / p50 11,4 / p90 18,8 ms, also
+Faktor 2,3, eine echte Einheit und ein Ziel am Pitch-Fader.
+
+Nachgeprueft mit tools/eval/beat_jitter.py ueber 237 bewertete Uebergaenge
+aus 24 Aufnahmen:
+
+    beat_jitter_ms          -0,336   n=237   <- belegt, p < 0,0001
+       bereinigt um Energieloch     -0,488 -> -0,444
+       bereinigt um Fensterlaenge   -0,336 -> -0,260
+       bereinigt um Pegelsprung     -0,336 -> -0,314
+       gegen den Pegelsprung selbst -0,021  <- sagt etwas ANDERES
+
+Es sind also zwei Groessen, nicht eine. Die dritte Zeile ist der Grund,
+warum die zweite ueberhaupt dazugehoert: waere der Jitter nur ein anderer
+Ausdruck des Pegelsprungs, brauchte ihn niemand.
 
 Wer diese Regel aufweicht, baut die Vorlage von frueher in neuer
 Verpackung ("Transition Review - listen to the detected transition
@@ -47,6 +63,21 @@ SCHWELLE_PEGELSPRUNG_DB = 3.0
 # Das Ziel. Unter 1 dB ist am Mixer hoerbar sauber und mit Gain/Trim
 # erreichbar - anders als ein Ziel auf einer 0-100-Skala ohne Einheit.
 ZIEL_PEGELSPRUNG_DB = 1.0
+
+# Ab hier wird Beat-Jitter zur Uebung.
+#
+# HERLEITUNG, nach demselben Muster wie oben: ueber alle 390 befuellten
+# Uebergaenge liegt p75 bei 14,6 ms und p80 bei 15,4 ms - das schlechteste
+# Fuenftel beginnt hier. 15 ms trifft 90 von 390 (23 %), vergleichbar mit den
+# 29 % des Pegelsprungs. Ein musikalisch hergeleiteter Wert waere eine
+# Behauptung: ab wann Eiern hoerbar wird, ist in diesem Projekt nicht
+# gemessen.
+SCHWELLE_BEAT_JITTER_MS = 15.0
+
+# Das Ziel. 10 ms erreichen heute 130 von 390 Uebergaengen (33 %) - also
+# nachweislich erreichbar und kein Wunschwert. Darunter wird es duenn:
+# 8 ms schaffen nur 8 %, 5 ms noch 3 %.
+ZIEL_BEAT_JITTER_MS = 10.0
 
 # Beobachtungen: festgestellt, nicht bewertet. Die Schwellen sind bewusst
 # grob - sie entscheiden nur, ob etwas erwaehnenswert ist, nicht ob es
@@ -134,6 +165,38 @@ def _uebung_pegelsprung(analysis_id: str, t: Dict) -> Optional[Dict]:
     }
 
 
+def _uebung_beat_jitter(analysis_id: str, t: Dict) -> Optional[Dict]:
+    """Die zweite belegte Uebung, seit 20.08.2026. None, wenn nichts zu sagen ist.
+
+    Anders als beim Pegelsprung gibt es keine Richtung ("zu laut"/"zu leise")
+    - der Jitter ist eine Streuung, und die hat nur einen Betrag.
+    """
+    jitter = t.get("beat_jitter_ms")
+    if not isinstance(jitter, (int, float)):
+        return None
+    jitter = float(jitter)
+    if jitter < SCHWELLE_BEAT_JITTER_MS:
+        return None
+
+    mid = t.get("mid_sec")
+    return {
+        "title": f"Beats zusammenhalten bei {_zeit(mid)}",
+        "description": (
+            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) schwankte der "
+            f"Beat-Abstand im Blend um {_zahl(jitter)} ms. Mix ihn nochmal "
+            f"und halte die Beats zusammen, Ziel: unter "
+            f"{_zahl(ZIEL_BEAT_JITTER_MS)} ms."
+        ),
+        "analysisId": analysis_id,
+        "transitionIndex": t.get("index"),
+        "atSec": t.get("start_sec") if isinstance(t.get("start_sec"), (int, float)) else mid,
+        "metric": "beat_jitter_ms",
+        "value": round(jitter, 2),
+        "target": ZIEL_BEAT_JITTER_MS,
+        "xp": XP_JE_UEBUNG,
+    }
+
+
 def _beobachtungen(analysis_id: str, t: Dict) -> List[Dict]:
     """Feststellungen ohne Handlungsaufforderung.
 
@@ -179,6 +242,22 @@ def _beobachtungen(analysis_id: str, t: Dict) -> List[Dict]:
     return raus
 
 
+# Welche Schwelle zu welcher Groesse gehoert - gebraucht fuer die
+# Reihenfolge, siehe baue().
+_SCHWELLEN = {
+    "loudness_jump_db": SCHWELLE_PEGELSPRUNG_DB,
+    "beat_jitter_ms": SCHWELLE_BEAT_JITTER_MS,
+}
+
+
+def _ueberschreitung(uebung: Dict) -> float:
+    """Um welchen Faktor liegt der Wert ueber seiner Schwelle."""
+    schwelle = _SCHWELLEN.get(uebung.get("metric"))
+    if not schwelle:
+        return 0.0
+    return abs(float(uebung.get("value") or 0.0)) / schwelle
+
+
 def baue(analysis_id: str, transitions: List[Dict]) -> Tuple[List[Dict], List[Dict]]:
     """(Uebungen, Beobachtungen) fuer einen Report.
 
@@ -194,12 +273,17 @@ def baue(analysis_id: str, transitions: List[Dict]) -> Tuple[List[Dict], List[Di
     for t in transitions or []:
         if not isinstance(t, dict):
             continue
-        u = _uebung_pegelsprung(analysis_id, t)
-        if u is not None:
-            uebungen.append(u)
+        for bauer in (_uebung_pegelsprung, _uebung_beat_jitter):
+            u = bauer(analysis_id, t)
+            if u is not None:
+                uebungen.append(u)
         beobachtungen.extend(_beobachtungen(analysis_id, t))
 
     # Die schlimmsten zuerst - wer nur eine Sache uebt, soll die groesste
-    # ueben. Sortiert nach Betrag des Sprungs, nicht nach Zeit.
-    uebungen.sort(key=lambda u: -abs(u["value"]))
+    # ueben. Seit es zwei Groessen gibt, geht das NICHT mehr ueber den
+    # Betrag: 19 ms und 4 dB sind keine vergleichbaren Zahlen, und nach
+    # Betrag sortiert stuende jede Jitter-Uebung ueber jeder Pegel-Uebung.
+    # Verglichen wird stattdessen, wie weit ein Wert seine eigene Schwelle
+    # ueberschreitet - das ist in beiden Einheiten dieselbe Frage.
+    uebungen.sort(key=lambda u: -_ueberschreitung(u))
     return uebungen, beobachtungen

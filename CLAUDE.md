@@ -55,6 +55,14 @@ Offen und wartend auf Sebastian:
   nicht mehr, weil die Messung fehlt, sondern weil sie stattgefunden hat und
   nichts belegt. Wer die Übungen für besser hält, braucht eine größere
   Stichprobe — nicht dieselbe Behauptung nochmal.
+
+  **Seit dem 20.08. ruhen sie immerhin nicht mehr auf einer Größe.** Der
+  Beat-Jitter ist die zweite belegte Dimension (Spearman −0,336 über 237
+  bewertete Übergänge, gegen den Pegelsprung selbst nur −0,021 — er sagt also
+  etwas anderes). Er war die ganze Zeit da, nur unter einer Skala begraben,
+  deren Nullpunkt bei 164 ms liegt, während 2,9–26,2 ms gemessen werden.
+  202 Übungen statt 110, 21 von 24 Aufnahmen mit Coach.
+  Hergang: `SITZUNG_2026-08-20.md`.
 - Die Entscheidungen zu `quality_score`, zur Übungsbibliothek
   (`ENTSCHEIDUNG_UEBUNGSBIBLIOTHEK.md`) und zum LLM-Coach.
 - Neu gefunden am 18.08., beides klein und außerhalb jedes Auftrags: die App
@@ -239,6 +247,10 @@ Vergleich, eigene Bewertung für Blend, Drop und Bass-Swap).
   Coach-Sätze, eine Schwelle an zwei Stellen — jedes Mal lief einer der
   beiden Stände davon, und jedes Mal hat es Tage gekostet. Wer eine zweite
   Kopie anlegt, muss sagen, welche gilt.
+- **Übungen entstehen an zwei Stellen** — `app/coach/uebungen.py` (je Report)
+  und `app/coach/profile.py` (über alle Sets, mit eigenem DE/EN-Text). Beide
+  müssen nachgezogen werden, wer nur eine anfasst, baut eine Größe, die der
+  Nutzer nie sieht. Gefunden am 20.08., gehört zusammengelegt.
 - Kommentare und Doku auf Deutsch, wie im Bestand.
 
 ## Was gemessen erledigt ist — nicht nochmal aufmachen
@@ -263,10 +275,10 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 301 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 315 Tests, alle grün
 ```
 
-Dazu 54 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
+Dazu 66 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
 --noEmit`, das seit dem 15.08. bei **0 Fehlern** steht.
 
 `tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm

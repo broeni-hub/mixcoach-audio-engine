@@ -99,8 +99,17 @@ Nach ein paar Sets entsteht dein DJ-Profil. Der Coach erkennt Muster, die du sel
 > 14.08. nennt **jede** der 110 Übungen eine Zahl aus dem eigenen Set, mit
 > Zeitstempel zum Anspringen: *„Bei 24:53 (FaltyDL → Lone) kam der neue Track
 > 4,0 dB leiser rein. Mix ihn nochmal, Ziel: unter 1 dB."* 18 von 19 echten
-> Aufnahmen bekommen einen Coach. Aber alle Übungen ruhen auf **einer** Größe,
-> dem Pegelsprung — die anderen sieben Dimensionen tragen noch nicht. Und die
+> Aufnahmen bekommen einen Coach.
+>
+> *Nachtrag 20.08.2026.* Bis hierher stand: „alle Übungen ruhen auf **einer**
+> Größe, dem Pegelsprung". Es sind seit heute **zwei**. Der Beat-Jitter
+> (Spearman −0,336 über 237 bewertete Übergänge) war die ganze Zeit gemessen,
+> lag aber unter einer 0-100-Skala, deren Nullpunkt 164 ms entspricht, während
+> 2,9–26,2 ms vorkommen — sie presste die Variation in 15 Punkte. In
+> Millisekunden trägt dieselbe Messung eine Übung mit Ziel; gegen den
+> Pegelsprung ist sie mit −0,021 praktisch unkorreliert, sagt also etwas
+> Eigenes. 202 Übungen statt 110. Die übrigen sechs Dimensionen tragen
+> weiterhin nicht. Und die
 > **Mustererkennung über Bedingungen hinweg** („außer wenn du in schnellere
 > Tracks mischst") gibt es noch nicht; der Coach nennt Einzelstellen.
 
@@ -111,6 +120,11 @@ Das Skill-Radar entwickelt sich über Wochen. Du siehst dein bestes Set, deinen 
 > gibt es: Der Pegelsprung ist über 13 eigene Aufnahmen vom 06.07. bis 28.07.
 > von 2,80 auf 1,85 dB gefallen (Anteil über 3 dB: ~50 % → ~22 %, r = −0,622).
 > Das ist Bedingung 3 der Live-Schwelle, belegt.
+> *Nachtrag 20.08.2026:* **Beatmatching** ist keine leere Achse mehr — der
+> Beat-Jitter trägt sie (siehe Punkt 3). Eine **Kurve über die Zeit** hat er
+> aber noch nicht; die gibt es weiter nur für den Pegelsprung. Timing und
+> Harmonie bleiben unverändert „nicht gemessen".
+>
 > Die ursprünglich genannten Achsen **Timing, Beatmatching, Harmonie** sagen
 > heute „nicht gemessen" — sie standen auf Größen, die nichts aussagen, und
 > eine ehrliche Lücke ist besser als eine erfundene Zahl. Welche Achsen das

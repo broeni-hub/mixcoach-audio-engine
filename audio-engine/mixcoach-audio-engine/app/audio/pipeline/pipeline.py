@@ -9,6 +9,7 @@ from app.audio.phrase_grid import build_phrase_grid
 from app.audio.rule_engine import evaluate_set_rules
 from app.audio.segment_keys import detect_segment_keys_from_chroma, dominant_key
 from app.audio.bass_overlap import annotate_bass_overlap
+from app.audio.beat_jitter import annotate_beat_jitter
 from app.audio.loudness import (
     annotate_transitions as annotate_loudness,
     loudness_curve,
@@ -225,6 +226,9 @@ def run_set_pipeline(audio, progress=None) -> Dict:
     # --- Composite-Score (V3): 5 klangbasierte Dimensionen zusaetzlich zum
     # bestehenden quality_score, siehe app/audio/scoring/composite.py. ---
     annotate_beat_alignment(transitions_detailed, beat_grid["beats"])
+    # Dieselbe Messung in Millisekunden, fuer Report und Coach - der Score
+    # darueber speist den Composite und bleibt unberuehrt.
+    annotate_beat_jitter(transitions_detailed, beat_grid["beats"])
     annotate_exit_quality(transitions_detailed, energy.get("points", []))
     if STEM_SCORING_ENABLED:
         report("transition_analysis", 88)

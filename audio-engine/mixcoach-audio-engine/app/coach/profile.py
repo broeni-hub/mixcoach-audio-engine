@@ -20,7 +20,9 @@ from app.jobs.job_manager import RESULTS_DIR
 from app.jobs import feedback_store
 # Eine Quelle fuer Schwelle und Ziel - sonst mahnt der Report bei 3 dB und
 # das Profil bei einem anderen Wert (siehe app/coach/uebungen.py).
-from app.coach.uebungen import SCHWELLE_PEGELSPRUNG_DB, ZIEL_PEGELSPRUNG_DB
+from app.coach.uebungen import (SCHWELLE_BEAT_JITTER_MS,
+                               SCHWELLE_PEGELSPRUNG_DB,
+                               ZIEL_BEAT_JITTER_MS, ZIEL_PEGELSPRUNG_DB)
 # Nur vergleichbare Reports duerfen in eine Verlaufskurve - siehe
 # pegel_zeitreihe(). Zwei Zahlen aus verschiedenen Rechenvorschriften
 # nebeneinander zu zeichnen ist genau der Fehler, gegen den das Modul steht.
@@ -56,6 +58,13 @@ TEXTS = {
                     "Tracks erneut. {target}."),
         "ex_target": "Ziel: unter {ziel} dB",
         "lauter": "lauter", "leiser": "leiser",
+        # Zweite belegte Groesse seit 20.08.2026 (app/audio/beat_jitter.py).
+        # Eine Streuung hat keine Richtung - daher kein {richtung} hier.
+        "jit_title": "Halte die Beats zusammen: {name}",
+        "jit_desc": ("Aus '{file}': der Beat-Abstand schwankte im Blend um "
+                     "{jitter} ms. Hoere zuerst die Original-Stelle an, dann "
+                     "mixe dieselben Tracks erneut. {target}."),
+        "jit_target": "Ziel: unter {ziel} ms",
     },
     "en": {
         "p1_title": "Phrase timing suffers when switching to {worse} tracks",
@@ -78,6 +87,11 @@ TEXTS = {
                     "again. {target}."),
         "ex_target": "Goal: under {ziel} dB",
         "lauter": "louder", "leiser": "quieter",
+        "jit_title": "Keep the beats locked: {name}",
+        "jit_desc": ("From '{file}': beat spacing wavered by {jitter} ms "
+                     "during the blend. Listen to the original spot first, "
+                     "then mix the same tracks again. {target}."),
+        "jit_target": "Goal: under {ziel} ms",
     },
 }
 
@@ -417,6 +431,7 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
             sprung = t.get("loudness_jump_db")
             if not isinstance(sprung, (int, float)):
                 continue
+            jitter = t.get("beat_jitter_ms")
             scored.append({
                 "analysisId": r.get("id"),
                 "fileName": r.get("fileName"),
@@ -427,6 +442,8 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
                 "quality": t.get("quality_score"),
                 "phraseBeatsOff": t.get("phrase_beats_off"),
                 "loudnessJumpDb": round(float(sprung), 2),
+                "beatJitterMs": (round(float(jitter), 2)
+                                 if isinstance(jitter, (int, float)) else None),
                 "feedback": t.get("feedback"),
             })
     if not scored:
@@ -436,33 +453,80 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
     best = min(scored, key=lambda s: abs(s["loudnessJumpDb"]))
     worst_sorted = sorted(scored, key=lambda s: -abs(s["loudnessJumpDb"]))
 
+    # Seit dem 20.08.2026 gibt es zwei belegte Groessen. Ein Uebergang kann
+    # deshalb zwei Anlaesse haben, und die beiden muessen vergleichbar
+    # gereiht werden: 26 ms und 9 dB sind keine vergleichbaren Zahlen.
+    # Verglichen wird - wie in app/coach/uebungen.py - wie weit ein Wert
+    # seine EIGENE Schwelle ueberschreitet.
+    kandidaten = []
+    for s in scored:
+        betrag = abs(s["loudnessJumpDb"])
+        if betrag >= SCHWELLE_PEGELSPRUNG_DB:
+            kandidaten.append((betrag / SCHWELLE_PEGELSPRUNG_DB, "loudness_jump_db", s))
+        jitter = s.get("beatJitterMs")
+        if isinstance(jitter, (int, float)) and jitter >= SCHWELLE_BEAT_JITTER_MS:
+            kandidaten.append((jitter / SCHWELLE_BEAT_JITTER_MS, "beat_jitter_ms", s))
+    kandidaten.sort(key=lambda k: -k[0])
+
+    # REIHENFOLGE, zweite Regel: erst die schlimmste Stelle JE GROESSE, dann
+    # auffuellen. Ohne diese Regel bliebe die zweite Groesse unsichtbar - der
+    # Pegelsprung reicht ueber alle Aufnahmen bis zum 3,4-fachen seiner
+    # Schwelle, der Jitter nur bis zum 1,75-fachen, und damit belegt der
+    # Pegelsprung alle drei Plaetze. Das waere kein Befund ueber den DJ,
+    # sondern einer ueber die beiden Verteilungen: gemessen an ihrer eigenen
+    # Spanne ist ein Jitter von 26 ms genauso der schlechteste Wert wie ein
+    # Sprung von 10 dB. Dieselbe Ueberlegung wie bei used_sets, eine Ebene
+    # hoeher - Vielfalt schlaegt die nackte Rangzahl.
+    zuerst, danach, gesehen = [], [], set()
+    for eintrag in kandidaten:
+        if eintrag[1] in gesehen:
+            danach.append(eintrag)
+        else:
+            gesehen.add(eintrag[1])
+            zuerst.append(eintrag)
+
     exercises = []
     used_sets = set()
-    for s in worst_sorted:
+    for _rang, metrik, s in zuerst + danach:
         # Unter der Schwelle gibt es nichts zu ueben - lieber weniger als
-        # drei Uebungen als eine, die keinen Anlass hat.
-        if abs(s["loudnessJumpDb"]) < SCHWELLE_PEGELSPRUNG_DB:
-            break
-        if s["analysisId"] in used_sets and len(worst_sorted) > 3:
+        # drei Uebungen als eine, die keinen Anlass hat. Das erledigt oben
+        # schon der Aufbau der Kandidatenliste.
+        if s["analysisId"] in used_sets and len(kandidaten) > 3:
             continue
-        betrag = abs(s["loudnessJumpDb"])
-        exercises.append({
-            "title": T["ex_title"].format(name=s["name"]),
-            "description": T["ex_desc"].format(
-                file=s["fileName"],
-                jump=f"{betrag:.1f}".replace(".", ","),
-                richtung=T["lauter"] if s["loudnessJumpDb"] > 0 else T["leiser"],
-                target=T["ex_target"].format(
-                    ziel=f"{ZIEL_PEGELSPRUNG_DB:.1f}".replace(".", ",")),
-            ),
+        if metrik == "loudness_jump_db":
+            betrag = abs(s["loudnessJumpDb"])
+            eintrag = {
+                "title": T["ex_title"].format(name=s["name"]),
+                "description": T["ex_desc"].format(
+                    file=s["fileName"],
+                    jump=f"{betrag:.1f}".replace(".", ","),
+                    richtung=T["lauter"] if s["loudnessJumpDb"] > 0 else T["leiser"],
+                    target=T["ex_target"].format(
+                        ziel=f"{ZIEL_PEGELSPRUNG_DB:.1f}".replace(".", ",")),
+                ),
+                "value": s["loudnessJumpDb"],
+                "target": ZIEL_PEGELSPRUNG_DB,
+            }
+        else:
+            eintrag = {
+                "title": T["jit_title"].format(name=s["name"]),
+                "description": T["jit_desc"].format(
+                    file=s["fileName"],
+                    jitter=f"{s['beatJitterMs']:.1f}".replace(".", ","),
+                    target=T["jit_target"].format(
+                        ziel=f"{ZIEL_BEAT_JITTER_MS:.1f}".replace(".", ",")),
+                ),
+                "value": s["beatJitterMs"],
+                "target": ZIEL_BEAT_JITTER_MS,
+            }
+        eintrag.update({
             "analysisId": s["analysisId"],
             "midSec": s["midSec"],
             "startSec": s["startSec"],
             # Der Beleg, wie bei den Report-Uebungen auch.
-            "metric": "loudness_jump_db",
-            "value": s["loudnessJumpDb"],
-            "target": ZIEL_PEGELSPRUNG_DB,
+            "metric": metrik,
         })
+        exercises.append(eintrag)
         used_sets.add(s["analysisId"])
         if len(exercises) == 3:
             break

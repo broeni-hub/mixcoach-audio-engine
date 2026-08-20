@@ -70,8 +70,11 @@ export interface CoachProfile {
   transitionsMeasured: number;
   timeline: Array<Record<string, unknown>>;
   trends: Record<string, CoachTrend>;
-  /** Die einzige Groesse im Profil mit belegtem Zusammenhang zum
-   *  menschlichen Urteil (Spearman -0,339). Siehe profile.pegel_zeitreihe. */
+  /** Pegelsprung ueber die Zeit - Spearman -0,339 gegen das menschliche
+   *  Urteil. Bis zum 20.08.2026 stand hier "die einzige Groesse mit
+   *  belegtem Zusammenhang"; seitdem ist der Beat-Jitter die zweite
+   *  (-0,336, siehe app/audio/beat_jitter.py). Eine Zeitreihe hat bisher
+   *  nur der Pegelsprung. Siehe profile.pegel_zeitreihe. */
   loudnessSeries?: LoudnessPoint[];
   loudnessTrend?: LoudnessTrend;
   patterns: CoachPattern[];

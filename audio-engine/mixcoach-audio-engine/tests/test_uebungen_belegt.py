@@ -15,7 +15,9 @@ from pathlib import Path
 import pytest
 
 from app.coach.uebungen import (
+    SCHWELLE_BEAT_JITTER_MS,
     SCHWELLE_PEGELSPRUNG_DB,
+    ZIEL_BEAT_JITTER_MS,
     _camelot_abstand,
     _uebergangsname,
     _zeit,
@@ -184,3 +186,65 @@ def test_kein_report_zeigt_eine_vorlage():
                     f"{pfad.name} #{u['transitionIndex']}: {u['metric']}="
                     f"{u['value']} steht so nicht im Report ({t.get(u['metric'])})")
     assert not verstoesse, "\n".join(verstoesse[:10])
+
+# --- Die zweite Dimension: Beat-Jitter (seit 20.08.2026) -------------------
+
+
+def test_beat_jitter_wird_zur_uebung():
+    uebungen, _ = baue(AID, [_uebergang(1, beat_jitter_ms=19.4)])
+    assert len(uebungen) == 1
+    u = uebungen[0]
+    assert u["metric"] == "beat_jitter_ms"
+    assert u["value"] == 19.4
+    assert u["target"] == ZIEL_BEAT_JITTER_MS
+    # Die gemessene Zahl UND das Ziel stehen im Text - sonst ist die Uebung
+    # nicht nachpruefbar.
+    assert "19,4 ms" in u["description"]
+    assert "10,0 ms" in u["description"]
+
+
+def test_beat_jitter_unter_der_schwelle_schweigt():
+    uebungen, _ = baue(AID, [
+        _uebergang(1, beat_jitter_ms=SCHWELLE_BEAT_JITTER_MS - 0.01),
+        _uebergang(2, beat_jitter_ms=None),
+        _uebergang(3),
+    ])
+    assert uebungen == []
+
+
+def test_beat_jitter_schwelle_ist_einschliessend():
+    genau, _ = baue(AID, [_uebergang(1, beat_jitter_ms=SCHWELLE_BEAT_JITTER_MS)])
+    assert len(genau) == 1
+
+
+def test_beide_dimensionen_koennen_am_selben_uebergang_haengen():
+    """Ein Uebergang kann zugleich zu laut und zu unruhig sein - das sind
+    zwei Befunde, nicht einer."""
+    uebungen, _ = baue(AID, [_uebergang(1, loudness_jump_db=5.0, beat_jitter_ms=20.0)])
+    assert {u["metric"] for u in uebungen} == {"loudness_jump_db", "beat_jitter_ms"}
+
+
+def test_reihenfolge_vergleicht_ueber_die_einheiten_hinweg():
+    """Der Test, an dem die alte Sortierung gescheitert waere.
+
+    Nach Betrag sortiert stuende 16,0 ms (knapp ueber der 15er-Schwelle) vor
+    9,0 dB (dem Dreifachen der 3er-Schwelle). Verglichen wird die
+    Ueberschreitung der jeweils eigenen Schwelle, nicht die nackte Zahl.
+    """
+    uebungen, _ = baue(AID, [
+        _uebergang(1, beat_jitter_ms=16.0),     # Faktor 1,07
+        _uebergang(2, loudness_jump_db=9.0),    # Faktor 3,00
+        _uebergang(3, beat_jitter_ms=30.0),     # Faktor 2,00
+    ])
+    assert [u["metric"] for u in uebungen] == [
+        "loudness_jump_db", "beat_jitter_ms", "beat_jitter_ms"]
+    assert [u["value"] for u in uebungen] == [9.0, 30.0, 16.0]
+
+
+def test_jitter_uebung_nennt_keine_richtung():
+    """Eine Streuung hat keine Richtung - "zu frueh"/"zu spaet" waere
+    erfunden."""
+    uebungen, _ = baue(AID, [_uebergang(1, beat_jitter_ms=20.0)])
+    text = uebungen[0]["description"]
+    for erfunden in ("zu frueh", "zu spaet", "lauter", "leiser", "hoerbar"):
+        assert erfunden not in text
