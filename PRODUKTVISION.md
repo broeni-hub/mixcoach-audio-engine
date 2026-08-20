@@ -66,9 +66,18 @@ Einmalig verbindest du deine Track-Library (rekordbox-Export, ein Klick). Ab dan
 > trägt: 6113 Tracks im Index, Recall 0,90 bei Precision 1,0. **„Sekundengenau"
 > trägt nicht:** σ = 54,58 s, 5 % der Übergänge liegen innerhalb von 8 s.
 > Vier unabhängige Blend-Onset-Schätzer sind gemessen gescheitert. Ob ein
-> Mensch selbst sekundengenau labeln kann, ist ungemessen — die zweite, blinde
-> Labelrunde steht seit dem 31.07. bereit und entscheidet, ob dieser Satz so
-> bleiben kann.
+> Mensch selbst sekundengenau labeln kann, ist **weiterhin ungemessen**.
+>
+> *Nachtrag 19.08.2026 — Korrektur an dieser Stelle.* Bis heute stand hier,
+> die zweite blinde Labelrunde „steht seit dem 31.07. bereit". Sie stand nicht
+> bereit, sie war **am 11.08. vollständig gelaufen** (16 von 16), und niemand
+> hatte das Ergebnis abgerufen. Abgerufen ergibt es σ = 48,72 s
+> Selbst-Übereinstimmung — was diesen Absatz erledigen würde. **Die Zahl gilt
+> nicht:** die Eingabemaske setzte den Abspielkopf auf den Engine-Marker und
+> schickte die Abspielposition ab, belegte die Antwort also vor. Runde 2 lag
+> im Median 4,7 s neben dem Marker, Runde 1 bei −50,1 s, 15 von 16 näher.
+> Werkzeug-Fassung 2 steht seit dem 19.08.; es fehlt ein Durchgang von 19 min.
+> Hergang: `SITZUNG_2026-08-19.md`.
 
 **2. Der Report: dein Set wie unter dem Mikroskop.**
 Eine interaktive Wellenform zeigt jeden Übergang mit echten Tracknamen: "Amelie Lens – In My Mind → FJAAK – Gravel, Übergang bei 14:32, 24 Beats Blend". Pro Übergang siehst du die Messwerte, die zählen: Phrasen-Timing in Beats, Tempo-Drift, harmonische Kompatibilität, Energieverlauf, Lautheits-Sprünge. Jeder Wert ist anklickbar und sofort anhörbar — du springst exakt an die Stelle und hörst selbst, was die Zahlen sagen. Und das Entscheidende: **Was MixCoach nicht messen kann, zeigt es nicht an.** Keine erfundenen Scores, keine Pseudo-Präzision. Diese radikale Ehrlichkeit ist ein Markenkern.

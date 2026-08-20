@@ -8,8 +8,17 @@
 #
 #  Was hier gemessen wird: wie gut du deine eigene Zeitangabe
 #  ein zweites Mal triffst. Deine Angaben vom ersten Mal
-#  bekommst du deshalb NICHT zu sehen, und die Reihenfolge der
-#  Uebergaenge ist gewuerfelt.
+#  bekommst du deshalb NICHT zu sehen, die Reihenfolge der
+#  Uebergaenge ist gewuerfelt, und der Abspielkopf startet
+#  zufaellig 30-120 s neben dem Engine-Vorschlag.
+#
+#  WICHTIG, Stand 19.08.2026: Der Durchgang vom 11.08. wird dir
+#  noch einmal vorgelegt. Das Werkzeug von damals hat den
+#  Abspielkopf auf den Engine-Vorschlag gesetzt und die
+#  Abspielposition abgeschickt - damit war der Vorschlag die
+#  Vorbelegung deiner Antwort, nicht nur der Reiz. Die alten
+#  Antworten bleiben erhalten, sie beantworten die Frage nur
+#  nicht. Begruendung: SITZUNG_2026-08-19.md.
 #
 #  Es geht NICHT darum, dieselbe Zahl wie beim ersten Mal zu
 #  treffen. Hoer hin und entscheide neu. Ein ehrliches Ergebnis
@@ -66,9 +75,13 @@ echo ""
 echo "  Die Seite ist im Browser offen."
 echo ""
 echo "  Ablauf je Uebergang:"
-echo "    1. Abspielen, an die Stelle springen, wo der Uebergang BEGINNT"
-echo "    2. angeben, was du markiert hast (A geht raus / B kommt rein / beides)"
-echo "    3. 'Uebernehmen und weiter'"
+echo "    1. Abspielen; mit dem Schieber oder den Sprungtasten an die"
+echo "       Stelle gehen, wo der Uebergang BEGINNT"
+echo "    2. 'Hier beginnt der Uebergang' druecken - das setzt die Marke."
+echo "       Ohne diesen Druck wird nichts gespeichert; Weiterhoeren"
+echo "       verschiebt die Marke danach NICHT mehr."
+echo "    3. angeben, was du markiert hast (A geht raus / B kommt rein / beides)"
+echo "    4. 'Uebernehmen und weiter'"
 echo ""
 echo "  Du kannst jederzeit abbrechen - der Stand wird nach jedem"
 echo "  Uebergang gespeichert. Beim naechsten Start geht es weiter."

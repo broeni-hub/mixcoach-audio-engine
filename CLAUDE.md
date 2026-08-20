@@ -28,6 +28,23 @@ Stelle entsteht.
 
 Offen und wartend auf Sebastian:
 
+- **K1 war gelaufen und niemand hatte es gemerkt** (Fund vom 19.08.). Die
+  zweite, blinde Labelrunde liegt seit dem 11.08. vollständig in
+  `daten/relabel/` — 16 von 16. Das Auswertungswerkzeug war nie aufgerufen.
+  Aufgerufen sagt es σ = 48,72 s Selbst-Übereinstimmung gegen 52,87 s der
+  Engine. **Diese Zahl trägt nicht:** die Zweitrunden-Seite setzte den
+  Abspielkopf auf den Engine-Marker und schickte die Abspielposition ab, war
+  also die Vorbelegung der Antwort. Runde 2 lag im Median 4,7 s neben dem
+  Marker, Runde 1 bei −50,1 s; 15 von 16 näher. **Die K1-Frage ist offen.**
+  Werkzeug-Fassung 2 (zufälliger Startpunkt 30–120 s daneben, freie
+  Positionierung, ausdrücklicher Griff) steht und ist in der laufenden App
+  vorgeführt. Was fehlt, ist ein Durchgang: 19 min,
+  `MixCoach-Zweitrunde.command`. Hergang: `SITZUNG_2026-08-19.md`.
+- **`collection.xml` liegt nicht auf diesem Mac** (gesucht am 19.08. in
+  `/Users`, `/Volumes`, Projektstamm). Damit kann K2 — der rekordbox-Weg, den
+  `PRODUKTVISION.md` als einzigen Weg zu „sekundengenau" ohne offene Forschung
+  nennt — nicht beginnen. Alle Zahlen dazu stammen aus der Windows-Zeit.
+
 - **J7 ist gelaufen, und das Ergebnis ist unentschieden.** 20 Paare, blind:
   **13 zu 7** für die belegte Übung (65 %), zweiseitiger Binomialtest
   **p = 0,263**. Nötig für 5 % wären 15 von 20 gewesen. Von einem Münzwurf ist
@@ -190,7 +207,11 @@ Die Diagnose dazu: `detect_set_transition_zones()` in
 der Breakdown vor dem Drop, also das *Ende* des Blends. Der Mensch labelt den
 *Anfang*. Die Differenz ist die Transitionslänge (8–64 Takte), daher die große
 Streuung. Ein globaler Offset behebt das nicht und lässt σ unverändert.
-**σ ist die Zahl, an der sich jede Änderung messen lassen muss.**
+**σ ist die Zahl, an der sich jede Änderung messen lassen muss.** Wie viel Luft
+diese Zahl nach unten hat, ist **nicht bekannt**: die Messung, die das klären
+sollte (K1), ist mit einem Instrument entstanden, das die Antwort vorbelegt
+hat — siehe oben. Wer σ = 48,7 s als menschliche Untergrenze zitiert, zitiert
+ein Artefakt.
 
 Bis zum 17.08.2026 stand hier `detect_transition_zones()` — ein 46-Zeiler in
 `app/experimental/`, der von nichts importiert wurde und inzwischen unter
@@ -242,7 +263,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 294 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 301 Tests, alle grün
 ```
 
 Dazu 54 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
