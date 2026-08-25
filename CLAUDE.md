@@ -37,9 +37,15 @@ Offen und wartend auf Sebastian:
   also die Vorbelegung der Antwort. Runde 2 lag im Median 4,7 s neben dem
   Marker, Runde 1 bei −50,1 s; 15 von 16 näher. **Die K1-Frage ist offen.**
   Werkzeug-Fassung 2 (zufälliger Startpunkt 30–120 s daneben, freie
-  Positionierung, ausdrücklicher Griff) steht und ist in der laufenden App
-  vorgeführt. Was fehlt, ist ein Durchgang: 19 min,
-  `MixCoach-Zweitrunde.command`. Hergang: `SITZUNG_2026-08-19.md`.
+  Positionierung, ausdrücklicher Griff) steht. **Der Durchgang damit ist am
+  25.08. gelaufen und zählt ebenfalls nicht:** die eingebaute Selbstprüfung
+  meldet r = +0,996 zwischen Startversatz und Antwort, 16 von 16 Antworten
+  liegen auf derselben Seite des Markers wie der Würfel, Median-Dauer 22 s je
+  Übergang gegen 72 s in Runde 1. Am Werkzeug liegt es nicht — kein Wert liegt
+  exakt auf dem Startpunkt. **K1 ist damit zweimal gescheitert und weiter
+  offen.** Seit dem 25.08. warnt die Seite während des Durchgangs, statt es
+  hinterher im Terminal zu sagen. Hergang: `SITZUNG_2026-08-19.md` und
+  `PROJEKT_REVIEW_2026-08-25.md`, Abschnitt 12.
 - **`collection.xml` liegt nicht auf diesem Mac** (gesucht am 19.08. in
   `/Users`, `/Volumes`, Projektstamm). Damit kann K2 — der rekordbox-Weg, den
   `PRODUKTVISION.md` als einzigen Weg zu „sekundengenau" ohne offene Forschung
@@ -275,7 +281,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 315 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 330 Tests, alle grün
 ```
 
 Dazu 66 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc

@@ -1,4 +1,4 @@
-# MixCoach — Projekt-Review, 21.08.2026
+# MixCoach — Projekt-Review, 25.08.2026
 
 ## 0 · Wie es entstand
 
@@ -24,7 +24,7 @@ als erster Befund steht.
 
 ## 1 · Die kurze Fassung
 
-Die App hat zwischen dem 18. und dem 21.08. eine Verschlechterung angezeigt,
+Die App hat zwischen dem 18. und dem 25.08. eine Verschlechterung angezeigt,
 die nicht stattgefunden hat — zwei Probedateien aus dem Cloud-Nachweis mit je
 einem Übergang kippten die Fortschrittskurve, also genau die Messung, die
 Bedingung 3 der Live-Schwelle trägt. Zugleich ist der Coach zum ersten Mal
@@ -46,11 +46,11 @@ von ihnen zuletzt nur durch Zufall nicht gekippt sind.
 > Historie einen Gerätewechsel überlebt, und drei Sets desselben DJs eine
 > Entwicklung sichtbar machen.**
 
-| Bedingung | 17.08. | **21.08.** |
+| Bedingung | 17.08. | **25.08.** |
 |---|---|---|
 | 1 · Jeder angezeigte Wert ist gemessen | erfüllt, bis auf B5 | **verletzt** — der Report sagt „beatmatching: nicht gemessen" und zeigt daneben eine Beatmatching-Übung mit Zahl (Abschnitt 5b) |
 | 2 · Historie überlebt Gerätewechsel | gebaut, nie vorgeführt | **erfüllt** — vorgeführt am 18.08. |
-| 3 · Drei Sets zeigen eine Entwicklung | erfüllt und sichtbar | **erfüllt, aber war es drei Tage lang nicht** (Abschnitt 5a) |
+| 3 · Drei Sets zeigen eine Entwicklung | erfüllt und sichtbar | **erfüllt, aber war es sieben Tage lang nicht** (Abschnitt 5a) |
 
 Das Fernziel (>90 % Erkennung, sekundengenau) bleibt Ziel und ist kein Tor.
 
@@ -60,7 +60,7 @@ Das Fernziel (>90 % Erkennung, sekundengenau) bleibt Ziel und ist kein Tor.
 
 ### Die fünf Erlebnis-Punkte
 
-| | 13.08. | 17.08. | **21.08.** | Begründung |
+| | 13.08. | 17.08. | **25.08.** | Begründung |
 |---|---|---|---|---|
 | 1 · Erkennung | 58 % | 58 % | **58 %** | Unberührt, Referenzmetrik identisch. Neu ist kein Fortschritt, sondern ein Verlust an Sicherheit: die Messung, die die menschliche Untergrenze klären sollte, ist mit einem Instrument entstanden, das die Antwort vorbelegt hat (19.08.). |
 | 2 · Report | 78 % | 80 % | **80 %** | `beat_jitter_ms` an 86,7 % der Übergänge dazugekommen — aufgewogen vom Widerspruch in `notMeasured`. |
@@ -70,7 +70,7 @@ Das Fernziel (>90 % Erkennung, sekundengenau) bleibt Ziel und ist kein Tor.
 
 ### Die drei Burggräben
 
-| | 13.08. | 17.08. | **21.08.** | Begründung |
+| | 13.08. | 17.08. | **25.08.** | Begründung |
 |---|---|---|---|---|
 | 1 · Daten-Schleife | 40 % | 40 % | **42 %** | Korrektur am letzten Review: dort stand „die 9 Bewertungskonflikte sind weiter offen". `daten/ground_truth/KONFLIKTE.md` führt heute **Offen: 0**. Weiterhin null fremde Nutzer. |
 | 2 · Library-Verbindung | 72 % | 72 % | **72 %** | Tracknamen an 21,8 % der Übergänge (17.08.: 20,4 %). Neu und schlecht: `collection.xml` liegt **nicht auf diesem Mac** — der einzige Weg zu „sekundengenau" ohne offene Forschung ist damit nicht begehbar. |
@@ -78,7 +78,7 @@ Das Fernziel (>90 % Erkennung, sekundengenau) bleibt Ziel und ist kein Tor.
 
 ### Die drei Teile der Roadmap
 
-| | 13.08. | 17.08. | **21.08.** |
+| | 13.08. | 17.08. | **25.08.** |
 |---|---|---|---|
 | Teil 1 · Audio-Engine | 70 % | 72 % | **74 %** |
 | Teil 2 · Frontend | 62 % | 68 % | **68 %** |
@@ -91,7 +91,7 @@ Fortschritt und einen gleich großen Fund gegeneinander.
 
 ## 4 · Kennzahlen-Tafel
 
-| | Stand 21.08.2026 |
+| | Stand 25.08.2026 |
 |---|---|
 | Betriebspunkt | `min_probability 0,6` · `min_gap 150 s` |
 | LOSO-Validierung | R 92,4 % · P 62,8 % · F1 0,748 (25 Sets / 3537 Kandidaten) |
@@ -112,7 +112,7 @@ Fortschritt und einen gleich großen Fund gegeneinander.
 
 ### Befüllung je Übergang (450)
 
-| Feld | 17.08. | **21.08.** |
+| Feld | 17.08. | **25.08.** |
 |---|---|---|
 | `quality_score`, `phrase_alignment_score` | 100 % | **100 %** (beide messen nichts, ρ ≈ 0) |
 | `composite_quality_score` | 86,4 % | **86,7 %** |
@@ -132,7 +132,7 @@ Korrekturweg greift, aber 24 Reports stehen auf einem älteren Stand.
 
 ## 5 · Befunde, die in keinem Projektdokument stehen
 
-### a) Die Fortschrittskurve zeigte drei Tage lang das Gegenteil der Wahrheit
+### a) Die Fortschrittskurve zeigte sieben Tage lang das Gegenteil der Wahrheit
 
 Am 18.08. entstanden beim Cloud-Nachweis zwei Probedateien,
 `PROBE-J1-2026-08-18.wav` und `J1-NACHWEIS-2026-08-18.wav`, mit **je einem
@@ -271,7 +271,7 @@ gescheitert.
 **Ohne Bedingungsbezug, mit genanntem Grund**
 
 5. **K1-Durchgang mit Werkzeug-Fassung 2** — 19 min. **3× verschoben**
-   (19., 20., 21.08.). Solange er fehlt, ist unbekannt, wie viel Luft σ hat.
+   (19., 20., 25.08.). Solange er fehlt, ist unbekannt, wie viel Luft σ hat.
 6. **`collection.xml` auf den Mac holen** — **3× verschoben**. Blockiert K2.
 7. Entscheidungen zu `quality_score`, Übungsbibliothek, LLM-Coach — offen seit
    dem 14./15.08., **6 Tage**.
@@ -328,7 +328,7 @@ Größe freigelegt, die zwei Wochen lang als tot galt.
 „nachgewiesen erfüllt".**
 
 Der Beleg steht in diesem Review dreimal. Bedingung 3 galt seit dem 15.08. als
-erfüllt und war es vom 18. bis zum 21.08. nicht — bemerkt durch Zufall, beim
+erfüllt und war es vom 18. bis zum 25.08. nicht — bemerkt durch Zufall, beim
 Vorbereiten einer anderen Aufgabe. Bedingung 1 gilt als erfüllt und ist es in
 allen 56 Reports nicht. Die K1-Zahl galt neun Tage als erhoben und war ein
 Artefakt des Instruments.
@@ -342,4 +342,50 @@ hat.
 
 **Die Gegenmaßnahme ist billig:** jede der drei Bedingungen bekommt eine Prüfung
 im Selbsttest, die bei jedem Lauf mitläuft — Bedingung 3 hätte am 19.08. rot
-gezeigt statt am 21.08. durch Zufall aufzufallen.
+gezeigt statt am 25.08. durch Zufall aufzufallen.
+
+---
+
+## 12 · Nachtrag vom selben Abend
+
+**Zwei Korrekturen an diesem Dokument.** Es war zuerst auf den 21.08. datiert
+und sprach von „drei Tagen". Beides falsch: heute ist der 25.08., und die
+Kurve zeigte von der Entstehung der Probedateien am 18.08. bis zum Fund
+**sieben Tage** lang das Gegenteil. Der Commit `4a96e9e` trägt die alte Zahl
+noch in der Meldung.
+
+**Die zweite Labelrunde ist gelaufen — und zählt nicht.** 16 von 16 in
+Fassung 2 am 25.08., „zum Engine-Vorschlag" kein einziges Mal benutzt. Die am
+19.08. eingebaute Selbstprüfung schlägt trotzdem an:
+
+| | |
+|---|---|
+| Korrelation Startversatz / Antwort | **r = +0,996** |
+| Antwort innerhalb 8 s des Startpunkts | 13 von 16 |
+| Antwort auf derselben Seite des Markers wie der Würfel | **16 von 16** |
+| Median-Dauer je Übergang | 22 s (Runde 1: 72 s) |
+
+Das Werkzeug ist in Ordnung — kein Wert liegt exakt auf dem Startpunkt, die
+Abstände reichen von −20,2 bis +8,5 s, der Griff funktioniert also. Aber ein
+Übergang kann nicht zugleich 109 s vor und 117 s nach dem Marker liegen;
+welche Seite herauskommt, entscheidet der zufällige Startpunkt.
+
+**K1 bleibt unbeantwortet. σ = 54,58 s hat weiterhin keine bekannte
+Untergrenze.** Das ist der zweite Durchgang, der an derselben Frage scheitert
+— beim ersten Mal fiel es nach neun Tagen auf, diesmal nach Minuten, weil die
+Prüfung eingebaut war.
+
+**Gebaut am selben Abend, als Konsequenz:**
+
+1. **Der Anker-Wächter rechnet jetzt während des Durchgangs mit.** Nach der
+   vierten Antwort meldet die Seite selbst, wenn die Marken am Einstiegspunkt
+   kleben — dann bricht man nach zwei Minuten ab statt nach sieben.
+2. **Die Bedingungen 1 und 3 laufen im Selbsttest mit.** Bedingung 1 meldet
+   heute WARN (`beatmatching` in 33 von 56 Reports). Bedingung 3 vergleicht
+   den angezeigten Trend gegen die Steigung der ganzen Reihe — gegengeprüft am
+   historischen Fehler: mit der alten Mindestgröße meldet sie
+   *„angezeigt +0,90 dB → schlechter | ganze Reihe −0,063 → besser"*. Sie
+   hätte am 19.08. rot gezeigt.
+
+Damit ist die Gegenmaßnahme aus Abschnitt 11 gebaut, nicht nur vorgeschlagen.
+330 Tests grün.

@@ -364,6 +364,140 @@ def pruefe_cloud() -> None:
 
 
 # --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+def pruefe_bedingung1() -> None:
+    """Bedingung 1: jeder angezeigte Wert ist gemessen.
+
+    Geprueft wird der engste, unstrittigste Fall: ein Report, der aus einer
+    Groesse eine UEBUNG baut, hat diese Groesse gemessen - sonst gaebe es die
+    Uebung nicht. Steht dieselbe Groesse zugleich unter notMeasured,
+    widerspricht der Report sich selbst.
+
+    Anlass (20.-21.08.2026): seit dem Beat-Jitter sagen alle 56 Reports
+    "beatmatching: nicht gemessen" und zeigen daneben eine
+    Beatmatching-Uebung mit Zahl. Das ist ein Verstoss gegen die
+    Ehrlichkeitslinie in der selteneren Richtung - eine echte Messung
+    verleugnet. Aufgefallen ist es beim Review, nicht beim Betrieb.
+    """
+    abschnitt("7 - Bedingung 1: jeder angezeigte Wert ist gemessen")
+
+    # Welche Uebungs-Groesse zu welcher Achse in notMeasured gehoert.
+    # Bewusst kurz: nur Faelle, in denen der Widerspruch eindeutig ist.
+    ACHSE_ZU_METRIK = {"beatmatching": {"beat_jitter_ms"}}
+
+    betroffen = {}
+    reports = 0
+    for pfad in RESULTS_DIR.glob("*.json"):
+        try:
+            d = json.loads(pfad.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if "setTransitions" not in d:
+            continue
+        reports += 1
+        metriken = {e.get("metric") for e in (d.get("exercises") or [])}
+        for achse in (d.get("notMeasured") or []):
+            if not isinstance(achse, str):
+                continue
+            if metriken & ACHSE_ZU_METRIK.get(achse, set()):
+                betroffen.setdefault(achse, 0)
+                betroffen[achse] += 1
+
+    if not betroffen:
+        sag(OK, "Kein Report widerspricht sich",
+            f"{reports} Reports geprueft: keine Groesse steht zugleich unter "
+            f"notMeasured und hinter einer Uebung.")
+        return
+    for achse, n in sorted(betroffen.items()):
+        sag(WARN, f"'{achse}' gilt als nicht gemessen und baut trotzdem Uebungen",
+            f"{n} von {reports} Reports",
+            "notMeasured ist eine feste Liste statt eines Blicks auf den "
+            "Befuellungsstand (B5). Bis das behoben ist, verleugnet der "
+            "Report eine Messung, die er selbst anzeigt.")
+
+
+# --------------------------------------------------------------------------
+def _steigung(werte: list) -> float:
+    """Kleinste-Quadrate-Steigung ueber die Reihenfolge. Ohne numpy."""
+    n = len(werte)
+    if n < 2:
+        return 0.0
+    mx = (n - 1) / 2
+    my = sum(werte) / n
+    oben = sum((i - mx) * (y - my) for i, y in enumerate(werte))
+    unten = sum((i - mx) ** 2 for i in range(n))
+    return oben / unten if unten else 0.0
+
+
+def pruefe_bedingung3() -> None:
+    """Bedingung 3: drei Sets desselben DJs zeigen eine Entwicklung.
+
+    Zwei Pruefungen, und die zweite ist die, die gefehlt hat:
+
+    1. Steht ueberhaupt eine Kurve mit genug eigenen Aufnahmen?
+    2. Sagt der angezeigte Trend (letzte drei gegen die drei davor) dasselbe
+       wie die Steigung ueber die GANZE Reihe?
+
+    Anlass (18.-21.08.2026): zwei Probedateien aus dem Cloud-Nachweis mit je
+    einem Uebergang landeten am Ende der Kurve und drehten den angezeigten
+    Trend auf +0,9 dB - "schlechter geworden" -, waehrend die Reihe insgesamt
+    klar faellt (r = -0,740). Drei Tage lang zeigte die App das Gegenteil der
+    Wahrheit, und aufgefallen ist es durch Zufall.
+    """
+    abschnitt("8 - Bedingung 3: drei Sets zeigen eine Entwicklung")
+
+    from app.coach.profile import (MIN_UEBERGAENGE_JE_PUNKT, _load_results,
+                                   pegel_trend, pegel_zeitreihe)
+
+    results = _load_results()
+    reihe = pegel_zeitreihe(results)
+    eigene = [e for e in reihe if e.get("ownRecording")]
+    trend = pegel_trend(reihe)
+
+    if len(eigene) < 4:
+        sag(WARN, "Zu wenige eigene Aufnahmen fuer einen Trend",
+            f"{len(eigene)} auf der Kurve (noetig: 4)",
+            "Bedingung 3 ist damit nicht belegbar, egal was die Oberflaeche zeigt.")
+        return
+
+    sag(OK, "Die Kurve steht",
+        f"{len(eigene)} eigene Aufnahmen, {len(reihe) - len(eigene)} fremde "
+        f"sichtbar aber nicht gezaehlt, Mindestgroesse je Punkt "
+        f"{MIN_UEBERGAENGE_JE_PUNKT} Uebergaenge")
+
+    # Wieviele Aufnahmen haben es NICHT auf die Kurve geschafft? Sichtbar
+    # machen, sonst schrumpft sie still.
+    namen_auf_kurve = {e["fileName"] for e in reihe}
+    draussen = sorted({(r.get("fileName") or "?") for r in results
+                       if r.get("fileName") and r.get("fileName") not in namen_auf_kurve})
+    if draussen:
+        sag(OK, "Aufnahmen ausserhalb der Kurve",
+            f"{len(draussen)}: " + ", ".join(d[:26] for d in draussen[:6])
+            + (" ..." if len(draussen) > 6 else ""),
+            "Testdateien, zu wenige Uebergaenge oder eine andere "
+            "Rechenvorschrift - das ist so gewollt, muss aber sichtbar sein.")
+
+    delta = trend.get("delta")
+    steigung = _steigung([e["medianJumpDb"] for e in eigene])
+    if delta is None:
+        sag(WARN, "Kein Trend sagbar", f"{len(eigene)} Aufnahmen, delta ist None")
+        return
+
+    richtung_kurz = "besser" if delta < 0 else ("schlechter" if delta > 0 else "gleich")
+    richtung_lang = "besser" if steigung < 0 else ("schlechter" if steigung > 0 else "gleich")
+    detail = (f"angezeigt (letzte 3 gegen 3 davor): {delta:+.2f} dB -> {richtung_kurz}   "
+              f"|   ganze Reihe: Steigung {steigung:+.3f} dB/Aufnahme -> {richtung_lang}")
+
+    if delta * steigung < 0:
+        sag(WARN, "Angezeigter Trend und Gesamtverlauf widersprechen sich",
+            detail,
+            "Genau das war der Fehler vom 18.-21.08.: einzelne Punkte am Ende "
+            "der Reihe drehen den angezeigten Trend. Nachsehen, welche "
+            "Aufnahmen zuletzt dazugekommen sind.")
+    else:
+        sag(OK, "Angezeigter Trend passt zum Gesamtverlauf", detail)
+
+
 def main() -> int:
     print()
     print("MixCoach - Selbsttest")
@@ -372,7 +506,7 @@ def main() -> int:
 
     for pruefung in (pruefe_datenstamm, pruefe_modell, pruefe_library,
                      pruefe_stems, pruefe_messwerte, pruefe_vergleichbarkeit,
-                     pruefe_cloud):
+                     pruefe_cloud, pruefe_bedingung1, pruefe_bedingung3):
         try:
             pruefung()
         except Exception as exc:

@@ -209,6 +209,51 @@ def startversatz(seed: int, index: int) -> float:
     return betrag if wuerfel.random() < 0.5 else -betrag
 
 
+# --- Anker-Waechter -------------------------------------------------------
+#
+# Am 25.08.2026 lief ein vollstaendiger Durchgang mit Fassung 2 - und war
+# unbrauchbar: 16 von 16 Antworten lagen auf derselben Seite des Markers wie
+# der ZUFAELLIGE Startpunkt, 13 davon innerhalb von 8 s. Die Marke wurde
+# gesetzt, wo der Abspielkopf landete, statt dort, wo der Uebergang beginnt.
+#
+# Aufgefallen ist das drei Tage spaeter im Terminal. Beim ersten Mal (Fassung
+# 1, 11.08.) dauerte es neun Tage. Beides ist zu spaet: wer es waehrend des
+# Durchgangs erfaehrt, bricht nach zwei Minuten ab statt nach sieben.
+# Deshalb rechnet der Server nach jeder Antwort mit und sagt es der Seite.
+#
+# Die Schwelle ist bewusst grob. Sie soll nicht entscheiden, ob eine Messung
+# gilt - das tut tools/eval/relabel_agreement.py mit der vollen Rechnung -,
+# sondern nur, ob es sich lohnt weiterzumachen.
+ANKER_MIN_ANTWORTEN = 4
+ANKER_ABSTAND_S = 15.0
+
+
+def anker_warnung(analysis_id: str) -> Optional[Dict]:
+    """Kleben die bisherigen Antworten am Startpunkt? None, bis genug da sind.
+
+    Gerechnet wird der Median des Abstands Antwort/Startpunkt ueber alle
+    Antworten der laufenden Fassung. Median, nicht Mittelwert: ein einzelner
+    weiter Sprung soll die Warnung nicht abschalten.
+    """
+    daten = laden(analysis_id)
+    abstaende = sorted(
+        abs(float(a["sec"]) - float(a["startSec"]))
+        for a in (daten.get("antworten") or {}).values()
+        if a.get("startSec") is not None and a.get("werkzeug") == WERKZEUG
+    )
+    if len(abstaende) < ANKER_MIN_ANTWORTEN:
+        return None
+    m = len(abstaende) // 2
+    median = (abstaende[m] if len(abstaende) % 2
+              else (abstaende[m - 1] + abstaende[m]) / 2)
+    return {
+        "n": len(abstaende),
+        "medianAbstandS": round(median, 1),
+        "warnung": median < ANKER_ABSTAND_S,
+        "grenzeS": ANKER_ABSTAND_S,
+    }
+
+
 def erledigt_mit_werkzeug(analysis_id: str, fassung: int = WERKZEUG) -> list[int]:
     """Indizes, die MIT DIESER Werkzeug-Fassung beantwortet sind.
 

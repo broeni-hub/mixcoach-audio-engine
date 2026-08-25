@@ -230,3 +230,52 @@ def test_seite_belegt_die_antwort_nicht_mit_dem_marker_vor():
     # Abgeschickt wird der ausdrueckliche Griff, nicht die Abspielposition.
     assert "sec:gewaehlt" in seite
     assert "gewaehlt = audio.currentTime" in seite
+
+
+# --- Der Anker-Waechter (25.08.2026) --------------------------------------
+
+
+def _antwort(index, sec, start):
+    return client.post(f"/relabel/{AID}/antwort",
+                       json={"index": index, "sec": sec, "was": "b_rein",
+                             "startSec": start, "zumMarker": False})
+
+
+def test_waechter_schweigt_bis_genug_antworten_da_sind():
+    """Aus zwei Antworten laesst sich nichts ablesen - und eine Warnung, die
+    zu frueh kommt, wird ignoriert."""
+    assert _antwort(1, 100.0, 100.0).json()["anker"] is None
+    assert _antwort(2, 200.0, 200.0).json()["anker"] is None
+
+
+def test_waechter_schlaegt_an_wenn_die_antwort_am_startpunkt_klebt():
+    """Der Fall vom 25.08.: 16 von 16 Marken lagen dort, wo der Abspielkopf
+    zufaellig landete. Das fiel erst drei Tage spaeter im Terminal auf."""
+    for i in range(1, 5):
+        anker = _antwort(i, 100.0 * i + 3.0, 100.0 * i).json()["anker"]
+    assert anker is not None
+    assert anker["n"] == 4
+    assert anker["medianAbstandS"] == 3.0
+    assert anker["warnung"] is True
+
+
+def test_waechter_schweigt_wenn_wirklich_navigiert_wurde():
+    for i in range(1, 5):
+        anker = _antwort(i, 100.0 * i + 70.0, 100.0 * i).json()["anker"]
+    assert anker["warnung"] is False
+    assert anker["medianAbstandS"] == 70.0
+
+
+def test_waechter_nimmt_den_median_nicht_den_mittelwert():
+    """Ein einzelner weiter Sprung darf die Warnung nicht abschalten."""
+    for sec, start in ((103.0, 100.0), (203.0, 200.0),
+                       (303.0, 300.0), (900.0, 400.0)):
+        anker = _antwort(int(start // 100), sec, start).json()["anker"]
+    # Mittelwert waere 129 s und wuerde schweigen; der Median ist 3 s.
+    assert anker["warnung"] is True
+
+
+def test_die_seite_zeigt_die_warnung_an():
+    seite = client.get(f"/relabel/{AID}").text
+    assert "zeigeAnker" in seite
+    assert "so misst dieser Durchgang nichts" in seite

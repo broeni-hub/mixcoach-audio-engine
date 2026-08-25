@@ -158,7 +158,11 @@ def post_antwort(analysis_id: str, payload: AntwortPayload) -> dict:
             start_sec=payload.startSec, zum_marker=payload.zumMarker)
     except ValueError as fehler:
         raise HTTPException(status_code=422, detail=str(fehler)) from fehler
-    return {"erledigt": len(stand["antworten"]), "gespeichert": payload.index}
+    return {"erledigt": len(stand["antworten"]), "gespeichert": payload.index,
+            # Der Anker-Waechter. Faehrt bei JEDER Antwort mit, damit ein
+            # unbrauchbarer Durchgang waehrend des Durchgangs auffaellt und
+            # nicht Tage spaeter im Terminal (siehe relabel_store).
+            "anker": relabel_store.anker_warnung(analysis_id)}
 
 
 @router.get("/{analysis_id}", response_class=HTMLResponse)
@@ -192,6 +196,9 @@ _SEITE = """<!doctype html>
  .zeit{font-variant-numeric:tabular-nums;font-size:26px;font-weight:600}
  .gewaehltzeit{font-variant-numeric:tabular-nums;font-size:20px;color:#7ee08a}
  .hinweis{color:#9a9aab;font-size:13px} .fertig{color:#7ee08a}
+ .warnung{background:#3a2318;border:1px solid #a8552a;border-radius:10px;
+          padding:14px 16px;margin-bottom:16px;color:#ffd9c2;font-size:14px}
+ .warnung b{color:#ffb083}
  .balken{height:6px;background:#33333f;border-radius:3px;overflow:hidden;margin:8px 0 18px}
  .balken>div{height:100%;background:#5b46c8;width:0}
  input[type=range]{width:100%;accent-color:#6f5ae0}
@@ -201,6 +208,7 @@ _SEITE = """<!doctype html>
 zufällig neben dem Engine-Vorschlag. Deine Angaben vom ersten Mal werden
 nicht angezeigt &ndash; das ist der Sinn der Sache.</div>
 <div class="balken"><div id="balken"></div></div>
+<div id="anker"></div>
 <div class="karte" id="karte">Lade&hellip;</div>
 <div class="hinweis" id="status"></div>
 <script>
@@ -284,6 +292,24 @@ function zeichne(){
   }, {once:true});
 }
 
+function zeigeAnker(a){
+  // Der Waechter rechnet auf dem Server, hier steht nur, was er sagt.
+  // Absichtlich deutlich und ohne Beschoenigung: ein Durchgang, der so
+  // weiterlaeuft, misst nichts, und dann ist Abbrechen die bessere Wahl.
+  const k = document.getElementById("anker");
+  if (!a || !a.warnung){ k.innerHTML = ""; return; }
+  k.innerHTML = `<div class="warnung">
+    <b>Achtung - so misst dieser Durchgang nichts.</b><br>
+    Deine letzten ${a.n} Marken lagen im Median nur
+    <b>${a.medianAbstandS} s</b> vom Einstiegspunkt entfernt. Der
+    Einstiegspunkt ist gewürfelt und liegt 30-120 s <i>neben</i> dem
+    Übergang &mdash; wer dort markiert, gibt den Würfel zurück, nicht die
+    Stelle.<br><br>
+    Geh mit dem Schieber oder den Sprungtasten wirklich zu der Stelle, wo der
+    Übergang beginnt. Wenn das gerade nicht geht: lieber abbrechen und später
+    weitermachen. Der Stand bleibt gespeichert.</div>`;
+}
+
 function spring(d){ if(audio) audio.currentTime = Math.max(0, audio.currentTime + d); }
 function zumMarker(){
   if(!audio) return;
@@ -310,11 +336,12 @@ async function sichern(){
   }
   if (!was){ alert("Bitte zuerst angeben, was du markierst."); return; }
   const a = aufgaben[pos];
-  await fetch(`/relabel/${AID}/antwort`, {
+  const antwort = await fetch(`/relabel/${AID}/antwort`, {
     method:"POST", headers:{"Content-Type":"application/json"},
     body: JSON.stringify({index:a.index, sec:gewaehlt, was:was,
                           startSec:a.startSec, zumMarker:zumMarkerGenutzt})
   });
+  try { zeigeAnker((await antwort.json()).anker); } catch(e) {}
   erledigt.add(a.index);
   pos += 1;
   while (pos < aufgaben.length && erledigt.has(aufgaben[pos].index)) pos += 1;
