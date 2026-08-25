@@ -186,6 +186,31 @@ def _trends(timeline: List[Dict]) -> Dict:
 # also genau dort, wo der Fortschritt abgelesen wird.
 TESTDATEIEN = {"mix.wav", "synthetic_mix.wav"}
 
+# Wieviele Uebergaenge eine Aufnahme mindestens braucht, um einen Punkt auf
+# der Fortschrittskurve zu setzen.
+#
+# WARUM DIESE REGEL AM 21.08.2026 DAZUKAM: TESTDATEIEN ist eine Namensliste,
+# und Namenslisten werden nicht nachgezogen. Am 18.08. entstanden beim
+# Cloud-Nachweis zwei Probedateien - PROBE-J1-2026-08-18.wav und
+# J1-NACHWEIS-2026-08-18.wav, je EIN Uebergang bei 3,4 dB. Sie standen nicht
+# auf der Liste, landeten als zwei der drei juengsten Punkte auf der Kurve
+# und drehten den Trend um: die App meldete delta +0,9 dB und +41,7 pp ueber
+# der Schwelle, also eine Verschlechterung, die nicht stattgefunden hat.
+# Ohne sie faellt der Pegelsprung ueber 14 eigene Aufnahmen von 3,10 auf
+# 1,47 dB (r = -0,740, p = 0,002).
+#
+# Die Sitzungsnotiz vom 18.08. hielt fest, die Probedateien "stoeren keine
+# Messung". Geprueft war das an der Referenzmetrik - die zaehlt gelabelte
+# Aufnahmen und stimmt. Die Fortschrittskurve zaehlt AUFNAHMEN. Der Satz war
+# richtig fuer die eine und falsch fuer die andere Messung.
+#
+# Drei ist keine gegriffene Zahl: darunter ist der Median keiner. Bei n=1
+# gibt es nichts zu mitteln, bei n=2 entscheidet jeder der beiden Werte
+# allein. Ab drei gibt es ein Mittelstueck, das ein Ausreisser nicht
+# bestimmt. Im Bestand trennt die Grenze sauber: JEDE Test- und Probedatei
+# hat genau einen Uebergang, JEDE echte Aufnahme mindestens drei.
+MIN_UEBERGAENGE_JE_PUNKT = 3
+
 
 def _selbst_aufgenommen(dateiname: str) -> bool:
     """Ist das eine eigene Aufnahme - oder ein fremdes Set zum Studieren?
@@ -249,6 +274,10 @@ def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
        Lauf, denn das ist, wann diese Aufnahme entstanden ist. Ohne die
        Trennung wanderte eine alte Aufnahme allein durch ein Nachrechnen
        nach rechts.
+    4. MINDESTENS DREI UEBERGAENGE je Punkt (MIN_UEBERGAENGE_JE_PUNKT).
+       Ein Median ueber einen Wert ist keiner. Diese Regel ersetzt nicht die
+       Namensliste aus 2, sie faengt auf, was dort fehlt - und genau das war
+       am 18.08. noetig geworden.
     2. TESTDATEIEN raus (siehe TESTDATEIEN).
     3. NUR VERGLEICHBARE Reports. vergleichbar() ist genau dafuer da. Im
        Bestand sind sieben ungestempelt, und das sind zufaellig genau die
@@ -275,6 +304,8 @@ def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
         laeufe.sort(key=lambda r: str(r.get("createdAt") or ""))
         neuester = laeufe[-1]
         spruenge = _pegelspruenge(neuester)
+        if len(spruenge) < MIN_UEBERGAENGE_JE_PUNKT:
+            continue
         ueber = sum(1 for s in spruenge if s >= SCHWELLE_PEGELSPRUNG_DB)
         reihe.append({
             "fileName": name,

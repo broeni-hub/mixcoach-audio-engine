@@ -9,10 +9,30 @@ Vorzeichen verwechseln, weil hier ausnahmsweise NIEDRIGER BESSER ist.
 import pytest
 
 from app.coach import profile
-from app.coach.profile import pegel_trend, pegel_zeitreihe
+from app.coach.profile import (MIN_UEBERGAENGE_JE_PUNKT, pegel_trend,
+                               pegel_zeitreihe)
 
 
 def _report(datei, tag, spruenge, version=3, aid=None):
+    """Ein Report. Kurze Sprunglisten werden auf die Mindestzahl WIEDERHOLT.
+
+    Seit dem 21.08.2026 braucht ein Kurvenpunkt mindestens drei Uebergaenge
+    (MIN_UEBERGAENGE_JE_PUNKT). Die Tests hier pruefen etwas anderes -
+    Entdoppeln, Ausschluesse, Vorzeichen - und sollen an dieser Grenze nicht
+    haengenbleiben. Wiederholen statt Auffuellen mit neuen Werten, weil das
+    Median UND Anteil unveraendert laesst: eine k-fach wiederholte Liste hat
+    denselben Median und dieselben Anteile wie das Original.
+
+    Wer die Mindestzahl selbst pruefen will, nimmt _report_roh().
+    """
+    voll = list(spruenge)
+    while voll and len(voll) < MIN_UEBERGAENGE_JE_PUNKT:
+        voll += list(spruenge)
+    return _report_roh(datei, tag, voll, version, aid)
+
+
+def _report_roh(datei, tag, spruenge, version=3, aid=None):
+    """Wie _report(), aber ohne Auffuellen - fuer die Mindestzahl selbst."""
     return {
         "id": aid or f"{datei}-{tag}",
         "fileName": datei,
@@ -165,3 +185,38 @@ def test_fremde_sets_zaehlen_nicht_in_den_trend():
     assert t["recordings"] == 5
     assert t["excludedForeign"] == 2
     assert t["delta"] < 0
+
+# --- Die Mindestzahl je Kurvenpunkt (21.08.2026) --------------------------
+
+
+def test_eine_aufnahme_mit_einem_uebergang_setzt_keinen_punkt():
+    """Der Fehler vom 18.08.: zwei Probedateien aus dem Cloud-Nachweis, je
+    EIN Uebergang bei 3,4 dB, landeten als zwei der drei juengsten Punkte
+    auf der Kurve und drehten den Trend von Fortschritt auf Rueckschritt."""
+    reihe = pegel_zeitreihe([
+        _report("REC001.WAV", 6, [1.0, 1.0, 1.0]),
+        _report_roh("PROBE-J1-2026-08-18.wav", 18, [3.4]),
+        _report_roh("J1-NACHWEIS-2026-08-18.wav", 18, [3.4]),
+    ])
+    assert [e["fileName"] for e in reihe] == ["REC001.WAV"]
+
+
+def test_zwei_uebergaenge_reichen_auch_nicht():
+    """Bei n=2 bestimmt jeder der beiden Werte den Median allein."""
+    reihe = pegel_zeitreihe([_report_roh("REC001.WAV", 6, [1.0, 9.0])])
+    assert reihe == []
+
+
+def test_drei_uebergaenge_reichen():
+    """Die Grenze trennt im Bestand sauber: jede Probedatei hat einen
+    Uebergang, jede echte Aufnahme mindestens drei (MixCoach6 hat drei)."""
+    reihe = pegel_zeitreihe([_report_roh("MixCoach6.WAV", 18, [1.0, 2.0, 3.0])])
+    assert len(reihe) == 1
+    assert reihe[0]["transitions"] == 3
+
+
+def test_die_namensliste_bleibt_zusaetzlich_noetig():
+    """Die Mindestzahl ERSETZT TESTDATEIEN nicht - eine Testdatei mit drei
+    Uebergaengen muesste weiter ueber die Liste fallen."""
+    reihe = pegel_zeitreihe([_report_roh("mix.wav", 7, [0.0, 0.0, 0.0])])
+    assert reihe == []

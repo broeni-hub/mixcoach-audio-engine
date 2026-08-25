@@ -4,85 +4,248 @@
  "startedAt": 1786434000.8219242,
  "antworten": {
   "31": {
-   "sec": 5800.59,
+   "sec": 5893.88,
    "was": "b_rein",
-   "at": 1786434076.1534002
+   "at": 1787684997.602808,
+   "werkzeug": 2,
+   "startSec": 5888.2,
+   "zumMarker": false
   },
   "32": {
-   "sec": 6046.83,
+   "sec": 6006.16,
    "was": "b_rein",
-   "at": 1786434148.5059478
+   "at": 1787685006.449415,
+   "werkzeug": 2,
+   "startSec": 6003.51,
+   "zumMarker": false
   },
   "33": {
-   "sec": 6313.53,
-   "was": "a_raus",
-   "at": 1786437325.019298
+   "sec": 6201.83,
+   "was": "b_rein",
+   "at": 1787685022.8487308,
+   "werkzeug": 2,
+   "startSec": 6208.88,
+   "zumMarker": false
   },
   "29": {
-   "sec": 5345.67,
-   "was": "a_raus",
-   "at": 1786437412.213548
+   "sec": 5207.17,
+   "was": "beides",
+   "at": 1787685053.3829162,
+   "werkzeug": 2,
+   "startSec": 5221.14,
+   "zumMarker": false
   },
   "10": {
-   "sec": 1898.58,
-   "was": "b_rein",
-   "at": 1786437432.931875
+   "sec": 1985.99,
+   "was": "beides",
+   "at": 1787685078.1324039,
+   "werkzeug": 2,
+   "startSec": 2006.23,
+   "zumMarker": false
   },
   "18": {
-   "sec": 3106.61,
-   "was": "beides",
-   "at": 1786437510.860307
+   "sec": 3167.52,
+   "was": "b_rein",
+   "at": 1787685097.048874,
+   "werkzeug": 2,
+   "startSec": 3172.84,
+   "zumMarker": false
   },
   "21": {
-   "sec": 3610.1,
+   "sec": 3668.22,
    "was": "b_rein",
-   "at": 1786437563.8984141
+   "at": 1787685118.599422,
+   "werkzeug": 2,
+   "startSec": 3673.42,
+   "zumMarker": false
   },
   "22": {
-   "sec": 3672.02,
+   "sec": 3623.44,
    "was": "b_rein",
-   "at": 1786439787.044677
+   "at": 1787685146.031764,
+   "werkzeug": 2,
+   "startSec": 3616.04,
+   "zumMarker": false
   },
   "24": {
-   "sec": 4009.71,
+   "sec": 4052.17,
    "was": "b_rein",
-   "at": 1786439823.889973
+   "at": 1787685167.066117,
+   "werkzeug": 2,
+   "startSec": 4051.75,
+   "zumMarker": false
   },
   "28": {
-   "sec": 4716.26,
-   "was": "b_rein",
-   "at": 1786440038.7390301
+   "sec": 4829.68,
+   "was": "beides",
+   "at": 1787685195.414593,
+   "werkzeug": 2,
+   "startSec": 4825.63,
+   "zumMarker": false
   },
   "34": {
-   "sec": 6667.37,
+   "sec": 6565.4,
    "was": "b_rein",
-   "at": 1786440112.838049
+   "at": 1787685215.5140889,
+   "werkzeug": 2,
+   "startSec": 6566.59,
+   "zumMarker": false
   },
   "13": {
-   "sec": 2393.62,
-   "was": "beides",
-   "at": 1786447747.80817
+   "sec": 2446.69,
+   "was": "b_rein",
+   "at": 1787685237.948124,
+   "werkzeug": 2,
+   "startSec": 2446.48,
+   "zumMarker": false
   },
   "15": {
-   "sec": 2725.16,
+   "sec": 2635.86,
    "was": "b_rein",
-   "at": 1786447756.067401
+   "at": 1787685263.9817522,
+   "werkzeug": 2,
+   "startSec": 2630.03,
+   "zumMarker": false
   },
   "14": {
-   "sec": 2472.85,
+   "sec": 2341.58,
    "was": "b_rein",
-   "at": 1786447797.1342132
+   "at": 1787685330.300917,
+   "werkzeug": 2,
+   "startSec": 2337.4,
+   "zumMarker": false
   },
   "17": {
-   "sec": 3032.7,
+   "sec": 3079.33,
    "was": "b_rein",
-   "at": 1786447817.933894
+   "at": 1787685365.1190872,
+   "werkzeug": 2,
+   "startSec": 3074.54,
+   "zumMarker": false
   },
   "25": {
-   "sec": 4255.51,
+   "sec": 4158.85,
    "was": "b_rein",
-   "at": 1786447841.2685618
+   "at": 1787685386.329041,
+   "werkzeug": 2,
+   "startSec": 4150.4,
+   "zumMarker": false
   }
  },
- "userId": "local-single-user"
+ "userId": "local-single-user",
+ "ersetzt": [
+  {
+   "index": 31,
+   "sec": 5800.59,
+   "was": "b_rein",
+   "at": 1786434076.1534002,
+   "werkzeug": 1
+  },
+  {
+   "index": 32,
+   "sec": 6046.83,
+   "was": "b_rein",
+   "at": 1786434148.5059478,
+   "werkzeug": 1
+  },
+  {
+   "index": 33,
+   "sec": 6313.53,
+   "was": "a_raus",
+   "at": 1786437325.019298,
+   "werkzeug": 1
+  },
+  {
+   "index": 29,
+   "sec": 5345.67,
+   "was": "a_raus",
+   "at": 1786437412.213548,
+   "werkzeug": 1
+  },
+  {
+   "index": 10,
+   "sec": 1898.58,
+   "was": "b_rein",
+   "at": 1786437432.931875,
+   "werkzeug": 1
+  },
+  {
+   "index": 18,
+   "sec": 3106.61,
+   "was": "beides",
+   "at": 1786437510.860307,
+   "werkzeug": 1
+  },
+  {
+   "index": 21,
+   "sec": 3610.1,
+   "was": "b_rein",
+   "at": 1786437563.8984141,
+   "werkzeug": 1
+  },
+  {
+   "index": 22,
+   "sec": 3672.02,
+   "was": "b_rein",
+   "at": 1786439787.044677,
+   "werkzeug": 1
+  },
+  {
+   "index": 24,
+   "sec": 4009.71,
+   "was": "b_rein",
+   "at": 1786439823.889973,
+   "werkzeug": 1
+  },
+  {
+   "index": 28,
+   "sec": 4716.26,
+   "was": "b_rein",
+   "at": 1786440038.7390301,
+   "werkzeug": 1
+  },
+  {
+   "index": 34,
+   "sec": 6667.37,
+   "was": "b_rein",
+   "at": 1786440112.838049,
+   "werkzeug": 1
+  },
+  {
+   "index": 13,
+   "sec": 2393.62,
+   "was": "beides",
+   "at": 1786447747.80817,
+   "werkzeug": 1
+  },
+  {
+   "index": 15,
+   "sec": 2725.16,
+   "was": "b_rein",
+   "at": 1786447756.067401,
+   "werkzeug": 1
+  },
+  {
+   "index": 14,
+   "sec": 2472.85,
+   "was": "b_rein",
+   "at": 1786447797.1342132,
+   "werkzeug": 1
+  },
+  {
+   "index": 17,
+   "sec": 3032.7,
+   "was": "b_rein",
+   "at": 1786447817.933894,
+   "werkzeug": 1
+  },
+  {
+   "index": 25,
+   "sec": 4255.51,
+   "was": "b_rein",
+   "at": 1786447841.2685618,
+   "werkzeug": 1
+  }
+ ],
+ "werkzeug": 2
 }
