@@ -126,8 +126,15 @@ export interface SkillStat {
 
 /** Warum eine Achse nichts zeigt. Nach scoreField, nicht nach Anzeigename. */
 const NICHT_GEMESSEN: Record<string, string> = {
-  beatmatching: "seit 31.07.2026 bewusst ohne Wert: bpm_drift ist in 89 % der "
-    + "Übergänge exakt 0,0 und unterscheidet keine zwei DJs (K1)",
+  // Bis zum 27.08.2026 stand hier "bewusst ohne Wert: bpm_drift ist in 89 %
+  // der Übergänge exakt 0,0 (K1)". Das galt für bpm_drift und gilt weiter -
+  // nur hängt die Achse seitdem nicht mehr daran. beat_jitter_ms misst das
+  // Beatmatching (Spearman -0,336 über 237 eigene Bewertungen), und
+  // scores.beatmatching trägt seither eine echte Zahl. Dieser Text erscheint
+  // deshalb nur noch für Aufnahmen, in denen kein einziger Übergang einen
+  // Jitter trägt - 7 von 56 im Bestand.
+  beatmatching: "für diese Aufnahme konnte der Beat-Jitter in keinem Übergang "
+    + "gemessen werden — meist zu kurze Blends oder Set-Ränder",
   timing: "seit 31.07.2026 bewusst ohne Wert: das Phrasenraster wandert weiter "
     + "als die Größe, die es messen soll (K1)",
   eq: "wird von der Analyse noch nicht berechnet",

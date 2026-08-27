@@ -116,3 +116,51 @@ def annotate_beat_jitter(transitions_detailed: List[Dict], beats: List[float]) -
         # Unterscheidung sieht eine grob geschaetzte Zahl aus wie eine
         # gemessene.
         t["beat_jitter_quelle"] = "raster" if wert is not None else None
+
+
+# --- Die Kopfzahl fuers Skill-Radar ---------------------------------------
+#
+# Das Radar braucht 0-100. Der Jitter ist eine Zeit. Die Umrechnung ist eine
+# ANZEIGE-Entscheidung und keine Messung, deshalb steht sie hier offen und
+# nicht versteckt in einer Formel:
+#
+#   100 Punkte bei <= 5 ms, 0 Punkte bei >= 25 ms, dazwischen linear.
+#
+# Woher die beiden Anker: ueber 390 gemessene Uebergaenge liegt das Minimum
+# bei 2,9 ms und das Maximum bei 26,2 ms. 5 ms erreichen 3 %, 25 ms
+# ueberschreiten unter 1 %. Die Skala deckt also genau den Bereich ab, der
+# vorkommt - und zwar mit FESTEN Werten in Millisekunden, nicht mit
+# Perzentilen des heutigen Bestands. Sonst hiesse dieselbe Zahl naechstes
+# Jahr etwas anderes.
+#
+# Das ist die Lehre aus beat_alignment_score: dessen Nullpunkt liegt bei
+# cv = 0,35, also 164 ms - dem Sechsfachen des groessten je gemessenen
+# Werts. Die Folge war eine Spanne von 83 bis 98 Punkten. Hier laufen p10
+# bis p90 (8,1 bis 18,8 ms) ueber 31 bis 84 Punkte.
+#
+# Die Millisekunden bleiben daneben stehen (beat_jitter_ms je Uebergang).
+# Wer der Punktzahl nicht traut, kann die Messung selbst nachsehen.
+PUNKTE_100_MS = 5.0
+PUNKTE_0_MS = 25.0
+
+
+def radar_punkte(uebergaenge: List[Dict]) -> Optional[int]:
+    """0-100 fuer das Skill-Radar aus dem Median-Jitter eines Sets.
+
+    None, wenn kein einziger Uebergang einen Jitter traegt - dann ist die
+    Achse fuer dieses Set nicht gemessen, und das soll sie auch sagen.
+
+    Median und nicht Mittelwert, aus demselben Grund wie bei der
+    Pegelsprung-Kurve: ein einzelner ausgerissener Uebergang darf die
+    Kopfzahl eines ganzen Sets nicht verschieben.
+    """
+    werte = sorted(float(t["beat_jitter_ms"]) for t in (uebergaenge or [])
+                   if isinstance(t, dict)
+                   and isinstance(t.get("beat_jitter_ms"), (int, float)))
+    if not werte:
+        return None
+    m = len(werte) // 2
+    median = werte[m] if len(werte) % 2 else (werte[m - 1] + werte[m]) / 2
+
+    anteil = (PUNKTE_0_MS - median) / (PUNKTE_0_MS - PUNKTE_100_MS)
+    return int(round(max(0.0, min(1.0, anteil)) * 100))

@@ -4,6 +4,8 @@ from uuid import uuid4
 
 from app.audio.dramaturgie import bogen
 from app.audio.pipeline.scoring_version import scoring_stamp
+from app.audio.beat_jitter import radar_punkte
+from app.audio.nicht_gemessen import aus_report as nicht_gemessen_aus_report
 from app.coach.uebungen import baue as baue_uebungen
 
 # Scores, die die Set-Pipeline derzeit NICHT misst, werden bewusst als
@@ -37,6 +39,12 @@ from app.coach.uebungen import baue as baue_uebungen
 # Die Rohwerte bleiben im Payload (phrase_beats_off, phrase_alignment_score,
 # bpm_drift je Uebergang) - sie werden fuer Auswertung und Export gebraucht.
 # Was entfaellt, ist die NOTE und die daraus abgeleitete Handlungsanweisung.
+# Bis zum 27.08.2026 stand hier eine feste Fuenferliste, die direkt nach
+# notMeasured ging. Sie kann nicht stimmen, sobald sich etwas aendert - und
+# seit dem 20.08. misst beat_jitter_ms das Beatmatching. Die Entscheidung,
+# was als gemessen gilt, faellt jetzt an genau einer Stelle:
+# app/audio/nicht_gemessen.py. Der Name bleibt fuer die Stellen, die ihn als
+# Erklaerung zitieren.
 NOT_YET_MEASURED = ["eq", "creativity", "frequency", "beatmatching", "timing"]
 
 
@@ -60,7 +68,7 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
     uebergaenge = _map_set_transitions(analysis)
     uebungen, beobachtungen = baue_uebungen(analysis_id, uebergaenge)
 
-    return {
+    ergebnis = {
         "id": analysis_id,
         "fileName": filename,
         "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -109,7 +117,12 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
             # beatmatching/timing: siehe NOT_YET_MEASURED oben. Bewusst None
             # und nicht der berechnete Wert - eine Note, die bei 12 von 19
             # Aufnahmen 100 lautet, ist keine Messung.
-            "beatmatching": None,
+            # beatmatching: seit 27.08.2026 eine echte Zahl. Sie kommt aus
+            # dem Median-Jitter des Sets (app/audio/beat_jitter.py), und die
+            # Umrechnung auf 0-100 steht dort offen dokumentiert. Bis dahin
+            # war das Feld None - richtig, solange nur bpm_drift dahinter
+            # stand, das in 89 % der Uebergaenge exakt 0,0 ist.
+            "beatmatching": radar_punkte(uebergaenge),
             "eq": None,
             "timing": None,
             "creativity": None,
@@ -118,7 +131,7 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
             "overall": overall,
         },
 
-        "notMeasured": NOT_YET_MEASURED,
+        "notMeasured": None,  # wird unten gesetzt, wenn scores stehen
         "analysisWarnings": warnings,
 
         "timeline": _map_timeline(analysis),
@@ -157,6 +170,12 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
         "totalDurationSec": round(float(analysis.get("duration", 0))),
         "findings": _map_findings(analysis),
     }
+
+    # Zum Schluss, weil es die fertigen scores und Uebergaenge braucht: was
+    # dieser Report nicht traegt. Eine Stelle, ein Ort - siehe
+    # app/audio/nicht_gemessen.py.
+    ergebnis["notMeasured"] = nicht_gemessen_aus_report(ergebnis)
+    return ergebnis
 
 
 def _measured_bpm(tempo: Dict) -> Optional[int]:

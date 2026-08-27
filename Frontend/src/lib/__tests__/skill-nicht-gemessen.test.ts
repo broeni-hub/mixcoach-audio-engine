@@ -40,12 +40,28 @@ describe("computeSkillStats: nicht gemessen ist nicht null", () => {
     }
   });
 
-  it("nennt bei beatmatching und timing den K1-Grund", () => {
+  it("nennt bei timing weiter den K1-Grund", () => {
     const stats = computeSkillStats(zustand(NUR_FLOW));
-    for (const feld of ["beatmatching", "timing"]) {
-      const s = stats.find((x) => x.def.scoreField === feld)!;
-      expect(s.notMeasuredReason).toContain("K1");
-    }
+    const s = stats.find((x) => x.def.scoreField === "timing")!;
+    expect(s.notMeasuredReason).toContain("K1");
+  });
+
+  it("nennt bei beatmatching nicht mehr bpm_drift", () => {
+    // Seit dem 27.08.2026 misst beat_jitter_ms diese Achse. Der alte Grund
+    // ("bpm_drift ist in 89 % exakt 0,0") beschrieb eine andere Größe und
+    // hätte eine vorhandene Messung weiter verleugnet.
+    const stats = computeSkillStats(zustand(NUR_FLOW));
+    const s = stats.find((x) => x.def.scoreField === "beatmatching")!;
+    expect(s.notMeasuredReason).toBeTruthy();
+    expect(s.notMeasuredReason).not.toContain("bpm_drift");
+    expect(s.notMeasuredReason).toContain("Jitter");
+  });
+
+  it("zeigt beatmatching als gemessen, sobald eine Zahl dasteht", () => {
+    const stats = computeSkillStats(zustand({ ...NUR_FLOW, beatmatching: 76 } as never));
+    const s = stats.find((x) => x.def.scoreField === "beatmatching")!;
+    expect(s.measured).toBe(true);
+    expect(s.notMeasuredReason).toBeUndefined();
   });
 
   it("laesst befuellte Achsen unberuehrt", () => {

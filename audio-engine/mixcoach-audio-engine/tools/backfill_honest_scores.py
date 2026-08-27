@@ -64,6 +64,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from app.audio.beat_jitter import radar_punkte
+from app.audio.nicht_gemessen import aus_report as _nicht_gemessen
 from app.api.analysis_mapper import NOT_YET_MEASURED  # noqa: E402
 from app.audio.pipeline.scoring_version import SCORING_VERSION  # noqa: E402
 from app.paths import RESULTS_DIR  # noqa: E402
@@ -88,7 +90,7 @@ def _muss_angefasst(report: dict) -> bool:
     s = report.get("scores") or {}
     return (s.get("beatmatching") is not None
             or s.get("timing") is not None
-            or set(report.get("notMeasured") or []) != set(NOT_YET_MEASURED))
+            or set(report.get("notMeasured") or []) != set(_nicht_gemessen(report)))
 
 
 def main() -> int:
@@ -143,10 +145,15 @@ def main() -> int:
     for pfad, report in offen:
         s = report.setdefault("scores", {})
         neu, eingaenge = _neuer_overall(s)
-        s["beatmatching"] = None
+        # beatmatching stand hier bis zum 27.08.2026 fest auf None - richtig,
+        # solange nur bpm_drift dahinter stand. Seit dem 20.08. misst
+        # beat_jitter_ms die Groesse; None zu schreiben wuerde eine
+        # vorhandene Messung wieder zudecken.
+        s["beatmatching"] = radar_punkte(report.get("setTransitions") or [])
         s["timing"] = None
         s["overall"] = neu
-        report["notMeasured"] = list(NOT_YET_MEASURED)
+        # Seit 27.08.2026 aus dem Ist-Stand, nicht aus der festen Liste.
+        report["notMeasured"] = _nicht_gemessen(report)
         report["scoringVersion"] = SCORING_VERSION
         # Welche Eingaenge die Gesamtnote tragen konnten. Eine frisch
         # analysierte Aufnahme hat zusaetzlich energy_shape - ohne diese

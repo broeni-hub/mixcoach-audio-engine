@@ -120,10 +120,14 @@ Das Skill-Radar entwickelt sich über Wochen. Du siehst dein bestes Set, deinen 
 > gibt es: Der Pegelsprung ist über 13 eigene Aufnahmen vom 06.07. bis 28.07.
 > von 2,80 auf 1,85 dB gefallen (Anteil über 3 dB: ~50 % → ~22 %, r = −0,622).
 > Das ist Bedingung 3 der Live-Schwelle, belegt.
-> *Nachtrag 20.08.2026:* **Beatmatching** ist keine leere Achse mehr — der
-> Beat-Jitter trägt sie (siehe Punkt 3). Eine **Kurve über die Zeit** hat er
-> aber noch nicht; die gibt es weiter nur für den Pegelsprung. Timing und
-> Harmonie bleiben unverändert „nicht gemessen".
+> *Nachtrag 20.08.2026, ergänzt am 27.08.:* **Beatmatching** ist keine leere
+> Achse mehr — der Beat-Jitter trägt sie (siehe Punkt 3). Seit dem 27.08.
+> steht dort auch eine Zahl: der Median-Jitter des Sets, umgerechnet über
+> feste Anker (100 Punkte bei ≤5 ms, 0 bei ≥25 ms — gemessen kommen 2,9 bis
+> 26,2 ms vor). Die Millisekunden bleiben je Übergang daneben stehen. Eine
+> **Kurve über die Zeit** hat die Achse noch nicht; die gibt es weiter nur
+> für den Pegelsprung, und über 14 eigene Aufnahmen ist der Jitter flach
+> (r = −0,053). Timing und Harmonie bleiben unverändert „nicht gemessen".
 >
 > Die ursprünglich genannten Achsen **Timing, Beatmatching, Harmonie** sagen
 > heute „nicht gemessen" — sie standen auf Größen, die nichts aussagen, und

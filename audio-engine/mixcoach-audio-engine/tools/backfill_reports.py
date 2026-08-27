@@ -46,6 +46,7 @@ import json
 import sys
 from pathlib import Path
 
+from app.audio.nicht_gemessen import aus_report as _nicht_gemessen
 from app.api.analysis_mapper import NOT_YET_MEASURED
 from app.audio.pipeline.scoring_version import (
     SCORING_CHANGELOG,
@@ -81,10 +82,16 @@ def nachziehen(report: dict) -> tuple[dict, list[str]]:
     if scores != (neu.get("scores") or {}):
         neu["scores"] = scores
 
-    if list(neu.get("notMeasured") or []) != list(NOT_YET_MEASURED):
+    # Sortiert vergleichen: die alte feste Liste stand unsortiert im Report,
+    # das gemeinsame Modul liefert sortiert. Ohne diese Angleichung meldet
+    # jeder Lauf eine Aenderung, die keine ist - und zaehlt die
+    # reportRevision hoch, was jede Browser-Kopie grundlos austauscht.
+    nm_neu = _nicht_gemessen(neu)
+    if sorted(neu.get("notMeasured") or []) != nm_neu:
         aenderungen.append(
-            f"notMeasured: {len(neu.get('notMeasured') or [])} -> {len(NOT_YET_MEASURED)} Eintraege")
-        neu["notMeasured"] = list(NOT_YET_MEASURED)
+            f"notMeasured: {len(neu.get('notMeasured') or [])} -> {len(nm_neu)} Eintraege")
+        # Seit 27.08.2026 aus dem Ist-Stand, nicht aus der festen Liste.
+        neu["notMeasured"] = nm_neu
 
     ist = neu.get("scoringVersion")
     soll = SCORING_VERSION if _stempel_belegt(neu) else UNSTAMPED

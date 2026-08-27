@@ -389,3 +389,56 @@ Prüfung eingebaut war.
 
 Damit ist die Gegenmaßnahme aus Abschnitt 11 gebaut, nicht nur vorgeschlagen.
 330 Tests grün.
+
+---
+
+## 13 · Nachtrag 27.08.2026 — B5 ist erledigt
+
+Der Befund aus Abschnitt 5b ist behoben, und er war größer als er aussah.
+
+**Es waren nicht zwei Stellen, sondern drei.** `notMeasured` kam aus einer
+festen Fünferliste im Mapper; `tools/backfill_uebungen.py` hatte eine zweite,
+halbfertige Fassung, die aus `scores` las — und dort steht
+`beatmatching: None`, weil diese Kopfzahl niemand rechnete. Die dritte Stelle
+liegt im Frontend: `progression.ts` entscheidet gar nicht an `notMeasured`,
+sondern daran, ob `scores.beatmatching` eine Zahl ist. Nur die Liste zu
+ändern hätte einen Widerspruch gegen einen anderen getauscht — der Report
+hätte „gemessen" gesagt und das Skill-Radar weiter „nicht gemessen".
+
+**Was jetzt steht:**
+
+| | |
+|---|---|
+| `app/audio/nicht_gemessen.py` | eine Tabelle: je Dimension das Feld, ob ein Beleg vorliegt, und welcher. Die einzige Stelle, an der diese Entscheidung fällt. |
+| `scores.beatmatching` | eine echte Zahl aus dem Median-Jitter. Anker fest in ms: 100 bei ≤5, 0 bei ≥25. p10–p90 der echten Verteilung laufen damit über **31 bis 84 Punkte** — gegen 83 bis 98 beim alten `beat_alignment_score`. |
+| `progression.ts` | der Grundtext für beatmatching nannte `bpm_drift` und K1; er erscheint jetzt nur noch für die 7 Aufnahmen ohne jeden Jitter und sagt, warum. |
+| Bestand | 49 von 56 Reports nachgezogen, `reportRevision` 7 → 8. |
+
+**Die Regel, die dabei entstanden ist und wichtiger ist als der Fix:**
+*Befüllt ist nicht gemessen.* `phrase_alignment_score` steht in 100 % der
+Übergänge und sagt nichts (ρ −0,04). Deshalb prüft das Modul zwei Dinge —
+ist das Feld in **diesem** Report befüllt, und gibt es dafür einen Beleg mit
+Zahl und Datum. `timing` bleibt genau deshalb in der Liste, obwohl sein Feld
+überall steht.
+
+**Bedingung 1 ist damit erfüllt**, und der Selbsttest sagt es selbst:
+
+```
+7 - Bedingung 1: jeder angezeigte Wert ist gemessen
+[  ok  ] Kein Report widerspricht sich
+         56 Reports geprueft: keine Groesse steht zugleich unter
+         notMeasured und hinter einer Uebung.
+```
+
+Vorgestern stand dort WARN für 33 von 56 Reports. Der Wächter, der den
+Befund gemeldet hat, meldet jetzt seine Behebung — das war der Zweck.
+
+**Offen geblieben und ausdrücklich nicht nebenbei entschieden:** `flow` und
+`musicality` stehen weiter als Note im Report, ohne dass ein Beleg vorliegt.
+Sie sind Kopfzahlen über ein ganzes Set, die vorhandenen Bewertungen sind je
+Übergang — beides lässt sich nicht direkt gegeneinander rechnen. Das braucht
+einen eigenen Eingang und steht als solcher in `nicht_gemessen.py`
+(`OFFEN_OHNE_BELEG`).
+
+344 Backend-Tests grün (vorher 330), 68 Frontend-Tests (66), `tsc` 0 Fehler,
+Referenzmetrik reproduziert.

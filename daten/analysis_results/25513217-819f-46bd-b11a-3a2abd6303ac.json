@@ -1997,7 +1997,7 @@
  ],
  "frequency": null,
  "scores": {
-  "beatmatching": null,
+  "beatmatching": 76,
   "eq": null,
   "timing": null,
   "creativity": null,
@@ -2006,7 +2006,6 @@
   "overall": 90
  },
  "notMeasured": [
-  "beatmatching",
   "creativity",
   "eq",
   "frequency",
@@ -2153,7 +2152,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 5,
+ "reportRevision": 6,
  "observations": [
   {
    "text": "Bei 2:08: die Energie fällt um 63,0 % ab. Ob das stört, ist an deinen Bewertungen nicht ablesbar.",

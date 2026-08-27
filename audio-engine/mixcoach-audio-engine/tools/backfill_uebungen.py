@@ -37,6 +37,7 @@ from app.audio.coach_summary import LEER_POSITIV, LEER_VERBESSERUNG
 from app.audio.pipeline.scoring_version import naechste_revision, revision_von
 from app.audio.segment_keys import camelot_compatibility_score
 from app.audio.transition_quality import _feedback, _feedback_en
+from app.audio.nicht_gemessen import aus_report as _nicht_gemessen
 from app.coach.uebungen import baue
 from app.paths import RESULTS_DIR
 
@@ -57,28 +58,6 @@ UNBELEGTE_SAETZE = (
     "Set analysis completed",
     "No major issues detected",
 )
-
-
-def _nicht_gemessen(report: dict) -> list:
-    """Welche Kopfzahlen dieser Report NICHT traegt (B5).
-
-    Frueher stand hier eine feste Fuenferliste in analysis_mapper.py. Die
-    stimmte fuer den Regelfall, aber nicht fuer Reports, denen darueber
-    hinaus etwas fehlt - und die gab es (flow/musicality sind None, wenn
-    die Pipeline sie nicht rechnen konnte). Aus dem Ist-Stand gebildet
-    sagt das Feld die Wahrheit ueber DIESEN Report.
-    """
-    scores = report.get("scores") or {}
-    fehlend = {k for k, v in scores.items() if v is None}
-
-    # frequency steht NICHT in scores, sondern als eigenes Feld auf oberster
-    # Ebene. Beim ersten Anlauf ist es genau deshalb aus der Liste gefallen -
-    # der Report haette behauptet, das Frequenzbild sei gemessen. Wer hier
-    # Felder ergaenzt, muss dasselbe pruefen.
-    if report.get("frequency") is None:
-        fehlend.add("frequency")
-
-    return sorted(fehlend)
 
 
 def _saetze_neu(uebergaenge: list) -> int:
@@ -178,7 +157,7 @@ def nachziehen(report: dict) -> tuple[dict, list]:
         neu["observations"] = beobachtungen
 
     nm = _nicht_gemessen(neu)
-    if list(report.get("notMeasured") or []) != nm:
+    if sorted(report.get("notMeasured") or []) != nm:
         aenderungen.append(
             f"notMeasured: {len(report.get('notMeasured') or [])} -> {len(nm)} Eintraege")
         neu["notMeasured"] = nm

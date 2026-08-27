@@ -253,6 +253,15 @@ Vergleich, eigene Bewertung für Blend, Drop und Bass-Swap).
   Coach-Sätze, eine Schwelle an zwei Stellen — jedes Mal lief einer der
   beiden Stände davon, und jedes Mal hat es Tage gekostet. Wer eine zweite
   Kopie anlegt, muss sagen, welche gilt.
+- **`notMeasured` fällt an genau einer Stelle** — `app/audio/nicht_gemessen.py`.
+  Dort steht je Dimension, welches Feld sie messen würde und ob dafür ein
+  Beleg vorliegt. Wer eine Dimension herausnimmt, trägt den Beleg dort ein,
+  mit Zahl und Datum. Vorher waren es zwei Stellen (feste Liste im Mapper,
+  halbfertige Kopie im Werkzeug), und beide sagten sieben Tage lang
+  „beatmatching: nicht gemessen" neben einer Beatmatching-Übung mit Zahl.
+- **Befüllt ist nicht gemessen.** `phrase_alignment_score` steht in 100 % der
+  Übergänge und sagt nichts (ρ −0,04). Wer die Regel auf „Feld ist nicht
+  `None`" verkürzt, baut die Pseudo-Präzision, gegen die das Produkt antritt.
 - **Übungen entstehen an zwei Stellen** — `app/coach/uebungen.py` (je Report)
   und `app/coach/profile.py` (über alle Sets, mit eigenem DE/EN-Text). Beide
   müssen nachgezogen werden, wer nur eine anfasst, baut eine Größe, die der
@@ -281,10 +290,10 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 330 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 344 Tests, alle grün
 ```
 
-Dazu 66 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
+Dazu 68 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
 --noEmit`, das seit dem 15.08. bei **0 Fehlern** steht.
 
 `tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm
