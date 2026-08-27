@@ -242,14 +242,26 @@ def _selbst_aufgenommen(dateiname: str) -> bool:
 # Fortschrittsmeldung in fdb1780 - eine Grenze fuer Messung und Coaching.
 
 
-def _pegelspruenge(result: Dict) -> List[float]:
-    """Betraege aller gemessenen Pegelspruenge eines Reports."""
+def _werte(result: Dict, feld: str) -> List[float]:
+    """Alle gemessenen Werte einer Groesse in einem Report.
+
+    Betrag oder nicht entscheidet GROESSEN in app/coach/uebungen.py - beim
+    Pegelsprung ist zu leise genauso unsauber wie zu laut, der Jitter ist
+    eine Streuung und hat keine Richtung. Dieselbe Tabelle, die auch ueber
+    Schwelle und Ziel entscheidet.
+    """
+    betrag = GROESSEN.get(feld, {}).get("betrag", False)
     raus = []
     for t in _filtered_transitions(result):
-        wert = t.get("loudness_jump_db")
+        wert = t.get(feld)
         if isinstance(wert, (int, float)):
-            raus.append(abs(float(wert)))
+            raus.append(abs(float(wert)) if betrag else float(wert))
     return raus
+
+
+def _pegelspruenge(result: Dict) -> List[float]:
+    """Betraege aller gemessenen Pegelspruenge eines Reports."""
+    return _werte(result, "loudness_jump_db")
 
 
 def _median(werte: List[float]) -> Optional[float]:
@@ -260,8 +272,8 @@ def _median(werte: List[float]) -> Optional[float]:
     return s[m] if len(s) % 2 else (s[m - 1] + s[m]) / 2
 
 
-def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
-    """Pegel-Sauberkeit je AUFNAHME ueber die Zeit.
+def zeitreihe(results: List[Dict], feld: str = "loudness_jump_db") -> List[Dict]:
+    """Eine Groesse je AUFNAHME ueber die Zeit.
 
     Drei Regeln, jede gegen einen Fehler, der die Kurve verfaelschen wuerde:
 
@@ -295,7 +307,7 @@ def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
             continue
         if not vergleichbar(r.get("scoringVersion"), SCORING_VERSION):
             continue
-        if not _pegelspruenge(r):
+        if not _werte(r, feld):
             continue
         je_aufnahme.setdefault(name, []).append(r)
 
@@ -303,15 +315,20 @@ def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
     for name, laeufe in je_aufnahme.items():
         laeufe.sort(key=lambda r: str(r.get("createdAt") or ""))
         neuester = laeufe[-1]
-        spruenge = _pegelspruenge(neuester)
+        spruenge = _werte(neuester, feld)
         if len(spruenge) < MIN_UEBERGAENGE_JE_PUNKT:
             continue
-        ueber = sum(1 for s in spruenge if s >= SCHWELLE_PEGELSPRUNG_DB)
+        schwelle = GROESSEN[feld]["schwelle"]
+        ueber = sum(1 for s in spruenge if s >= schwelle)
         reihe.append({
             "fileName": name,
             "analysisId": neuester.get("id"),
             # Frueheste Analyse = wann diese Aufnahme in MixCoach kam.
             "createdAt": laeufe[0].get("createdAt"),
+            # Der Schluessel heisst weiter medianJumpDb, auch fuer den
+            # Jitter. Umbenennen hiesse Frontend, Tests und gespeicherte
+            # Erwartungen anfassen, ohne dass eine Zahl besser wuerde; die
+            # Einheit steht in der Antwort des Trends (siehe trend()).
             "medianJumpDb": round(_median(spruenge) or 0.0, 2),
             "shareAboveThresholdPct": round(100 * ueber / len(spruenge), 1),
             "transitions": len(spruenge),
@@ -322,7 +339,62 @@ def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
     return reihe
 
 
-def pegel_trend(reihe: List[Dict]) -> Dict:
+def pegel_zeitreihe(results: List[Dict]) -> List[Dict]:
+    """Die Pegel-Kurve. Traegt Bedingung 3 der Live-Schwelle."""
+    return zeitreihe(results, "loudness_jump_db")
+
+
+def jitter_zeitreihe(results: List[Dict]) -> List[Dict]:
+    """Dieselbe Kurve fuer den Beat-Jitter, seit 27.08.2026.
+
+    ACHTUNG BEI DER ANZEIGE: sie ist ueber Sebastians eigene Aufnahmen
+    FLACH: Spearman -0,004 (p = 0,988) ueber 14 eigene Aufnahmen, gegen
+    -0,732 (p = 0,003) beim Pegelsprung. Beide Zahlen sind gegen scipy
+    nachgerechnet. Die Achse gibt es, eine Entwicklung zeigt sie nicht. Wer sie
+    wie die Pegel-Kurve daneben stellt, ohne das zu sagen, baut aus einem
+    ehrlichen Nullbefund eine Fortschrittsgeschichte.
+    """
+    return zeitreihe(results, "beat_jitter_ms")
+
+
+def _rangkorrelation(werte: List[float]) -> Optional[float]:
+    """Spearman gegen die Reihenfolge - laeuft ohne scipy.
+
+    Beantwortet: bewegt sich die Groesse ueber die Aufnahmen ueberhaupt in
+    eine Richtung? Ohne diese Zahl liest sich ein delta von 0,0 wie "keine
+    Veraenderung", und das ist etwas anderes als "keine Entwicklung
+    erkennbar".
+    """
+    n = len(werte)
+    if n < 4:
+        return None
+
+    # BINDUNGEN BRAUCHEN DURCHSCHNITTSRAENGE. Ohne das bekommt eine Reihe
+    # aus lauter gleichen Werten der Reihe nach die Raenge 0,1,2,3 - und
+    # korreliert perfekt mit der Reihenfolge. Eine flache Kurve haette dann
+    # "Entwicklung erkennbar" gemeldet, also genau das Gegenteil.
+    ordnung = sorted(range(n), key=lambda i: werte[i])
+    rang = [0.0] * n
+    platz = 0
+    while platz < n:
+        ende = platz
+        while ende + 1 < n and werte[ordnung[ende + 1]] == werte[ordnung[platz]]:
+            ende += 1
+        mittlerer = (platz + ende) / 2
+        for k in range(platz, ende + 1):
+            rang[ordnung[k]] = mittlerer
+        platz = ende + 1
+    mx = (n - 1) / 2
+    my = sum(rang) / n
+    oben = sum((i - mx) * (rang[i] - my) for i in range(n))
+    unten_x = sum((i - mx) ** 2 for i in range(n))
+    unten_y = sum((r - my) ** 2 for r in rang)
+    if unten_x <= 0 or unten_y <= 0:
+        return None
+    return round(oben / (unten_x * unten_y) ** 0.5, 3)
+
+
+def trend(reihe: List[Dict], feld: str = "loudness_jump_db") -> Dict:
     """Letzte drei Aufnahmen gegen die drei davor.
 
     ACHTUNG VORZEICHEN: hier ist NIEDRIGER BESSER. Ein negatives delta
@@ -337,10 +409,13 @@ def pegel_trend(reihe: List[Dict]) -> Dict:
 
     mediane = [e["medianJumpDb"] for e in eigene]
     anteile = [e["shareAboveThresholdPct"] for e in eigene]
+    einheit = "dB" if feld == "loudness_jump_db" else "ms"
     if not mediane:
         return {"current": None, "delta": None, "lowerIsBetter": True,
                 "recordings": 0, "excludedForeign": fremd,
-                "currentSharePct": None, "deltaSharePct": None}
+                "currentSharePct": None, "deltaSharePct": None,
+                "unit": einheit, "metric": feld,
+                "rankCorrelation": None, "developmentVisible": False}
 
     if len(mediane) < 4:
         # Zu wenig fuer einen Vergleich. Keine erfundene Null - None heisst
@@ -349,13 +424,29 @@ def pegel_trend(reihe: List[Dict]) -> Dict:
                 "lowerIsBetter": True, "recordings": len(mediane),
                 "excludedForeign": fremd,
                 "currentSharePct": round(_mean(anteile[-3:]) or 0.0, 1),
-                "deltaSharePct": None}
+                "deltaSharePct": None,
+                "unit": einheit, "metric": feld,
+                "rankCorrelation": None, "developmentVisible": False}
 
     def vergleich(werte):
         return _mean(werte[-3:]), (_mean(werte[-6:-3]) or _mean(werte[:-3]))
 
     m_jetzt, m_vorher = vergleich(mediane)
     a_jetzt, a_vorher = vergleich(anteile)
+
+    # Bewegt sich die Groesse ueberhaupt in eine Richtung?
+    #
+    # Ohne diese Zahl liest sich ein delta von 0,0 wie "keine Veraenderung" -
+    # und das ist etwas anderes als "keine Entwicklung erkennbar". Beim
+    # Beat-Jitter ist genau das der Fall: ueber 14 eigene Aufnahmen
+    # r = -0,004 (p = 0,988). Die Achse gibt es, eine Entwicklung zeigt
+    # sie nicht, und die Oberflaeche muss das sagen koennen.
+    #
+    # 0,3 ist keine Signifikanzgrenze und gibt sich auch nicht als eine aus -
+    # sie trennt nur "da bewegt sich etwas" von "da bewegt sich nichts". Der
+    # Pegelsprung liegt bei -0,73, der Jitter bei -0,004; dazwischen ist
+    # reichlich Platz.
+    korrelation = _rangkorrelation(mediane)
     return {
         "current": round(m_jetzt, 2),
         "delta": round(m_jetzt - m_vorher, 2),
@@ -364,8 +455,17 @@ def pegel_trend(reihe: List[Dict]) -> Dict:
         "excludedForeign": fremd,
         "currentSharePct": round(a_jetzt, 1),
         "deltaSharePct": round(a_jetzt - a_vorher, 1),
-        "thresholdDb": SCHWELLE_PEGELSPRUNG_DB,
+        "thresholdDb": GROESSEN[feld]["schwelle"],
+        "unit": einheit,
+        "metric": feld,
+        "rankCorrelation": korrelation,
+        "developmentVisible": korrelation is not None and abs(korrelation) >= 0.3,
     }
+
+
+def pegel_trend(reihe: List[Dict]) -> Dict:
+    """Der Pegel-Trend. Traegt Bedingung 3 der Live-Schwelle."""
+    return trend(reihe, "loudness_jump_db")
 
 
 def _patterns(all_transitions: List[Dict], lang: str = "de") -> List[Dict]:
@@ -646,6 +746,10 @@ def build_profile(lang: str = "de") -> Dict:
     # zugeordnete Urteile). Sie laeuft ueber AUFNAHMEN, nicht ueber Reports -
     # deshalb eine eigene Reihe neben timeline, nicht darin.
     pegel = pegel_zeitreihe(results)
+    # Zweite Achse seit dem 27.08.2026. Sie ist flach, und die Antwort sagt
+    # das selbst (developmentVisible) - deshalb steht sie hier und wird
+    # nicht weggelassen. Eine ehrliche Null ist ein Ergebnis.
+    jitter = jitter_zeitreihe(results)
 
     return {
         # Aufnahmen, nicht Reports - und nur eigene, weil das Abzeichen
@@ -657,6 +761,8 @@ def build_profile(lang: str = "de") -> Dict:
         "trends": _trends(timeline),
         "loudnessSeries": pegel,
         "loudnessTrend": pegel_trend(pegel),
+        "jitterSeries": jitter,
+        "jitterTrend": trend(jitter, "beat_jitter_ms"),
         "patterns": _patterns(all_transitions, lang),
         **_highlights_and_exercises(results, lang),
         "enoughData": len(results) >= 3,

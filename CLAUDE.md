@@ -315,10 +315,10 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 374 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 384 Tests, alle grün
 ```
 
-Dazu 74 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
+Dazu 79 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
 --noEmit`, das seit dem 15.08. bei **0 Fehlern** steht.
 
 `tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm

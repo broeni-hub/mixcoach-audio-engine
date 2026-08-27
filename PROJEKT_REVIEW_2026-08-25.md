@@ -611,3 +611,50 @@ statt daran zu scheitern.
 
 374 Backend-Tests grün (vorher 367), Referenzmetrik reproduziert,
 Selbsttest 14 ok / 7 WARN / 0 FEHLT.
+
+---
+
+## 18 · Nachtrag 27.08.2026 — die zweite Achse, und warum `delta` nicht reicht
+
+Befund 5d erledigt. Der Beat-Jitter hat jetzt eine eigene Fortschrittskurve
+neben dem Pegelsprung. `pegel_zeitreihe()` wurde dafür verallgemeinert statt
+kopiert — die Pegel-Kurve trägt Bedingung 3, und ihre Ausgabe ist nach dem
+Umbau **byte-identisch** (gegen den vorher gesicherten Stand verglichen).
+
+**Das Ergebnis ist ein Nullbefund, und der steht so in der App:**
+
+| | Median | Spearman | p |
+|---|---|---|---|
+| Pegel-Sauberkeit | 1,50 dB | **−0,732** | 0,003 |
+| Beat-Genauigkeit | 9,80 ms | **−0,004** | 0,988 |
+
+Beide gegen `scipy.stats.spearmanr` nachgerechnet, exakte Übereinstimmung.
+
+**Warum das mehr ist als „Achse dazugebaut".** Beim Verdrahten fiel auf, dass
+`delta` — der Vergleich der letzten drei Aufnahmen mit den drei davor — im
+echten Bestand **in beide Richtungen täuscht**:
+
+```
+Beat-Jitter    delta = −3,8 ms    r = −0,004   → Fortschritt, den es nicht gibt
+Pegelsprung    delta =  0,0 dB    r = −0,732   → keiner, wo deutlich einer ist
+```
+
+Ohne Gegenmaßnahme hätte die Oberfläche beim Jitter einen **grünen Pfeil**
+gezeigt. Deshalb liefert der Trend jetzt `rankCorrelation` und
+`developmentVisible` mit, und der Pfeil hängt an der Korrelation der ganzen
+Reihe, nicht am Fenster. Steht keine Richtung fest, sagt die Karte das:
+*„Über diese Aufnahmen ist keine Entwicklung erkennbar (r = −0,00). Der Wert
+steht, die Richtung nicht."*
+
+Die Regel liegt als `zeigtPfeil()` in der lib, nicht in der Komponente — sie
+ist eine Aussage über die Messung, keine über das Layout. Fünf Tests.
+
+**Ein Fehler in meiner eigenen Rechnung, gefunden durch einen Test:** Die
+erste Fassung der Rangkorrelation vergab bei gleichen Werten
+aufeinanderfolgende Ränge statt Durchschnittsränge. Eine vollkommen flache
+Reihe kam damit auf **r = 1,0** und hätte „Entwicklung erkennbar" gemeldet —
+das genaue Gegenteil. Behoben, und gegen scipy in fünf Fällen geprüft,
+darunter der Bindungsfall.
+
+384 Backend-Tests grün (vorher 374), **79** Frontend-Tests (74), `tsc` 0
+Fehler, Referenzmetrik reproduziert.

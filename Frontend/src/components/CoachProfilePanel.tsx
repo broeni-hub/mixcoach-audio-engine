@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Brain, Play, TrendingDown, TrendingUp, Trophy, AlertTriangle } from "lucide-react";
-import { fetchCoachProfile, type CoachProfile } from "@/lib/coach-profile";
+import { fetchCoachProfile, zeigtPfeil, type CoachProfile, type LoudnessTrend } from "@/lib/coach-profile";
 import { useLang } from "@/lib/i18n";
 
 const PANEL_TEXTS = {
@@ -39,6 +39,71 @@ function fmtSec(sec: number | null): string {
   const m = Math.floor(sec / 60);
   const s = Math.floor(sec % 60).toString().padStart(2, "0");
   return `${m}:${s}`;
+}
+
+/** Eine Fortschritts-Achse. Zweimal benutzt: Pegelsprung und Beat-Jitter.
+ *
+ *  DIE REGEL, DIE HIER DRINSTECKT: Der Pfeil erscheint nur, wenn die GANZE
+ *  Reihe sich in eine Richtung bewegt (`developmentVisible`), nicht wenn
+ *  `delta` von null verschieden ist. `delta` vergleicht die letzten drei
+ *  Aufnahmen mit den drei davor und täuscht in beide Richtungen: im Bestand
+ *  vom 27.08.2026 meldet der Beat-Jitter delta = −3,8 ms bei einer
+ *  Rangkorrelation von −0,004, und der Pegelsprung delta = 0,0 bei −0,73.
+ *  Ohne diese Regel stünde beim Jitter ein grüner Pfeil für einen
+ *  Fortschritt, den es nicht gibt.
+ */
+function AchsenBlock({ trend, titel, was }: {
+  trend?: LoudnessTrend;
+  titel: string;
+  was: string;
+}) {
+  if (!trend || trend.current == null) return null;
+  const einheit = trend.unit ?? "dB";
+  const zahl = (n: number) => n.toFixed(2).replace(".", ",");
+  const zeigePfeil = zeigtPfeil(trend);
+
+  return (
+    <div className="rounded-lg border border-primary/30 bg-card/50 p-3">
+      <div className="flex items-baseline justify-between gap-2">
+        <p className="text-sm font-semibold">{titel}</p>
+        <p className="text-[11px] text-muted-foreground">niedriger ist besser</p>
+      </div>
+      <p className="mt-1 flex items-center gap-2 text-sm font-semibold">
+        {zahl(trend.current)} {einheit}
+        {zeigePfeil && (
+          <span className={`flex items-center gap-0.5 text-xs ${
+            trend.delta! < 0 ? "text-green-500" : "text-red-400"}`}>
+            {trend.delta! < 0 ? <TrendingDown className="h-3 w-3" />
+                              : <TrendingUp className="h-3 w-3" />}
+            {trend.delta! > 0 ? "+" : ""}{zahl(trend.delta!)} {einheit}
+          </span>
+        )}
+      </p>
+      {trend.currentSharePct != null && (
+        <p className="mt-1 text-xs text-muted-foreground">
+          {trend.currentSharePct.toFixed(0)} % der Übergänge über{" "}
+          {(trend.thresholdDb ?? 3).toFixed(0)} {einheit}
+          {zeigePfeil && trend.deltaSharePct != null && trend.deltaSharePct !== 0 && (
+            <> ({trend.deltaSharePct > 0 ? "+" : ""}
+            {trend.deltaSharePct.toFixed(0)} pp)</>
+          )}
+        </p>
+      )}
+      {/* Die Unsicherheit gehoert daneben, nicht in eine Fussnote. */}
+      <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+        {was}, über {trend.recordings}{" "}
+        {trend.recordings === 1 ? "eigene Aufnahme" : "eigene Aufnahmen"}
+        {trend.excludedForeign ? ` (${trend.excludedForeign} fremde Sets zählen nicht mit)` : ""}.
+        {" "}
+        {trend.developmentVisible
+          ? "Ein deutlicher Hinweis, keine Gewissheit — ein Bewerter, wenige Wochen."
+          : `Über diese Aufnahmen ist keine Entwicklung erkennbar${
+              trend.rankCorrelation != null
+                ? ` (r = ${trend.rankCorrelation.toFixed(2).replace(".", ",")})`
+                : ""}. Der Wert steht, die Richtung nicht.`}
+      </p>
+    </div>
+  );
 }
 
 export function CoachProfilePanel() {
@@ -100,42 +165,10 @@ export function CoachProfilePanel() {
             Der Name sagt, was gemessen wird: der Pegelsprung, in dB. Nicht
             "Qualitaet" - ein Composite, der zu 98 % aus einer Dimension
             besteht, war schon einmal der Fehler. */}
-        {pegel && pegel.current != null && (
-          <div className="rounded-lg border border-primary/30 bg-card/50 p-3">
-            <div className="flex items-baseline justify-between gap-2">
-              <p className="text-sm font-semibold">Pegel-Sauberkeit</p>
-              <p className="text-[11px] text-muted-foreground">niedriger ist besser</p>
-            </div>
-            <p className="mt-1 flex items-center gap-2 text-sm font-semibold">
-              {pegel.current.toFixed(2).replace(".", ",")} dB
-              {pegel.delta != null && pegel.delta !== 0 && (
-                <span className={`flex items-center gap-0.5 text-xs ${
-                  pegel.delta < 0 ? "text-green-500" : "text-red-400"}`}>
-                  {pegel.delta < 0 ? <TrendingDown className="h-3 w-3" />
-                                   : <TrendingUp className="h-3 w-3" />}
-                  {pegel.delta > 0 ? "+" : ""}{pegel.delta.toFixed(2).replace(".", ",")} dB
-                </span>
-              )}
-            </p>
-            {pegel.currentSharePct != null && (
-              <p className="mt-1 text-xs text-muted-foreground">
-                {pegel.currentSharePct.toFixed(0)} % der Übergänge über{" "}
-                {(pegel.thresholdDb ?? 3).toFixed(0)} dB
-                {pegel.deltaSharePct != null && pegel.deltaSharePct !== 0 && (
-                  <> ({pegel.deltaSharePct > 0 ? "+" : ""}
-                  {pegel.deltaSharePct.toFixed(0)} pp)</>
-                )}
-              </p>
-            )}
-            {/* Die Unsicherheit gehoert daneben, nicht in eine Fussnote. */}
-            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
-              Median des Pegelsprungs, über {pegel.recordings}{" "}
-              {pegel.recordings === 1 ? "eigene Aufnahme" : "eigene Aufnahmen"}
-              {pegel.excludedForeign ? ` (${pegel.excludedForeign} fremde Sets zählen nicht mit)` : ""}.
-              {" "}Ein deutlicher Hinweis, keine Gewissheit — ein Bewerter, wenige Wochen.
-            </p>
-          </div>
-        )}
+        <AchsenBlock trend={pegel} titel="Pegel-Sauberkeit"
+                     was="Median des Pegelsprungs" />
+        <AchsenBlock trend={profile.jitterTrend} titel="Beat-Genauigkeit"
+                     was="Median des Beat-Jitters" />
 
         {!profile.enoughData && (
           <p className="text-xs text-muted-foreground">

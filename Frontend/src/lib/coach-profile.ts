@@ -64,6 +64,24 @@ export interface LoudnessTrend {
   currentSharePct: number | null;
   deltaSharePct: number | null;
   thresholdDb?: number;
+  /** Einheit der Zahlen: "dB" beim Pegelsprung, "ms" beim Beat-Jitter. */
+  unit?: string;
+  /** Welche Groesse hier gemessen wird. */
+  metric?: string;
+  /** Rangkorrelation der GANZEN Reihe gegen die Reihenfolge.
+   *
+   *  Der Grund, warum es dieses Feld gibt: `delta` vergleicht nur die
+   *  letzten drei Aufnahmen mit den drei davor, und das taeuscht in beide
+   *  Richtungen. Im Bestand vom 27.08.2026 meldet der Beat-Jitter
+   *  delta = -3,8 ms bei einer Korrelation von -0,004 (also gar keine
+   *  Entwicklung), und der Pegelsprung delta = 0,0 bei -0,73 (also sehr
+   *  wohl eine). Wer nur delta anzeigt, zeigt einmal Fortschritt, wo keiner
+   *  ist, und einmal keinen, wo welcher ist. */
+  rankCorrelation?: number | null;
+  /** Bewegt sich die Groesse ueber die Aufnahmen ueberhaupt in eine
+   *  Richtung? Ist das false, darf KEIN Pfeil erscheinen - "keine
+   *  Veraenderung" und "keine Entwicklung erkennbar" sind zweierlei. */
+  developmentVisible?: boolean;
 }
 
 export interface CoachProfile {
@@ -84,6 +102,12 @@ export interface CoachProfile {
    *  nur der Pegelsprung. Siehe profile.pegel_zeitreihe. */
   loudnessSeries?: LoudnessPoint[];
   loudnessTrend?: LoudnessTrend;
+  /** Zweite Achse seit dem 27.08.2026: Beat-Jitter in ms. Ueber Sebastians
+   *  14 eigene Aufnahmen FLACH (r = -0,004) - die Achse gibt es, eine
+   *  Entwicklung zeigt sie nicht. Steht trotzdem da: eine ehrliche Null
+   *  ist ein Ergebnis. */
+  jitterSeries?: LoudnessPoint[];
+  jitterTrend?: LoudnessTrend;
   patterns: CoachPattern[];
   best: CoachHighlight | null;
   worst: CoachHighlight | null;
@@ -101,4 +125,23 @@ export async function fetchCoachProfile(lang: "de" | "en" = "de"): Promise<Coach
   } catch {
     return null;
   }
+}
+
+/** Darf neben einer Achse ein Fortschritts-Pfeil stehen?
+ *
+ *  Die Regel steht hier und nicht in der Komponente, weil sie eine Aussage
+ *  über die Messung ist und keine über das Layout: ein Pfeil behauptet eine
+ *  Richtung, und die gibt es nur, wenn sich die GANZE Reihe in eine bewegt.
+ *
+ *  `delta` allein reicht nicht. Es vergleicht die letzten drei Aufnahmen mit
+ *  den drei davor und täuscht in beide Richtungen — im Bestand vom
+ *  27.08.2026 meldet der Beat-Jitter delta = −3,8 ms bei einer
+ *  Rangkorrelation von −0,004 (kein Fortschritt), der Pegelsprung delta = 0,0
+ *  bei −0,73 (sehr wohl einer).
+ */
+export function zeigtPfeil(trend?: LoudnessTrend | null): boolean {
+  if (!trend) return false;
+  return trend.developmentVisible === true
+    && trend.delta != null
+    && trend.delta !== 0;
 }
