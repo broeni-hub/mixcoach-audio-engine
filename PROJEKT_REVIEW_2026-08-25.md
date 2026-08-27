@@ -442,3 +442,52 @@ einen eigenen Eingang und steht als solcher in `nicht_gemessen.py`
 
 344 Backend-Tests grün (vorher 330), 68 Frontend-Tests (66), `tsc` 0 Fehler,
 Referenzmetrik reproduziert.
+
+---
+
+## 14 · Nachtrag 27.08.2026 — die Engine ist nicht mehr offen
+
+Der Befund aus Abschnitt 5h ist behoben. Er stand in keinem Projektdokument
+und in keiner Roadmap; Teil 3 („Online gehen") nannte Hosting, Speicher,
+Konten und DSGVO — nicht, dass die Engine selbst niemanden fragt.
+
+**Nachgeprüft, weil ein Grep keine Zählung ist:** kein `Depends`, kein
+`HTTPBearer`, kein `OAuth2`, kein `Security(`, keine Auth-Middleware
+irgendwo in `app/`. 25 Endpoints, einer davon `DELETE /analysis/{id}`.
+
+**Was jetzt steht** (`app/auth.py`):
+
+| | |
+|---|---|
+| `MIXCOACH_AUTH=aus` | Vorgabe. Lokaler Betrieb wie bisher — 344 bestehende Tests unverändert grün. |
+| `MIXCOACH_AUTH=an` | Jeder Endpoint außer vier verlangt ein Supabase-JWT. Asymmetrisch über JWKS (**kein neues Geheimnis nötig**, nur `SUPABASE_URL`) oder HS256. |
+| CORS | `*` → die localhost-Adressen, per `MIXCOACH_CORS_ORIGINS` überschreibbar. |
+| Sichtbarkeit | `/health` nennt die Betriebsart, der Start schreibt sie ins Terminal, Selbsttest Abschnitt 9. |
+
+**Die Entscheidung, die dabei gegen den Bestand fiel:** In `main.py` stand,
+der Relabel- und der Übungs-Router gehörten bei F2 „in dieselbe Ausnahme".
+Sie bekommen **keine**. Beide zeigen echte Analysen — gehostet könnte sonst
+jeder `/relabel/<id>` öffnen und fremde Sets ansehen. Bei `aus` laufen sie
+wie bisher, bei `an` sind sie zu. Ein Test hält das fest.
+
+**Die Eigenschaft, auf die es ankommt:** Die Prüfung hängt an der ganzen App,
+nicht an einzelnen Endpoints — ein neu hinzugefügter Endpoint ist damit von
+selbst geschützt. Auch dafür gibt es einen Test, der einen frischen Endpoint
+registriert und 401 erwartet.
+
+**Vorgeführt, nicht nur getestet:**
+
+```
+aus:  /health 200   /analysis 200   /coach/profile 200
+an:   /health 200   /analysis 401   /analysis/<id> 401
+      /relabel/<id> 401   DELETE /analysis/<id> 401
+```
+
+**Was das noch nicht ist:** Das Frontend schickt keinen Token an die Engine.
+Solange das so ist, kann `MIXCOACH_AUTH=an` nicht in den Alltagsbetrieb —
+es ist der Schalter, der **vor** dem Hosten umgelegt wird, und dann muss das
+Frontend im selben Zug nachziehen. Das ist der zweite Teil von F2 und der
+nächste Schritt auf dem Weg zur Beta.
+
+360 Backend-Tests grün (vorher 344), 68 Frontend-Tests, `tsc` 0 Fehler,
+Referenzmetrik reproduziert.

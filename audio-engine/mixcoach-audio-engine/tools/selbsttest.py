@@ -498,6 +498,50 @@ def pruefe_bedingung3() -> None:
         sag(OK, "Angezeigter Trend passt zum Gesamtverlauf", detail)
 
 
+# --------------------------------------------------------------------------
+def pruefe_zugang() -> None:
+    """Wer darf an die Engine?
+
+    Bis zum 27.08.2026 gab es darauf keine Antwort: kein Depends, keine
+    Auth-Middleware, CORS auf "*", 25 Endpoints - einer davon
+    DELETE /analysis/{id}. Lokal folgenlos, weil MixCoach-Start-Mac.command
+    an 127.0.0.1 bindet. Genau deshalb ist es nie aufgefallen; der Befund
+    stand in keinem Projektdokument, bis er beim Review vom 25.08. auffiel.
+    """
+    abschnitt("9 - Zugang zur Engine")
+
+    from app.auth import OFFENE_PFADE, betriebsart, cors_urspruenge
+
+    art = betriebsart()
+    if art == "an":
+        fehlt = [n for n in ("SUPABASE_URL",) if not os.getenv(n)]
+        if fehlt:
+            sag(FEHLT, "Zugangskontrolle AN, aber nicht pruefbar",
+                f"es fehlt: {', '.join(fehlt)}",
+                "Die Engine weist dann ALLES mit 503 ab - richtig, aber die "
+                "App ist damit tot. Variable setzen oder MIXCOACH_AUTH "
+                "zuruecknehmen.")
+        else:
+            sag(OK, "Zugangskontrolle ist AN",
+                f"jeder Endpoint ausser {sorted(OFFENE_PFADE)} verlangt ein "
+                f"Supabase-JWT")
+    else:
+        sag(WARN, "Zugangskontrolle ist AUS",
+            "MIXCOACH_AUTH ist nicht 'an' - jeder, der den Port erreicht, "
+            "kann jede Analyse lesen und loeschen",
+            "Fuer den lokalen Betrieb an 127.0.0.1 ist das die Vorgabe und "
+            "in Ordnung. VOR dem Hosten MIXCOACH_AUTH=an setzen - und dann "
+            "das Frontend nachziehen, sonst sperrt es den Nutzer aus.")
+
+    urspruenge = cors_urspruenge()
+    if "*" in urspruenge:
+        sag(FEHLT, "CORS steht auf *",
+            "jede Website darf im Namen des Nutzers auf die Engine zugreifen")
+    else:
+        sag(OK, "CORS ist eingegrenzt",
+            f"{len(urspruenge)} Herkuenfte, u.a. {urspruenge[0]}")
+
+
 def main() -> int:
     print()
     print("MixCoach - Selbsttest")
@@ -506,7 +550,8 @@ def main() -> int:
 
     for pruefung in (pruefe_datenstamm, pruefe_modell, pruefe_library,
                      pruefe_stems, pruefe_messwerte, pruefe_vergleichbarkeit,
-                     pruefe_cloud, pruefe_bedingung1, pruefe_bedingung3):
+                     pruefe_cloud, pruefe_bedingung1, pruefe_bedingung3,
+                     pruefe_zugang):
         try:
             pruefung()
         except Exception as exc:

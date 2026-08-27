@@ -4,11 +4,13 @@ import shutil
 import tempfile
 from pathlib import Path
 
-from fastapi import FastAPI, File, Header, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response, StreamingResponse
 
 from app.api.analysis_mapper import map_set_analysis_to_frontend_result
+from app.auth import (betriebsart as auth_betriebsart,
+                      cors_urspruenge, nutzer, startmeldung)
 from app.audio.loader import load_audio_file
 from app.audio.set_analyzer import analyze_set
 from app.jobs import job_manager
@@ -17,15 +19,25 @@ APP_VERSION = "0.3.0"
 
 SUPPORTED_SUFFIXES = {".mp3", ".wav", ".aiff", ".aif", ".flac", ".m4a"}
 
-app = FastAPI(title="MixCoach Audio Engine", version=APP_VERSION)
+# Die Zugangskontrolle haengt an der GANZEN App, nicht an einzelnen
+# Endpoints. Damit ist ein neu hinzugefuegter Endpoint automatisch
+# geschuetzt; eine Liste, die man je Endpoint pflegen muss, laeuft frueher
+# oder spaeter auseinander. Welche Pfade offen bleiben, steht in
+# app/auth.py (OFFENE_PFADE), und die Betriebsart in MIXCOACH_AUTH.
+app = FastAPI(title="MixCoach Audio Engine", version=APP_VERSION,
+              dependencies=[Depends(nutzer)])
 
+# Bis zum 27.08.2026 stand hier allow_origins=["*"]. Fuer eine Engine an
+# 127.0.0.1 folgenlos, fuer eine gehostete nicht.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_urspruenge(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+print(startmeldung(), flush=True)
 
 # Zweite, blinde Labelrunde (K1) - eigener Router, eigene Seite, damit die
 # bestehenden Endpoints und Frontend-Seiten unberuehrt bleiben. Siehe
@@ -35,9 +47,14 @@ from app.api.relabel import router as relabel_router  # noqa: E402
 app.include_router(relabel_router)
 
 # Blinder Vergleich alte Vorlage / belegte Uebung (J7) - dieselbe Bauart und
-# derselbe Grund wie oben. Ebenfalls ein lokales Messwerkzeug ohne Sitzung:
-# bringt F2 die Auth-Pflicht, gehoert dieser Router in dieselbe Ausnahme wie
-# der Relabel-Router.
+# derselbe Grund wie oben.
+#
+# NACHTRAG 27.08.2026: Hier stand, dieser Router gehoere bei F2 "in dieselbe
+# Ausnahme wie der Relabel-Router". Er bekommt KEINE Ausnahme, und der
+# Relabel-Router auch nicht. Beide zeigen echte Analysen; gehostet koennte
+# sonst jeder /relabel/<id> oeffnen und fremde Sets ansehen. Sie sind lokale
+# Werkzeuge - bei MIXCOACH_AUTH=aus (lokaler Betrieb) laufen sie wie bisher,
+# bei =an (gehostet) sind sie zu. Genau so soll es sein.
 from app.api.uebungen_bewertung import router as uebungen_bewertung_router  # noqa: E402
 
 app.include_router(uebungen_bewertung_router)
@@ -49,6 +66,11 @@ def health():
         "status": "ok",
         "service": "mixcoach-audio-engine",
         "version": APP_VERSION,
+        # Die Betriebsart gehoert nach aussen. Am 18.08. hat eine Anmeldung,
+        # deren Zustand niemand sehen konnte, einen halben Nachmittag
+        # gekostet - ein Zustand, den man nicht abfragen kann, ist einer,
+        # ueber den man raet.
+        "auth": auth_betriebsart(),
     }
 
 

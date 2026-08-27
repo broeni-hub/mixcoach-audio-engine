@@ -155,6 +155,19 @@ dabei herauskamen, sind am 17.08. entschieden — `daten/ground_truth/
 KONFLIKTE.md` führt „Offen: 0". Die Variable bleibt trotzdem Pflicht: ohne sie
 entsteht derselbe Doppelstamm von vorn.
 
+**Seit dem 27.08.2026 hat die Engine eine Zugangskontrolle** —
+`app/auth.py`, gesteuert über `MIXCOACH_AUTH`:
+
+| Wert | Bedeutung |
+|---|---|
+| *nicht gesetzt* / `aus` | **Vorgabe.** Keine Prüfung, nur für den lokalen Betrieb an 127.0.0.1. Das Frontend schickt heute keinen Token — wer scharfstellt, ohne es nachzuziehen, sperrt sich aus. |
+| `an` | Jeder Endpoint außer `/health`, `/docs`, `/openapi.json`, `/redoc` verlangt ein gültiges Supabase-JWT. Braucht `SUPABASE_URL` (asymmetrisch, über JWKS) oder `SUPABASE_JWT_SECRET` (HS256). |
+
+`/health` nennt die Betriebsart, der Start schreibt sie ins Terminal, und der
+Selbsttest hat einen eigenen Abschnitt dafür. **Kein versteckter Schalter** —
+das ist die Lehre aus der Anmeldung vom 18.08. CORS steht nicht mehr auf `*`,
+sondern auf den localhost-Adressen; `MIXCOACH_CORS_ORIGINS` überschreibt sie.
+
 Details und offene Blocker: `SETUP_MACOS.md`.
 
 ## Zwei Eigenheiten, die man kennen muss
@@ -290,7 +303,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 344 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 360 Tests, alle grün
 ```
 
 Dazu 68 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
