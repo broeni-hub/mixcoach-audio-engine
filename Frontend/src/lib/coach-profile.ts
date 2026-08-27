@@ -67,8 +67,14 @@ export interface LoudnessTrend {
 }
 
 export interface CoachProfile {
+  /** Eigene AUFNAHMEN, nicht Reports - und ohne fremde Sets. Bis zum
+   *  27.08.2026 stand hier die Zahl der Reports: "56 Sets" bei 24
+   *  Aufnahmen, davon 6 fremde. REC001 allein lag elfmal vor. */
   setsAnalyzed: number;
   transitionsMeasured: number;
+  /** Wie viele fremde Sets nicht mitgezaehlt wurden - eine stille Auswahl
+   *  ist eine, ueber die niemand nachfragen kann. */
+  excludedForeignRecordings?: number;
   timeline: Array<Record<string, unknown>>;
   trends: Record<string, CoachTrend>;
   /** Pegelsprung ueber die Zeit - Spearman -0,339 gegen das menschliche

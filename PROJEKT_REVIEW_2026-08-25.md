@@ -527,3 +527,49 @@ ist beides nur je für sich belegt. Das ist ein Test, den Sebastian in zwei
 Minuten fahren kann, sobald er angemeldet ist.
 
 360 Backend-Tests, **74** Frontend-Tests (vorher 68), `tsc` 0 Fehler.
+
+---
+
+## 16 · Nachtrag 27.08.2026 — das Profil sprach über fremdes Handwerk
+
+Befund 5e war größer als dort beschrieben. Nicht nur „bester Übergang" zog
+aus allen Reports — **die Übungen und die Muster auch**, und das Abzeichen
+zählte Reports statt Aufnahmen.
+
+Was in der App stand, unter Überschriften, die das Gegenteil versprechen:
+
+| Überschrift in `CoachProfilePanel.tsx` | was darunter stand |
+|---|---|
+| „Dein bester Übergang" | `Dixon WE2 Tomorrowland 2025.mp3` (−0,0 dB) |
+| „**Deine Übungen (aus deinen eigenen Sets)**" | „Aus 'RÜFÜS DU SOL – Mayan Warrior': mixe dieselben Tracks erneut" |
+| „56 Sets · 379 Übergänge gemessen" | 24 Aufnahmen, davon 6 fremde; REC001 allein elfmal analysiert |
+| „Viele harmonisch riskante Key-Wechsel: 230 von 379" | eine Aussage über Sebastians Handwerk, gerechnet auch aus Dixon, Four Tet und RÜFÜS DU SOL |
+
+Zwei Fehler in einem: die Überschrift behauptet etwas Falsches, **und** die
+Übung ist nicht ausführbar — er hat diese Tracks nicht und stand bei diesem
+Set nicht am Mixer. `PRODUKTVISION.md` nennt als Kern von Punkt 3
+ausdrücklich „Übungen aus deinem eigenen Material".
+
+**Nach der Korrektur:**
+
+```
+bester        : MixCoach4.WAV   (0,0 dB)
+schlechtester : MixCoach5.WAV   (9,3 dB)
+Abzeichen     : 18 Sets · 106 Übergänge   (vorher 56 · 379)
+Übungen       : MixCoach5.WAV, Dec25.WAV, MixCoach1.WAV
+```
+
+**Das Muster dahinter ist das eigentliche Ergebnis.** `pegel_trend()` macht
+die Trennung eigen/fremd seit dem 15.08. und meldet sie als
+`excludedForeign`. Die Referenzmetrik entdoppelt nach Aufnahme seit dem
+31.07. (`--mode dedup`), `pegel_zeitreihe` seit dem 15.08. **Vier weitere
+Stellen im selben Modul sind beiden Regeln nie gefolgt** — best, worst, die
+Übungen und die Muster. Eine Regel, die an einer Stelle gilt und drei Meter
+weiter nicht, ist keine Regel, sondern ein Zufall.
+
+Beide Ausschlüsse werden jetzt mitgeliefert (`excludedForeignReports`,
+`excludedForeignRecordings`), damit eine stille Auswahl nicht wieder
+entsteht. Sieben Tests halten es fest.
+
+367 Backend-Tests grün (vorher 360), 74 Frontend-Tests, `tsc` 0 Fehler,
+Referenzmetrik reproduziert.

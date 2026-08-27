@@ -279,6 +279,12 @@ Vergleich, eigene Bewertung für Blend, Drop und Bass-Swap).
 - **Befüllt ist nicht gemessen.** `phrase_alignment_score` steht in 100 % der
   Übergänge und sagt nichts (ρ −0,04). Wer die Regel auf „Feld ist nicht
   `None`" verkürzt, baut die Pseudo-Präzision, gegen die das Produkt antritt.
+- **Eigene Aufnahmen von fremden trennen, und nach Aufnahme entdoppeln.**
+  Beide Regeln gelten seit Juli/August, aber vier Stellen in
+  `app/coach/profile.py` sind ihnen bis zum 27.08. nicht gefolgt: `best`,
+  `worst`, die Übungen und die Muster. Ergebnis war „Dein bester Übergang:
+  Dixon WE2" und „56 Sets" bei 24 Aufnahmen. Wer eine neue Auswertung baut,
+  prüft beides — und liefert mit, was ausgeschlossen wurde.
 - **Übungen entstehen an zwei Stellen** — `app/coach/uebungen.py` (je Report)
   und `app/coach/profile.py` (über alle Sets, mit eigenem DE/EN-Text). Beide
   müssen nachgezogen werden, wer nur eine anfasst, baut eine Größe, die der
@@ -307,7 +313,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 360 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 367 Tests, alle grün
 ```
 
 Dazu 74 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc

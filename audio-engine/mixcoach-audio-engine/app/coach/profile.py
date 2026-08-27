@@ -456,8 +456,27 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
     # Die Struktur bleibt: drei Uebungen aus moeglichst verschiedenen Sets,
     # Tracknamen wo vorhanden, startSec/midSec zum Anspringen. Alle bisherigen
     # Felder bleiben ebenfalls stehen, damit die Seite nichts verliert.
+    # NUR EIGENE AUFNAHMEN, seit 27.08.2026.
+    #
+    # Bis dahin zog diese Funktion aus ALLEN Reports. Das Ergebnis stand so
+    # in der App: "Dein bester Uebergang: ... in 'Dixon WE2 Tomorrowland
+    # 2025.mp3'" und darunter, unter der Ueberschrift "Deine Uebungen (aus
+    # deinen eigenen Sets)", die Aufgabe "Aus 'RUEFUES DU SOL - Mayan
+    # Warrior': mixe dieselben Tracks erneut".
+    #
+    # Zwei Fehler in einem: die Ueberschrift behauptet etwas Falsches, und
+    # die Uebung ist nicht ausfuehrbar - er hat diese Tracks nicht und war
+    # bei diesem Set nicht am Mixer. Die Vision nennt als Kern von Punkt 3
+    # ausdruecklich "Uebungen aus deinem eigenen Material".
+    #
+    # pegel_trend() macht diese Trennung seit dem 15.08. (excludedForeign),
+    # best/worst und die Uebungen sind ihr nur nie gefolgt.
+    eigene = [r for r in results
+              if _selbst_aufgenommen(r.get("fileName") or r.get("id") or "")]
+    fremde_reports = len(results) - len(eigene)
+
     scored = []
-    for r in results:
+    for r in eigene:
         for t in _filtered_transitions(r):
             sprung = t.get("loudness_jump_db")
             if not isinstance(sprung, (int, float)):
@@ -478,7 +497,9 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
                 "feedback": t.get("feedback"),
             })
     if not scored:
-        return {"best": None, "worst": None, "exercises": []}
+        # Lieber nichts als ein fremdes Set als "deins" ausgeben.
+        return {"best": None, "worst": None, "exercises": [],
+                "excludedForeignReports": fremde_reports}
 
     # Am besten sitzt der Uebergang mit dem kleinsten Pegelsprung.
     best = min(scored, key=lambda s: abs(s["loudnessJumpDb"]))
@@ -562,13 +583,46 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
         if len(exercises) == 3:
             break
 
-    return {"best": best, "worst": worst_sorted[0], "exercises": exercises}
+    return {"best": best, "worst": worst_sorted[0], "exercises": exercises,
+            # Sichtbar machen, was weggelassen wurde - eine stille Auswahl
+            # ist eine, ueber die niemand nachfragen kann.
+            "excludedForeignReports": fremde_reports}
+
+
+def je_aufnahme(results: List[Dict]) -> List[Dict]:
+    """Ein Report je AUFNAHME - die neueste Analyse gewinnt.
+
+    Im Bestand liegen 56 Reports zu 24 Aufnahmen; REC001 allein elfmal. Wer
+    ueber Reports zaehlt, zaehlt REC001 elfmal. Denselben Fehler hat die
+    Referenzmetrik einmal gemacht (--mode dedup ist seit dem 31.07. Vorgabe)
+    und pegel_zeitreihe macht ihn seit dem 15.08. nicht mehr; die Kopfzahlen
+    des Profils und die Muster sind ihnen bis zum 27.08.2026 nicht gefolgt.
+    """
+    je: Dict[str, List[Dict]] = {}
+    for r in results:
+        je.setdefault(r.get("fileName") or r.get("id") or "", []).append(r)
+    raus = []
+    for laeufe in je.values():
+        laeufe.sort(key=lambda r: str(r.get("createdAt") or ""))
+        raus.append(laeufe[-1])
+    return raus
 
 
 def build_profile(lang: str = "de") -> Dict:
     results = _load_results()
     timeline = _skill_timeline(results)
-    all_transitions = [t for r in results for t in _filtered_transitions(r)]
+
+    # Eine Aufnahme, ein Eintrag - und Muster nur aus EIGENEN Aufnahmen.
+    #
+    # Bis zum 27.08.2026 stand im Abzeichen "56 Sets - 379 Uebergaenge
+    # gemessen", obwohl es 24 Aufnahmen sind. Und die Muster ("Viele
+    # harmonisch riskante Key-Wechsel: 230 von 379") waren Aussagen ueber
+    # SEBASTIANS Handwerk, gerechnet auch aus Dixon, Four Tet und RUEFUES DU
+    # SOL. Beides derselbe Fehler wie bei best/worst eine Funktion weiter.
+    aufnahmen = je_aufnahme(results)
+    eigene = [r for r in aufnahmen
+              if _selbst_aufgenommen(r.get("fileName") or r.get("id") or "")]
+    all_transitions = [t for r in eigene for t in _filtered_transitions(r)]
 
     # Die Pegel-Sauberkeit ist die einzige Groesse im Profil, die gegen
     # Sebastians Bewertungen belegt ist (Spearman -0,339 ueber 230
@@ -577,8 +631,11 @@ def build_profile(lang: str = "de") -> Dict:
     pegel = pegel_zeitreihe(results)
 
     return {
-        "setsAnalyzed": len(results),
+        # Aufnahmen, nicht Reports - und nur eigene, weil das Abzeichen
+        # unter der Ueberschrift "dein Profil" steht.
+        "setsAnalyzed": len(eigene),
         "transitionsMeasured": len(all_transitions),
+        "excludedForeignRecordings": len(aufnahmen) - len(eigene),
         "timeline": timeline,
         "trends": _trends(timeline),
         "loudnessSeries": pegel,
