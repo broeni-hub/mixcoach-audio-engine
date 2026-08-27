@@ -242,20 +242,89 @@ def _beobachtungen(analysis_id: str, t: Dict) -> List[Dict]:
     return raus
 
 
-# Welche Schwelle zu welcher Groesse gehoert - gebraucht fuer die
-# Reihenfolge, siehe baue().
-_SCHWELLEN = {
-    "loudness_jump_db": SCHWELLE_PEGELSPRUNG_DB,
-    "beat_jitter_ms": SCHWELLE_BEAT_JITTER_MS,
+# --- Die gemeinsame Auswahl- und Reihenfolge-Regel -------------------------
+#
+# Uebungen entstehen an ZWEI Stellen: hier je Report und in
+# app/coach/profile.py ueber alle Sets, mit eigenem DE/EN-Text. Die TEXTE
+# duerfen verschieden sein - "Pegel angleichen bei 17:30" und "Mixe diesen
+# Uebergang neu: A -> B" sagen dasselbe an verschiedene Leser.
+#
+# Was NICHT zweimal existieren darf, ist die Regel: welche Groesse zaehlt, ab
+# wann, mit welchem Ziel, und in welcher Reihenfolge. Am 20.08.2026 stand sie
+# zweimal da, und die zweite Groesse waere fast nur im Report gelandet und im
+# Coach-Panel - dem, was der Nutzer sieht - unsichtbar geblieben. Ab hier
+# steht sie einmal, und beide Seiten lesen sie.
+GROESSEN: Dict[str, Dict] = {
+    "loudness_jump_db": {
+        "schwelle": SCHWELLE_PEGELSPRUNG_DB,
+        "ziel": ZIEL_PEGELSPRUNG_DB,
+        # Der Pegelsprung hat eine Richtung (lauter/leiser), gemessen wird
+        # der Betrag. Der Jitter ist eine Streuung und hat keine.
+        "betrag": True,
+    },
+    "beat_jitter_ms": {
+        "schwelle": SCHWELLE_BEAT_JITTER_MS,
+        "ziel": ZIEL_BEAT_JITTER_MS,
+        "betrag": False,
+    },
 }
 
 
-def _ueberschreitung(uebung: Dict) -> float:
-    """Um welchen Faktor liegt der Wert ueber seiner Schwelle."""
-    schwelle = _SCHWELLEN.get(uebung.get("metric"))
-    if not schwelle:
+def wert_von(t: Dict, metrik: str) -> Optional[float]:
+    """Der Messwert eines Uebergangs, oder None."""
+    wert = (t or {}).get(metrik)
+    return float(wert) if isinstance(wert, (int, float)) else None
+
+
+def ueber_der_schwelle(t: Dict, metrik: str) -> bool:
+    wert = wert_von(t, metrik)
+    if wert is None:
+        return False
+    regel = GROESSEN[metrik]
+    return (abs(wert) if regel["betrag"] else wert) >= regel["schwelle"]
+
+
+def ueberschreitung(metrik: str, wert: float) -> float:
+    """Um welchen Faktor liegt der Wert ueber seiner eigenen Schwelle.
+
+    Der einzige Vergleich, der ueber Einheiten hinweg etwas heisst: 19 ms
+    und 4 dB sind keine vergleichbaren Zahlen, "1,3-fach ueber der Schwelle"
+    und "1,3-fach" schon.
+    """
+    regel = GROESSEN.get(metrik)
+    if not regel or not regel["schwelle"]:
         return 0.0
-    return abs(float(uebung.get("value") or 0.0)) / schwelle
+    return abs(float(wert)) / regel["schwelle"]
+
+
+def sortieren(eintraege: List, metrik_von, wert_von_eintrag,
+              vielfalt_zuerst: bool = False) -> List:
+    """Die schlimmsten zuerst, ueber Einheiten hinweg vergleichbar.
+
+    vielfalt_zuerst=True stellt zusaetzlich die schlimmste Stelle JE GROESSE
+    nach vorn. Das braucht nur, wer am Ende abschneidet: im Profil sind es
+    drei Plaetze, und der Pegelsprung reicht ueber alle Aufnahmen bis zum
+    3,4-fachen seiner Schwelle, der Jitter nur bis zum 1,75-fachen - ohne
+    diese Regel belegte der Pegelsprung alle drei. Wer die ganze Liste zeigt
+    (der Report), braucht sie nicht und faehrt besser mit "schlimmste zuerst".
+    """
+    geordnet = sorted(
+        eintraege,
+        key=lambda e: -ueberschreitung(metrik_von(e), wert_von_eintrag(e)))
+    if not vielfalt_zuerst:
+        return geordnet
+
+    zuerst, danach, gesehen = [], [], set()
+    for e in geordnet:
+        m = metrik_von(e)
+        (danach if m in gesehen else zuerst).append(e)
+        gesehen.add(m)
+    return zuerst + danach
+
+
+def _ueberschreitung(uebung: Dict) -> float:
+    """Wie ueberschreitung(), aber fuer eine fertige Uebung."""
+    return ueberschreitung(uebung.get("metric") or "", uebung.get("value") or 0.0)
 
 
 def baue(analysis_id: str, transitions: List[Dict]) -> Tuple[List[Dict], List[Dict]]:

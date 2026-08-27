@@ -573,3 +573,41 @@ entsteht. Sieben Tests halten es fest.
 
 367 Backend-Tests grün (vorher 360), 74 Frontend-Tests, `tsc` 0 Fehler,
 Referenzmetrik reproduziert.
+
+---
+
+## 17 · Nachtrag 27.08.2026 — die Übungsregel steht jetzt einmal
+
+Befund 5f abgeschlossen. Zusammengelegt wurde **nicht der Text** — „Pegel
+angleichen bei 17:30" und „Mixe diesen Übergang neu: A → B" sagen dasselbe
+an verschiedene Leser, und nur `profile.py` ist zweisprachig. Zusammengelegt
+wurde die **Regel**: welche Größe zählt, ab wann, mit welchem Ziel, in
+welcher Reihenfolge.
+
+Sie steht in `uebungen.py` als `GROESSEN` plus `ueber_der_schwelle()`,
+`ueberschreitung()` und `sortieren()`. `profile.py` liest sie und übersetzt
+nur seine eigenen Feldnamen. Das Ergebnis im Bestand ist unverändert — ein
+Umbau, der die Ausgabe verschiebt, wäre verdächtig.
+
+**Beim Schreiben des Tests kam ein zweiter Fehler heraus.** Die Auswahl im
+Profil hing komplett am Pegelsprung:
+
+```python
+sprung = t.get("loudness_jump_db")
+if not isinstance(sprung, (int, float)):
+    continue          # ← und damit war auch der Jitter raus
+```
+
+Ein Übergang **ohne** Pegelwert kam gar nicht erst in die Kandidatenliste und
+konnte deshalb nie eine Jitter-Übung ergeben — obwohl der Jitter seit dem
+20.08. eine eigene belegte Größe ist. Im Bestand fällt es nicht auf, weil
+beide Felder dieselben 86,7 % der Übergänge tragen. Es ist trotzdem falsch,
+und es wäre genau dann aufgeschlagen, wenn eine dritte Größe dazukommt, die
+seltener befüllt ist.
+
+`best`/`worst` bleiben bewusst am Pegelsprung — die Größe mit dem stärksten
+belegten Zusammenhang. Sie überspringen jetzt Übergänge ohne Pegelwert,
+statt daran zu scheitern.
+
+374 Backend-Tests grün (vorher 367), Referenzmetrik reproduziert,
+Selbsttest 14 ok / 7 WARN / 0 FEHLT.

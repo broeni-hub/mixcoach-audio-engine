@@ -286,9 +286,11 @@ Vergleich, eigene Bewertung für Blend, Drop und Bass-Swap).
   Dixon WE2" und „56 Sets" bei 24 Aufnahmen. Wer eine neue Auswertung baut,
   prüft beides — und liefert mit, was ausgeschlossen wurde.
 - **Übungen entstehen an zwei Stellen** — `app/coach/uebungen.py` (je Report)
-  und `app/coach/profile.py` (über alle Sets, mit eigenem DE/EN-Text). Beide
-  müssen nachgezogen werden, wer nur eine anfasst, baut eine Größe, die der
-  Nutzer nie sieht. Gefunden am 20.08., gehört zusammengelegt.
+  und `app/coach/profile.py` (über alle Sets, mit eigenem DE/EN-Text). Die
+  **Texte** dürfen verschieden sein; die **Regel** steht seit dem 27.08. nur
+  noch in `uebungen.py` (`GROESSEN`, `ueber_der_schwelle`, `ueberschreitung`,
+  `sortieren`), und `profile.py` liest sie. Wer eine dritte Größe aufnimmt,
+  trägt sie dort ein — nirgends sonst.
 - Kommentare und Doku auf Deutsch, wie im Bestand.
 
 ## Was gemessen erledigt ist — nicht nochmal aufmachen
@@ -313,7 +315,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 367 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 374 Tests, alle grün
 ```
 
 Dazu 74 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc

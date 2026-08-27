@@ -20,9 +20,9 @@ from app.jobs.job_manager import RESULTS_DIR
 from app.jobs import feedback_store
 # Eine Quelle fuer Schwelle und Ziel - sonst mahnt der Report bei 3 dB und
 # das Profil bei einem anderen Wert (siehe app/coach/uebungen.py).
-from app.coach.uebungen import (SCHWELLE_BEAT_JITTER_MS,
-                               SCHWELLE_PEGELSPRUNG_DB,
-                               ZIEL_BEAT_JITTER_MS, ZIEL_PEGELSPRUNG_DB)
+from app.coach.uebungen import (GROESSEN, SCHWELLE_PEGELSPRUNG_DB,
+                               ZIEL_BEAT_JITTER_MS, ZIEL_PEGELSPRUNG_DB,
+                               sortieren, ueber_der_schwelle)
 # Nur vergleichbare Reports duerfen in eine Verlaufskurve - siehe
 # pegel_zeitreihe(). Zwei Zahlen aus verschiedenen Rechenvorschriften
 # nebeneinander zu zeichnen ist genau der Fehler, gegen den das Modul steht.
@@ -443,6 +443,17 @@ def _transition_name(t: Dict, lang: str = "de") -> str:
     return TEXTS.get(lang, TEXTS["de"])["tname"].format(index=t.get("index"))
 
 
+def _als_uebergang(eintrag: Dict) -> Dict:
+    """Ein scored-Eintrag in der Feldsprache eines Uebergangs.
+
+    Die gemeinsame Regel in uebungen.py liest die Rohfelder
+    (loudness_jump_db, beat_jitter_ms); hier heissen sie seit jeher anders.
+    Statt die Regel zu verdoppeln, wird der Eintrag uebersetzt.
+    """
+    return {"loudness_jump_db": eintrag.get("loudnessJumpDb"),
+            "beat_jitter_ms": eintrag.get("beatJitterMs")}
+
+
 def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
     T = TEXTS.get(lang, TEXTS["de"])
 
@@ -479,9 +490,19 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
     for r in eigene:
         for t in _filtered_transitions(r):
             sprung = t.get("loudness_jump_db")
-            if not isinstance(sprung, (int, float)):
-                continue
             jitter = t.get("beat_jitter_ms")
+            # Seit dem 27.08.2026 reicht EINE der beiden Groessen.
+            #
+            # Vorher hing die ganze Auswahl am Pegelsprung: ein Uebergang
+            # ohne Pegelwert kam gar nicht erst in die Liste und konnte
+            # deshalb auch keine Jitter-Uebung ergeben - obwohl der Jitter
+            # eine eigene belegte Groesse ist. Im Bestand faellt es kaum
+            # auf, weil beide Felder dieselben 86,7 % der Uebergaenge
+            # tragen; es ist trotzdem falsch, und ein Test faengt es jetzt.
+            hat_pegel = isinstance(sprung, (int, float))
+            hat_jitter = isinstance(jitter, (int, float))
+            if not hat_pegel and not hat_jitter:
+                continue
             scored.append({
                 "analysisId": r.get("id"),
                 "fileName": r.get("fileName"),
@@ -491,9 +512,8 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
                 "name": _transition_name(t, lang),
                 "quality": t.get("quality_score"),
                 "phraseBeatsOff": t.get("phrase_beats_off"),
-                "loudnessJumpDb": round(float(sprung), 2),
-                "beatJitterMs": (round(float(jitter), 2)
-                                 if isinstance(jitter, (int, float)) else None),
+                "loudnessJumpDb": round(float(sprung), 2) if hat_pegel else None,
+                "beatJitterMs": round(float(jitter), 2) if hat_jitter else None,
                 "feedback": t.get("feedback"),
             })
     if not scored:
@@ -502,44 +522,39 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
                 "excludedForeignReports": fremde_reports}
 
     # Am besten sitzt der Uebergang mit dem kleinsten Pegelsprung.
-    best = min(scored, key=lambda s: abs(s["loudnessJumpDb"]))
-    worst_sorted = sorted(scored, key=lambda s: -abs(s["loudnessJumpDb"]))
+    # best/worst sind seit dem 14.08.2026 ueber den Pegelsprung definiert -
+    # die Groesse mit dem staerksten belegten Zusammenhang zum menschlichen
+    # Urteil. Uebergaenge ohne Pegelwert koennen hier deshalb nicht mitreden,
+    # auch wenn sie inzwischen ueber den Jitter eine Uebung ergeben duerfen.
+    mit_pegel = [s for s in scored if s["loudnessJumpDb"] is not None]
+    best = min(mit_pegel, key=lambda s: abs(s["loudnessJumpDb"])) if mit_pegel else None
+    worst_sorted = sorted(mit_pegel, key=lambda s: -abs(s["loudnessJumpDb"]))
 
-    # Seit dem 20.08.2026 gibt es zwei belegte Groessen. Ein Uebergang kann
-    # deshalb zwei Anlaesse haben, und die beiden muessen vergleichbar
-    # gereiht werden: 26 ms und 9 dB sind keine vergleichbaren Zahlen.
-    # Verglichen wird - wie in app/coach/uebungen.py - wie weit ein Wert
-    # seine EIGENE Schwelle ueberschreitet.
-    kandidaten = []
-    for s in scored:
-        betrag = abs(s["loudnessJumpDb"])
-        if betrag >= SCHWELLE_PEGELSPRUNG_DB:
-            kandidaten.append((betrag / SCHWELLE_PEGELSPRUNG_DB, "loudness_jump_db", s))
-        jitter = s.get("beatJitterMs")
-        if isinstance(jitter, (int, float)) and jitter >= SCHWELLE_BEAT_JITTER_MS:
-            kandidaten.append((jitter / SCHWELLE_BEAT_JITTER_MS, "beat_jitter_ms", s))
-    kandidaten.sort(key=lambda k: -k[0])
-
-    # REIHENFOLGE, zweite Regel: erst die schlimmste Stelle JE GROESSE, dann
-    # auffuellen. Ohne diese Regel bliebe die zweite Groesse unsichtbar - der
-    # Pegelsprung reicht ueber alle Aufnahmen bis zum 3,4-fachen seiner
-    # Schwelle, der Jitter nur bis zum 1,75-fachen, und damit belegt der
-    # Pegelsprung alle drei Plaetze. Das waere kein Befund ueber den DJ,
-    # sondern einer ueber die beiden Verteilungen: gemessen an ihrer eigenen
-    # Spanne ist ein Jitter von 26 ms genauso der schlechteste Wert wie ein
-    # Sprung von 10 dB. Dieselbe Ueberlegung wie bei used_sets, eine Ebene
-    # hoeher - Vielfalt schlaegt die nackte Rangzahl.
-    zuerst, danach, gesehen = [], [], set()
-    for eintrag in kandidaten:
-        if eintrag[1] in gesehen:
-            danach.append(eintrag)
-        else:
-            gesehen.add(eintrag[1])
-            zuerst.append(eintrag)
+    # Auswahl und Reihenfolge kommen aus app/coach/uebungen.py - dort steht
+    # die Regel EINMAL, hier steht nur der Text. Bis zum 27.08.2026 war die
+    # Regel an beiden Stellen ausgeschrieben, und das ist genau das Muster,
+    # an dem die zweite Groesse am 20.08. beinahe unsichtbar geblieben waere.
+    #
+    # vielfalt_zuerst=True, weil hier nach drei Eintraegen abgeschnitten
+    # wird: sonst belegt der Pegelsprung alle drei Plaetze (er reicht bis zum
+    # 3,4-fachen seiner Schwelle, der Jitter nur bis zum 1,75-fachen), und
+    # das waere kein Befund ueber den DJ, sondern einer ueber die beiden
+    # Verteilungen. Der Report zeigt die ganze Liste und braucht das nicht.
+    kandidaten = [
+        (metrik, eintrag)
+        for eintrag in scored
+        for metrik in GROESSEN
+        if ueber_der_schwelle(_als_uebergang(eintrag), metrik)
+    ]
+    kandidaten = sortieren(
+        kandidaten,
+        metrik_von=lambda k: k[0],
+        wert_von_eintrag=lambda k: _als_uebergang(k[1])[k[0]],
+        vielfalt_zuerst=True)
 
     exercises = []
     used_sets = set()
-    for _rang, metrik, s in zuerst + danach:
+    for metrik, s in kandidaten:
         # Unter der Schwelle gibt es nichts zu ueben - lieber weniger als
         # drei Uebungen als eine, die keinen Anlass hat. Das erledigt oben
         # schon der Aufbau der Kandidatenliste.
@@ -583,7 +598,9 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
         if len(exercises) == 3:
             break
 
-    return {"best": best, "worst": worst_sorted[0], "exercises": exercises,
+    return {"best": best,
+            "worst": worst_sorted[0] if worst_sorted else None,
+            "exercises": exercises,
             # Sichtbar machen, was weggelassen wurde - eine stille Auswahl
             # ist eine, ueber die niemand nachfragen kann.
             "excludedForeignReports": fremde_reports}
