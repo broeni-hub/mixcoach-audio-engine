@@ -1,6 +1,7 @@
 // Coach-Profil: Trends, Muster und Uebungen ueber alle Sets - vom Backend
 // aggregiert (inkl. Feedback-Filter: Fehlalarme zaehlen nicht).
 
+import { engineFetch } from "@/lib/api/engineFetch";
 import { getEngineBaseUrl } from "./api/remoteProvider";
 
 export interface CoachTrend {
@@ -88,7 +89,7 @@ export async function fetchCoachProfile(lang: "de" | "en" = "de"): Promise<Coach
   const base = getEngineBaseUrl();
   if (!base) return null;
   try {
-    const res = await fetch(`${base}/coach/profile?lang=${lang}`);
+    const res = await engineFetch(`${base}/coach/profile?lang=${lang}`);
     if (!res.ok) return null;
     return (await res.json()) as CoachProfile;
   } catch {

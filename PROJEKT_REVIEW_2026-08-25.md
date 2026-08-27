@@ -491,3 +491,39 @@ nächste Schritt auf dem Weg zur Beta.
 
 360 Backend-Tests grün (vorher 344), 68 Frontend-Tests, `tsc` 0 Fehler,
 Referenzmetrik reproduziert.
+
+---
+
+## 15 · Nachtrag 27.08.2026 — F2, zweiter Teil: das Frontend schickt den Token
+
+Ohne diesen Schritt bleibt `MIXCOACH_AUTH=an` ein Schalter, den niemand
+umlegen kann.
+
+**Ein Ort statt fünfzehn.** Die Engine-Aufrufe lagen als blanke `fetch()` in
+neun Dateien verstreut. Jetzt gehen alle über `src/lib/api/engineFetch.ts`,
+das die Supabase-Sitzung liest und `Authorization: Bearer …` anhängt. Ohne
+Sitzung wird ohne Header aufgerufen — bei `MIXCOACH_AUTH=aus`, der Vorgabe,
+läuft damit alles wie bisher. Dieselbe Überlegung wie auf der Engine-Seite:
+dort hängt die Prüfung an der ganzen App, hier der Token an einer Funktion.
+
+**Der Test, der den Quelltext liest, hat sofort etwas gefunden.** Ich hatte
+über `getEngineBaseUrl` gesucht und dreizehn Stellen umgestellt. Der Wächter
+meldete eine vierzehnte in einer Datei, die dabei gar nicht auftauchte:
+`src/services/audioEngineClient.ts` — und darin steckte der **Upload-Weg**,
+also der wichtigste Aufruf des Produkts. Eine Suche nach dem einen Bezeichner
+hätte ihn nie gefunden. Fünfzehn Aufrufe sind es am Ende.
+
+Das ist die dritte Wiederholung desselben Musters in diesem Review: eine
+Zählung über ein Stichwort ist keine Zählung.
+
+**Vorgeführt:** Engine und App gestartet, der `/health`-Ping der App läuft
+über `engineFetch` und kommt mit 200 an. Die Seite mit angemeldetem Nutzer
+konnte ich wieder nicht öffnen — dafür bräuchte ich ein Passwort.
+
+**Was noch fehlt, bevor `an` in den Betrieb kann:** ein Durchlauf mit
+angemeldetem Nutzer gegen eine Engine mit `MIXCOACH_AUTH=an`. Erst der zeigt,
+ob das Supabase-Token die Prüfung in `app/auth.py` wirklich besteht — bisher
+ist beides nur je für sich belegt. Das ist ein Test, den Sebastian in zwei
+Minuten fahren kann, sobald er angemeldet ist.
+
+360 Backend-Tests, **74** Frontend-Tests (vorher 68), `tsc` 0 Fehler.

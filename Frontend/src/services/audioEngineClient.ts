@@ -12,6 +12,7 @@
 // back to demo analysis. This module never throws on missing config — it
 // reports `isConfigured() === false` and lets the caller decide.
 
+import { engineFetch } from "@/lib/api/engineFetch";
 import type { AnalysisResult } from "@/lib/analysis";
 
 const URL_OVERRIDE_KEY = "mixcoach.audioEngineUrl";
@@ -139,7 +140,7 @@ class AudioEngineClient {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const res = await fetch(`${url}/health`, { method: "GET", signal: controller.signal });
+      const res = await engineFetch(`${url}/health`, { method: "GET", signal: controller.signal });
       if (!res.ok) throw new AudioEngineError(`Backend returned ${res.status}`, undefined, res.status);
       const s: ConnectionState = { status: "ok", checkedAt: Date.now(), error: null, url };
       writeStoredStatus(s);
@@ -215,7 +216,7 @@ class AudioEngineClient {
   }
 
   private async fetchUpload(url: string, form: FormData, signal?: AbortSignal): Promise<unknown> {
-    const res = await fetch(url, { method: "POST", body: form, signal });
+    const res = await engineFetch(url, { method: "POST", body: form, signal });
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       throw new AudioEngineError(`Backend rejected upload (${res.status}) ${text}`.trim(), undefined, res.status);

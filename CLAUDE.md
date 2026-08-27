@@ -164,7 +164,11 @@ entsteht derselbe Doppelstamm von vorn.
 | `an` | Jeder Endpoint außer `/health`, `/docs`, `/openapi.json`, `/redoc` verlangt ein gültiges Supabase-JWT. Braucht `SUPABASE_URL` (asymmetrisch, über JWKS) oder `SUPABASE_JWT_SECRET` (HS256). |
 
 `/health` nennt die Betriebsart, der Start schreibt sie ins Terminal, und der
-Selbsttest hat einen eigenen Abschnitt dafür. **Kein versteckter Schalter** —
+Selbsttest hat einen eigenen Abschnitt dafür. **Auf der Frontend-Seite geht
+jeder Engine-Aufruf über `Frontend/src/lib/api/engineFetch.ts`** — dort hängt
+das Supabase-Token dran. Ein Test liest den Quelltext und schlägt an, wenn
+eine Stelle den Helfer umgeht; genau so wurde der Upload-Weg gefunden, den
+eine Suche nach `getEngineBaseUrl` nicht erfasst hatte. **Kein versteckter Schalter** —
 das ist die Lehre aus der Anmeldung vom 18.08. CORS steht nicht mehr auf `*`,
 sondern auf den localhost-Adressen; `MIXCOACH_CORS_ORIGINS` überschreibt sie.
 
@@ -306,7 +310,7 @@ cd audio-engine/mixcoach-audio-engine
 ../../.venv/bin/python -m pytest tests/ -q      # 360 Tests, alle grün
 ```
 
-Dazu 68 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
+Dazu 74 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
 --noEmit`, das seit dem 15.08. bei **0 Fehlern** steht.
 
 `tests/conftest.py` verhindert, dass Testläufe Analyse-JSONs im Datenstamm

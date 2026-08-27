@@ -10,6 +10,7 @@
 // or the backend is unreachable, callers fall back to the local provider
 // via `provider.ts`.
 
+import { engineFetch } from "./engineFetch";
 import type {
   AnalysisAPI,
   AnalysisJob,
@@ -163,7 +164,7 @@ async function fetchWithRetry(input: string, init: RequestInit, attempts = MAX_R
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
     try {
-      const res = await fetch(input, { ...init, signal: controller.signal });
+      const res = await engineFetch(input, { ...init, signal: controller.signal });
       clearTimeout(timer);
       // Retry on 5xx; surface 4xx immediately.
       if (res.status >= 500 && i < attempts) {
@@ -335,7 +336,7 @@ export async function pingBackend(baseUrl?: string, timeoutMs = 3000): Promise<b
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const res = await fetch(`${url}/health`, { method: "GET", signal: controller.signal });
+    const res = await engineFetch(`${url}/health`, { method: "GET", signal: controller.signal });
     return res.ok;
   } catch {
     return false;

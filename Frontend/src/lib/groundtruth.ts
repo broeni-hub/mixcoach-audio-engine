@@ -2,6 +2,7 @@
 // Uebergaenge direkt im Report. Jede Rueckmeldung landet im Backend
 // (ground_truth/) und verbessert die Erkennungs-Engine.
 
+import { engineFetch } from "@/lib/api/engineFetch";
 import { getEngineBaseUrl } from "./api/remoteProvider";
 
 export type Verdict = "correct" | "not_a_transition" | "timing_off";
@@ -19,7 +20,7 @@ export async function fetchFeedback(analysisId: string): Promise<FeedbackState |
   const url = base();
   if (!url) return null;
   try {
-    const res = await fetch(`${url}/analysis/${encodeURIComponent(analysisId)}/feedback`);
+    const res = await engineFetch(`${url}/analysis/${encodeURIComponent(analysisId)}/feedback`);
     if (!res.ok) return null;
     return (await res.json()) as FeedbackState;
   } catch {
@@ -37,7 +38,7 @@ export async function sendVerdict(
   const url = base();
   if (!url) return false;
   try {
-    const res = await fetch(`${url}/analysis/${encodeURIComponent(analysisId)}/feedback/verdict`, {
+    const res = await engineFetch(`${url}/analysis/${encodeURIComponent(analysisId)}/feedback/verdict`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ index, midSec, verdict, correctedSec: correctedSec ?? null }),
@@ -52,7 +53,7 @@ export async function sendMissed(analysisId: string, sec: number): Promise<boole
   const url = base();
   if (!url) return false;
   try {
-    const res = await fetch(`${url}/analysis/${encodeURIComponent(analysisId)}/feedback/missed`, {
+    const res = await engineFetch(`${url}/analysis/${encodeURIComponent(analysisId)}/feedback/missed`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sec }),
@@ -70,7 +71,7 @@ export async function requestRematch(analysisId: string): Promise<{ added: numbe
   const url = base();
   if (!url) return null;
   try {
-    const res = await fetch(`${url}/analysis/${encodeURIComponent(analysisId)}/rematch`, {
+    const res = await engineFetch(`${url}/analysis/${encodeURIComponent(analysisId)}/rematch`, {
       method: "POST",
     });
     if (!res.ok) return null;

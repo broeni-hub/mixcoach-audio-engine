@@ -1,3 +1,4 @@
+import { engineFetch } from "@/lib/api/engineFetch";
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,7 +20,7 @@ async function engineReachable(): Promise<boolean> {
   const base = getEngineBaseUrl();
   if (!base) return true; // keine lokale Engine erwartet -> Browser-Pfad ist ok
   try {
-    const res = await fetch(`${base}/health`, { signal: AbortSignal.timeout(4000) });
+    const res = await engineFetch(`${base}/health`, { signal: AbortSignal.timeout(4000) });
     return res.ok;
   } catch {
     return false;
