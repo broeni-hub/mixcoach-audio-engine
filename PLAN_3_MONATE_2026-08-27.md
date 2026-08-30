@@ -92,7 +92,7 @@ Produkt.
 Ziel: Ein „nein" von einem DJ soll ein „nein" zum **Produkt** sein, nicht zu
 einer falschen Zeitangabe.
 
-### A1 · Der Marker wird ein Fenster (2–3 Tage)
+### A1 · Der Marker wird ein Fenster — **gebaut am 27.08.**
 
 σ = 54,6 s ist zweimal gemessen und in drei Monaten nicht wegzuoptimieren.
 Die *Behauptung* lässt sich aber ehrlich machen:
@@ -106,14 +106,32 @@ keine Forschung.
 **Messgröße:** Anteil der menschlichen Korrekturen, die im angezeigten Fenster
 liegen. Ziel ≥ 75 %.
 
-### A2 · Betriebspunkt messen (1 Tag)
+### A2 · Betriebspunkt messen — **gelaufen am 27.08., Nullbefund**
 
-`min_p 0,6` ist darauf getrimmt, viel zu finden. Für den ersten Eindruck ist
-das falsch herum: **sechs richtige Marker schlagen zehn, von denen zwei auf
-nichts zeigen.** Precision gegen Recall neu abwägen — als Messung, nicht als
-Behauptung.
+`min_p 0,6` ist auf F1 getrimmt. Die Vermutung war: für den ersten Eindruck
+sind sechs richtige Marker besser als zehn, von denen zwei auf nichts zeigen.
+Gemessen mit `tools/eval/betriebspunkt.py` über 17 Sets, Toleranz ±105 s:
 
-**Messgröße:** Precision bei verschiedenen `min_p`. Entscheidung erst danach.
+| min_p | Marker | Precision | Recall |
+|---|---|---|---|
+| 0,40 | 212 | 0,605 | 0,770 |
+| **0,60** | 178 | **0,632** | 0,674 ← aktiv |
+| 0,70 | 88 | **0,612** | 0,304 |
+| 0,75 | 27 | 0,529 | 0,067 |
+| 0,80 | 0 | — | — |
+
+**Die Schwelle anzuheben kauft keine Precision.** Von 0,60 auf 0,70 halbiert
+sich der Recall, und die Precision wird sogar leicht schlechter. Die
+Fehlalarme sind nicht unsicher — das Modell ist bei ihnen selbstbewusst
+falsch. Über 0,78 gibt es gar keine Marker mehr.
+
+**Entscheidung: der Betriebspunkt bleibt bei 0,6.** Die Idee „weniger, aber
+richtigere Marker" ist gemessen tot und wird nicht wieder aufgemacht. Der
+erste Eindruck muss über A1 und A3 kommen.
+
+*Vorbehalt:* Toleranz ±105 s ist eine großzügige Latte — „Precision 0,63"
+heißt, 63 % der Marker liegen innerhalb von 105 s eines echten Übergangs.
+Die Rangfolge der Schwellen ändert das nicht.
 
 ### A3 · Tracknamen ohne Library (2–3 Tage)
 
@@ -123,6 +141,20 @@ der rekordbox-History. Die Engine ordnet sie den erkannten Wechseln zeitlich
 zu. Kein Upload von 300 Dateien, kein Fingerprinting.
 
 **Messgröße:** Anteil benannter Übergänge in einem fremden Set. Ziel ≥ 70 %.
+
+**Gebaut am 27.08.** `app/audio/tracklist.py` plus
+`MixCoach-Tracklist-Eintragen.command`. An einem echten fremden Set (Four Tet,
+13 Übergänge, 0 Namen) getestet: **0 % → 100 %**. Und mit einer Tracklist, wie
+ein DJ sie wirklich schreibt — Zeiten bis 25 s daneben, zwei Tracks mehr als
+Übergänge — **12 von 13 richtig**. Der eine Fehler liegt dort, wo zwei
+Übergänge nur 9 s auseinanderliegen.
+
+Zwei Wege, und sie sind verschieden viel wert: **mit Zeiten** robust auch bei
+übersehenen Übergängen; **nur Reihenfolge** nur, wenn n Tracks auf n−1
+Übergänge treffen — sonst wird **nichts** zugeordnet. Nach Position zu raten
+verschöbe alle folgenden Namen um eins, und dann stünde unter jedem Übergang
+ein falscher, aber selbstbewusster Name. Derselbe Fehler wie die
+Sekundenangabe, die A1 gerade ersetzt hat.
 
 ### A4 · Gegenprobe an eigenen Sets
 

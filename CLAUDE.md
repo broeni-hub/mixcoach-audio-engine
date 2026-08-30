@@ -329,6 +329,13 @@ Auswertung rechnet weiter wie bisher.
 - **Keine Synthetik im Training, kein Landmark-Vorfilter.** Beide gemessen
   verworfen, siehe `PROJEKTSTAND-CLAUDE.md` Abschnitt 4.
 
+- **Den Betriebspunkt anzuheben kauft keine Precision.** Gemessen am
+  27.08.2026 über 17 Sets (`tools/eval/betriebspunkt.py`): von `min_p` 0,60
+  auf 0,70 halbiert sich der Recall (0,674 → 0,304), die Precision sinkt
+  sogar leicht (0,632 → 0,612). Über 0,78 gibt es gar keine Marker mehr. Die
+  Fehlalarme sind nicht unsicher — das Modell ist bei ihnen selbstbewusst
+  falsch. **0,6 bleibt.**
+
 Wer eine dieser Fragen neu stellt, braucht einen neuen Eingang — nicht mehr
 Daten und keine andere Zielgröße.
 
@@ -336,7 +343,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 393 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 405 Tests, alle grün
 ```
 
 Dazu 79 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc
