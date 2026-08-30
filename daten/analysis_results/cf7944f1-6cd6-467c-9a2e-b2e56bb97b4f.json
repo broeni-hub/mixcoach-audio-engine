@@ -2097,7 +2097,13 @@
    "confidence": 0.3777,
    "beat_jitter_ms": 9.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 66.0,
+    "bisSec": 175.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -2152,7 +2158,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 6,
+ "reportRevision": 7,
  "observations": [
   {
    "text": "Bei 2:08: die Energie fällt um 63,0 % ab. Ob das stört, ist an deinen Bewertungen nicht ablesbar.",

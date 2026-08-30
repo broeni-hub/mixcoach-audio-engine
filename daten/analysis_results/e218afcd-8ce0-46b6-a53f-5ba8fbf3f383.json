@@ -28658,7 +28658,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 146.7,
+    "bisSec": 256.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -28700,7 +28706,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 276.0,
+    "bisSec": 386.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -28742,7 +28754,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 580.5,
+    "bisSec": 690.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -28784,7 +28802,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 665.2,
+    "bisSec": 775.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -28826,7 +28850,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 782.6,
+    "bisSec": 892.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -28868,7 +28898,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 879.4,
+    "bisSec": 989.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -28910,7 +28946,13 @@
    },
    "beat_jitter_ms": 5.85,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1192.3,
+    "bisSec": 1302.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -28952,7 +28994,13 @@
    },
    "beat_jitter_ms": 14.63,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1505.7,
+    "bisSec": 1615.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 9,
@@ -28994,7 +29042,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1610.6,
+    "bisSec": 1720.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 10,
@@ -29036,7 +29090,13 @@
    },
    "beat_jitter_ms": 7.32,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1801.7,
+    "bisSec": 1911.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 11,
@@ -29078,7 +29138,13 @@
    },
    "beat_jitter_ms": 16.09,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1955.7,
+    "bisSec": 2065.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 12,
@@ -29120,7 +29186,13 @@
    },
    "beat_jitter_ms": 16.09,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2207.3,
+    "bisSec": 2317.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 13,
@@ -29162,7 +29234,13 @@
    },
    "beat_jitter_ms": 16.09,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2437.1,
+    "bisSec": 2547.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 14,
@@ -29204,7 +29282,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2511.9,
+    "bisSec": 2621.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 15,
@@ -29246,7 +29330,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2593.6,
+    "bisSec": 2703.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 16,
@@ -29288,7 +29378,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2767.5,
+    "bisSec": 2877.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 17,
@@ -29330,7 +29426,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2845.9,
+    "bisSec": 2955.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 18,
@@ -29372,7 +29474,13 @@
    },
    "beat_jitter_ms": 10.24,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3074.6,
+    "bisSec": 3184.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 19,
@@ -29414,7 +29522,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3217.3,
+    "bisSec": 3327.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 20,
@@ -29456,7 +29570,13 @@
    },
    "beat_jitter_ms": 14.63,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3352.1,
+    "bisSec": 3462.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 21,
@@ -29498,7 +29618,13 @@
    },
    "beat_jitter_ms": 13.17,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3569.8,
+    "bisSec": 3679.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 22,
@@ -29540,7 +29666,13 @@
    },
    "beat_jitter_ms": 14.63,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3744.3,
+    "bisSec": 3854.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 23,
@@ -29582,7 +29714,13 @@
    },
    "beat_jitter_ms": 13.17,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4290.7,
+    "bisSec": 4400.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 24,
@@ -29624,7 +29762,13 @@
    },
    "beat_jitter_ms": 17.56,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4647.5,
+    "bisSec": 4757.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 25,
@@ -29666,7 +29810,13 @@
    },
    "beat_jitter_ms": 4.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4737.7,
+    "bisSec": 4847.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 26,
@@ -29708,7 +29858,13 @@
    },
    "beat_jitter_ms": 2.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4888.8,
+    "bisSec": 4998.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 27,
@@ -29750,7 +29906,13 @@
    },
    "beat_jitter_ms": 14.63,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5047.1,
+    "bisSec": 5157.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -29770,7 +29932,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 10:56: 6A → 11A, 5 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

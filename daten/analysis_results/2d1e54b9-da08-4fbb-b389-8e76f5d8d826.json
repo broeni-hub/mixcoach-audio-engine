@@ -2132,7 +2132,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 18.79,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 104.2,
+    "bisSec": 214.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -2171,7 +2177,13 @@
    "feedback_en": "Transition at 06:38 makes a distant key change (G Minor -> B Minor, Camelot 6A -> 10A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 13.66,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 254.2,
+    "bisSec": 364.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -2210,7 +2222,13 @@
    "feedback_en": "Transition at 09:19 makes a distant key change (B Minor -> A Minor, Camelot 10A -> 8A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 13.66,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 373.0,
+    "bisSec": 483.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -2249,7 +2267,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 10.25,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 762.4,
+    "bisSec": 872.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -2288,7 +2312,13 @@
    "feedback_en": "Transition at 16:55 makes a distant key change (E Minor -> F# Minor, Camelot 9A -> 11A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 20.5,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 926.5,
+    "bisSec": 1036.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -2327,7 +2357,13 @@
    "feedback_en": "Transition at 19:41 makes a distant key change (F# Minor -> C Minor, Camelot 11A -> 5A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 11.96,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 994.7,
+    "bisSec": 1104.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -2366,7 +2402,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 10.25,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1305.5,
+    "bisSec": 1415.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -2405,7 +2447,13 @@
    "feedback_en": "Transition at 28:07 makes a distant key change (C Minor -> G# Minor, Camelot 5A -> 1A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 11.96,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1528.2,
+    "bisSec": 1638.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "totalDurationSec": 1773,
@@ -2417,7 +2465,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 6:38: 6A → 10A, 4 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

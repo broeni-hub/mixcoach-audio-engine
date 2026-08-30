@@ -2073,7 +2073,13 @@
    "feedback_en": "Transition at 05:53 makes a distant key change (C# Minor -> A# Minor, Camelot 12A -> 3A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 272.8,
+    "bisSec": 382.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -2112,7 +2118,13 @@
    "feedback_en": "Transition at 08:28 makes a distant key change (A# Minor -> A# Major, Camelot 3A -> 6B) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 419.0,
+    "bisSec": 529.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -2151,7 +2163,13 @@
    "feedback_en": "Transition at 11:17 makes a distant key change (A# Major -> F Minor, Camelot 6B -> 4A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 603.4,
+    "bisSec": 713.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -2190,7 +2208,13 @@
    "feedback_en": "Transition at 15:10 makes a distant key change (F Minor -> D Minor, Camelot 4A -> 7A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 11.96,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 736.9,
+    "bisSec": 846.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -2229,7 +2253,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1094.3,
+    "bisSec": 1204.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -2268,7 +2298,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 18.79,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1411.8,
+    "bisSec": 1521.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "totalDurationSec": 1922,
@@ -2291,7 +2327,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 5:53: 12A → 3A, 3 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

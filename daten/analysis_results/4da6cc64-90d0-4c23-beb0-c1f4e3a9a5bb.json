@@ -5,7 +5,7 @@
  "mapperVersion": "honest-v2",
  "scoringVersion": 3,
  "scoringNote": "ab 13.08.2026 - erste Version, die ueberhaupt gestempelt wird. Inhaltlich wie 2; die Nummer existiert, damit kuenftige Aenderungen unterscheidbar sind.",
- "reportRevision": 4,
+ "reportRevision": 5,
  "bpm": 123,
  "key": "F# Minor",
  "camelot": "11A",
@@ -14565,7 +14565,13 @@
    "confidence": 0.7536,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 265.5,
+    "bisSec": 375.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -14610,7 +14616,13 @@
    "confidence": 0.6153,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 624.3,
+    "bisSec": 734.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -14655,7 +14667,13 @@
    "confidence": 0.5325,
    "beat_jitter_ms": 15.34,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1008.9,
+    "bisSec": 1118.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -14700,7 +14718,13 @@
    "confidence": 0.5325,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1238.1,
+    "bisSec": 1348.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -14745,7 +14769,13 @@
    "confidence": 0.6042,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1430.5,
+    "bisSec": 1540.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -14790,7 +14820,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1696.8,
+    "bisSec": 1806.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -14835,7 +14871,13 @@
    "confidence": 0.4666,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1802.3,
+    "bisSec": 1912.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -14880,7 +14922,13 @@
    "confidence": 0.4659,
    "beat_jitter_ms": 22.16,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2027.9,
+    "bisSec": 2137.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 9,
@@ -14925,7 +14973,13 @@
    "confidence": 0.713,
    "beat_jitter_ms": 17.05,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2188.5,
+    "bisSec": 2298.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 10,
@@ -14970,7 +15024,13 @@
    "confidence": 0.3785,
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2347.3,
+    "bisSec": 2457.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {

@@ -41,6 +41,7 @@ const FEEDBACK_TEXTS = {
     timingTitle: "Der Übergang ist echt, beginnt aber woanders: Steuere im Player die echte Startstelle an und klicke dann hier.",
     listen: "Anhören",
     from: "ab",
+    window: "Übergang zwischen",
   },
   en: {
     correctToast: "Thanks! Confirmed as a real transition.",
@@ -58,6 +59,7 @@ const FEEDBACK_TEXTS = {
     timingTitle: "The transition is real but starts elsewhere: seek to the true start in the player, then click here.",
     listen: "Listen",
     from: "from",
+    window: "transition between",
   },
 } as const;
 
@@ -451,7 +453,12 @@ export function SetTransitionsExplorer({ analysisId, totalDurationSec, transitio
                 <span className="font-bold">{t.quality_score}</span>
               </span>
               <span className="mt-1 text-[10px] font-mono text-muted-foreground/80 group-hover:text-foreground">
-                {fmt(t.start_sec ?? t.mid_sec)}
+                {/* Seit 27.08.2026 eine Spanne statt eines Punktes. Der Punkt
+                    traf die menschliche Korrektur in 5 % der Faelle auf 8 s
+                    genau - siehe app/audio/uebergangsfenster.py. */}
+                {t.window
+                  ? `${fmt(t.window.vonSec)}–${fmt(t.window.bisSec)}`
+                  : fmt(t.start_sec ?? t.mid_sec)}
               </span>
               <span className={`mt-0.5 h-3 w-px ${tone.dot}`} />
             </button>
@@ -489,7 +496,11 @@ export function SetTransitionsExplorer({ analysisId, totalDurationSec, transitio
                     </span>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono text-muted-foreground">{F.from} {fmt(t.start_sec ?? t.mid_sec)}</span>
+                        <span className="text-xs font-mono text-muted-foreground">
+                          {t.window
+                            ? `${F.window} ${fmt(t.window.vonSec)}–${fmt(t.window.bisSec)}`
+                            : `${F.from} ${fmt(t.start_sec ?? t.mid_sec)}`}
+                        </span>
                         <span className="text-sm font-semibold truncate">T{t.index} · {meta.label}</span>
                       </div>
                       <p className="text-xs text-muted-foreground truncate mt-0.5">{t.mainIssue}</p>

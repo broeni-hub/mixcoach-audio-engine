@@ -250,6 +250,27 @@ Bis zum 17.08.2026 stand hier `detect_transition_zones()` — ein 46-Zeiler in
 Fassung; sie ist nur differenzierter (geglättete Kurve, drei Fenster im
 Vergleich, eigene Bewertung für Blend, Drop und Bass-Swap).
 
+## Der Übergang ist ein Fenster, keine Sekunde
+
+Seit dem 27.08.2026 zeigt der Report eine Spanne statt eines Punktes —
+`app/audio/uebergangsfenster.py`, nachgemessen mit
+`tools/eval/uebergangsfenster.py`. Grund: der Punkt `mid_sec` trifft die
+menschliche Korrektur in **5 %** der Fälle auf 8 s genau, der Fehler liegt im
+Median bei 34 s. Für einen fremden DJ ist das der teuerste Fehler des
+Produkts — er klickt „anhören", hört mitten in einen Track und hat entschieden.
+
+σ lässt sich nicht wegoptimieren, die Behauptung schon. Zwei gemessene Werte
+tragen das Fenster:
+
+- **Anker ist `start_sec`, nicht `mid_sec`** (Median −7,1 s statt −28,3 s).
+  Passt zur Diagnose: die Engine findet das *Ende* des Blends, der Mensch
+  markiert den *Anfang*.
+- **Breite −60 s … +50 s**, das sind 110 s und **73 %** Abdeckung. Das
+  vorhandene Blend-Fenster (Median 34 s) enthält nur 32 % und taugt nicht.
+
+`mid_sec`, `start_sec` und `end_sec` bleiben unverändert — jede bestehende
+Auswertung rechnet weiter wie bisher.
+
 ## Arbeitsregeln
 
 - `app/audio/scoring/*` nicht anfassen (Composite-Rebuild).
@@ -315,7 +336,7 @@ Daten und keine andere Zielgröße.
 
 ```bash
 cd audio-engine/mixcoach-audio-engine
-../../.venv/bin/python -m pytest tests/ -q      # 384 Tests, alle grün
+../../.venv/bin/python -m pytest tests/ -q      # 393 Tests, alle grün
 ```
 
 Dazu 79 Frontend-Tests (`cd Frontend && npx vitest run`) und `npx tsc

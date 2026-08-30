@@ -11875,7 +11875,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 21.61,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 64.4,
+    "bisSec": 174.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -11917,7 +11923,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 14.62,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 265.0,
+    "bisSec": 375.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -11959,7 +11971,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 12.99,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 462.4,
+    "bisSec": 572.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -12001,7 +12019,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 3.25,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 738.0,
+    "bisSec": 848.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -12043,7 +12067,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 16.24,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 901.6,
+    "bisSec": 1011.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -12085,7 +12115,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 16.24,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1054.7,
+    "bisSec": 1164.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -12127,7 +12163,13 @@
    "confidence": 0.4755,
    "beat_jitter_ms": 9.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1252.6,
+    "bisSec": 1362.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -12169,7 +12211,13 @@
    "confidence": 0.961,
    "beat_jitter_ms": 16.24,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1466.0,
+    "bisSec": 1576.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 9,
@@ -12211,7 +12259,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 9.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1584.6,
+    "bisSec": 1694.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 10,
@@ -12253,7 +12307,13 @@
    "confidence": 0.808,
    "beat_jitter_ms": 9.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1777.1,
+    "bisSec": 1887.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -12315,7 +12375,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 2:19: 9A → 1A, 4 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

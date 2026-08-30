@@ -13638,7 +13638,13 @@
    "confidence": 0.5943,
    "beat_jitter_ms": 20.45,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 229.4,
+    "bisSec": 339.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -13680,7 +13686,13 @@
    "confidence": 0.88,
    "beat_jitter_ms": 13.64,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 321.3,
+    "bisSec": 431.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -13722,7 +13734,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 18.75,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 554.0,
+    "bisSec": 664.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -13764,7 +13782,13 @@
    "confidence": 0.3506,
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 732.8,
+    "bisSec": 842.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -13806,7 +13830,13 @@
    "confidence": 0.619,
    "beat_jitter_ms": 17.05,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 875.1,
+    "bisSec": 985.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -13848,7 +13878,13 @@
    "confidence": 0.85,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1358.0,
+    "bisSec": 1468.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -13890,7 +13926,13 @@
    "confidence": 0.5591,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1783.8,
+    "bisSec": 1893.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -13932,7 +13974,13 @@
    "confidence": 0.4084,
    "beat_jitter_ms": 18.75,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1970.3,
+    "bisSec": 2080.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 9,
@@ -13974,7 +14022,13 @@
    "confidence": 0.4084,
    "beat_jitter_ms": 20.45,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2179.5,
+    "bisSec": 2289.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -14075,7 +14129,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 6:55: 7A → 10A, 3 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

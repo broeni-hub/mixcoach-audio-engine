@@ -5,7 +5,7 @@
  "mapperVersion": "honest-v2",
  "scoringVersion": 3,
  "scoringNote": "ab 13.08.2026 - erste Version, die ueberhaupt gestempelt wird. Inhaltlich wie 2; die Nummer existiert, damit kuenftige Aenderungen unterscheidbar sind.",
- "reportRevision": 4,
+ "reportRevision": 5,
  "bpm": 129,
  "key": "F Minor",
  "camelot": "4A",
@@ -4990,7 +4990,13 @@
    "confidence": 0.5815,
    "beat_jitter_ms": 9.77,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 150.9,
+    "bisSec": 260.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -5035,7 +5041,13 @@
    "confidence": 0.4931,
    "beat_jitter_ms": 8.14,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 479.5,
+    "bisSec": 589.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -5080,7 +5092,13 @@
    "confidence": 0.4931,
    "beat_jitter_ms": 9.77,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 589.4,
+    "bisSec": 699.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {

@@ -5,6 +5,7 @@ from uuid import uuid4
 from app.audio.dramaturgie import bogen
 from app.audio.pipeline.scoring_version import scoring_stamp
 from app.audio.beat_jitter import radar_punkte
+from app.audio.uebergangsfenster import annotate_fenster
 from app.audio.nicht_gemessen import aus_report as nicht_gemessen_aus_report
 from app.coach.uebungen import baue as baue_uebungen
 
@@ -66,6 +67,10 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
     # springt darueber an die Stelle).
     analysis_id = str(uuid4())
     uebergaenge = _map_set_transitions(analysis)
+    # Der Uebergang als Fenster statt als Sekundenangabe (A1/K3). Additiv -
+    # mid_sec, start_sec und end_sec bleiben unveraendert, damit jede
+    # bestehende Auswertung weiterrechnet wie bisher.
+    annotate_fenster(uebergaenge, analysis.get("duration"))
     uebungen, beobachtungen = baue_uebungen(analysis_id, uebergaenge)
 
     ergebnis = {
@@ -384,6 +389,8 @@ def _map_set_transitions(analysis: Dict) -> List[Dict]:
                 "beat_jitter_ms": t.get("beat_jitter_ms"),
                 "beat_jitter_beats": t.get("beat_jitter_beats"),
                 "beat_jitter_quelle": t.get("beat_jitter_quelle"),
+                # Wird nach dem Bauen von annotate_fenster gesetzt.
+                "window": t.get("window"),
                 "label": t.get("label", "neutral"),
                 "feedback": t.get("feedback"),
                 "feedback_en": t.get("feedback_en"),

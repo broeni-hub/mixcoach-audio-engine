@@ -2079,7 +2079,13 @@
    "feedback_en": "Transition at 04:21 makes a distant key change (G Minor -> D Major, Camelot 6A -> 10B) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 17.05,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 172.2,
+    "bisSec": 282.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -2118,7 +2124,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 317.4,
+    "bisSec": 427.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -2157,7 +2169,13 @@
    "feedback_en": "Transition at 15:52 makes a distant key change (B Minor -> G Minor, Camelot 10A -> 6A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 880.7,
+    "bisSec": 990.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -2196,7 +2214,13 @@
    "feedback_en": "Transition at 19:29 makes a distant key change (G Minor -> A Minor, Camelot 6A -> 8A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1094.3,
+    "bisSec": 1204.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -2235,7 +2259,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1394.4,
+    "bisSec": 1504.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "totalDurationSec": 1863,
@@ -2258,7 +2288,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 4:22: 6A → 10B, 5 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

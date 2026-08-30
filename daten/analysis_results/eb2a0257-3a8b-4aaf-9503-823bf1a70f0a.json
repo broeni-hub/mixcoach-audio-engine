@@ -37971,7 +37971,13 @@
    },
    "beat_jitter_ms": 7.48,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 411.4,
+    "bisSec": 521.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -38013,7 +38019,13 @@
    },
    "beat_jitter_ms": 20.56,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 637.8,
+    "bisSec": 747.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -38055,7 +38067,13 @@
    },
    "beat_jitter_ms": 18.69,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 997.0,
+    "bisSec": 1107.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -38097,7 +38115,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1112.5,
+    "bisSec": 1222.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -38139,7 +38163,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1444.1,
+    "bisSec": 1554.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -38181,7 +38211,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1587.6,
+    "bisSec": 1697.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -38223,7 +38259,13 @@
    },
    "beat_jitter_ms": 17.88,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1673.7,
+    "bisSec": 1783.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -38265,7 +38307,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1874.3,
+    "bisSec": 1984.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 9,
@@ -38307,7 +38355,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1955.2,
+    "bisSec": 2065.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 10,
@@ -38349,7 +38403,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2187.0,
+    "bisSec": 2297.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 11,
@@ -38391,7 +38451,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2606.1,
+    "bisSec": 2716.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 12,
@@ -38433,7 +38499,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2818.9,
+    "bisSec": 2928.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 13,
@@ -38475,7 +38547,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3052.2,
+    "bisSec": 3162.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 14,
@@ -38517,7 +38595,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3603.5,
+    "bisSec": 3713.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 15,
@@ -38559,7 +38643,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4071.6,
+    "bisSec": 4181.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 16,
@@ -38601,7 +38691,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4252.6,
+    "bisSec": 4362.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 17,
@@ -38643,7 +38739,13 @@
    },
    "beat_jitter_ms": 17.88,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4717.5,
+    "bisSec": 4827.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 18,
@@ -38685,7 +38787,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5275.8,
+    "bisSec": 5385.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 19,
@@ -38727,7 +38835,13 @@
    },
    "beat_jitter_ms": 7.15,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5741.9,
+    "bisSec": 5851.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 20,
@@ -38769,7 +38883,13 @@
    },
    "beat_jitter_ms": 10.73,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 6125.6,
+    "bisSec": 6235.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 21,
@@ -38811,7 +38931,13 @@
    },
    "beat_jitter_ms": 10.25,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 6377.5,
+    "bisSec": 6487.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 22,
@@ -38853,7 +38979,13 @@
    },
    "beat_jitter_ms": 11.96,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 6530.2,
+    "bisSec": 6640.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -38902,7 +39034,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 11:52: 5A → 11A, 6 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

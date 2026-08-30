@@ -32,6 +32,22 @@ export interface SetTransition {
   position_estimated?: boolean | null;
   gap_seconds?: number | null;               // Groesse der Luecke in Sekunden
   possible_unrecognized_track?: boolean | null; // sehr grosse Luecke: evtl. Zwischentrack
+  // Das Fenster, in dem der Uebergang BEGINNT (A1/K3, seit 27.08.2026).
+  //
+  // Warum das noetig ist: mid_sec als Punkt trifft die menschliche Korrektur
+  // in 5 % der Faelle auf 8 s genau; der Fehler liegt im Median bei 34 s.
+  // Fuer einen fremden DJ ist das der teuerste Fehler des Produkts - er
+  // klickt "anhoeren", hoert mitten in einen Track und hat entschieden.
+  // sigma laesst sich nicht wegoptimieren, die Behauptung schon:
+  // aus "Uebergang bei 14:32" wird "Uebergang zwischen 13:32 und 15:22".
+  // Gerechnet in app/audio/uebergangsfenster.py.
+  window?: {
+    vonSec: number;
+    bisSec: number;
+    /** Anteil der menschlichen Korrekturen, die in so einem Fenster liegen. */
+    abdeckungPct: number;
+    anker: "start_sec" | "mid_sec";
+  } | null;
 }
 
 export interface SetAnalysisResult {

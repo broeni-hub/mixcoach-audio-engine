@@ -10921,7 +10921,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 11.39,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 148.5,
+    "bisSec": 258.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -10963,7 +10969,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 17.9,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 319.2,
+    "bisSec": 429.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -11005,7 +11017,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 8.14,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 626.6,
+    "bisSec": 736.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -11047,7 +11065,13 @@
    "confidence": 0.5002,
    "beat_jitter_ms": 22.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 841.7,
+    "bisSec": 951.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -11089,7 +11113,13 @@
    "confidence": 0.879,
    "beat_jitter_ms": 9.77,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1038.4,
+    "bisSec": 1148.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -11131,7 +11161,13 @@
    "confidence": 0.834,
    "beat_jitter_ms": 14.65,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1230.2,
+    "bisSec": 1340.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -11173,7 +11209,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 9.77,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1435.5,
+    "bisSec": 1545.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -11215,7 +11257,13 @@
    "confidence": 0.0,
    "beat_jitter_ms": 17.9,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1601.4,
+    "bisSec": 1711.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -11281,7 +11329,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 15:04: die Energie fällt um 53,0 % ab. Ob das stört, ist an deinen Bewertungen nicht ablesbar.",

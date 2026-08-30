@@ -10436,7 +10436,13 @@
    "confidence": 0.5082,
    "beat_jitter_ms": 18.75,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 175.9,
+    "bisSec": 285.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -10478,7 +10484,13 @@
    "confidence": 0.4822,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 336.4,
+    "bisSec": 446.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -10520,7 +10532,13 @@
    "confidence": 0.4822,
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 533.7,
+    "bisSec": 643.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -10562,7 +10580,13 @@
    "confidence": 0.5733,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 894.4,
+    "bisSec": 1004.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -10604,7 +10628,13 @@
    "confidence": 0.5733,
    "beat_jitter_ms": 10.23,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1063.5,
+    "bisSec": 1173.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -10646,7 +10676,13 @@
    "confidence": 0.7137,
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1409.7,
+    "bisSec": 1519.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -10726,7 +10762,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 4:02: 6A → 10B, 5 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",

@@ -9833,7 +9833,13 @@
    },
    "beat_jitter_ms": 14.62,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 141.1,
+    "bisSec": 251.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -9875,7 +9881,13 @@
    },
    "beat_jitter_ms": 9.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 339.2,
+    "bisSec": 449.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -9917,7 +9929,13 @@
    },
    "beat_jitter_ms": 16.24,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 710.4,
+    "bisSec": 820.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -9959,7 +9977,13 @@
    },
    "beat_jitter_ms": 3.25,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 960.1,
+    "bisSec": 1070.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -10001,7 +10025,13 @@
    },
    "beat_jitter_ms": 9.74,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1234.4,
+    "bisSec": 1344.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -10043,7 +10073,13 @@
    },
    "beat_jitter_ms": 6.5,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1552.8,
+    "bisSec": 1662.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "library": {
@@ -10106,7 +10142,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 3:29: die Energie fällt um 36,0 % ab. Ob das stört, ist an deinen Bewertungen nicht ablesbar.",

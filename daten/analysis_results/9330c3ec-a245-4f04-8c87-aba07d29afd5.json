@@ -32829,7 +32829,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 11.96,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 484.4,
+    "bisSec": 594.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 2,
@@ -32868,7 +32874,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 15.37,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 746.1,
+    "bisSec": 856.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 3,
@@ -32907,7 +32919,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 899.5,
+    "bisSec": 1009.5,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 4,
@@ -32946,7 +32964,13 @@
    "feedback_en": "Transition at 18:59 makes a distant key change (C# Minor -> D# Minor, Camelot 12A -> 2A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1053.6,
+    "bisSec": 1163.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 5,
@@ -32985,7 +33009,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 18.79,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1313.0,
+    "bisSec": 1423.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 6,
@@ -33024,7 +33054,13 @@
    "feedback_en": "Transition at 28:50 makes a distant key change (D# Minor -> D# Major, Camelot 2A -> 5B) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.52,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1656.4,
+    "bisSec": 1766.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 7,
@@ -33063,7 +33099,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1795.7,
+    "bisSec": 1905.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 8,
@@ -33102,7 +33144,13 @@
    "feedback_en": "Transition at 33:40 makes a distant key change (G# Major -> D# Minor, Camelot 4B -> 2A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 11.96,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 1946.2,
+    "bisSec": 2056.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 9,
@@ -33141,7 +33189,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2029.4,
+    "bisSec": 2139.4,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 10,
@@ -33180,7 +33234,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2126.7,
+    "bisSec": 2236.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 11,
@@ -33219,7 +33279,13 @@
    "feedback_en": "Transition at 41:08 makes a distant key change (D# Minor -> G Minor, Camelot 2A -> 6A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2284.2,
+    "bisSec": 2394.2,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 12,
@@ -33258,7 +33324,13 @@
    "feedback_en": "Transition at 44:55 makes a distant key change (G Minor -> C# Major, Camelot 6A -> 3B) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2621.3,
+    "bisSec": 2731.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 13,
@@ -33297,7 +33369,13 @@
    "feedback_en": "Transition at 47:03 makes a distant key change (C# Major -> A Minor, Camelot 3B -> 8A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 2754.8,
+    "bisSec": 2864.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 14,
@@ -33336,7 +33414,13 @@
    "feedback_en": "Transition at 51:49 makes a distant key change (A Minor -> F Minor, Camelot 8A -> 4A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 17.08,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3043.7,
+    "bisSec": 3153.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 15,
@@ -33375,7 +33459,13 @@
    "feedback_en": "Transition at 55:26 makes a distant key change (F Minor -> F# Minor, Camelot 4A -> 11A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 3229.6,
+    "bisSec": 3339.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 16,
@@ -33414,7 +33504,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4029.3,
+    "bisSec": 4139.3,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 17,
@@ -33453,7 +33549,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4301.8,
+    "bisSec": 4411.8,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 18,
@@ -33492,7 +33594,13 @@
    "feedback_en": "Transition at 78:24 makes a distant key change (F# Minor -> D Minor, Camelot 11A -> 7A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4624.1,
+    "bisSec": 4734.1,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 19,
@@ -33531,7 +33639,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 11.93,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 4973.7,
+    "bisSec": 5083.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 20,
@@ -33570,7 +33684,13 @@
    "feedback_en": "",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5234.9,
+    "bisSec": 5344.9,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 21,
@@ -33609,7 +33729,13 @@
    "feedback_en": "Transition at 90:01 makes a distant key change (G Minor -> A Major, Camelot 6A -> 11B) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5326.6,
+    "bisSec": 5436.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 22,
@@ -33648,7 +33774,13 @@
    "feedback_en": "Transition at 93:11 makes a distant key change (A Major -> E Minor, Camelot 11B -> 9A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5472.6,
+    "bisSec": 5582.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 23,
@@ -33687,7 +33819,13 @@
    "feedback_en": "Transition at 95:51 makes a distant key change (E Minor -> D Major, Camelot 9A -> 10B) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5655.0,
+    "bisSec": 5765.0,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 24,
@@ -33726,7 +33864,13 @@
    "feedback_en": "Transition at 98:01 makes a distant key change (D Major -> E Minor, Camelot 10B -> 9A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.52,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5784.7,
+    "bisSec": 5894.7,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   },
   {
    "index": 25,
@@ -33765,7 +33909,13 @@
    "feedback_en": "Transition at 99:57 makes a distant key change (E Minor -> G Minor, Camelot 9A -> 6A) - pick a track from a neighbouring Camelot field.",
    "beat_jitter_ms": 8.54,
    "beat_jitter_beats": null,
-   "beat_jitter_quelle": "score"
+   "beat_jitter_quelle": "score",
+   "window": {
+    "vonSec": 5920.6,
+    "bisSec": 6030.6,
+    "abdeckungPct": 73,
+    "anker": "start_sec"
+   }
   }
  ],
  "totalDurationSec": 6318,
@@ -33777,7 +33927,7 @@
   "flow",
   "musicality"
  ],
- "reportRevision": 8,
+ "reportRevision": 9,
  "observations": [
   {
    "text": "Bei 28:50: 2A → 5B, 4 Schritte auf dem Camelot-Rad. Ob dich das stört, ist an deinen Bewertungen nicht ablesbar.",
