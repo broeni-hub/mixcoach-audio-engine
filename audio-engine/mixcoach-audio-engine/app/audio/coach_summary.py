@@ -25,16 +25,21 @@ def generate_coach_summary(set_analysis: Dict) -> Dict:
     # Phase 2: konkretes Feedback aus der Uebergangs-Bewertung.
     transitions = set_analysis.get("transitions_detailed", [])
     rough = [t for t in transitions if t.get("label") == "rough"]
-    smooth = [t for t in transitions if t.get("label") == "smooth"]
 
     for t in sorted(rough, key=lambda x: x.get("quality_score") or 0)[:2]:
         if t.get("feedback"):
             improvements.insert(0, t["feedback"])
 
-    if smooth:
-        best = max(smooth, key=lambda x: x.get("quality_score") or 0)
-        if best.get("feedback"):
-            positives.insert(0, best["feedback"])
+    # Bis zum 14.09.2026 stand hier: der beste "smooth"-Uebergang gibt seinen
+    # feedback-Text als Staerke ab. Das stammte aus der Zeit, als dieser Kanal
+    # noch Lob kannte ("sitzt: Timing, Tempo und Energie passen zusammen").
+    # Seit dem 14.08. schreiben ihn nur noch drei Stellen, und alle drei
+    # tadeln: transition_quality._feedback (harmonisch weit), loudness
+    # (Pegelsprung), bass_overlap (Baesse uebereinander). Die Zeile konnte
+    # also nur noch Kritik unter "Staerken" setzen - in 12 von 59 Reports
+    # stand "waehle einen Track im Nachbarfeld" unter "das lief gut".
+    # Ersatzlos weg: ein Lob braucht einen eigenen, belegten Grund, und wo
+    # keiner da ist, sagt LEER_POSITIV das.
 
     # Bleibt eine Liste leer, wird das gesagt - nicht gefuellt. Seit dem
     # 14.08.2026 kommt das haeufiger vor: die Uebergangs-Saetze aus
