@@ -48,6 +48,7 @@ points"), und die stand in allen 51 Reports.
 
 from __future__ import annotations
 
+import zlib
 from typing import Dict, List, Optional, Tuple
 
 # Ab hier wird ein Pegelsprung zur Uebung.
@@ -88,6 +89,172 @@ SCHWELLE_ENERGIELOCH_PCT = 28.0
 # XP ist Spielmechanik, keine Messung. Fester Wert, damit keine erfundene
 # Zahl entsteht ("schwerere Uebung = mehr Punkte" waere geraten).
 XP_JE_UEBUNG = 30
+
+
+# --- Wortlaut: Fassungen statt einer Vorlage ------------------------------
+#
+# Bis zum 14.09.2026 erzeugte jede Groesse genau einen Satz, in den Zeit und
+# Wert eingesetzt wurden. Rechnet man Zeiten, Werte und Klammern heraus,
+# blieben fuer 32 Uebungen aus drei Analysen VIER Formulierungen, die
+# haeufigste 17-mal. Ein Report mit zehn Uebungen zeigte zehnmal denselben
+# Satz - er las sich als Serienbrief, und die Messung dahinter wirkte mit.
+#
+# Unterschieden wird an dem, was in den Daten verschieden ist: der Richtung
+# des Pegelsprungs (zu laut und zu leise brauchen entgegengesetzte
+# Handgriffe) und der Schwere als Vielfaches der Schwelle. Innerhalb eines
+# Falls werden gleichwertige Fassungen reihum vergeben.
+#
+# WAS KEINE FASSUNG DARF: etwas behaupten, das nicht gemessen ist. Keine
+# Wahrnehmung ("hoerbar", "klingt", "der Raum"), keine Wirkung ("kostet
+# mehr"), beim Jitter keine Richtung. Jede Fassung nennt den Wert, beim
+# Pegel die Richtung, und einen Handgriff. Geprueft fuer ALLE Fassungen in
+# tests/test_uebungen_wortlaut.py - nicht nur fuer die gerade ausgewaehlten.
+#
+# Die Stufen sind Textauswahl, keine Messgrenzen: sie aendern weder, ob eine
+# Uebung entsteht, noch ihre Reihenfolge. Das entscheidet GROESSEN unten.
+STUFE_WEIT = 1.75
+STUFE_DEUTLICH = 1.35
+
+# Hoechste Anzahl Uebungen DESSELBEN Falls in einem Report, gezaehlt am
+# 14.09.2026 ueber 59 Reports. Jede Liste unten ist laenger - der Test haelt
+# das fest. Waechst der Bestand darueber, wiederholt sich eine Fassung erst
+# nach allen anderen.
+GEMESSENES_MAXIMUM = {
+    ("beat_jitter_ms", "knapp"): 6, ("beat_jitter_ms", "deutlich"): 5,
+    ("beat_jitter_ms", "weit"): 0,
+    ("lauter", "knapp"): 4, ("lauter", "deutlich"): 2, ("lauter", "weit"): 2,
+    ("leiser", "knapp"): 2, ("leiser", "deutlich"): 3, ("leiser", "weit"): 3,
+}
+
+TITEL = {
+    ("loudness_jump_db", "weit"): "Pegel vorab setzen",
+    ("loudness_jump_db", "deutlich"): "Pegel angleichen",
+    ("loudness_jump_db", "knapp"): "Pegel nachjustieren",
+    ("beat_jitter_ms", "weit"): "Übergang neu ansetzen",
+    ("beat_jitter_ms", "deutlich"): "Beats früher nachziehen",
+    ("beat_jitter_ms", "knapp"): "Beats kurz nachfassen",
+}
+
+# {w} = Wert mit Einheit, {r} = "lauter"/"leiser". Jede Fassung setzt den
+# Satz fort, der mit "Bei mm:ss (Uebergang)" beginnt.
+FASSUNGEN = {
+    ("lauter", "weit"): [
+        "kam der neue Track {w} {r} rein. Den Gain des einkommenden Kanals schon "
+        "vor dem Einblenden zurücknehmen, nicht erst während des Blends.",
+        "war der einsetzende Track {w} {r} als der laufende. Am Kopfhörer "
+        "vorhören und den Trim zurückdrehen, bis beide Anzeigen gleich stehen.",
+        "lag der Einstieg {w} {r}. Den Übergang mit abgesenktem Gain neu "
+        "ansetzen, statt ihn mit dem Fader auszugleichen.",
+    ],
+    ("lauter", "deutlich"): [
+        "kam der neue Track {w} {r} rein. Vor dem Blend am Trim angleichen.",
+        "war der einsetzende Track {w} {r} als der laufende. Beide Pegelanzeigen "
+        "vor dem Öffnen des Faders vergleichen und den Gain nachziehen.",
+        "lag der Einstieg {w} {r}. Den Gain des neuen Kanals vorab zurücknehmen, "
+        "dann erst einblenden.",
+    ],
+    ("lauter", "knapp"): [
+        "kam der neue Track {w} {r} rein. Ein kleiner Dreh am Gain vor dem Blend reicht.",
+        "war der einsetzende Track {w} {r} als der laufende. Am Kopfhörer vorhören "
+        "und leicht nachziehen.",
+        "lag der Einstieg {w} {r}. Knapp über der Schwelle — beim Vorhören am "
+        "Trim angleichen.",
+        "startete der neue Track {w} {r}. Vor dem Einblenden die Pegelanzeige "
+        "des Cue-Kanals prüfen.",
+        "kam der neue Track {w} {r}. Den Gain vor dem Blend eine Spur zurücknehmen.",
+    ],
+    ("leiser", "weit"): [
+        "kam der neue Track {w} {r} rein. Den Gain des einkommenden Kanals schon "
+        "vor dem Einblenden anheben, nicht erst während des Blends.",
+        "war der einsetzende Track {w} {r} als der laufende. Am Kopfhörer "
+        "vorhören und den Trim hochdrehen, bis beide Anzeigen gleich stehen.",
+        "lag der Einstieg {w} {r}. Den Übergang mit angehobenem Gain neu "
+        "ansetzen, statt ihn mit dem Fader auszugleichen.",
+        "startete der neue Track {w} {r}. Den einkommenden Kanal vorab anheben "
+        "und erst dann öffnen.",
+    ],
+    ("leiser", "deutlich"): [
+        "kam der neue Track {w} {r} rein. Den einkommenden Kanal vorab anheben.",
+        "war der einsetzende Track {w} {r} als der laufende. Beide Pegelanzeigen "
+        "vor dem Öffnen des Faders vergleichen und den Gain hochziehen.",
+        "lag der Einstieg {w} {r}. Am Gain angleichen, bevor der Fader aufgeht.",
+        "startete der neue Track {w} {r}. Beim Vorhören am Cue-Kanal den Trim "
+        "nachziehen.",
+    ],
+    ("leiser", "knapp"): [
+        "kam der neue Track {w} {r} rein. Am Gain in Sekunden behoben.",
+        "war der einsetzende Track {w} {r} als der laufende. Beim Vorhören "
+        "leicht anheben.",
+        "lag der Einstieg {w} {r}. Knapp über der Schwelle — vor dem Blend den "
+        "Trim eine Spur hochdrehen.",
+    ],
+    ("beat_jitter_ms", "weit"): [
+        "schwankte der Beat-Abstand im Blend um {w}. Den Übergang neu ansetzen: "
+        "Tempo beider Decks vorher angleichen und erst dann einblenden.",
+        "war der Beat-Abstand im Blend um {w} unregelmäßig. Pitch vor dem Blend "
+        "feiner angleichen und im Blend nur kleine Jog-Korrekturen setzen.",
+        "streute der Beat-Abstand im Blend um {w}. Früher in den Blend "
+        "einsteigen, damit Zeit zum Nachregeln bleibt.",
+    ],
+    ("beat_jitter_ms", "deutlich"): [
+        "schwankte der Beat-Abstand im Blend um {w}. Die Korrektur gehört in die "
+        "erste Phrase, nicht ans Ende des Blends.",
+        "streute der Beat-Abstand im Blend um {w}. Pitch-Bend früh und in kleinen "
+        "Schritten setzen statt einmal groß.",
+        "war das Beatraster im Blend um {w} unregelmäßig. Tempo beider Decks vor "
+        "dem Einblenden genauer angleichen.",
+        "schwankte der Abstand der Beats im Blend um {w}. Zwei Takte früher "
+        "einsteigen gibt Zeit zum Nachregeln.",
+        "lag die Streuung des Beat-Abstands im Blend bei {w}. Während des Blends "
+        "die Beatanzeige beider Decks im Blick behalten.",
+        "schwankte der Beat-Abstand um {w}. Vor dem Blend das Tempo am "
+        "Pitch-Fader nachführen, dann erst den Fader öffnen.",
+    ],
+    ("beat_jitter_ms", "knapp"): [
+        "schwankte der Beat-Abstand im Blend um {w}. Meist reicht ein kurzer "
+        "Nudge am Jog.",
+        "streute der Beat-Abstand im Blend um {w}. Knapp über der Schwelle — ein "
+        "einzelner Schubs am Jog genügt.",
+        "war der Beat-Abstand im Blend um {w} unregelmäßig. In der ersten Phrase "
+        "kurz nachkorrigieren.",
+        "lag die Streuung des Beat-Abstands bei {w}. Ein Antippen des Jogs früh "
+        "im Blend reicht.",
+        "schwankte der Abstand der Beats um {w}. Beim Einblenden auf die "
+        "Beatanzeige schauen und leicht nachführen.",
+        "streute das Beatraster im Blend um {w}. Kleine Korrektur am Pitch-Fader "
+        "vor dem Einblenden.",
+        "war der Beat-Abstand um {w} unregelmäßig. In den ersten acht Takten des "
+        "Blends einmal nachregeln.",
+        "schwankte der Beat-Abstand im Blend um {w}. Die Tempos beider Decks "
+        "vorab eine Nachkommastelle genauer angleichen.",
+    ],
+}
+
+
+def _stufe(faktor: float) -> str:
+    """Textstufe aus dem Vielfachen der Schwelle - keine Messgrenze."""
+    if faktor >= STUFE_WEIT:
+        return "weit"
+    if faktor >= STUFE_DEUTLICH:
+        return "deutlich"
+    return "knapp"
+
+
+def _fall(metrik: str, wert: float) -> Tuple[str, str]:
+    """Schluessel in FASSUNGEN: (Richtung oder Groesse, Stufe)."""
+    faktor = ueberschreitung(metrik, wert)
+    if metrik == "loudness_jump_db":
+        return ("lauter" if wert > 0 else "leiser", _stufe(faktor))
+    return (metrik, _stufe(faktor))
+
+
+def _versatz(analysis_id: str) -> int:
+    """Stabiler Startpunkt je Report - zlib statt hash(), das je Prozess wuerfelt.
+
+    Damit beginnen zwei Reports nicht mit derselben Fassung, und derselbe
+    Report bekommt bei jedem Backfill denselben Wortlaut.
+    """
+    return zlib.crc32((analysis_id or "").encode("utf-8"))
 
 
 def _zeit(sekunden: Optional[float]) -> str:
@@ -135,8 +302,12 @@ def _camelot_abstand(vorher: Optional[str], nachher: Optional[str]) -> Optional[
     return stunden + (0 if a[1] == b[1] else 1)
 
 
-def _uebung_pegelsprung(analysis_id: str, t: Dict) -> Optional[Dict]:
-    """Die einzige belegte Uebung. None, wenn nichts zu sagen ist."""
+def _uebung_pegelsprung(analysis_id: str, t: Dict, fassung: int = 0) -> Optional[Dict]:
+    """Die erste belegte Uebung. None, wenn nichts zu sagen ist.
+
+    `fassung` waehlt den Wortlaut innerhalb des Falls - baue() vergibt sie
+    reihum, damit derselbe Satz in einem Report nicht zweimal steht.
+    """
     sprung = t.get("loudness_jump_db")
     if not isinstance(sprung, (int, float)):
         return None
@@ -145,12 +316,13 @@ def _uebung_pegelsprung(analysis_id: str, t: Dict) -> Optional[Dict]:
         return None
 
     mid = t.get("mid_sec")
-    richtung = "lauter" if sprung > 0 else "leiser"
+    richtung, stufe = _fall("loudness_jump_db", float(sprung))
+    liste = FASSUNGEN[(richtung, stufe)]
+    satz = liste[fassung % len(liste)].format(w=f"{_zahl(betrag)} dB", r=richtung)
     return {
-        "title": f"Pegel angleichen bei {_zeit(mid)}",
+        "title": f"{TITEL[('loudness_jump_db', stufe)]} bei {_zeit(mid)}",
         "description": (
-            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) kam der neue Track "
-            f"{_zahl(betrag)} dB {richtung} rein. Mix ihn nochmal, "
+            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) {satz} "
             f"Ziel: unter {_zahl(ZIEL_PEGELSPRUNG_DB)} dB."
         ),
         "analysisId": analysis_id,
@@ -165,7 +337,7 @@ def _uebung_pegelsprung(analysis_id: str, t: Dict) -> Optional[Dict]:
     }
 
 
-def _uebung_beat_jitter(analysis_id: str, t: Dict) -> Optional[Dict]:
+def _uebung_beat_jitter(analysis_id: str, t: Dict, fassung: int = 0) -> Optional[Dict]:
     """Die zweite belegte Uebung, seit 20.08.2026. None, wenn nichts zu sagen ist.
 
     Anders als beim Pegelsprung gibt es keine Richtung ("zu laut"/"zu leise")
@@ -179,13 +351,14 @@ def _uebung_beat_jitter(analysis_id: str, t: Dict) -> Optional[Dict]:
         return None
 
     mid = t.get("mid_sec")
+    _, stufe = _fall("beat_jitter_ms", jitter)
+    liste = FASSUNGEN[("beat_jitter_ms", stufe)]
+    satz = liste[fassung % len(liste)].format(w=f"{_zahl(jitter)} ms")
     return {
-        "title": f"Beats zusammenhalten bei {_zeit(mid)}",
+        "title": f"{TITEL[('beat_jitter_ms', stufe)]} bei {_zeit(mid)}",
         "description": (
-            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) schwankte der "
-            f"Beat-Abstand im Blend um {_zahl(jitter)} ms. Mix ihn nochmal "
-            f"und halte die Beats zusammen, Ziel: unter "
-            f"{_zahl(ZIEL_BEAT_JITTER_MS)} ms."
+            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) {satz} "
+            f"Ziel: unter {_zahl(ZIEL_BEAT_JITTER_MS)} ms."
         ),
         "analysisId": analysis_id,
         "transitionIndex": t.get("index"),
@@ -339,12 +512,20 @@ def baue(analysis_id: str, transitions: List[Dict]) -> Tuple[List[Dict], List[Di
     """
     uebungen: List[Dict] = []
     beobachtungen: List[Dict] = []
+    versatz = _versatz(analysis_id)
+    vergeben: Dict[Tuple[str, str], int] = {}
     for t in transitions or []:
         if not isinstance(t, dict):
             continue
-        for bauer in (_uebung_pegelsprung, _uebung_beat_jitter):
-            u = bauer(analysis_id, t)
+        for metrik, bauer in (("loudness_jump_db", _uebung_pegelsprung),
+                              ("beat_jitter_ms", _uebung_beat_jitter)):
+            wert = wert_von(t, metrik)
+            if wert is None or not ueber_der_schwelle(t, metrik):
+                continue
+            fall = _fall(metrik, wert)
+            u = bauer(analysis_id, t, fassung=versatz + vergeben.get(fall, 0))
             if u is not None:
+                vergeben[fall] = vergeben.get(fall, 0) + 1
                 uebungen.append(u)
         beobachtungen.extend(_beobachtungen(analysis_id, t))
 

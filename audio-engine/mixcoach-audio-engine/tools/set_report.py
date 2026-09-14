@@ -37,6 +37,7 @@ import argparse, json, statistics, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.coach.uebungen import baue as uebungen_bauen, ueberschreitung  # noqa: E402
 from app.paths import RESULTS_DIR  # noqa: E402
 
 SCHWELLE_PEGEL, ZIEL_PEGEL = 3.0, 1.0
@@ -45,126 +46,25 @@ SCHWELLE_JIT,  ZIEL_JIT    = 15.0, 10.0
 PROFI_PEGEL_P50, PROFI_JIT_P50 = 1.35, 10.0
 PROFI_DICHTE_MIN, PROFI_DICHTE_MAX = 1.83, 2.94   # Be Svendsen .. Joris Voorn
 
-UEBERSCHRIFT = {
-  ("loudness_jump_db","weit"):     "Pegel vorab setzen",
-  ("loudness_jump_db","deutlich"): "Pegel angleichen",
-  ("loudness_jump_db","knapp"):    "Pegel nachjustieren",
-  ("beat_jitter_ms","weit"):       "Übergang neu ansetzen",
-  ("beat_jitter_ms","deutlich"):   "Früher nachziehen",
-  ("beat_jitter_ms","knapp"):      "Kurz nachfassen",
-}
+# Die Uebungstexte kommen aus der Engine (app/coach/uebungen.py), nicht aus
+# einer eigenen Bibliothek. Bis zum 14.09.2026 hatte dieses Werkzeug eine
+# zweite - mit Saetzen wie "bevor ein Doppelschlag hoerbar wird", die die
+# Engine-Tests ausdruecklich verbieten. Zwei Kopien, und eine lief davon.
 
-def schwere(faktor):
-    if faktor >= 1.75: return "weit"
-    if faktor >= 1.35: return "deutlich"
-    return "knapp"
-
-PEGEL_LAUTER = {
- "weit": [
-   "Der einsetzende Track liegt {w} über dem laufenden — ein Sprung dieser Größe "
-   "trifft den Raum als Ruck. Den Kanal schon vor dem Einblenden am Gain angleichen; "
-   "im laufenden Blend lässt sich das nicht mehr sauber auffangen.",
-   "{w} zu laut beim Einsatz. Der größte Hebel an dieser Stelle: Gain vorab am "
-   "Kopfhörer setzen, statt den Fader während des Übergangs zu suchen.",
-   "Mit {w} Überschuss startet der neue Track über dem Rest des Sets. Vorher "
-   "abhören und angleichen — nachträglich zieht man den ganzen Mix schief.",
- ],
- "deutlich": [
-   "Der neue Track kommt {w} lauter herein. Vor dem Blend am Trim angleichen — "
-   "wer es erst im Übergang merkt, korrigiert sichtbar.",
-   "{w} Unterschied nach oben. Genug, dass der Sprung als Absicht gelesen wird, "
-   "auch wenn keine dahintersteht.",
-   "Der Einstieg liegt {w} über dem laufenden Track. Ein Blick auf den Cue-Kanal "
-   "vor dem Öffnen des Faders fängt das ab.",
-   "{w} lauter beim Wechsel — das reicht, damit die Front den Sprung wahrnimmt, "
-   "bevor sie den neuen Track wahrnimmt.",
- ],
- "knapp": [
-   "{w} über dem laufenden Track — grenzwertig, gut vorab am Kopfhörer zu fangen.",
-   "Der Einstieg liegt {w} zu hoch. Kleine Sache, am Gain in Sekunden erledigt.",
-   "{w} nach oben. Für sich unauffällig; störend erst, wenn es sich häuft.",
- ],
-}
-PEGEL_LEISER = {
- "weit": [
-   "Der neue Track fällt um {w} ab — die Energie sackt genau an der Stelle weg, "
-   "an der sie tragen müsste. Gain hochziehen, bevor der alte Track rausgeht.",
-   "{w} Abfall beim Wechsel. Ein zu leiser Einstieg kostet mehr als ein zu lauter: "
-   "Der Raum liest ihn als Ende, nicht als Übergang.",
-   "Hier verliert der Mix {w} auf einmal. Den einkommenden Kanal vorab anheben "
-   "und erst dann öffnen — im Blend ist der Abfall schon passiert.",
- ],
- "deutlich": [
-   "{w} leiser als der laufende Track. Den einkommenden Kanal vorab anheben, "
-   "sonst trägt die zweite Hälfte des Blends nicht.",
-   "Der Wechsel verliert {w}. Sichtbar am Pegelausschlag, wenn du vorher kurz "
-   "auf den Cue-Kanal schaust.",
-   "Mit {w} Abfall rutscht der neue Track unter das Niveau, das gerade lief. "
-   "Am Gain angleichen, bevor der Fader aufgeht.",
-   "{w} nach unten. Der Übergang selbst ist sauber — es fehlt nur die "
-   "Pegelanpassung davor.",
-   "Der einkommende Track startet {w} zu tief. Über mehrere solcher Stellen "
-   "verliert das Set an Druck, ohne dass eine einzelne auffällt.",
- ],
- "knapp": [
-   "{w} unter dem laufenden Track. Für sich genommen klein — über ein ganzes Set "
-   "summieren sich solche Stufen aber nach unten.",
-   "Der Einstieg liegt {w} zu tief. Am Gain schnell behoben.",
-   "{w} Abfall — grenzwertig, aber am Cue-Kanal vorab sichtbar.",
- ],
-}
-JITTER = {
- "weit": [
-   "Bei {w} laufen die Beats so weit auseinander, dass zwei Kicks getrennt stehen. "
-   "Hier hilft kein Nachregeln mehr — den Übergang neu ansetzen und früher "
-   "synchronisieren.",
-   "{w} Drift. Das ist die Größenordnung, in der der Takt kippt statt nur weich "
-   "zu werden. Früher einsteigen und in der ersten Phrase nachziehen.",
- ],
- "deutlich": [
-   "{w} Drift im Blend. Die Korrektur gehört in die erste Phrase — wer bis zur "
-   "dritten wartet, regelt gegen einen Versatz an, der schon steht.",
-   "Die Beats gehen um {w} auseinander. Pitch-Bend früher ansetzen und in kleinen "
-   "Schritten, statt einmal groß nachzuschieben.",
-   "{w} Versatz. Genug, dass der Bass die Kontur verliert, bevor ein Doppelschlag "
-   "hörbar wird.",
-   "Mit {w} steht der Versatz deutlich über der Schwelle. Beim Nachhören zuerst "
-   "auf die Kickdrum achten — dort zeigt er sich am klarsten.",
-   "{w} Abweichung. Zwei Takte früher einsteigen gibt die Zeit, die zum "
-   "Angleichen fehlt.",
- ],
- "knapp": [
-   "{w} — noch kein Doppelschlag, aber der Groove wird weich. Meist reicht ein "
-   "kurzer Nudge am Jog.",
-   "Die Beats stehen {w} auseinander. Grenzwertig; ein einzelner Schubs am Jog "
-   "holt das zurück.",
-   "{w} Drift. Klein genug zum Fangen, wenn du in der ersten Phrase draufhörst.",
-   "{w} Versatz — knapp über der Schwelle. Hier entscheidet, wie früh du es merkst, "
-   "nicht wie stark du korrigierst.",
-   "Mit {w} liegt der Übergang dicht an der Grenze. Ein kurzer Blick auf die "
-   "Wellenform während des Blends genügt meist.",
-   "{w}. Der Versatz ist da, aber klein — ein Antippen des Jogs reicht.",
-   "Die Kicks liegen {w} auseinander. Am Rand des Hörbaren; im Club fällt es eher "
-   "als Trägheit auf denn als Fehler.",
-   "{w} über der Schwelle. Sauber zu retten, solange die Korrektur in den ersten "
-   "acht Takten kommt.",
- ],
-}
-
-def uebungstext(metrik, wert, faktor, zaehler):
-    s = schwere(faktor)
-    if metrik == "beat_jitter_ms":
-        fassungen, wort = JITTER[s], f"{wert:.1f}".replace(".", ",") + " ms"
-    else:
-        fassungen = (PEGEL_LAUTER if wert > 0 else PEGEL_LEISER)[s]
-        wort = f"{abs(wert):.1f}".replace(".", ",") + " dB"
-    return fassungen[zaehler % len(fassungen)].format(w=wort), s
 
 def zusatz_beide(metrik, auch_gelistet, anderer_wert):
+    """Seiten-Anmerkung, wenn an derselben Stelle beide Groessen reissen.
+
+    Zwei Faelle: steht die zweite Groesse ebenfalls in der angezeigten Liste,
+    kann man darauf verweisen. Wurde sie beim Abschneiden weggelassen, muss
+    der Wert genannt werden - sonst behauptet der Satz eine Zeile, die es
+    nicht gibt.
+    """
     andere = "der Pegelsprung" if metrik == "beat_jitter_ms" else "der Beat-Jitter"
     if auch_gelistet:
         return f" An dieser Stelle reißt auch {andere} — sie steht deshalb zweimal in der Liste."
     return f" An diesem Übergang liegt zusätzlich {andere} über der Schwelle ({anderer_wert})."
+
 
 CSS = """
 :root{
@@ -305,8 +205,6 @@ td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 """
 
-ZAEHLER: dict = {}   # laeuft ueber ALLE Reports eines Laufs
-
 def z(s):
     if s is None: return "–"
     s = int(s); return f"{s//60}:{s%60:02d}"
@@ -394,41 +292,35 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
           f'<td class="num" style="color:var(--ink-3)">'
           f'{t.get("camelot_before") or "–"} → {t.get("camelot_after") or "–"}</td></tr>')
 
+    # Uebungen aus der Engine - dieselbe Regel, derselbe Wortlaut wie in der App.
+    je_index = {t.get("index"): t for t in ts}
     roh = []
-    for t in ts:
+    for u in uebungen_bauen(report.get("id") or "", ts)[0]:
+        t = je_index.get(u.get("transitionIndex")) or {}
         w = t.get("window") or {}
-        for feld, schw in (("loudness_jump_db", SCHWELLE_PEGEL), ("beat_jitter_ms", SCHWELLE_JIT)):
-            v = t.get(feld)
-            if not isinstance(v, (int, float)): continue
-            x = abs(v) if feld == "loudness_jump_db" else v
-            if x < schw: continue
-            roh.append({"faktor":x/schw, "wert":v, "feld":feld, "idx":t.get("index"),
-                        "mid":t.get("mid_sec") or w.get("vonSec"),
-                        "zeit":f'{z(w.get("vonSec"))}–{z(w.get("bisSec"))}'})
-    roh.sort(key=lambda e: -e["faktor"])
-    gezeigt = roh[:8]
+        roh.append({"faktor": ueberschreitung(u["metric"], u["value"]), "wert": u["value"],
+                    "feld": u["metric"], "idx": u.get("transitionIndex"),
+                    "mid": t.get("mid_sec") or w.get("vonSec"),
+                    "zeit": f'{z(w.get("vonSec"))}–{z(w.get("bisSec"))}',
+                    "titel": u["title"], "text": u["description"], "ziel": u["target"]})
+    gezeigt = roh[:8]   # baue() sortiert bereits nach Ueberschreitung
 
     def partner(e):
         return next((x for x in roh if x["idx"] == e["idx"] and x["feld"] != e["feld"]), None)
 
     uebungen = []
     for e in gezeigt:
-        s = schwere(e["faktor"])
-        schl = (e["feld"], s, "auf" if (e["feld"] == "beat_jitter_ms" or e["wert"] > 0) else "ab")
-        ZAEHLER[schl] = ZAEHLER.get(schl, 0)
-        txt, _ = uebungstext(e["feld"], e["wert"], e["faktor"], ZAEHLER[schl])
-        ZAEHLER[schl] += 1
+        txt = e["text"]
         p = partner(e)
         if p is not None:
             eh = "ms" if p["feld"] == "beat_jitter_ms" else "dB"
             txt += zusatz_beide(e["feld"], p in gezeigt, f'{zahl(abs(p["wert"]))} {eh}')
         eh = "ms" if e["feld"] == "beat_jitter_ms" else "dB"
-        ziel = ZIEL_JIT if e["feld"] == "beat_jitter_ms" else ZIEL_PEGEL
         uebungen.append(
           f'<div class="uebung"><div class="zeit">{e["zeit"]}</div>'
-          f'<div class="was">{UEBERSCHRIFT[(e["feld"], s)]} '
+          f'<div class="was">{e["titel"]} '
           f'<span class="mono" style="color:var(--ink-3);font-weight:500">· '
-          f'{zahl(abs(e["wert"]))} {eh} → Ziel {zahl(ziel)} {eh}</span></div>'
+          f'{zahl(abs(e["wert"]))} {eh} → Ziel {zahl(e["ziel"])} {eh}</span></div>'
           f'<div class="wie">{txt}</div></div>')
 
     lage = ""
