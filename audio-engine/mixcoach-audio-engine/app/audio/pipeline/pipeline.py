@@ -19,6 +19,7 @@ from app.audio.library_match import (
     fill_gaps_by_segment,
     match_library,
     merge_with_fingerprints,
+    nur_verankert,
     transitions_from_matches,
 )
 from app.library import manager as library_manager
@@ -156,6 +157,11 @@ def run_set_pipeline(audio, progress=None) -> Dict:
             )
         except Exception:
             pass  # Zweitpass darf die Analyse nie abbrechen
+
+        # Ohne einen eindeutigen Treffer ist keiner glaubwuerdig - bei einem
+        # fremden DJ sind es sonst Zufallstreffer, die Grenzen verschieben
+        # (Begruendung und Messung: library_match.ANKER_MIN_SCORE).
+        library_matches = nur_verankert(library_matches)
 
         fp_transitions = transitions_from_matches(library_matches)
         if fp_transitions:

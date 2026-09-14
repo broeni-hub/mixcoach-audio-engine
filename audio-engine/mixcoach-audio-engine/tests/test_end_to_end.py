@@ -96,7 +96,15 @@ def test_transitions_have_phase2_measurements(analysis_result):
             assert 55 <= bpm <= 200, f"BPM {bpm} unplausibel"
 
     assert t["label"] in {"smooth", "neutral", "rough"}
-    assert isinstance(t["feedback"], str) and len(t["feedback"]) > 10
+    # feedback ist Vertrag, aber kein Befund: leer ist erlaubt und im Bestand
+    # der Normalfall (190 von 501 Uebergaengen, 13.09.2026). Bis dahin stand
+    # hier len > 10 - und erfuellt wurde das nur von einem erfundenen Satz,
+    # siehe test_datei_ohne_echte_tracks_bekommt_keine_erkennung.
+    assert isinstance(t["feedback"], str)
+
+    # Die zwei belegten Groessen - das sind die echten Messwerte.
+    assert isinstance(t.get("loudness_jump_db"), (int, float))
+    assert isinstance(t.get("beat_jitter_ms"), (int, float))
 
     if t["quality_score"] is not None:
         assert 0 <= t["quality_score"] <= 100
@@ -119,6 +127,32 @@ def test_no_fake_values_in_live_result(analysis_result):
     # entweder null oder ein echter Kandidat - aber niemals "Unknown"-String.
     assert result["key"] is None or isinstance(result["key"], str)
     assert result["key"] != "Unknown"
+
+
+def test_datei_ohne_echte_tracks_bekommt_keine_erkennung(analysis_result):
+    """Die Ankerregel an der einzigen Datei, deren Wahrheit feststeht.
+
+    Der synthetische Mix enthaelt keinen einzigen Library-Track. Gegen den
+    echten Index fand die Trackerkennung trotzdem zwei Treffer ("The Doors -
+    Light My Fire" 0,378, "Need My Space" 0,399). Daraus entstanden, gemessen
+    am 13.09.2026:
+
+      - ein Uebergang bei 127,95 s statt im Dip (110-122 s),
+      - ein Bass-Overlap von 100/100, kalibriert gegen die Originaldateien
+        zweier Tracks, die nicht spielen,
+      - der Rat "schneide den Bass des alten Tracks frueher raus".
+
+    Genau dieser erfundene Satz trug bis dahin die Pruefung "feedback hat mehr
+    als 10 Zeichen" oben. Ohne Library (MIXCOACH_DATA_DIR leer) ist dieser Test
+    trivial gruen - er haelt die Regel am echten Index fest.
+    """
+    assert (analysis_result.get("library") or {}).get("matches") in (None, [])
+    t = analysis_result["setTransitions"][0]
+    assert t.get("type") != "fingerprint"
+    assert not t.get("track_in") and not t.get("track_out")
+    assert t.get("bass_overlap_score") is None
+    # Der Dip liegt bei 110-122 s. Der Falschtreffer schob den Marker auf 127,95.
+    assert 104 <= t["mid_sec"] <= 124, f"mid_sec={t['mid_sec']}"
 
 
 def test_energy_curve_reflects_the_dip(analysis_result):

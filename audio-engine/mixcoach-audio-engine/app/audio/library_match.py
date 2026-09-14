@@ -403,6 +403,52 @@ def match_library(set_chroma_fine: np.ndarray, fingerprints: list[dict],
 #   lieber ehrlich "unbekannt" als ein falscher Trackname.
 SEGMENT_MIN_SCORE = 0.35
 SEGMENT_MIN_MARGIN = 1.25
+
+
+# Ankerregel: Ein Set traegt Fingerprint-Treffer nur, wenn mindestens EINER
+# davon eindeutig ist. Sonst werden alle verworfen - Namen, Grenzen, alles.
+#
+# WARUM: MIN_SCORE (0,32) und SEGMENT_MIN_SCORE (0,35) sind an EIGENEN Sets
+# kalibriert, in denen der echte Track fast immer im Index liegt. Bei einem
+# fremden DJ ist es umgekehrt: fast kein gespielter Track liegt im Index, und
+# Treffer knapp ueber der Schwelle sind dann ueberwiegend Zufall. Gemessen am
+# 13.09.2026 ueber alle gespeicherten Analysen, entdoppelt nach Aufnahme:
+#
+#     hoechster Treffer je Aufnahme
+#     echte eigene Aufnahmen (16)   0,547 .. 0,921   (kleinster: REC002)
+#     fremde Aufnahmen (7)          0,000 .. 0,476   (groesster: Fabi, Dec23)
+#
+# Ein Magnet trifft quer durch fremde Sets: "Dave Brubeck - Take Five" in
+# zwei Techno-Sets von Fabi (0,355 und 0,324), in keinem eigenen.
+#
+# Der Schaden ging ueber falsche Namen hinaus. merge_with_fingerprints
+# behandelt Treffer als massgeblich: es verschiebt ML-Uebergaenge im Umkreis
+# von 105 s auf die Trefferzeit, ergaenzt fehlende und loescht Zonen innerhalb
+# eines "erkannten" Tracks. In Fabis Sets waren 3 von 15, 9 von 19 und 7 von 17
+# Uebergaengen von Fehlalarmen positioniert - und damit auch die Fenster,
+# Pegelspruenge und Jitter-Werte an diesen Stellen.
+#
+# DIE LUECKE IST SCHMAL: 0,476 bis 0,547. 0,50 liegt je 0,024 von beiden
+# Raendern. Wer die Schwelle verschiebt, misst vorher an den fremden Sets
+# nach, nicht an den eigenen - genau diese Vermischung hat den Fehler erzeugt.
+#
+# WAS DIE REGEL NICHT LOEST: einen einzelnen Grauzonen-Fehlalarm in einem
+# sonst verankerten eigenen Set. Dort bleiben alle Treffer wie bisher.
+ANKER_MIN_SCORE = 0.50
+
+
+def nur_verankert(matches: list[dict]) -> list[dict]:
+    """Alle Treffer eines Sets, oder keinen - je nachdem, ob einer eindeutig ist.
+
+    Eine Regel fuer beide Wege, die Treffer in den Report bringen: die
+    Pipeline (nach dem Segment-Zweitpass) und das Nachmatchen
+    (app/audio/rematch.py, nach dem Vereinigen).
+    """
+    if not matches:
+        return []
+    if max(float(m.get("score") or 0.0) for m in matches) >= ANKER_MIN_SCORE:
+        return matches
+    return []
 SEGMENT_MIN_GAP_SECONDS = 120.0  # kuerzere Luecken sind meist nur Blend-Raender
 
 

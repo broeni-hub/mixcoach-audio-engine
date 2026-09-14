@@ -16,6 +16,7 @@ from __future__ import annotations
 from typing import Dict, List
 
 from app.audio.library_match import (
+    nur_verankert,
     rematch_from_boundaries,
     transitions_from_matches,
 )
@@ -77,6 +78,7 @@ def apply_rematch(result: Dict, feedback: Dict, waveform, sample_rate: int) -> D
     for m in (result.get("library") or {}).get("matches") or []:
         by_id[_key(m)] = dict(m)
     existing_count = len(by_id)
+    existing_keys = set(by_id)
 
     for h in new_hits:
         k = _key(h)
@@ -91,9 +93,24 @@ def apply_rematch(result: Dict, feedback: Dict, waveform, sample_rate: int) -> D
                 "start": h["start"], "end": h["end"], "score": h["score"],
             }
 
-    matches = sorted(by_id.values(), key=lambda m: m["start"])
+    # Dieselbe Ankerregel wie in der Pipeline - sonst holt das Nachmatchen
+    # die Zufallstreffer zurueck, die der erste Lauf verworfen hat.
+    matches = nur_verankert(sorted(by_id.values(), key=lambda m: m["start"]))
     result.setdefault("library", {})["matches"] = matches
-    added = len(by_id) - existing_count
+    # Gezaehlt wird, was nach der Ankerregel wirklich neu dazukam - nicht, was
+    # vor ihr in by_id stand. Sonst meldet das Nachmatchen "2 hinzugefuegt"
+    # bei null verbliebenen Treffern.
+    added = sum(1 for m in matches if _key(m) not in existing_keys)
+
+    # Hat die Ankerregel alles verworfen, duerfen auch die Namen aus einem
+    # frueheren Lauf nicht stehen bleiben: library.matches waere leer, die
+    # Uebergaenge truegen trotzdem Tracknamen - der Report widerspraeche sich.
+    if not matches:
+        for t in result.get("setTransitions") or []:
+            if t.get("detection") == "fingerprint":
+                t["track_out"] = None
+                t["track_in"] = None
+                t["detection"] = None
 
     # setTransitions neu benennen (gleiche 60s-Fenster-Logik wie die Pipeline).
     fp_transitions = transitions_from_matches(matches)
