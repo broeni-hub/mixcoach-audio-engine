@@ -6,6 +6,8 @@ Zeit, Wert und Klammer vier Formulierungen, die haeufigste stand 17-mal.
 
 import re
 from collections import Counter
+from difflib import SequenceMatcher
+from itertools import combinations
 
 from app.coach.uebungen import (
     FASSUNGEN,
@@ -111,3 +113,22 @@ def test_zwei_reports_beginnen_nicht_mit_derselben_fassung():
     texte = {_rumpf(baue(f"{i:08d}-aaaa-bbbb-cccc-dddddddddddd", einzeln)[0][0]["description"])
              for i in range(20)}
     assert len(texte) > 1
+
+
+def test_keine_zwei_fassungen_derselben_groesse_sind_fast_gleich():
+    """Wortgleich ist nicht der einzige Fehler - fast gleich liest sich genauso.
+
+    Am 14.09.2026 zeigte die Vorfuehrung an Fabis Set zwei Uebungen, die sich
+    nur in "lauter/leiser" und "nachziehen/hochziehen" unterschieden (96 %
+    gleich). Die Pegel-Listen waren parallel gebaut. Geprueft wird ueber ALLE
+    Fassungen einer Groesse, weil ein Report jede Kombination ziehen kann.
+    """
+    for groesse in ("pegel", "jitter"):
+        faelle = [k for k in FASSUNGEN
+                  if (k[0] in ("lauter", "leiser")) == (groesse == "pegel")]
+        texte = [(k, f.format(w="«w»", r=k[0] if k[0] in ("lauter", "leiser") else ""))
+                 for k in faelle for f in FASSUNGEN[k]]
+        zu_nah = [(round(SequenceMatcher(None, a, b).ratio(), 2), ka, kb)
+                  for (ka, a), (kb, b) in combinations(texte, 2)
+                  if SequenceMatcher(None, a, b).ratio() >= 0.80]
+        assert not zu_nah, (groesse, zu_nah)

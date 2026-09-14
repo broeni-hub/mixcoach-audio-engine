@@ -164,27 +164,26 @@ FASSUNGEN = {
         "kam der neue Track {w} {r}. Den Gain vor dem Blend eine Spur zurücknehmen.",
     ],
     ("leiser", "weit"): [
-        "kam der neue Track {w} {r} rein. Den Gain des einkommenden Kanals schon "
-        "vor dem Einblenden anheben, nicht erst während des Blends.",
-        "war der einsetzende Track {w} {r} als der laufende. Am Kopfhörer "
-        "vorhören und den Trim hochdrehen, bis beide Anzeigen gleich stehen.",
-        "lag der Einstieg {w} {r}. Den Übergang mit angehobenem Gain neu "
-        "ansetzen, statt ihn mit dem Fader auszugleichen.",
+        "fehlten dem neuen Track {w} — er kam {r} als der laufende. Die Lücke "
+        "gehört vor dem Einblenden an den Gain, nicht an den Kanalfader.",
+        "sackte der Pegel beim Einsetzen um {w} ab, der neue Track lief {r}. "
+        "Vor dem nächsten Versuch am Cue-Kanal den Trim hochdrehen.",
+        "blieb der einsetzende Track {w} {r} als sein Vorgänger. Den Wechsel "
+        "noch einmal üben, diesmal mit dem Gain vorab auf Höhe des laufenden Tracks.",
         "startete der neue Track {w} {r}. Den einkommenden Kanal vorab anheben "
         "und erst dann öffnen.",
     ],
     ("leiser", "deutlich"): [
         "kam der neue Track {w} {r} rein. Den einkommenden Kanal vorab anheben.",
-        "war der einsetzende Track {w} {r} als der laufende. Beide Pegelanzeigen "
-        "vor dem Öffnen des Faders vergleichen und den Gain hochziehen.",
+        "lief der neue Kanal {w} {r} an. Die Anzeige des Cue-Kanals zeigt das "
+        "schon vor dem Einblenden — dann den Trim nach oben.",
         "lag der Einstieg {w} {r}. Am Gain angleichen, bevor der Fader aufgeht.",
         "startete der neue Track {w} {r}. Beim Vorhören am Cue-Kanal den Trim "
         "nachziehen.",
     ],
     ("leiser", "knapp"): [
         "kam der neue Track {w} {r} rein. Am Gain in Sekunden behoben.",
-        "war der einsetzende Track {w} {r} als der laufende. Beim Vorhören "
-        "leicht anheben.",
+        "setzte der Track {w} {r} ein. Eine kleine Korrektur am Gain nach oben genügt.",
         "lag der Einstieg {w} {r}. Knapp über der Schwelle — vor dem Blend den "
         "Trim eine Spur hochdrehen.",
     ],
