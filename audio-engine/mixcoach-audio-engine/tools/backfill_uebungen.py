@@ -16,11 +16,13 @@ Was passiert
 3. notMeasured wird aus dem tatsaechlichen Befuellungsstand gebildet statt
    aus einer festen Fuenferliste (B5). Ein Report, dem darueber hinaus
    etwas fehlt, sagt das jetzt auch.
-4. reportRevision zaehlt hoch - ohne das bleibt alles auf der Platte
+4. Kritik, die als Staerke eingeschoben wurde, faellt aus strengths und
+   feedback.worked (seit 16.09.2026, siehe _eingeschobene_kritik).
+5. reportRevision zaehlt hoch - ohne das bleibt alles auf der Platte
    liegen und erreicht keinen Browser, der die Analyse schon kennt
    (siehe app/audio/pipeline/scoring_version.py).
 
-Punkt 4 ist der Grund, warum dieser Backfill ueberhaupt ankommt. Bis zum
+Punkt 5 ist der Grund, warum dieser Backfill ueberhaupt ankommt. Bis zum
 13.08.2026 ordnete der Korrekturweg nur nach scoringVersion, und Uebungen
 sind abgeleiteter Text - sie duerfen die Rechenvorschrift nicht erhoehen.
 Ohne die Revision waere dieser Lauf wirkungslos gewesen.
@@ -30,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -92,11 +95,58 @@ def _saetze_neu(uebergaenge: list) -> int:
     return geaendert
 
 
-def _liste_saeubern(eintraege: list, leer_satz: str) -> list:
+def _liste_saeubern(eintraege: list, leer_satz: str, auch_entfernen=None) -> list:
     """Unbelegte Saetze entfernen - und sagen, wenn nichts bleibt."""
     behalten = [s for s in (eintraege or [])
-                if not any(m in s for m in UNBELEGTE_SAETZE)]
+                if not any(m in s for m in UNBELEGTE_SAETZE)
+                and not (auch_entfernen and auch_entfernen(s))]
     return behalten or [leer_satz]
+
+
+# Die drei Saetze, die seit dem 14.08.2026 in das feedback eines Uebergangs
+# gelangen - alle drei Kritik, alle maschinell erzeugt. Gebunden an die
+# Quellen in tests/test_backfill_staerken.py: aendert jemand den Wortlaut
+# dort, schlaegt der Test an, bevor dieses Muster stillschweigend nichts mehr
+# findet.
+#     app/audio/transition_quality.py  _feedback
+#     app/audio/loudness.py            annotate_transitions
+#     app/audio/bass_overlap.py        annotate_bass_overlap
+KRITIK_MUSTER = re.compile(
+    r"Uebergang bei \d{2,3}:\d{2} wechselt harmonisch weit \("
+    r"|Achtung: Der neue Track kommt \d+\.\d dB (lauter|leiser)"
+    r"|Der neue Track ist \d+\.\d dB (lauter|leiser) - leichter Pegelsprung"
+    r"|Beide Baesse liefen im Blend uebereinander \(Overlap"
+)
+
+
+def _eingeschobene_kritik(report: dict):
+    """Pruefer: ist dieser Eintrag Kritik, die als Staerke eingeschoben wurde?
+
+    coach_summary setzte bis zum 14.09.2026 den feedback-Text des besten
+    "smooth"-Uebergangs als Staerke ein. Dieser Kanal kennt seit dem 14.08.
+    nur Kritik - in 12 von 59 Reports stand ein Tadel unter "das lief gut".
+
+    Zwei Wege, beide noetig (gemessen am 16.09.2026):
+
+    1. HERKUNFT - der Eintrag ist wortgleich einem feedback-Text, so wie er im
+       ORIGINAL-Report steht. Nicht im neu gebildeten: _saetze_neu bildet nur
+       den Harmonie-Satz neu, und "Achtung: Der neue Track kommt 4.2 dB
+       leiser" fiele aus dem Vergleich.
+    2. SATZMUSTER - in drei Reports vom 12.07. (REC002, REC003, REC013) steht
+       der Einschub noch unter strengths, aber nicht mehr im Uebergang: ein
+       frueherer Lauf hat das feedback neu gebildet und dabei entfernt, die
+       Staerke blieb. Die Herkunft ist dort nicht mehr ablesbar.
+
+    Die echten Staerken ("Die Energie steigt im Verlauf an ...") treffen
+    keinen der beiden Wege.
+    """
+    herkunft = frozenset(
+        (t.get("feedback") or "").strip()
+        for t in (report.get("setTransitions") or [])
+        if isinstance(t, dict) and (t.get("feedback") or "").strip()
+    )
+    return lambda eintrag: ((eintrag or "").strip() in herkunft
+                            or bool(KRITIK_MUSTER.search(eintrag or "")))
 
 
 def nachziehen(report: dict) -> tuple[dict, list]:
@@ -114,8 +164,11 @@ def nachziehen(report: dict) -> tuple[dict, list]:
         aenderungen.append(f"feedback je Uebergang: {saetze} neu gebildet")
         neu["setTransitions"] = uebergaenge
 
-    for feld, leer in (("strengths", LEER_POSITIV), ("weaknesses", LEER_VERBESSERUNG)):
-        gesaeubert = _liste_saeubern(report.get(feld) or [], leer)
+    kritik = _eingeschobene_kritik(report)
+    for feld, leer, weg in (("strengths", LEER_POSITIV, kritik),
+                            ("weaknesses", LEER_VERBESSERUNG, None)):
+        # Unter weaknesses sind Uebergangs-Saetze richtig - dort nichts entfernen.
+        gesaeubert = _liste_saeubern(report.get(feld) or [], leer, weg)
         if gesaeubert != (report.get(feld) or []):
             aenderungen.append(
                 f"{feld}: {len(report.get(feld) or [])} -> {len(gesaeubert)}")
@@ -135,6 +188,12 @@ def nachziehen(report: dict) -> tuple[dict, list]:
         neu_fb = dict(fb)
         for feld, leer in (("worked", LEER_POSITIV), ("improve", LEER_VERBESSERUNG)):
             gesaeubert = _liste_saeubern(fb.get(feld) or [], leer)
+            if feld == "worked":
+                # Der Mapper setzt worked = positives[:2]; gezaehlt am 16.09.2026
+                # gilt worked == strengths[:2] in 60 von 60 Reports. Faellt ein
+                # Einschub weg, rueckt die naechste Staerke nach - getrennt
+                # gesaeubert bliebe aus [Einschub, A, B] nur [A].
+                gesaeubert = (neu.get("strengths") or [leer])[:2]
             if gesaeubert != (fb.get(feld) or []):
                 aenderungen.append(
                     f"feedback.{feld}: {len(fb.get(feld) or [])} -> {len(gesaeubert)}")
