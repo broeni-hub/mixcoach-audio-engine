@@ -22,13 +22,24 @@ DREI REGELN, DIE HIER HAENGEN
    Sebastian beanstandet. Unterschieden wird nach Richtung und Schwere, der
    Zaehler laeuft ueber ALLE Reports eines Laufs.
 
+KEINE SET-TONART IM KOPF
+------------------------
+Bis zum 16.09.2026 stand im Kopf eine Tonart fuer das ganze Set. Nach der
+Ankerregel wurden Fabis drei Sets neu analysiert: BPM, Laenge und
+Energieverlauf blieben gleich, die Tonart kippte in ALLEN drei (2A->3A,
+10A->12A, 4A->9A). Sie haengt davon ab, wo Uebergaenge erkannt werden, und
+beschreibt ein DJ-Set nicht. Die Tonarten je Uebergang stehen weiter in der
+Tabelle - die sind lokal und ueberpruefbar.
+
 DIE DICHTE-KACHEL
 -----------------
 Am 13.09.2026 fragte Fabi zurueck: "Was genau ist der Vergleichswert der
 Dichte? Ist es empfohlen, schneller Tracks zu wechseln?" - Die Kachel stand
 gleichrangig neben zwei belegten Groessen und nannte einen Bereich der
 Vergleichs-Sets. Das liest sich als Ziel. Gemessen am 13.09. ueber 23
-Aufnahmen: Dichte gegen Jitter-Median rho = -0,027, p = 0,90. Es gibt
+Aufnahmen: Dichte gegen Jitter-Median rho = -0,027, p = 0,90 - nachgerechnet
+am 16.09.2026 nach der Ankerregel (Fabis Sets neu analysiert): rho = -0,094,
+p = 0,67. Es gibt
 keinen Zusammenhang. Die Kachel sagt das jetzt selbst.
 """
 from __future__ import annotations
@@ -180,6 +191,14 @@ td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
 }
 :root[data-theme="dark"] .c-warnung{color:var(--warnung)}
 :root[data-theme="dark"] .c-ernst{color:var(--ernst)}
+.korrektur{background:var(--blatt); border:1px solid var(--linie-stark);
+  border-radius:4px; padding:16px 20px; margin:0 0 22px;}
+.korrektur .marke{display:block; margin-bottom:6px; color:var(--akzent)}
+.korrektur p{font-size:14px; color:var(--ink-2); line-height:1.55; max-width:70ch}
+.korrektur p + p{margin-top:8px}
+.korrektur ul{margin:8px 0 0; padding-left:18px; display:flex; flex-direction:column; gap:4px}
+.korrektur li{font-size:13.5px; color:var(--ink-2); line-height:1.5}
+.korrektur b{color:var(--ink); font-weight:600}
 .muster{background:var(--blatt); border:1px solid var(--linie); border-left:3px solid var(--akzent);
   border-radius:0 4px 4px 0; padding:13px 16px; margin-bottom:14px;
   font-size:13.5px; color:var(--ink-2); line-height:1.55;}
@@ -245,7 +264,15 @@ def _skala(wert, schwelle, profi, max_x, links, rechts):
             f'<div class="schwelle" style="left:{min(schwelle/max_x*100,100):.1f}%"></div></div>'
             f'<div class="legende"><span>{links}</span><span>{rechts}</span></div></div>')
 
-def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
+def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
+         korrektur=None) -> str:
+    """Die Report-Seite als HTML.
+
+    korrektur: optional (datum, einleitung, [aenderungen]). Eine Seite, die ein
+    Leser schon in einer frueheren Fassung kennt, sagt offen, was sich
+    geaendert hat - sonst widerspricht sie stillschweigend dem, was er
+    gelesen hat.
+    """
     ts = report["setTransitions"]
     dur = report.get("totalDurationSec") or 0
     pj = [abs(t["loudness_jump_db"]) for t in ts if isinstance(t.get("loudness_jump_db"), (int, float))]
@@ -327,8 +354,10 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
     for feld, nm in (("beat_jitter_ms","Jitter-Stellen"), ("loudness_jump_db","Pegel-Stellen")):
         stellen = [e for e in roh if e["feld"] == feld and isinstance(e.get("mid"), (int, float))]
         if len(stellen) < 3: continue
-        mehr = len(stellen) > len([e for e in gezeigt if e["feld"] == feld])
-        zus = " über der Schwelle — die hier nicht aufgeführten eingeschlossen —" if mehr else ""
+        fehlend = len(stellen) - len([e for e in gezeigt if e["feld"] == feld])
+        zus = ("" if fehlend <= 0
+               else " über der Schwelle — die hier nicht aufgeführte eingeschlossen —" if fehlend == 1
+               else " über der Schwelle — die hier nicht aufgeführten eingeschlossen —")
         if all(e["mid"] >= dur/2 for e in stellen):
             lage = f" Und alle {len(stellen)} {nm}{zus} liegen in der zweiten Hälfte des Sets."
         elif all(e["mid"] < dur/2 for e in stellen):
@@ -340,7 +369,9 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
             ([f"<b>{len(gezeigt)-n_j}×</b> Pegelsprung"] if len(gezeigt)-n_j else [])
     muster = ""
     if roh:
-        rest = f" Weitere {len(roh)-8} Stellen sind hier nicht aufgeführt." if len(roh) > 8 else ""
+        ungezeigt = len(roh) - len(gezeigt)
+        rest = ("" if ungezeigt <= 0 else " Eine weitere Stelle ist hier nicht aufgeführt."
+                if ungezeigt == 1 else f" Weitere {ungezeigt} Stellen sind hier nicht aufgeführt.")
         muster = (f'<div class="muster">{len(roh)} Stellen über der Schwelle: '
                   f'{" und ".join(teile)}.{rest} Die Liste steht nach Schwere, gemessen als '
                   f'Vielfaches der jeweiligen Schwelle — so sind dB und ms vergleichbar.{lage}</div>')
@@ -355,6 +386,14 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
     u1, u2 = urteil or ("", "")
     urteil_html = (f'<section class="urteil" style="margin-top:0"><p>{u1}</p>'
                    f'<p>{u2}</p></section>') if u1 else ""
+
+    korrektur_html = ""
+    if korrektur:
+        k_datum, k_text, k_liste = korrektur
+        punkte = "".join(f"<li>{x}</li>" for x in k_liste)
+        korrektur_html = (f'<aside class="korrektur" role="note">'
+                          f'<span class="marke">Korrigierte Fassung · {k_datum}</span>'
+                          f'<p>{k_text}</p>{"<ul>" + punkte + "</ul>" if punkte else ""}</aside>')
 
     return f"""<title>{titel}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -371,10 +410,9 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
     <div><dt class="marke">Länge</dt><dd class="mono">{zahl(dur/60)} min</dd></div>
     <div><dt class="marke">Übergänge</dt><dd class="mono">{n}</dd></div>
     <div><dt class="marke">Grundtempo</dt><dd class="mono">{report.get('bpm') or '–'} BPM</dd></div>
-    <div><dt class="marke">Tonart</dt><dd class="mono">{report.get('camelot') or '–'}</dd></div>
   </dl>
 </header>
-{urteil_html}
+{korrektur_html}{urteil_html}
 <section>
   <div class="sektionskopf"><span class="nr">01</span><h2>Die zwei Zahlen, die belegt sind</h2></div>
   <p class="hinweis">MixCoach misst viel und belegt zwei Größen: den Pegelsprung am Übergang
@@ -402,7 +440,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None) -> str:
       <div class="wert mono">{zahl(dichte)}<span class="einheit">&nbsp;/10&nbsp;min</span></div>
       <div class="unter">Ein Trackwechsel etwa alle {zahl(dur/n/60)} Minuten.
         <b>Das ist eine Beschreibung, kein Ziel.</b> Über 23 Aufnahmen gemessen, hängt die
-        Dichte nicht mit der Qualität zusammen (ρ&nbsp;=&nbsp;−0,03, p&nbsp;=&nbsp;0,90).
+        Dichte nicht mit der Qualität zusammen (ρ&nbsp;=&nbsp;−0,09, p&nbsp;=&nbsp;0,67).
         Die Vergleichs-Sets reichen von {zahl(PROFI_DICHTE_MIN)} (Four Tet, Be Svendsen) bis
         {zahl(PROFI_DICHTE_MAX)} (Joris Voorn) — beide Enden sind Weltklasse.</div>
     </div>
