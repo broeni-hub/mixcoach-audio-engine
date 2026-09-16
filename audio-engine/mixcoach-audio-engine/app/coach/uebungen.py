@@ -147,21 +147,22 @@ FASSUNGEN = {
         "ansetzen, statt ihn mit dem Fader auszugleichen.",
     ],
     ("lauter", "deutlich"): [
-        "kam der neue Track {w} {r} rein. Vor dem Blend am Trim angleichen.",
-        "war der einsetzende Track {w} {r} als der laufende. Beide Pegelanzeigen "
-        "vor dem Öffnen des Faders vergleichen und den Gain nachziehen.",
-        "lag der Einstieg {w} {r}. Den Gain des neuen Kanals vorab zurücknehmen, "
-        "dann erst einblenden.",
+        "sprang der Pegel beim Einsetzen um {w}, der neue Track lief {r}. Vor dem "
+        "Blend am Trim angleichen.",
+        "zeigte die Pegelanzeige beim Wechsel {w} Unterschied, der neue Track war "
+        "{r}. Beide Anzeigen vor dem Öffnen des Faders vergleichen und den Gain zurücknehmen.",
+        "öffnete der neue Kanal {w} {r} als der alte. Den Gain vorab "
+        "zurücknehmen, dann erst einblenden.",
     ],
     ("lauter", "knapp"): [
-        "kam der neue Track {w} {r} rein. Ein kleiner Dreh am Gain vor dem Blend reicht.",
-        "war der einsetzende Track {w} {r} als der laufende. Am Kopfhörer vorhören "
-        "und leicht nachziehen.",
-        "lag der Einstieg {w} {r}. Knapp über der Schwelle — beim Vorhören am "
-        "Trim angleichen.",
+        "stand der neue Kanal beim Einsetzen {w} {r}. Ein kleiner Dreh am Gain vor dem Blend reicht.",
+        "legte der Pegel beim Wechsel um {w} zu — der neue Track kam {r}. Eine "
+        "kleine Rücknahme am Trim vor dem Einblenden reicht.",
+        "hob sich der neue Track um {w} ab, er war {r}. Knapp über der Schwelle — "
+        "beim Vorhören am Trim angleichen.",
         "startete der neue Track {w} {r}. Vor dem Einblenden die Pegelanzeige "
         "des Cue-Kanals prüfen.",
-        "kam der neue Track {w} {r}. Den Gain vor dem Blend eine Spur zurücknehmen.",
+        "fiel der Einstieg mit {w} {r} aus. Den Gain vor dem Blend eine Spur zurücknehmen genügt.",
     ],
     ("leiser", "weit"): [
         "fehlten dem neuen Track {w} — er kam {r} als der laufende. Die Lücke "
@@ -174,57 +175,58 @@ FASSUNGEN = {
         "und erst dann öffnen.",
     ],
     ("leiser", "deutlich"): [
-        "kam der neue Track {w} {r} rein. Den einkommenden Kanal vorab anheben.",
+        "verlor der Mix beim Wechsel {w}, der neue Track war {r}. Vor dem Öffnen "
+        "des Faders am Gain nachregeln.",
         "lief der neue Kanal {w} {r} an. Die Anzeige des Cue-Kanals zeigt das "
         "schon vor dem Einblenden — dann den Trim nach oben.",
         "lag der Einstieg {w} {r}. Am Gain angleichen, bevor der Fader aufgeht.",
-        "startete der neue Track {w} {r}. Beim Vorhören am Cue-Kanal den Trim "
-        "nachziehen.",
+        "ging der Pegel beim Wechsel um {w} zurück, der neue Track kam {r}. Beim "
+        "Vorhören am Cue-Kanal den Trim nachziehen.",
     ],
     ("leiser", "knapp"): [
         "kam der neue Track {w} {r} rein. Am Gain in Sekunden behoben.",
         "setzte der Track {w} {r} ein. Eine kleine Korrektur am Gain nach oben genügt.",
-        "lag der Einstieg {w} {r}. Knapp über der Schwelle — vor dem Blend den "
-        "Trim eine Spur hochdrehen.",
+        "blieb der neue Track {w} {r} als sein Vorgänger, knapp über der Schwelle. "
+        "Vor dem Blend den Trim eine Spur hochdrehen.",
     ],
     ("beat_jitter_ms", "weit"): [
         "schwankte der Beat-Abstand im Blend um {w}. Den Übergang neu ansetzen: "
         "Tempo beider Decks vorher angleichen und erst dann einblenden.",
-        "war der Beat-Abstand im Blend um {w} unregelmäßig. Pitch vor dem Blend "
+        "wich der Abstand der Beats im Blend um {w} ab. Pitch vor dem Blend "
         "feiner angleichen und im Blend nur kleine Jog-Korrekturen setzen.",
-        "streute der Beat-Abstand im Blend um {w}. Früher in den Blend "
+        "hielt das Beatraster im Blend nicht: {w} Streuung. Früher in den Blend "
         "einsteigen, damit Zeit zum Nachregeln bleibt.",
     ],
     ("beat_jitter_ms", "deutlich"): [
-        "schwankte der Beat-Abstand im Blend um {w}. Die Korrektur gehört in die "
+        "streute der Beat-Abstand im Blend um {w}. Die Korrektur gehört in die "
         "erste Phrase, nicht ans Ende des Blends.",
-        "streute der Beat-Abstand im Blend um {w}. Pitch-Bend früh und in kleinen "
-        "Schritten setzen statt einmal groß.",
+        "maß MixCoach im Blend {w} Streuung zwischen den Beats. Pitch-Bend früh "
+        "und in kleinen Schritten setzen statt einmal groß.",
         "war das Beatraster im Blend um {w} unregelmäßig. Tempo beider Decks vor "
         "dem Einblenden genauer angleichen.",
-        "schwankte der Abstand der Beats im Blend um {w}. Zwei Takte früher "
+        "variierte der Abstand zwischen den Kicks um {w}. Zwei Takte früher "
         "einsteigen gibt Zeit zum Nachregeln.",
         "lag die Streuung des Beat-Abstands im Blend bei {w}. Während des Blends "
         "die Beatanzeige beider Decks im Blick behalten.",
-        "schwankte der Beat-Abstand um {w}. Vor dem Blend das Tempo am "
-        "Pitch-Fader nachführen, dann erst den Fader öffnen.",
+        "blieb der Beat-Abstand nicht stabil, die Streuung betrug {w}. Vor dem "
+        "Blend das Tempo am Pitch-Fader nachführen, dann erst den Fader öffnen.",
     ],
     ("beat_jitter_ms", "knapp"): [
-        "schwankte der Beat-Abstand im Blend um {w}. Meist reicht ein kurzer "
+        "zeigte der Beat-Abstand im Blend {w} Streuung. Meist reicht ein kurzer "
         "Nudge am Jog.",
-        "streute der Beat-Abstand im Blend um {w}. Knapp über der Schwelle — ein "
+        "kam das Beatraster auf {w} Streuung, knapp über der Schwelle. Ein "
         "einzelner Schubs am Jog genügt.",
-        "war der Beat-Abstand im Blend um {w} unregelmäßig. In der ersten Phrase "
+        "betrug die Schwankung zwischen den Beats {w}. In der ersten Phrase "
         "kurz nachkorrigieren.",
-        "lag die Streuung des Beat-Abstands bei {w}. Ein Antippen des Jogs früh "
-        "im Blend reicht.",
-        "schwankte der Abstand der Beats um {w}. Beim Einblenden auf die "
+        "stand die Streuung im Blend bei {w}. Ein Antippen des Jogs früh im "
+        "Blend reicht.",
+        "liefen die Kicks mit {w} Streuung übereinander. Beim Einblenden auf die "
         "Beatanzeige schauen und leicht nachführen.",
-        "streute das Beatraster im Blend um {w}. Kleine Korrektur am Pitch-Fader "
-        "vor dem Einblenden.",
-        "war der Beat-Abstand um {w} unregelmäßig. In den ersten acht Takten des "
-        "Blends einmal nachregeln.",
-        "schwankte der Beat-Abstand im Blend um {w}. Die Tempos beider Decks "
+        "ergab die Messung {w} Unregelmäßigkeit im Beatraster. Kleine Korrektur "
+        "am Pitch-Fader vor dem Einblenden.",
+        "wackelte der Beat-Abstand um {w}. In den ersten acht Takten des Blends "
+        "einmal nachregeln.",
+        "summierte sich die Abweichung der Beats auf {w}. Die Tempos beider Decks "
         "vorab eine Nachkommastelle genauer angleichen.",
     ],
 }

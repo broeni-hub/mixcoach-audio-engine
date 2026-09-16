@@ -123,12 +123,56 @@ def test_keine_zwei_fassungen_derselben_groesse_sind_fast_gleich():
     gleich). Die Pegel-Listen waren parallel gebaut. Geprueft wird ueber ALLE
     Fassungen einer Groesse, weil ein Report jede Kombination ziehen kann.
     """
-    for groesse in ("pegel", "jitter"):
+    # Verglichen wird, was der Leser sieht: MIT dem Zielsatz, der an jede
+    # Uebung derselben Groesse gleich angehaengt wird. Ohne ihn lag ein Paar
+    # am 16.09.2026 bei 0,79 und kam durch - gelesen waren es 0,83, und
+    # "Den einkommenden Kanal vorab anheben" stand zweimal untereinander.
+    for groesse, ziel in (("pegel", " Ziel: unter «w»."), ("jitter", " Ziel: unter «w».")):
         faelle = [k for k in FASSUNGEN
                   if (k[0] in ("lauter", "leiser")) == (groesse == "pegel")]
-        texte = [(k, f.format(w="«w»", r=k[0] if k[0] in ("lauter", "leiser") else ""))
+        texte = [(k, f.format(w="«w»", r=k[0] if k[0] in ("lauter", "leiser") else "") + ziel)
                  for k in faelle for f in FASSUNGEN[k]]
         zu_nah = [(round(SequenceMatcher(None, a, b).ratio(), 2), ka, kb)
                   for (ka, a), (kb, b) in combinations(texte, 2)
                   if SequenceMatcher(None, a, b).ratio() >= 0.80]
         assert not zu_nah, (groesse, zu_nah)
+
+
+def test_kein_satzanfang_zweimal_je_gruppe():
+    """Gleich beginnende Zeilen untereinander lesen sich wie Copy-Paste - auch
+    wenn der Rest verschieden ist.
+
+    Am 16.09.2026 standen in Fabis Ü30-Report "startete der neue Track 8,7 dB
+    leiser" und "startete der neue Track 4,5 dB leiser" direkt untereinander,
+    bei 0,72 Aehnlichkeit - der Aehnlichkeitstest liess es durch. Im Bestand
+    waren es 21 doppelte Anfaenge in 12 Reports.
+
+    Sind die Anfaenge je Gruppe eindeutig, genuegt das: innerhalb eines Falls
+    ist die Rotation wiederholungsfrei, solange die Liste laenger ist als das
+    Maximum (test_jede_liste_ist_laenger_als_das_gemessene_maximum).
+    """
+    for gruppe in ("lauter", "leiser", "beat_jitter_ms"):
+        anfaenge = Counter(" ".join(f.split()[:3])
+                           for k in FASSUNGEN if k[0] == gruppe for f in FASSUNGEN[k])
+        doppelt = [a for a, n in anfaenge.items() if n > 1]
+        assert not doppelt, (gruppe, doppelt)
+
+
+def test_report_mit_den_meisten_uebungen_hat_keinen_anfang_doppelt():
+    # Hoechstwerte je Report im Bestand (16.09.2026): 11 Jitter, 7 zu laut, 4 zu leise.
+    uebergaenge = (
+        [_uebergang(i, beat_jitter_ms=15.5 + i * 0.3) for i in range(1, 7)]
+        + [_uebergang(10 + i, beat_jitter_ms=21.0 + i * 0.5) for i in range(5)]
+        + [_uebergang(20 + i, loudness_jump_db=3.2 + i * 0.1) for i in range(4)]
+        + [_uebergang(25 + i, loudness_jump_db=4.3 + i * 0.1) for i in range(2)]
+        + [_uebergang(28, loudness_jump_db=6.0)]
+        + [_uebergang(30 + i, loudness_jump_db=-4.5 - i * 0.1) for i in range(3)]
+        + [_uebergang(40, loudness_jump_db=-6.0)]
+    )
+    uebungen, _ = baue(AID, uebergaenge)
+    anfaenge = Counter(
+        (u["metric"] if u["metric"] == "beat_jitter_ms" else ("lauter" if u["value"] > 0 else "leiser"),
+         " ".join(re.sub(r"^Bei \S+ \([^)]*\) ", "", u["description"]).split()[:3]))
+        for u in uebungen)
+    assert len(uebungen) == 22
+    assert max(anfaenge.values()) == 1, [a for a, n in anfaenge.items() if n > 1]
