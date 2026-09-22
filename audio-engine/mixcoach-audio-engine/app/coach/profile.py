@@ -234,8 +234,30 @@ def _selbst_aufgenommen(dateiname: str) -> bool:
     exakt 13 zu 6. Es ist trotzdem nur ein Indiz - wer ein eigenes Set als
     mp3 ablegt, faellt heraus. Jede Aufnahme traegt deshalb ownRecording
     mit, und der Zaehler steht in der Antwort: nichts davon ist unsichtbar.
+
+    Wer es besser weiss, traegt es in den Report ein - ist_eigene_aufnahme()
+    liest das und laesst diese Heuristik dann gar nicht erst laufen.
     """
     return dateiname.lower().endswith(".wav")
+
+
+def ist_eigene_aufnahme(report: Dict) -> bool:
+    """Eigene Aufnahme, oder fremdes Set zum Studieren? Report schlaegt Endung.
+
+    Die Endung ist ein Indiz, kein Wissen. Am 22.09.2026 kam ein Set eines
+    befreundeten DJs als .wav - die Heuristik haette es als Sebastians
+    eigenes gezaehlt und damit in die Fortschrittskurve gelegt, also in die
+    Zahl, die Bedingung 3 der Live-Schwelle traegt. Bei Fabis Sets ging es
+    nur gut, weil sie zufaellig .mp3 waren.
+
+    Steht ownRecording ausdruecklich im Report, gilt das. Fehlt es, bleibt
+    alles wie bisher - kein gespeicherter Report aendert sein Verhalten,
+    solange niemand das Feld setzt (tools/aufnahme_markieren.py).
+    """
+    ausdruecklich = report.get("ownRecording")
+    if isinstance(ausdruecklich, bool):
+        return ausdruecklich
+    return _selbst_aufgenommen(report.get("fileName") or report.get("id") or "")
 
 # Die Schwelle (SCHWELLE_PEGELSPRUNG_DB) kommt aus app/coach/uebungen.py und
 # ist oben schon importiert: dieselbe Grenze wie bei den Uebungen und bei der
@@ -333,7 +355,7 @@ def zeitreihe(results: List[Dict], feld: str = "loudness_jump_db") -> List[Dict]
             "shareAboveThresholdPct": round(100 * ueber / len(spruenge), 1),
             "transitions": len(spruenge),
             "analyses": len(laeufe),
-            "ownRecording": _selbst_aufgenommen(name),
+            "ownRecording": ist_eigene_aufnahme(neuester),
         })
     reihe.sort(key=lambda e: str(e["createdAt"] or ""))
     return reihe
@@ -583,7 +605,7 @@ def _highlights_and_exercises(results: List[Dict], lang: str = "de") -> Dict:
     # pegel_trend() macht diese Trennung seit dem 15.08. (excludedForeign),
     # best/worst und die Uebungen sind ihr nur nie gefolgt.
     eigene = [r for r in results
-              if _selbst_aufgenommen(r.get("fileName") or r.get("id") or "")]
+              if ist_eigene_aufnahme(r)]
     fremde_reports = len(results) - len(eigene)
 
     scored = []
@@ -738,7 +760,7 @@ def build_profile(lang: str = "de") -> Dict:
     # SOL. Beides derselbe Fehler wie bei best/worst eine Funktion weiter.
     aufnahmen = je_aufnahme(results)
     eigene = [r for r in aufnahmen
-              if _selbst_aufgenommen(r.get("fileName") or r.get("id") or "")]
+              if ist_eigene_aufnahme(r)]
     all_transitions = [t for r in eigene for t in _filtered_transitions(r)]
 
     # Die Pegel-Sauberkeit ist die einzige Groesse im Profil, die gegen
