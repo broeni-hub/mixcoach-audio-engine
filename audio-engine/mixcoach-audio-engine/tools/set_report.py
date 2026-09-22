@@ -63,7 +63,7 @@ PROFI_DICHTE_MIN, PROFI_DICHTE_MAX = 1.83, 2.94   # Be Svendsen .. Joris Voorn
 # Engine-Tests ausdruecklich verbieten. Zwei Kopien, und eine lief davon.
 
 
-def zusatz_beide(metrik, auch_gelistet, anderer_wert):
+def zusatz_beide(metrik, auch_gelistet, anderer_wert, sprache="de"):
     """Seiten-Anmerkung, wenn an derselben Stelle beide Groessen reissen.
 
     Zwei Faelle: steht die zweite Groesse ebenfalls in der angezeigten Liste,
@@ -71,10 +71,11 @@ def zusatz_beide(metrik, auch_gelistet, anderer_wert):
     der Wert genannt werden - sonst behauptet der Satz eine Zeile, die es
     nicht gibt.
     """
-    andere = "der Pegelsprung" if metrik == "beat_jitter_ms" else "der Beat-Jitter"
+    T = TEXTE.get(sprache, TEXTE["de"])
+    andere = T["a_pegel"] if metrik == "beat_jitter_ms" else T["a_jitter"]
     if auch_gelistet:
-        return f" An dieser Stelle reißt auch {andere} — sie steht deshalb zweimal in der Liste."
-    return f" An diesem Übergang liegt zusätzlich {andere} über der Schwelle ({anderer_wert})."
+        return T["zusatz_gelistet"].format(a=andere)
+    return T["zusatz_offen"].format(a=andere, w=anderer_wert)
 
 
 CSS = """
@@ -224,12 +225,168 @@ td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 """
 
+# --- Seitentexte je Sprache -----------------------------------------------
+# Die Uebungstexte kommen aus app/coach/uebungen.py und sind dort zweisprachig.
+# Hier stehen nur die Texte der SEITE.
+TEXTE = {
+ "de": {
+  "marke": "MixCoach · Set-Analyse", "laenge": "Länge", "uebergaenge": "Übergänge",
+  "tempo": "Grundtempo", "min": "min", "minuten": "Minuten", "je10": "/10&nbsp;min",
+  "h1": "Die zwei Zahlen, die belegt sind",
+  "hinweis1": ("MixCoach misst viel und belegt zwei Größen: den Pegelsprung am Übergang "
+    "und den Beat-Jitter im Blend. Nur diese beiden hängen nachweisbar mit dem menschlichen "
+    "Urteil zusammen — alles andere steht weiter unten unter „Was hier nicht drinsteht“."),
+  "k_pegel": "Pegelsprung · Median", "k_jitter": "Beat-Jitter · Median",
+  "k_dichte": "Wechseldichte · keine Bewertung",
+  "u_pegel": "<b>{a} von {b}</b> Übergängen ({p}&nbsp;%) springen um mehr als 3 dB. Größter Sprung: {m} dB.",
+  "u_jitter": "<b>{a} von {b}</b> Übergängen ({p}&nbsp;%) reißen die 15-ms-Schwelle. Schlechtester Wert: {m} ms.",
+  "u_dichte": ("Ein Trackwechsel etwa alle {t} Minuten. <b>Das ist eine Beschreibung, kein Ziel.</b> "
+    "Über 23 Aufnahmen gemessen, hängt die Dichte nicht mit der Qualität zusammen "
+    "(ρ&nbsp;=&nbsp;−0,09, p&nbsp;=&nbsp;0,67). Die Vergleichs-Sets reichen von {dmin} "
+    "(Four Tet, Be Svendsen) bis {dmax} (Joris Voorn) — beide Enden sind Weltklasse."),
+  "skala_pegel_l": "Vergleichs-Sets 1,35 dB", "skala_pegel_r": "Schwelle 3 dB",
+  "skala_jitter_l": "Vergleichs-Sets 10,0 ms", "skala_jitter_r": "Schwelle 15 ms",
+  "h2": "Wo im Set du hinhören musst",
+  "hinweis2": ("Jeder Balken ist ein Übergang — als <b>Zeitfenster</b>, nicht als Sekundenangabe. "
+    "Das ist Absicht: Die Erkennung trifft den exakten Punkt nur selten, das Fenster von "
+    "110 Sekunden enthält den echten Übergang in 73&nbsp;% der Fälle. Die Kurve dahinter ist der "
+    "Energieverlauf. Farbe und Zahl sagen dasselbe — die Zahl gilt."),
+  "svg_alt": "Energieverlauf über das Set",
+  "l_gut": "im Rahmen", "l_warn": "knapp über der Schwelle", "l_ernst": "deutlich drüber",
+  "l_krit": "weit drüber", "l_zahl": "Zahl im Balken: Nummer des Übergangs",
+  "h3": "Alle Übergänge im Einzelnen",
+  "th": ("Nr", "Fenster", "Pegelsprung", "Beat-Jitter", "Tonart"),
+  "lauter": " lauter", "leiser": " leiser",
+  "tip_pegel": "Pegelsprung", "tip_jitter": "Jitter",
+  "h4": "Was sich üben lässt",
+  "hinweis4": ("Nur Stellen, an denen eine belegte Größe ihre Schwelle reißt. "
+    "Jede Zeile nennt den gemessenen Wert aus <em>diesem</em> Set."),
+  "leer": ("<div class=\"uebung\"><div class=\"zeit\">–</div><div class=\"was\">Keine Stelle über der "
+    "Schwelle.</div><div class=\"wie\">Weder Pegelsprung noch Beat-Jitter überschreiten in "
+    "diesem Set ihre belegte Schwelle.</div></div>"),
+  "m_stellen": "{n} Stellen über der Schwelle: ", "m_jit": "<b>{n}×</b> Beat-Jitter",
+  "m_peg": "<b>{n}×</b> Pegelsprung", "m_und": " und ",
+  "m_rest1": " Eine weitere Stelle ist hier nicht aufgeführt.",
+  "m_restn": " Weitere {n} Stellen sind hier nicht aufgeführt.",
+  "m_sortiert": (" Die Liste steht nach Schwere, gemessen als Vielfaches der jeweiligen "
+    "Schwelle — so sind dB und ms vergleichbar."),
+  "lage": " Und alle {n} {was}{zus} liegen in der {haelfte} Hälfte des Sets.",
+  "lage_jit": "Jitter-Stellen", "lage_peg": "Pegel-Stellen",
+  "lage_erste": "ersten", "lage_zweite": "zweiten",
+  "lage_zus1": " über der Schwelle — die hier nicht aufgeführte eingeschlossen —",
+  "lage_zusn": " über der Schwelle — die hier nicht aufgeführten eingeschlossen —",
+  "h5": "Was hier nicht drinsteht",
+  "grenzen_kopf": "MixCoach zeigt nichts an, was nicht gemessen wurde. Für dieses Set heißt das konkret:",
+  "g_namen": ("<b>Keine Tracknamen.</b> Die Trackerkennung vergleicht gegen die Sammlung im "
+    "Fingerabdruck-Index. Tracks, die dort nicht liegen, bleiben unbenannt — und Treffer, "
+    "die nur knapp an der Erkennungsschwelle liegen, zeigt diese Seite bewusst nicht an. "
+    "<b>Mit einer Tracklist</b> — eine Zeile je Track, Zeiten wenn vorhanden — stünden hier Namen."),
+  "g_eq": ("<b>Nichts zu EQ, Frequenzbild, Timing oder Kreativität.</b> Ob sich Bässe oder "
+    "Höhen im Blend beißen, wird heute nicht gemessen: Die vorhandene Bass-Messung "
+    "braucht beide Tracks aus der Sammlung und ist fast immer entweder 0 oder 100 — "
+    "ein Schalter, keine Abstufung. Gegen Hörurteile belegt ist sie nicht. "
+    "Daraus einen Rat abzuleiten hieße raten."),
+  "g_fenster": ("<b>Das Fenster ist ein Fenster.</b> Die 110 Sekunden enthalten den echten "
+    "Übergang in 73&nbsp;% der Fälle — nicht in allen. Bei etwa jedem vierten Balken "
+    "liegt der Übergang daneben."),
+  "g_vergleich": ("<b>Der Vergleich hat eine Schwäche.</b> Die sechs Referenz-Sets (Dixon, Four Tet, "
+    "Joris Voorn, RÜFÜS DU SOL, Be Svendsen) sind veröffentlichte Festival-Mitschnitte "
+    "und damit gemastert. Mastering drückt Pegelsprünge. Beim <em>Pegel</em> ist der "
+    "Vergleich deshalb zu deinen Ungunsten verzerrt; beim <em>Beat-Jitter</em> "
+    "nicht — den ändert kein Mastering."),
+  "fuss_id": "Analyse-ID", "fuss_ver": "Scoring-Version",
+  "korr_marke": "Korrigierte Fassung · {d}",
+  "zusatz_gelistet": " An dieser Stelle reißt auch {a} — sie steht deshalb zweimal in der Liste.",
+  "zusatz_offen": " An diesem Übergang liegt zusätzlich {a} über der Schwelle ({w}).",
+  "a_pegel": "der Pegelsprung", "a_jitter": "der Beat-Jitter",
+ },
+ "en": {
+  "marke": "MixCoach · Set analysis", "laenge": "Length", "uebergaenge": "Transitions",
+  "tempo": "Base tempo", "min": "min", "minuten": "minutes", "je10": "/10&nbsp;min",
+  "h1": "The two numbers that are backed by evidence",
+  "hinweis1": ("MixCoach measures a lot and can back up two of it: the level jump at the "
+    "transition and the beat jitter inside the blend. Only these two correlate with human "
+    "judgement — everything else is listed below under \u201cWhat is not in here\u201d."),
+  "k_pegel": "Level jump · median", "k_jitter": "Beat jitter · median",
+  "k_dichte": "Change rate · not a rating",
+  "u_pegel": "<b>{a} of {b}</b> transitions ({p}&nbsp;%) jump by more than 3 dB. Largest jump: {m} dB.",
+  "u_jitter": "<b>{a} of {b}</b> transitions ({p}&nbsp;%) cross the 15 ms line. Worst value: {m} ms.",
+  "u_dichte": ("A track change roughly every {t} minutes. <b>This describes, it does not rate.</b> "
+    "Measured across 23 recordings, change rate does not correlate with quality "
+    "(ρ&nbsp;=&nbsp;−0.09, p&nbsp;=&nbsp;0.67). The reference sets range from {dmin} "
+    "(Four Tet, Be Svendsen) to {dmax} (Joris Voorn) — both ends are world class."),
+  "skala_pegel_l": "Reference sets 1.35 dB", "skala_pegel_r": "Line at 3 dB",
+  "skala_jitter_l": "Reference sets 10.0 ms", "skala_jitter_r": "Line at 15 ms",
+  "h2": "Where in the set to listen",
+  "hinweis2": ("Every bar is one transition — shown as a <b>time window</b>, not as a timestamp. "
+    "That is deliberate: detection rarely hits the exact point, and this 110-second window "
+    "contains the real transition in 73&nbsp;% of cases. The curve behind it is the energy "
+    "over the set. Colour and number say the same thing — the number is what counts."),
+  "svg_alt": "Energy across the set",
+  "l_gut": "within range", "l_warn": "just over the line", "l_ernst": "clearly over",
+  "l_krit": "far over", "l_zahl": "Number in the bar: transition number",
+  "h3": "Every transition in detail",
+  "th": ("No", "Window", "Level jump", "Beat jitter", "Key"),
+  "lauter": " louder", "leiser": " quieter",
+  "tip_pegel": "Level jump", "tip_jitter": "Jitter",
+  "h4": "What to practise",
+  "hinweis4": ("Only places where a backed-up measure crosses its line. "
+    "Every row quotes the value measured in <em>this</em> set."),
+  "leer": ("<div class=\"uebung\"><div class=\"zeit\">–</div><div class=\"was\">Nothing crossed a "
+    "line.</div><div class=\"wie\">Neither level jump nor beat jitter crosses its backed-up "
+    "threshold anywhere in this set.</div></div>"),
+  "m_stellen": "{n} places over the line: ", "m_jit": "<b>{n}×</b> beat jitter",
+  "m_peg": "<b>{n}×</b> level jump", "m_und": " and ",
+  "m_rest1": " One further place is not listed here.",
+  "m_restn": " A further {n} places are not listed here.",
+  "m_sortiert": (" The list runs by severity, measured as a multiple of each measure's own "
+    "line — that makes dB and ms comparable."),
+  "lage": " And all {n} {was}{zus} fall in the {haelfte} half of the set.",
+  "lage_jit": "jitter places", "lage_peg": "level places",
+  "lage_erste": "first", "lage_zweite": "second",
+  "lage_zus1": " over the line — including the one not listed here —",
+  "lage_zusn": " over the line — including those not listed here —",
+  "h5": "What is not in here",
+  "grenzen_kopf": "MixCoach shows nothing it has not measured. For this set that means:",
+  "g_namen": ("<b>No track names.</b> Track recognition compares against the collection in the "
+    "fingerprint index. Tracks that are not in it stay unnamed — and matches that sit just at "
+    "the recognition threshold are deliberately not shown on this page. "
+    "<b>With a tracklist</b> — one line per track, times if you have them — names would appear here."),
+  "g_eq": ("<b>Nothing on EQ, frequency balance, timing or creativity.</b> Whether bass or highs "
+    "clash inside a blend is not measured today: the existing bass measurement needs both "
+    "tracks from the collection and is almost always either 0 or 100 — a switch, not a scale. "
+    "It has not been validated against listening judgements. "
+    "Deriving advice from it would mean guessing."),
+  "g_fenster": ("<b>The window is a window.</b> Those 110 seconds contain the real transition in "
+    "73&nbsp;% of cases — not in all. For roughly one bar in four the transition sits outside it."),
+  "g_vergleich": ("<b>The comparison has a weakness.</b> The six reference sets (Dixon, Four Tet, "
+    "Joris Voorn, RÜFÜS DU SOL, Be Svendsen) are released festival recordings and therefore "
+    "mastered. Mastering flattens level jumps. On <em>level</em> the comparison is skewed "
+    "against you; on <em>beat jitter</em> it is not — mastering does not change that."),
+  "fuss_id": "Analysis ID", "fuss_ver": "Scoring version",
+  "korr_marke": "Corrected version · {d}",
+  "zusatz_gelistet": " {a} crosses its line at this same place — which is why it appears twice in the list.",
+  "zusatz_offen": " At this transition {a} is over its line as well ({w}).",
+  "a_pegel": "the level jump", "a_jitter": "beat jitter",
+ },
+}
+
+
 def z(s):
     if s is None: return "–"
     s = int(s); return f"{s//60}:{s%60:02d}"
 
+def _fmt(v, n=1, sprache="de"):
+    """Zahl mit n Nachkommastellen - Komma im Deutschen, Punkt im Englischen."""
+    if v is None:
+        return "–"
+    text = f"{v:.{n}f}"
+    return text.replace(".", ",") if sprache == "de" else text
+
+
 def zahl(v, n=1):
-    return "–" if v is None else f"{v:.{n}f}".replace(".", ",")
+    """Deutsch - fuer Aufrufer ausserhalb von baue()."""
+    return _fmt(v, n, "de")
 
 def stufe(wert, schwelle):
     if wert is None: return "keine"
@@ -265,7 +422,7 @@ def _skala(wert, schwelle, profi, max_x, links, rechts):
             f'<div class="legende"><span>{links}</span><span>{rechts}</span></div></div>')
 
 def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
-         korrektur=None) -> str:
+         korrektur=None, sprache: str = "de") -> str:
     """Die Report-Seite als HTML.
 
     korrektur: optional (datum, einleitung, [aenderungen]). Eine Seite, die ein
@@ -273,6 +430,9 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     geaendert hat - sonst widerspricht sie stillschweigend dem, was er
     gelesen hat.
     """
+    T = TEXTE.get(sprache, TEXTE["de"])
+    # Lokal an die Sprache gebunden - alle Aufrufe unten bleiben zahl(...).
+    zahl = lambda v, n=1: _fmt(v, n, sprache)  # noqa: E731
     ts = report["setTransitions"]
     dur = report.get("totalDurationSec") or 0
     pj = [abs(t["loudness_jump_db"]) for t in ts if isinstance(t.get("loudness_jump_db"), (int, float))]
@@ -293,7 +453,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
         st = []
         for f in reihe:
             tip = (f"Übergang {f['i']} · {z(f['von'])}–{z(f['bis'])}\n"
-                   f"Pegelsprung {zahl(f['pegel'])} dB · Jitter {zahl(f['jit'])} ms")
+                   f"{T['tip_pegel']} {zahl(f['pegel'])} dB · {T['tip_jitter']} {zahl(f['jit'])} ms")
             st.append(f'<div class="fenster f-{f["stufe"]}" style="left:{f["von"]/dur*100:.2f}%;'
                       f'width:{max((f["bis"]-f["von"])/dur*100,1.1):.2f}%" tabindex="0" '
                       f'data-tip="{tip}">{f["i"]}</div>')
@@ -306,7 +466,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     for t in ts:
         w = t.get("window") or {}
         p, j = t.get("loudness_jump_db"), t.get("beat_jitter_ms")
-        r = (" lauter" if p > 0 else " leiser" if p < 0 else "") if isinstance(p,(int,float)) else ""
+        r = (T["lauter"] if p > 0 else T["leiser"] if p < 0 else "") if isinstance(p,(int,float)) else ""
         zeilen.append(
           f'<tr><td class="num">{t.get("index")}</td>'
           f'<td class="num">{z(w.get("vonSec"))}–{z(w.get("bisSec"))}</td>'
@@ -322,7 +482,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     # Uebungen aus der Engine - dieselbe Regel, derselbe Wortlaut wie in der App.
     je_index = {t.get("index"): t for t in ts}
     roh = []
-    for u in uebungen_bauen(report.get("id") or "", ts)[0]:
+    for u in uebungen_bauen(report.get("id") or "", ts, sprache=sprache)[0]:
         t = je_index.get(u.get("transitionIndex")) or {}
         w = t.get("window") or {}
         roh.append({"faktor": ueberschreitung(u["metric"], u["value"]), "wert": u["value"],
@@ -341,44 +501,38 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
         p = partner(e)
         if p is not None:
             eh = "ms" if p["feld"] == "beat_jitter_ms" else "dB"
-            txt += zusatz_beide(e["feld"], p in gezeigt, f'{zahl(abs(p["wert"]))} {eh}')
+            txt += zusatz_beide(e["feld"], p in gezeigt, f'{zahl(abs(p["wert"]))} {eh}', sprache)
         eh = "ms" if e["feld"] == "beat_jitter_ms" else "dB"
         uebungen.append(
           f'<div class="uebung"><div class="zeit">{e["zeit"]}</div>'
           f'<div class="was">{e["titel"]} '
           f'<span class="mono" style="color:var(--ink-3);font-weight:500">· '
-          f'{zahl(abs(e["wert"]))} {eh} → Ziel {zahl(e["ziel"])} {eh}</span></div>'
+          f'{zahl(abs(e["wert"]))} {eh} → {"Target" if sprache == "en" else "Ziel"} {zahl(e["ziel"])} {eh}</span></div>'
           f'<div class="wie">{txt}</div></div>')
 
     lage = ""
-    for feld, nm in (("beat_jitter_ms","Jitter-Stellen"), ("loudness_jump_db","Pegel-Stellen")):
+    for feld, nm in (("beat_jitter_ms", T["lage_jit"]), ("loudness_jump_db", T["lage_peg"])):
         stellen = [e for e in roh if e["feld"] == feld and isinstance(e.get("mid"), (int, float))]
         if len(stellen) < 3: continue
         fehlend = len(stellen) - len([e for e in gezeigt if e["feld"] == feld])
-        zus = ("" if fehlend <= 0
-               else " über der Schwelle — die hier nicht aufgeführte eingeschlossen —" if fehlend == 1
-               else " über der Schwelle — die hier nicht aufgeführten eingeschlossen —")
+        zus = ("" if fehlend <= 0 else T["lage_zus1"] if fehlend == 1 else T["lage_zusn"])
         if all(e["mid"] >= dur/2 for e in stellen):
-            lage = f" Und alle {len(stellen)} {nm}{zus} liegen in der zweiten Hälfte des Sets."
+            lage = T["lage"].format(n=len(stellen), was=nm, zus=zus, haelfte=T["lage_zweite"])
         elif all(e["mid"] < dur/2 for e in stellen):
-            lage = f" Und alle {len(stellen)} {nm}{zus} liegen in der ersten Hälfte des Sets."
+            lage = T["lage"].format(n=len(stellen), was=nm, zus=zus, haelfte=T["lage_erste"])
         if lage: break
 
     n_j = sum(1 for e in gezeigt if e["feld"] == "beat_jitter_ms")
-    teile = ([f"<b>{n_j}×</b> Beat-Jitter"] if n_j else []) + \
-            ([f"<b>{len(gezeigt)-n_j}×</b> Pegelsprung"] if len(gezeigt)-n_j else [])
+    teile = ([T["m_jit"].format(n=n_j)] if n_j else []) + \
+            ([T["m_peg"].format(n=len(gezeigt)-n_j)] if len(gezeigt)-n_j else [])
     muster = ""
     if roh:
         ungezeigt = len(roh) - len(gezeigt)
-        rest = ("" if ungezeigt <= 0 else " Eine weitere Stelle ist hier nicht aufgeführt."
-                if ungezeigt == 1 else f" Weitere {ungezeigt} Stellen sind hier nicht aufgeführt.")
-        muster = (f'<div class="muster">{len(roh)} Stellen über der Schwelle: '
-                  f'{" und ".join(teile)}.{rest} Die Liste steht nach Schwere, gemessen als '
-                  f'Vielfaches der jeweiligen Schwelle — so sind dB und ms vergleichbar.{lage}</div>')
-    ue_html = muster + "".join(uebungen) if uebungen else (
-      '<div class="uebung"><div class="zeit">–</div><div class="was">Keine Stelle über der '
-      'Schwelle.</div><div class="wie">Weder Pegelsprung noch Beat-Jitter überschreiten in '
-      'diesem Set ihre belegte Schwelle.</div></div>')
+        rest = ("" if ungezeigt <= 0 else T["m_rest1"] if ungezeigt == 1
+                else T["m_restn"].format(n=ungezeigt))
+        muster = (f'<div class="muster">{T["m_stellen"].format(n=len(roh))}'
+                  f'{T["m_und"].join(teile)}.{rest}{T["m_sortiert"]}{lage}</div>')
+    ue_html = muster + "".join(uebungen) if uebungen else T["leer"]
 
     p50p = statistics.median(pj) if pj else None
     p50j = statistics.median(bj) if bj else None
@@ -392,7 +546,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
         k_datum, k_text, k_liste = korrektur
         punkte = "".join(f"<li>{x}</li>" for x in k_liste)
         korrektur_html = (f'<aside class="korrektur" role="note">'
-                          f'<span class="marke">Korrigierte Fassung · {k_datum}</span>'
+                          f'<span class="marke">{T["korr_marke"].format(d=k_datum)}</span>'
                           f'<p>{k_text}</p>{"<ul>" + punkte + "</ul>" if punkte else ""}</aside>')
 
     return f"""<title>{titel}</title>
@@ -402,60 +556,52 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
 <style>{CSS}</style>
 <div class="blatt">
 <header class="kopf">
-  <span class="marke">MixCoach · Set-Analyse</span>
+  <span class="marke">{T["marke"]}</span>
   <div class="zeile" style="margin-top:8px"><h1>{titel}</h1>
     <span class="mono" style="color:var(--ink-3);font-size:13px">{datum}</span></div>
   <p class="quelle" style="color:var(--ink-2)">{quelle}</p>
   <dl class="stammdaten">
-    <div><dt class="marke">Länge</dt><dd class="mono">{zahl(dur/60)} min</dd></div>
-    <div><dt class="marke">Übergänge</dt><dd class="mono">{n}</dd></div>
-    <div><dt class="marke">Grundtempo</dt><dd class="mono">{report.get('bpm') or '–'} BPM</dd></div>
+    <div><dt class="marke">{T["laenge"]}</dt><dd class="mono">{zahl(dur/60)} {T["min"]}</dd></div>
+    <div><dt class="marke">{T["uebergaenge"]}</dt><dd class="mono">{n}</dd></div>
+    <div><dt class="marke">{T["tempo"]}</dt><dd class="mono">{report.get('bpm') or '–'} BPM</dd></div>
   </dl>
 </header>
 {korrektur_html}{urteil_html}
 <section>
-  <div class="sektionskopf"><span class="nr">01</span><h2>Die zwei Zahlen, die belegt sind</h2></div>
-  <p class="hinweis">MixCoach misst viel und belegt zwei Größen: den Pegelsprung am Übergang
-    und den Beat-Jitter im Blend. Nur diese beiden hängen nachweisbar mit dem menschlichen
-    Urteil zusammen — alles andere steht weiter unten unter „Was hier nicht drinsteht“.</p>
+  <div class="sektionskopf"><span class="nr">01</span><h2>{T["h1"]}</h2></div>
+  <p class="hinweis">{T["hinweis1"]}</p>
   <div class="kacheln" style="margin-top:18px">
     <div class="kachel">
-      <span class="marke">Pegelsprung · Median</span>
+      <span class="marke">{T["k_pegel"]}</span>
       <div class="wert mono">{zahl(p50p)}<span class="einheit">&nbsp;dB</span></div>
-      <div class="unter"><b>{sum(1 for v in pj if v>=SCHWELLE_PEGEL)} von {len(pj)}</b> Übergängen
-        ({round(sum(1 for v in pj if v>=SCHWELLE_PEGEL)/len(pj)*100) if pj else 0}&nbsp;%)
-        springen um mehr als 3 dB. Größter Sprung: {zahl(max(pj) if pj else None)} dB.</div>
-      {_skala(p50p, SCHWELLE_PEGEL, PROFI_PEGEL_P50, 4.0, 'Vergleichs-Sets 1,35 dB', 'Schwelle 3 dB')}
+      <div class="unter">{T["u_pegel"].format(a=sum(1 for v in pj if v>=SCHWELLE_PEGEL), b=len(pj),
+        p=round(sum(1 for v in pj if v>=SCHWELLE_PEGEL)/len(pj)*100) if pj else 0,
+        m=zahl(max(pj) if pj else None))}</div>
+      {_skala(p50p, SCHWELLE_PEGEL, PROFI_PEGEL_P50, 4.0, T["skala_pegel_l"], T["skala_pegel_r"])}
     </div>
     <div class="kachel">
-      <span class="marke">Beat-Jitter · Median</span>
+      <span class="marke">{T["k_jitter"]}</span>
       <div class="wert mono">{zahl(p50j)}<span class="einheit">&nbsp;ms</span></div>
-      <div class="unter"><b>{sum(1 for v in bj if v>=SCHWELLE_JIT)} von {len(bj)}</b> Übergängen
-        ({round(sum(1 for v in bj if v>=SCHWELLE_JIT)/len(bj)*100) if bj else 0}&nbsp;%)
-        reißen die 15-ms-Schwelle. Schlechtester Wert: {zahl(max(bj) if bj else None)} ms.</div>
-      {_skala(p50j, SCHWELLE_JIT, PROFI_JIT_P50, 20.0, 'Vergleichs-Sets 10,0 ms', 'Schwelle 15 ms')}
+      <div class="unter">{T["u_jitter"].format(a=sum(1 for v in bj if v>=SCHWELLE_JIT), b=len(bj),
+        p=round(sum(1 for v in bj if v>=SCHWELLE_JIT)/len(bj)*100) if bj else 0,
+        m=zahl(max(bj) if bj else None))}</div>
+      {_skala(p50j, SCHWELLE_JIT, PROFI_JIT_P50, 20.0, T["skala_jitter_l"], T["skala_jitter_r"])}
     </div>
     <div class="kachel beschreibung">
-      <span class="marke">Wechseldichte · keine Bewertung</span>
-      <div class="wert mono">{zahl(dichte)}<span class="einheit">&nbsp;/10&nbsp;min</span></div>
-      <div class="unter">Ein Trackwechsel etwa alle {zahl(dur/n/60)} Minuten.
-        <b>Das ist eine Beschreibung, kein Ziel.</b> Über 23 Aufnahmen gemessen, hängt die
-        Dichte nicht mit der Qualität zusammen (ρ&nbsp;=&nbsp;−0,09, p&nbsp;=&nbsp;0,67).
-        Die Vergleichs-Sets reichen von {zahl(PROFI_DICHTE_MIN)} (Four Tet, Be Svendsen) bis
-        {zahl(PROFI_DICHTE_MAX)} (Joris Voorn) — beide Enden sind Weltklasse.</div>
+      <span class="marke">{T["k_dichte"]}</span>
+      <div class="wert mono">{zahl(dichte)}<span class="einheit">&nbsp;{T["je10"]}</span></div>
+      <div class="unter">{T["u_dichte"].format(t=zahl(dur/n/60), dmin=zahl(PROFI_DICHTE_MIN),
+        dmax=zahl(PROFI_DICHTE_MAX))}</div>
     </div>
   </div>
 </section>
 <section>
-  <div class="sektionskopf"><span class="nr">02</span><h2>Wo im Set du hinhören musst</h2></div>
-  <p class="hinweis">Jeder Balken ist ein Übergang — als <b>Zeitfenster</b>, nicht als Sekundenangabe.
-    Das ist Absicht: Die Erkennung trifft den exakten Punkt nur selten, das Fenster von
-    110 Sekunden enthält den echten Übergang in 73&nbsp;% der Fälle. Die Kurve dahinter ist der
-    Energieverlauf. Farbe und Zahl sagen dasselbe — die Zahl gilt.</p>
+  <div class="sektionskopf"><span class="nr">02</span><h2>{T["h2"]}</h2></div>
+  <p class="hinweis">{T["hinweis2"]}</p>
   <div class="achse-rahmen" style="margin-top:18px">
     <div class="achse-innen">
       <div class="energie"><svg viewBox="0 0 1000 66" preserveAspectRatio="none"
-        aria-label="Energieverlauf über das Set">
+        aria-label="{T["svg_alt"]}">
         <path d="{flaeche}" fill="var(--akzent-flaeche)"></path>
         <path d="{linie}" fill="none" stroke="var(--akzent)" stroke-width="2"
               vector-effect="non-scaling-stroke" stroke-linejoin="round"></path></svg></div>
@@ -463,57 +609,41 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
       <div class="zeitleiste">{marken}</div>
     </div>
     <div class="achse-legende">
-      <b><span class="punkt" style="background:var(--gut)"></span>im Rahmen</b>
-      <b><span class="punkt" style="background:#b07d0a"></span>knapp über der Schwelle</b>
-      <b><span class="punkt" style="background:#c05f34"></span>deutlich drüber</b>
-      <b><span class="punkt" style="background:var(--kritisch)"></span>weit drüber</b>
-      <span style="color:var(--ink-3)">Zahl im Balken: Nummer des Übergangs</span>
+      <b><span class="punkt" style="background:var(--gut)"></span>{T["l_gut"]}</b>
+      <b><span class="punkt" style="background:#b07d0a"></span>{T["l_warn"]}</b>
+      <b><span class="punkt" style="background:#c05f34"></span>{T["l_ernst"]}</b>
+      <b><span class="punkt" style="background:var(--kritisch)"></span>{T["l_krit"]}</b>
+      <span style="color:var(--ink-3)">{T["l_zahl"]}</span>
     </div>
   </div>
 </section>
 <section>
-  <div class="sektionskopf"><span class="nr">03</span><h2>Alle Übergänge im Einzelnen</h2></div>
+  <div class="sektionskopf"><span class="nr">03</span><h2>{T["h3"]}</h2></div>
   <div class="tabellen-rahmen" style="margin-top:14px"><table>
-    <thead><tr><th>Nr</th><th>Fenster</th><th>Pegelsprung</th><th>Beat-Jitter</th><th>Tonart</th></tr></thead>
+    <thead><tr>{"".join(f"<th>{h}</th>" for h in T["th"])}</tr></thead>
     <tbody>{''.join(zeilen)}</tbody></table></div>
 </section>
 <section>
-  <div class="sektionskopf"><span class="nr">04</span><h2>Was sich üben lässt</h2></div>
-  <p class="hinweis">Nur Stellen, an denen eine belegte Größe ihre Schwelle reißt.
-    Jede Zeile nennt den gemessenen Wert aus <em>diesem</em> Set.</p>
+  <div class="sektionskopf"><span class="nr">04</span><h2>{T["h4"]}</h2></div>
+  <p class="hinweis">{T["hinweis4"]}</p>
   <div class="uebungen" style="margin-top:18px">{ue_html}</div>
 </section>
 <section>
-  <div class="sektionskopf"><span class="nr">05</span><h2>Was hier nicht drinsteht</h2></div>
+  <div class="sektionskopf"><span class="nr">05</span><h2>{T["h5"]}</h2></div>
   <div class="grenzen" style="margin-top:14px">
-    <p style="font-size:14px;color:var(--ink-2)">MixCoach zeigt nichts an, was nicht gemessen
-      wurde. Für dieses Set heißt das konkret:</p>
+    <p style="font-size:14px;color:var(--ink-2)">{T["grenzen_kopf"]}</p>
     <ul>
-      <li><b>Keine Tracknamen.</b> Die Trackerkennung vergleicht gegen die Sammlung im
-        Fingerabdruck-Index. Tracks, die dort nicht liegen, bleiben unbenannt — und Treffer,
-        die nur knapp an der Erkennungsschwelle liegen, zeigt diese Seite bewusst nicht an.
-        <b>Mit einer Tracklist</b> — eine Zeile je Track, Zeiten wenn vorhanden — stünden
-        hier Namen.</li>
-      <li><b>Nichts zu EQ, Frequenzbild, Timing oder Kreativität.</b> Ob sich Bässe oder
-        Höhen im Blend beißen, wird heute nicht gemessen: Die vorhandene Bass-Messung
-        braucht beide Tracks aus der Sammlung und ist fast immer entweder 0 oder 100 —
-        ein Schalter, keine Abstufung. Gegen Hörurteile belegt ist sie nicht. Daraus einen
-        Rat abzuleiten hieße raten.</li>
-      <li><b>Das Fenster ist ein Fenster.</b> Die 110 Sekunden enthalten den echten
-        Übergang in 73&nbsp;% der Fälle — nicht in allen. Bei etwa jedem vierten Balken
-        liegt der Übergang daneben.</li>
-      <li><b>Der Vergleich hat eine Schwäche.</b> Die sechs Referenz-Sets (Dixon, Four Tet,
-        Joris Voorn, RÜFÜS DU SOL, Be Svendsen) sind veröffentlichte Festival-Mitschnitte
-        und damit gemastert. Mastering drückt Pegelsprünge. Beim <em>Pegel</em> ist der
-        Vergleich deshalb zu deinen Ungunsten verzerrt; beim <em>Beat-Jitter</em>
-        nicht — den ändert kein Mastering.</li>
+      <li>{T["g_namen"]}</li>
+      <li>{T["g_eq"]}</li>
+      <li>{T["g_fenster"]}</li>
+      <li>{T["g_vergleich"]}</li>
     </ul>
   </div>
 </section>
 <div class="fuss">
-  <span>Analyse-ID <span class="mono">{report.get('id','')[:8]}</span> ·
-    Scoring-Version {report.get('scoringVersion')}</span>
-  <span>{n} Übergänge · {zahl(dur/60)} Minuten</span>
+  <span>{T["fuss_id"]} <span class="mono">{report.get('id','')[:8]}</span> ·
+    {T["fuss_ver"]} {report.get('scoringVersion')}</span>
+  <span>{n} {T["uebergaenge"]} · {zahl(dur/60)} {T["minuten"]}</span>
 </div>
 </div>
 <div id="tip" role="status"></div>
@@ -552,6 +682,7 @@ def main() -> int:
     p.add_argument("--datum", default="")
     p.add_argument("--quelle", default="")
     p.add_argument("--aus", type=Path, default=None)
+    p.add_argument("--sprache", choices=sorted(TEXTE), default="de")
     p.add_argument("--results-dir", type=Path, default=RESULTS_DIR)
     a = p.parse_args()
     pfad = a.results_dir / f"{a.analysis_id}.json"
@@ -560,7 +691,8 @@ def main() -> int:
     report = json.loads(pfad.read_text(encoding="utf-8"))
     titel = a.titel or (report.get("fileName") or a.analysis_id)
     ziel = a.aus or Path(f"report-{a.analysis_id[:8]}.html")
-    ziel.write_text(baue(report, titel, a.datum, a.quelle), encoding="utf-8")
+    ziel.write_text(baue(report, titel, a.datum, a.quelle, sprache=a.sprache),
+                    encoding="utf-8")
     print(f"{ziel}  ({len(report.get('setTransitions') or [])} Übergänge)")
     return 0
 
