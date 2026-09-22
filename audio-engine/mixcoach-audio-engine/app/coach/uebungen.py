@@ -232,6 +232,123 @@ FASSUNGEN = {
 }
 
 
+# --- Englisch. Dieselben Faelle, dieselben Regeln, eigener Wortlaut. -------
+#
+# Das Muster steht schon in app/coach/profile.py (TEXTS mit de/en) und je
+# Uebergang in feedback/feedback_en. Uebersetzt wird NICHT im Report-
+# Generator: dort entstuende eine zweite Textbibliothek, und genau die war
+# am 14.09.2026 das Problem. Fuer beide Sprachen gelten dieselben Tests -
+# Wert im Text, Richtung nur beim Pegel, keine Wahrnehmung, eigener
+# Satzanfang je Gruppe, Aehnlichkeit unter 0,80.
+TITEL_EN = {
+    ("loudness_jump_db", "weit"): "Set the gain beforehand",
+    ("loudness_jump_db", "deutlich"): "Match the levels",
+    ("loudness_jump_db", "knapp"): "Trim the level",
+    ("beat_jitter_ms", "weit"): "Rebuild this transition",
+    ("beat_jitter_ms", "deutlich"): "Correct the beats earlier",
+    ("beat_jitter_ms", "knapp"): "Nudge the beats",
+}
+
+FASSUNGEN_EN = {
+    ("lauter", "weit"): [
+        "the incoming track came in {w} {r} than the one playing. Pull its gain "
+        "down before you open the fader, not while the blend is running.",
+        "the level rose by {w} as the new track entered, it played {r}. Cue it up "
+        "and turn the trim back until both meters sit level.",
+        "the new channel opened {w} {r} than the old one. Rebuild the transition "
+        "with the gain lowered instead of riding it out on the fader.",
+    ],
+    ("lauter", "deutlich"): [
+        "the level jumped by {w} on entry, the new track ran {r}. Match it on the "
+        "trim before the blend.",
+        "the meter showed {w} difference at the switch, the new track was {r}. "
+        "Compare both meters before the fader opens and take the gain back.",
+        "the second deck came up {w} {r} than the first. Lower its gain first, "
+        "then start blending.",
+    ],
+    ("lauter", "knapp"): [
+        "the channel came up {w} {r} on entry. A small turn of the gain before "
+        "the blend is enough.",
+        "the level gained {w} at the switch, the incoming track was {r}. A light "
+        "trim correction before you blend covers it.",
+        "the track lifted {w} above the one playing, so {r}. Just over the line — "
+        "match it while cueing.",
+        "the entry started {w} {r}. Check the cue channel meter before opening "
+        "the fader.",
+        "the incoming level landed {w} {r}. Taking the gain down a notch before "
+        "the blend is enough.",
+    ],
+    ("leiser", "weit"): [
+        "the incoming track was missing {w} — it came in {r} than the one "
+        "playing. That gap belongs on the gain before the blend, not on the fader.",
+        "this switch gave up {w} of level, the second track playing {r}. Cue it "
+        "next time and bring the trim up before the fader moves.",
+        "the second deck stayed {w} {r} than its predecessor. Run the switch again "
+        "with the gain already at the level of the track playing.",
+        "the entry lost {w} at once, the new track was {r}. Raise the incoming "
+        "channel first and only then open it.",
+    ],
+    ("leiser", "deutlich"): [
+        "the mix lost {w} at the switch, the new track was {r}. Correct on the "
+        "gain before the fader opens.",
+        "the new channel started {w} {r} than the one playing. The cue meter shows "
+        "that before the blend — trim it up.",
+        "the entry sat {w} {r}. Match it on the gain before the fader moves.",
+        "the new deck ran {w} {r} than its predecessor. Raise the trim while "
+        "cueing.",
+    ],
+    ("leiser", "knapp"): [
+        "the new track entered {w} {r}. A few seconds on the gain fixes it.",
+        "the track came up {w} {r} than what was playing. A small upward "
+        "correction on the gain is enough.",
+        "the incoming level stayed {w} {r} than its predecessor, just over the "
+        "line. Turn the trim up a notch before the blend.",
+    ],
+    ("beat_jitter_ms", "weit"): [
+        "the beat spacing moved by {w} through the blend. Rebuild the transition: "
+        "match the tempo of both decks first, then start blending.",
+        "the gap between the beats varied by {w}. Align the pitch more finely "
+        "before the blend and keep jog corrections small inside it.",
+        "the grid did not hold through the blend: {w} of spread. Start the blend "
+        "earlier so there is room to correct.",
+    ],
+    ("beat_jitter_ms", "deutlich"): [
+        "beat spacing scattered by {w} inside the blend. The correction belongs in "
+        "the first phrase, not at the end of it.",
+        "MixCoach measured {w} of spread between the beats. Use pitch bend early "
+        "and in small steps instead of one large push.",
+        "the grid ran {w} off through the blend. Match the tempo of both decks "
+        "more precisely before you open the fader.",
+        "the distance between the kicks varied by {w}. Coming in two bars earlier "
+        "leaves time to correct.",
+        "spread of the beat spacing reached {w} in the blend. Keep an eye on the "
+        "beat display of both decks while it runs.",
+        "the spacing would not settle, at {w} of spread. Trim the tempo on the "
+        "pitch fader first, then open the fader.",
+    ],
+    ("beat_jitter_ms", "knapp"): [
+        "beat spacing showed {w} of spread. A short nudge on the jog usually does it.",
+        "the grid came to {w} of spread, just past the line. One push on the jog "
+        "is enough.",
+        "variation between the beats measured {w}. Correct briefly in the first "
+        "phrase.",
+        "spread inside the blend stood at {w}. A tap on the jog early in the blend "
+        "covers it.",
+        "the kicks sat {w} apart in spread. Watch the beat display as you blend "
+        "and follow gently.",
+        "measurement returned {w} of irregularity in the grid. A small pitch "
+        "correction before the blend fixes it.",
+        "beat spacing wobbled by {w}. Correct once within the first eight bars of "
+        "the blend.",
+        "deviation across the beats added up to {w}. Match both tempos one decimal "
+        "place more precisely beforehand.",
+    ],
+}
+
+ZIELSATZ = {"de": " Ziel: unter {z} {e}.", "en": " Target: under {z} {e}."}
+BIBLIOTHEK = {"de": (FASSUNGEN, TITEL), "en": (FASSUNGEN_EN, TITEL_EN)}
+
+
 def _stufe(faktor: float) -> str:
     """Textstufe aus dem Vielfachen der Schwelle - keine Messgrenze."""
     if faktor >= STUFE_WEIT:
@@ -266,12 +383,13 @@ def _zeit(sekunden: Optional[float]) -> str:
     return f"{gesamt // 60:d}:{gesamt % 60:02d}"
 
 
-def _zahl(wert: float) -> str:
-    """Deutsche Schreibweise mit einer Nachkommastelle."""
-    return f"{wert:.1f}".replace(".", ",")
+def _zahl(wert: float, sprache: str = "de") -> str:
+    """Eine Nachkommastelle - Komma im Deutschen, Punkt im Englischen."""
+    text = f"{wert:.1f}"
+    return text.replace(".", ",") if sprache == "de" else text
 
 
-def _uebergangsname(t: Dict) -> str:
+def _uebergangsname(t: Dict, sprache: str = "de") -> str:
     """Tracknamen, wo vorhanden - sonst die Uebergangsnummer.
 
     NIE ein Platzhalter, der Namen vortaeuscht: nur 19 % der Uebergaenge
@@ -282,6 +400,8 @@ def _uebergangsname(t: Dict) -> str:
     if raus or rein:
         return f"{raus or '?'} → {rein or '?'}"
     index = t.get("index")
+    if sprache == "en":
+        return f"Transition {index}" if index is not None else "this transition"
     return f"Übergang {index}" if index is not None else "dieser Übergang"
 
 
@@ -303,7 +423,8 @@ def _camelot_abstand(vorher: Optional[str], nachher: Optional[str]) -> Optional[
     return stunden + (0 if a[1] == b[1] else 1)
 
 
-def _uebung_pegelsprung(analysis_id: str, t: Dict, fassung: int = 0) -> Optional[Dict]:
+def _uebung_pegelsprung(analysis_id: str, t: Dict, fassung: int = 0,
+                        sprache: str = "de") -> Optional[Dict]:
     """Die erste belegte Uebung. None, wenn nichts zu sagen ist.
 
     `fassung` waehlt den Wortlaut innerhalb des Falls - baue() vergibt sie
@@ -318,13 +439,18 @@ def _uebung_pegelsprung(analysis_id: str, t: Dict, fassung: int = 0) -> Optional
 
     mid = t.get("mid_sec")
     richtung, stufe = _fall("loudness_jump_db", float(sprung))
-    liste = FASSUNGEN[(richtung, stufe)]
-    satz = liste[fassung % len(liste)].format(w=f"{_zahl(betrag)} dB", r=richtung)
+    fassungen, titel = BIBLIOTHEK.get(sprache, BIBLIOTHEK["de"])
+    liste = fassungen[(richtung, stufe)]
+    wort = "louder" if sprung > 0 else "quieter"
+    satz = liste[fassung % len(liste)].format(
+        w=f"{_zahl(betrag, sprache)} dB", r=wort if sprache == "en" else richtung)
+    kopf = "At" if sprache == "en" else "Bei"
     return {
-        "title": f"{TITEL[('loudness_jump_db', stufe)]} bei {_zeit(mid)}",
+        "title": (f"{titel[('loudness_jump_db', stufe)]} "
+                  f"{'at' if sprache == 'en' else 'bei'} {_zeit(mid)}"),
         "description": (
-            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) {satz} "
-            f"Ziel: unter {_zahl(ZIEL_PEGELSPRUNG_DB)} dB."
+            f"{kopf} {_zeit(mid)} ({_uebergangsname(t, sprache)}) {satz}"
+            + ZIELSATZ[sprache].format(z=_zahl(ZIEL_PEGELSPRUNG_DB, sprache), e="dB")
         ),
         "analysisId": analysis_id,
         "transitionIndex": t.get("index"),
@@ -338,7 +464,8 @@ def _uebung_pegelsprung(analysis_id: str, t: Dict, fassung: int = 0) -> Optional
     }
 
 
-def _uebung_beat_jitter(analysis_id: str, t: Dict, fassung: int = 0) -> Optional[Dict]:
+def _uebung_beat_jitter(analysis_id: str, t: Dict, fassung: int = 0,
+                        sprache: str = "de") -> Optional[Dict]:
     """Die zweite belegte Uebung, seit 20.08.2026. None, wenn nichts zu sagen ist.
 
     Anders als beim Pegelsprung gibt es keine Richtung ("zu laut"/"zu leise")
@@ -353,13 +480,16 @@ def _uebung_beat_jitter(analysis_id: str, t: Dict, fassung: int = 0) -> Optional
 
     mid = t.get("mid_sec")
     _, stufe = _fall("beat_jitter_ms", jitter)
-    liste = FASSUNGEN[("beat_jitter_ms", stufe)]
-    satz = liste[fassung % len(liste)].format(w=f"{_zahl(jitter)} ms")
+    fassungen, titel = BIBLIOTHEK.get(sprache, BIBLIOTHEK["de"])
+    liste = fassungen[("beat_jitter_ms", stufe)]
+    satz = liste[fassung % len(liste)].format(w=f"{_zahl(jitter, sprache)} ms")
+    kopf = "At" if sprache == "en" else "Bei"
     return {
-        "title": f"{TITEL[('beat_jitter_ms', stufe)]} bei {_zeit(mid)}",
+        "title": (f"{titel[('beat_jitter_ms', stufe)]} "
+                  f"{'at' if sprache == 'en' else 'bei'} {_zeit(mid)}"),
         "description": (
-            f"Bei {_zeit(mid)} ({_uebergangsname(t)}) {satz} "
-            f"Ziel: unter {_zahl(ZIEL_BEAT_JITTER_MS)} ms."
+            f"{kopf} {_zeit(mid)} ({_uebergangsname(t, sprache)}) {satz}"
+            + ZIELSATZ[sprache].format(z=_zahl(ZIEL_BEAT_JITTER_MS, sprache), e="ms")
         ),
         "analysisId": analysis_id,
         "transitionIndex": t.get("index"),
@@ -501,7 +631,8 @@ def _ueberschreitung(uebung: Dict) -> float:
     return ueberschreitung(uebung.get("metric") or "", uebung.get("value") or 0.0)
 
 
-def baue(analysis_id: str, transitions: List[Dict]) -> Tuple[List[Dict], List[Dict]]:
+def baue(analysis_id: str, transitions: List[Dict],
+         sprache: str = "de") -> Tuple[List[Dict], List[Dict]]:
     """(Uebungen, Beobachtungen) fuer einen Report.
 
     Getrennte Listen, nicht dieselbe: die Oberflaeche muss den Unterschied
@@ -524,7 +655,8 @@ def baue(analysis_id: str, transitions: List[Dict]) -> Tuple[List[Dict], List[Di
             if wert is None or not ueber_der_schwelle(t, metrik):
                 continue
             fall = _fall(metrik, wert)
-            u = bauer(analysis_id, t, fassung=versatz + vergeben.get(fall, 0))
+            u = bauer(analysis_id, t, fassung=versatz + vergeben.get(fall, 0),
+                      sprache=sprache)
             if u is not None:
                 vergeben[fall] = vergeben.get(fall, 0) + 1
                 uebungen.append(u)

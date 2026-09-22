@@ -9,7 +9,10 @@ from collections import Counter
 from difflib import SequenceMatcher
 from itertools import combinations
 
+import pytest
+
 from app.coach.uebungen import (
+    BIBLIOTHEK,
     FASSUNGEN,
     GEMESSENES_MAXIMUM,
     STUFE_DEUTLICH,
@@ -20,11 +23,16 @@ from app.coach.uebungen import (
 
 AID = "11111111-2222-3333-4444-555555555555"
 
-# Wahrnehmung und Wirkung sind nicht gemessen - in keiner Fassung.
-NIE = ("hörbar", "hoerbar", "klingt", "raum ", "publikum", "dancefloor",
-       "matsch", "spürbar", "wirkt", "kostet")
+# Wahrnehmung und Wirkung sind nicht gemessen - in keiner Fassung, in keiner
+# Sprache. Die englische Bibliothek kam am 22.09.2026 dazu und faellt unter
+# dieselben Regeln.
+NIE = {"de": ("hörbar", "hoerbar", "klingt", "raum ", "publikum", "dancefloor",
+              "matsch", "spürbar", "wirkt", "kostet"),
+       "en": ("audible", "sounds ", "the room", "crowd", "dancefloor", "muddy",
+              "feels ", "costs ")}
 # Der Jitter ist eine Streuung: keine Richtung, weder zeitlich noch im Pegel.
-NIE_BEIM_JITTER = ("zu früh", "zu frueh", "zu spät", "zu spaet", "lauter", "leiser")
+NIE_BEIM_JITTER = {"de": ("zu früh", "zu frueh", "zu spät", "zu spaet", "lauter", "leiser"),
+                   "en": ("too early", "too late", "louder", "quieter")}
 
 
 def _uebergang(index, **felder):
@@ -57,33 +65,48 @@ def test_im_report_steht_keine_formulierung_zweimal():
     assert not doppelt, doppelt
 
 
-def test_jede_liste_ist_laenger_als_das_gemessene_maximum():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_jede_liste_ist_laenger_als_das_gemessene_maximum(sprache):
+    fassungen, _ = BIBLIOTHEK[sprache]
     for fall, maximum in GEMESSENES_MAXIMUM.items():
-        assert len(FASSUNGEN[fall]) > maximum, fall
+        assert len(fassungen[fall]) > maximum, (sprache, fall)
 
 
-def test_jede_fassung_nennt_den_wert():
-    for fall, liste in FASSUNGEN.items():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_jede_fassung_nennt_den_wert(sprache):
+    fassungen, _ = BIBLIOTHEK[sprache]
+    for fall, liste in fassungen.items():
         for f in liste:
-            assert "{w}" in f, (fall, f)
+            assert "{w}" in f, (sprache, fall, f)
 
 
-def test_jede_pegelfassung_nennt_die_richtung():
-    for (art, _), liste in FASSUNGEN.items():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_jede_pegelfassung_nennt_die_richtung(sprache):
+    fassungen, _ = BIBLIOTHEK[sprache]
+    for (art, _), liste in fassungen.items():
         if art in ("lauter", "leiser"):
             for f in liste:
-                assert "{r}" in f, f
+                assert "{r}" in f, (sprache, f)
 
 
-def test_keine_fassung_behauptet_wahrnehmung_oder_wirkung():
-    for fall, liste in FASSUNGEN.items():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_jede_sprache_deckt_dieselben_faelle_ab(sprache):
+    fassungen, titel = BIBLIOTHEK[sprache]
+    assert set(fassungen) == set(FASSUNGEN), sprache
+    assert set(titel) == set(TITEL), sprache
+
+
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_keine_fassung_behauptet_wahrnehmung_oder_wirkung(sprache):
+    fassungen, _ = BIBLIOTHEK[sprache]
+    for fall, liste in fassungen.items():
         for f in liste:
             klein = f.lower()
-            for wort in NIE:
-                assert wort not in klein, (fall, wort, f)
+            for wort in NIE[sprache]:
+                assert wort not in klein, (sprache, fall, wort, f)
             if fall[0] == "beat_jitter_ms":
-                for wort in NIE_BEIM_JITTER:
-                    assert wort not in klein, (fall, wort, f)
+                for wort in NIE_BEIM_JITTER[sprache]:
+                    assert wort not in klein, (sprache, fall, wort, f)
 
 
 def test_zu_laut_und_zu_leise_geben_entgegengesetzte_handgriffe():
@@ -115,7 +138,8 @@ def test_zwei_reports_beginnen_nicht_mit_derselben_fassung():
     assert len(texte) > 1
 
 
-def test_keine_zwei_fassungen_derselben_groesse_sind_fast_gleich():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_keine_zwei_fassungen_derselben_groesse_sind_fast_gleich(sprache):
     """Wortgleich ist nicht der einzige Fehler - fast gleich liest sich genauso.
 
     Am 14.09.2026 zeigte die Vorfuehrung an Fabis Set zwei Uebungen, die sich
@@ -127,18 +151,21 @@ def test_keine_zwei_fassungen_derselben_groesse_sind_fast_gleich():
     # Uebung derselben Groesse gleich angehaengt wird. Ohne ihn lag ein Paar
     # am 16.09.2026 bei 0,79 und kam durch - gelesen waren es 0,83, und
     # "Den einkommenden Kanal vorab anheben" stand zweimal untereinander.
-    for groesse, ziel in (("pegel", " Ziel: unter «w»."), ("jitter", " Ziel: unter «w».")):
-        faelle = [k for k in FASSUNGEN
+    fassungen, _ = BIBLIOTHEK[sprache]
+    ziel = " Ziel: unter «w»." if sprache == "de" else " Target: under «w»."
+    for groesse in ("pegel", "jitter"):
+        faelle = [k for k in fassungen
                   if (k[0] in ("lauter", "leiser")) == (groesse == "pegel")]
         texte = [(k, f.format(w="«w»", r=k[0] if k[0] in ("lauter", "leiser") else "") + ziel)
-                 for k in faelle for f in FASSUNGEN[k]]
+                 for k in faelle for f in fassungen[k]]
         zu_nah = [(round(SequenceMatcher(None, a, b).ratio(), 2), ka, kb)
                   for (ka, a), (kb, b) in combinations(texte, 2)
                   if SequenceMatcher(None, a, b).ratio() >= 0.80]
-        assert not zu_nah, (groesse, zu_nah)
+        assert not zu_nah, (sprache, groesse, zu_nah)
 
 
-def test_kein_satzanfang_zweimal_je_gruppe():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_kein_satzanfang_zweimal_je_gruppe(sprache):
     """Gleich beginnende Zeilen untereinander lesen sich wie Copy-Paste - auch
     wenn der Rest verschieden ist.
 
@@ -151,14 +178,16 @@ def test_kein_satzanfang_zweimal_je_gruppe():
     ist die Rotation wiederholungsfrei, solange die Liste laenger ist als das
     Maximum (test_jede_liste_ist_laenger_als_das_gemessene_maximum).
     """
+    fassungen, _ = BIBLIOTHEK[sprache]
     for gruppe in ("lauter", "leiser", "beat_jitter_ms"):
         anfaenge = Counter(" ".join(f.split()[:3])
-                           for k in FASSUNGEN if k[0] == gruppe for f in FASSUNGEN[k])
+                           for k in fassungen if k[0] == gruppe for f in fassungen[k])
         doppelt = [a for a, n in anfaenge.items() if n > 1]
-        assert not doppelt, (gruppe, doppelt)
+        assert not doppelt, (sprache, gruppe, doppelt)
 
 
-def test_report_mit_den_meisten_uebungen_hat_keinen_anfang_doppelt():
+@pytest.mark.parametrize("sprache", sorted(BIBLIOTHEK))
+def test_report_mit_den_meisten_uebungen_hat_keinen_anfang_doppelt(sprache):
     # Hoechstwerte je Report im Bestand (16.09.2026): 11 Jitter, 7 zu laut, 4 zu leise.
     uebergaenge = (
         [_uebergang(i, beat_jitter_ms=15.5 + i * 0.3) for i in range(1, 7)]
@@ -169,10 +198,10 @@ def test_report_mit_den_meisten_uebungen_hat_keinen_anfang_doppelt():
         + [_uebergang(30 + i, loudness_jump_db=-4.5 - i * 0.1) for i in range(3)]
         + [_uebergang(40, loudness_jump_db=-6.0)]
     )
-    uebungen, _ = baue(AID, uebergaenge)
+    uebungen, _ = baue(AID, uebergaenge, sprache=sprache)
     anfaenge = Counter(
         (u["metric"] if u["metric"] == "beat_jitter_ms" else ("lauter" if u["value"] > 0 else "leiser"),
-         " ".join(re.sub(r"^Bei \S+ \([^)]*\) ", "", u["description"]).split()[:3]))
+         " ".join(re.sub(r"^(Bei|At) \S+ \([^)]*\) ", "", u["description"]).split()[:3]))
         for u in uebungen)
     assert len(uebungen) == 22
     assert max(anfaenge.values()) == 1, [a for a, n in anfaenge.items() if n > 1]
