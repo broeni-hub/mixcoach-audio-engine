@@ -18,6 +18,7 @@ import {
   lageNachRegistrierung,
   deuteAnmeldefehler,
   istWiederherstellung,
+  sollZurPasswortSeite,
 } from "../auth-logik";
 import { TEXTE } from "../auth-texte";
 
@@ -113,5 +114,30 @@ describe("die Ehrlichkeitslinie gilt auch an der Oberflaeche", () => {
       expect((TEXTE.de as Record<string, string>)[k].length, `de.${k} leer`).toBeGreaterThan(0);
       expect((TEXTE.en as Record<string, string>)[k].length, `en.${k} leer`).toBeGreaterThan(0);
     }
+  });
+});
+
+describe("sollZurPasswortSeite", () => {
+  // Der Fall vom 23.09.2026: Der Link aus der Reset-Mail landete auf der
+  // Landingpage, weil die Zieladresse nicht in der Redirect-Allowlist stand
+  // und Supabase still auf die SITE_URL zurueckfiel. Dort tat niemand etwas
+  // mit dem Fragment - die Weiche gab es nur auf /auth.
+  it("faengt den Link auch auf der Landingpage", () => {
+    expect(sollZurPasswortSeite("/", "#access_token=abc&type=recovery")).toBe(true);
+  });
+
+  it("faengt ihn auf jeder anderen Seite genauso", () => {
+    expect(sollZurPasswortSeite("/auth", "#type=recovery")).toBe(true);
+    expect(sollZurPasswortSeite("/pricing", "#type=recovery")).toBe(true);
+  });
+
+  it("schickt nicht im Kreis, wenn wir schon da sind", () => {
+    expect(sollZurPasswortSeite("/passwort-neu", "#type=recovery")).toBe(false);
+  });
+
+  it("laesst alles andere in Ruhe", () => {
+    expect(sollZurPasswortSeite("/", "")).toBe(false);
+    expect(sollZurPasswortSeite("/", "#access_token=abc&type=signup")).toBe(false);
+    expect(sollZurPasswortSeite("/app/dashboard", "#type=recovery_alt")).toBe(false);
   });
 });

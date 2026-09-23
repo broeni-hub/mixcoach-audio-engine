@@ -6,6 +6,8 @@
 // gekostet, und eine Regel ohne Test ist hier eine Regel auf Zeit. Als reine
 // Funktionen sind sie prüfbar wie scoring-version.ts.
 
+import { RESET_ZIEL } from "@/lib/auth-texte";
+
 /** Was nach einer erfolgreichen Registrierung wirklich gilt. */
 export type Registrierungslage = "angemeldet" | "bestaetigung-noetig";
 
@@ -68,4 +70,28 @@ export function deuteAnmeldefehler(meldung: string): Anmeldefehler {
  */
 export function istWiederherstellung(hash: string): boolean {
   return /(^|[#&])type=recovery(&|$)/.test(hash ?? "");
+}
+
+/**
+ * Gehört dieser Aufruf auf die Passwort-Seite — egal, wo er gelandet ist?
+ *
+ * Der Grund, warum es diese Funktion gibt (23.09.2026): Bis heute stand die
+ * Weiche nur in `auth.tsx`. Der Link aus der Reset-Mail landet aber auf der
+ * SITE_URL, sobald die Zieladresse nicht in der Redirect-Allowlist des
+ * Supabase-Projekts steht — und die SITE_URL ist die Landingpage, nicht
+ * `/auth`. Dort tat niemand etwas mit dem Fragment: Sebastian klickte den
+ * Link, sah die Startseite und konnte sein Passwort nicht setzen. Der
+ * Kommentar über `istWiederherstellung` hatte genau diesen Fall vorhergesagt
+ * und ihn „von hier aus nicht prüfbar" genannt. Jetzt ist er eingetreten.
+ *
+ * Die Allowlist gehört trotzdem in Ordnung gebracht — aber sie ist eine
+ * Kontoeinstellung, und dieselbe Falle steht bei jeder weiteren Adresse
+ * wieder auf (Produktion, Vorschau-Deploys, ein anderer Port). Deshalb hängt
+ * die Weiche ab jetzt an der Wurzel und gilt für jede Seite.
+ *
+ * Nicht weiterleiten, wenn wir schon da sind — sonst dreht sich die Navigation
+ * im Kreis.
+ */
+export function sollZurPasswortSeite(pfad: string, hash: string): boolean {
+  return istWiederherstellung(hash) && pfad !== RESET_ZIEL;
 }
