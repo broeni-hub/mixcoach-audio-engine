@@ -3,7 +3,10 @@
     "allow": [
       "Read(//Users/sebastianbroening/Music/**)",
       "Bash(npm --version)",
-      "Bash(git --version)"
+      "Bash(git --version)",
+      "Bash(git push:*)",
+      "Bash(git push *)",
+      "Bash(git push)"
     ]
   }
 }
