@@ -48,36 +48,43 @@ import argparse, json, statistics, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from app.coach.referenz import SPANNEN as PROFI_SPANNEN  # noqa: E402
 from app.coach.uebungen import (  # noqa: E402
+    GROESSEN,
     SCHWELLE_CAMELOT_SCHRITTE,
     SCHWELLE_ENERGIELOCH_PCT,
     _camelot_abstand,
     baue as uebungen_bauen,
+    sauberkeit,
+    stufe,
+    unter_allen_schwellen,
     ueberschreitung,
 )
 from app.paths import RESULTS_DIR  # noqa: E402
 
-SCHWELLE_PEGEL, ZIEL_PEGEL = 3.0, 1.0
-SCHWELLE_JIT,  ZIEL_JIT    = 15.0, 10.0
-# Referenz: die sechs fremden Profi-Sets im Bestand, gerechnet am 07.09.2026
-# Die sechs fremden Profi-Sets als SPANNE, nicht als Mittelwert.
+# KEINE EIGENEN ZAHLEN MEHR (23.09.2026).
 #
-# Bis zum 23.09.2026 stand hier nur der Median (Pegel 1,35 dB, Jitter 10,0 ms),
-# und die Skala zeichnete ihr Band von 0 bis dorthin. Alles darueber sah nach
-# "schlechter als die Profis" aus. Das ist falsch: die sechs Sets streuen beim
-# Jitter von 5,8 bis 11,9 ms.
+# Hier standen bis heute sieben Konstanten: vier Schwellen (3,0 dB / 1,0 dB /
+# 15,0 ms / 10,0 ms) und drei Profi-Spannen. Die vier Schwellen waren eine
+# woertliche Kopie aus app/coach/uebungen.py - dieselbe Regel an zwei Stellen,
+# genau die Bauart, an der dieses Projekt wiederholt Tage verloren hat. Die
+# drei Spannen gab es NUR hier; die App kannte sie nicht, und deshalb war die
+# verschickte Seite ein zweites Produkt statt einer Darstellung des ersten.
 #
-# Ein Test-DJ schrieb dazu: "maybe I'm not a machine but I believe 10ms is
-# fucking amazing". Er hatte recht. Sein Set liegt bei 11,2 ms - innerhalb der
-# Spanne, besser als Dixon bei Tomorrowland (11,9). Nachgerechnet am
-# 23.09.2026: der Standardfehler des Set-Medians ist ±1,8 ms, groesser als der
-# angezeigte Rueckstand von 1,2 ms, und gegen KEIN einziges Referenz-Set ist
-# ein Unterschied nachweisbar (Mann-Whitney, alle p > 0,09; gegen alle
-# zusammen p = 0,49). Der Report zeigte also einen Rueckstand, den er nicht
-# gemessen hatte.
-PROFI_PEGEL_MIN, PROFI_PEGEL_MAX = 0.50, 2.00     # Joris Voorn .. RUEFUES DU SOL
-PROFI_JIT_MIN, PROFI_JIT_MAX = 5.8, 11.9          # Joris Voorn .. Dixon WE2
-PROFI_DICHTE_MIN, PROFI_DICHTE_MAX = 1.83, 2.94   # Be Svendsen .. Joris Voorn
+# Beides liegt jetzt in app/ und wird von dort gelesen. Wer eine Schwelle
+# aendert, aendert sie in uebungen.py; wer die Referenz nachrechnet, tut es
+# mit referenz.neu_berechnen(). Dieses Werkzeug stellt nur noch dar.
+SCHWELLE_PEGEL = GROESSEN["loudness_jump_db"]["schwelle"]
+ZIEL_PEGEL     = GROESSEN["loudness_jump_db"]["ziel"]
+SCHWELLE_JIT   = GROESSEN["beat_jitter_ms"]["schwelle"]
+ZIEL_JIT       = GROESSEN["beat_jitter_ms"]["ziel"]
+
+PROFI_PEGEL_MIN, PROFI_PEGEL_MAX = (PROFI_SPANNEN["loudness_jump_db"]["min"],
+                                    PROFI_SPANNEN["loudness_jump_db"]["max"])
+PROFI_JIT_MIN, PROFI_JIT_MAX = (PROFI_SPANNEN["beat_jitter_ms"]["min"],
+                                PROFI_SPANNEN["beat_jitter_ms"]["max"])
+PROFI_DICHTE_MIN, PROFI_DICHTE_MAX = (PROFI_SPANNEN["uebergaenge_je_10min"]["min"],
+                                      PROFI_SPANNEN["uebergaenge_je_10min"]["max"])
 
 # Die Uebungstexte kommen aus der Engine (app/coach/uebungen.py), nicht aus
 # einer eigenen Bibliothek. Bis zum 14.09.2026 hatte dieses Werkzeug eine
@@ -443,11 +450,6 @@ def zahl(v, n=1):
     """Deutsch - fuer Aufrufer ausserhalb von baue()."""
     return _fmt(v, n, "de")
 
-def stufe(wert, schwelle):
-    if wert is None: return "keine"
-    f = abs(wert) / schwelle
-    return "gut" if f < 1.0 else "warnung" if f < 1.35 else "ernst" if f < 1.75 else "kritisch"
-
 def _spuren_verteilen(fenster):
     reihen = []
     for f in sorted(fenster, key=lambda x: x["von"]):
@@ -466,16 +468,22 @@ def _energie_pfad(d, breite=1000, hoehe=66):
     linie = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
     return linie, linie + f" L{breite},{hoehe} L0,{hoehe} Z"
 
-def _skala(wert, schwelle, ref_min, ref_max, max_x, links, rechts):
+def _skala(metrik, wert, max_x, links, rechts):
     """Der Wert auf einer Skala, mit dem Referenzband der sechs Profi-Sets.
 
     Das Band ist deren SPANNE, nicht ihr Mittelwert - sonst liest sich jeder
     Wert oberhalb des Mittelwerts als Rueckstand, obwohl er zwischen den
-    Profis liegen kann (siehe PROFI_JIT_MIN/MAX).
+    Profis liegen kann. Hergang und Zahlen: app/coach/referenz.py.
+
+    Schwelle und Band kommen seit dem 23.09.2026 aus den Regeln, nicht mehr
+    als Parameter von der Aufrufstelle - sonst haette jeder Aufruf seine
+    eigene Quelle fuer 3,0 dB.
     """
     if wert is None: return ""
+    schwelle = GROESSEN[metrik]["schwelle"]
+    ref_min, ref_max = PROFI_SPANNEN[metrik]["min"], PROFI_SPANNEN[metrik]["max"]
     farbe = {"gut":"var(--gut)","warnung":"#b07d0a","ernst":"#c05f34",
-             "kritisch":"var(--kritisch)"}[stufe(wert, schwelle)]
+             "kritisch":"var(--kritisch)"}[stufe(metrik, wert)]
     von, breite = min(ref_min/max_x*100, 100), min((ref_max-ref_min)/max_x*100, 100)
     return (f'<div class="skala"><div class="spur">'
             f'<div class="band" style="left:{von:.1f}%;width:{breite:.1f}%"></div>'
@@ -506,7 +514,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     for t in ts:
         w = t.get("window") or {}
         if w.get("vonSec") is None: continue
-        sp, sj = stufe(t.get("loudness_jump_db"), SCHWELLE_PEGEL), stufe(t.get("beat_jitter_ms"), SCHWELLE_JIT)
+        sp, sj = stufe("loudness_jump_db", t.get("loudness_jump_db")), stufe("beat_jitter_ms", t.get("beat_jitter_ms"))
         fenster.append({"i":t.get("index"), "von":w["vonSec"], "bis":w["bisSec"],
                         "stufe": sp if rang[sp] >= rang[sj] else sj,
                         "pegel":t.get("loudness_jump_db"), "jit":t.get("beat_jitter_ms")})
@@ -532,11 +540,11 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
         zeilen.append(
           f'<tr><td class="num">{t.get("index")}</td>'
           f'<td class="num">{z(w.get("vonSec"))}–{z(w.get("bisSec"))}</td>'
-          f'<td class="num"><span class="chip c-{stufe(p,SCHWELLE_PEGEL)}">'
+          f'<td class="num"><span class="chip c-{stufe("loudness_jump_db", p)}">'
           f'<span class="punkt" style="background:currentColor"></span>'
           f'{zahl(abs(p)) if isinstance(p,(int,float)) else "–"} dB</span>'
           f'<span style="color:var(--ink-3)">{r}</span></td>'
-          f'<td class="num"><span class="chip c-{stufe(j,SCHWELLE_JIT)}">'
+          f'<td class="num"><span class="chip c-{stufe("beat_jitter_ms", j)}">'
           f'<span class="punkt" style="background:currentColor"></span>{zahl(j)} ms</span></td>'
           f'<td class="num" style="color:var(--ink-3)">'
           f'{t.get("camelot_before") or "–"} → {t.get("camelot_after") or "–"}</td></tr>')
@@ -575,14 +583,10 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     # Was schon sitzt - gemessen, und im Report bis zum 23.09.2026 unsichtbar.
     # Ein Test-DJ wuenschte sich "more tips" und einen ermutigenderen Ton; das
     # Gute stand nirgends, obwohl es gemessen ist.
-    sauber = [t for t in ts
-              if isinstance(t.get("loudness_jump_db"), (int, float))
-              and abs(t["loudness_jump_db"]) < SCHWELLE_PEGEL
-              and isinstance(t.get("beat_jitter_ms"), (int, float))
-              and t["beat_jitter_ms"] < SCHWELLE_JIT]
+    sauber = [t for t in ts if unter_allen_schwellen(t)]
     gut_html = ""
     if sauber:
-        bester = min(sauber, key=lambda t: abs(t["loudness_jump_db"]) + t["beat_jitter_ms"] / 5)
+        bester = min(sauber, key=sauberkeit)
         bw = bester.get("window") or {}
         name = (bester.get("track_in") or bester.get("track_out")
                 or f'{"Transition" if sprache == "en" else "Übergang"} {bester.get("index")}')
@@ -686,7 +690,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
       <div class="unter">{T["u_pegel"].format(a=sum(1 for v in pj if v>=SCHWELLE_PEGEL), b=len(pj),
         p=round(sum(1 for v in pj if v>=SCHWELLE_PEGEL)/len(pj)*100) if pj else 0,
         m=zahl(max(pj) if pj else None))}</div>
-      {_skala(p50p, SCHWELLE_PEGEL, PROFI_PEGEL_MIN, PROFI_PEGEL_MAX, 4.0, T["skala_pegel_l"], T["skala_pegel_r"])}
+      {_skala("loudness_jump_db", p50p, 4.0, T["skala_pegel_l"], T["skala_pegel_r"])}
     </div>
     <div class="kachel">
       <span class="marke">{T["k_jitter"]}</span>
@@ -694,7 +698,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
       <div class="unter">{T["u_jitter"].format(a=sum(1 for v in bj if v>=SCHWELLE_JIT), b=len(bj),
         p=round(sum(1 for v in bj if v>=SCHWELLE_JIT)/len(bj)*100) if bj else 0,
         m=zahl(max(bj) if bj else None))}</div>
-      {_skala(p50j, SCHWELLE_JIT, PROFI_JIT_MIN, PROFI_JIT_MAX, 20.0, T["skala_jitter_l"], T["skala_jitter_r"])}
+      {_skala("beat_jitter_ms", p50j, 20.0, T["skala_jitter_l"], T["skala_jitter_r"])}
     </div>
     <div class="kachel beschreibung">
       <span class="marke">{T["k_dichte"]}</span>

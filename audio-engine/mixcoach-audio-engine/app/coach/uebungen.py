@@ -588,6 +588,61 @@ def ueber_der_schwelle(t: Dict, metrik: str) -> bool:
     return (abs(wert) if regel["betrag"] else wert) >= regel["schwelle"]
 
 
+def unter_allen_schwellen(t: Dict) -> bool:
+    """Sitzt diese Stelle - alle belegten Groessen gemessen UND unter Schwelle.
+
+    Aufgenommen am 23.09.2026 aus tools/set_report.py. "Gemessen" ist Teil der
+    Bedingung, nicht nur "unter der Schwelle": ein Uebergang ohne Pegelwert
+    ist nicht sauber, sondern unbekannt, und darf nicht als Lob auftauchen.
+    """
+    return all(wert_von(t, m) is not None and not ueber_der_schwelle(t, m)
+               for m in GROESSEN)
+
+
+def sauberkeit(t: Dict) -> float:
+    """Wie weit diese Stelle insgesamt von ihren Schwellen weg ist.
+
+    Kleiner ist sauberer. Summe der Ueberschreitungen ueber alle Groessen -
+    also derselbe einheitenfreie Vergleich, den ueberschreitung() begruendet.
+
+    Bis zum 23.09.2026 rechnete set_report.py hierfuer
+    `abs(pegel) + jitter / 5`. Die 5 stand nirgends begruendet; sie machte dB
+    und ms per Dekret vergleichbar - genau das, wogegen ueberschreitung()
+    geschrieben wurde. Eine vierte Art, dieselben zwei Zahlen zu verrechnen.
+    """
+    return sum(ueberschreitung(m, wert_von(t, m) or 0.0) for m in GROESSEN)
+
+
+#: Ab welcher Ueberschreitung eine Stelle wie stark benannt wird.
+#: Die Grenzen sind Vielfache der EIGENEN Schwelle, nicht absolute Werte -
+#: nur so laesst sich 19 ms mit 4 dB vergleichen (siehe ueberschreitung).
+STUFEN = ((1.00, "warnung"), (1.35, "ernst"), (1.75, "kritisch"))
+
+
+def stufe(metrik: str, wert: Optional[float]) -> str:
+    """Wie schwer ist diese Stelle - "gut", "warnung", "ernst", "kritisch".
+
+    Aufgenommen am 23.09.2026. Bis dahin stand diese Einteilung in
+    tools/set_report.py und rechnete dort `abs(wert) / schwelle` selbst aus -
+    die DRITTE Fassung derselben Rechnung, neben ueber_der_schwelle() und
+    ueberschreitung(). Sie hatte ihre eigene Schwelle als Parameter, also auch
+    ihre eigene Quelle fuer 3,0 dB und 15,0 ms.
+
+    Das ist die Bauart, an der dieses Projekt wiederholt verloren hat: eine
+    Regel an zwei Stellen, und eine davon laeuft davon. Wer eine dritte
+    Groesse aufnimmt, traegt sie in GROESSEN ein - und diese Funktion kann
+    sie sofort einstufen, ohne dass jemand daran denken muss.
+    """
+    f = ueberschreitung(metrik, wert) if isinstance(wert, (int, float)) else None
+    if f is None:
+        return "keine"
+    name = "gut"
+    for grenze, benennung in STUFEN:
+        if f >= grenze:
+            name = benennung
+    return name
+
+
 def ueberschreitung(metrik: str, wert: float) -> float:
     """Um welchen Faktor liegt der Wert ueber seiner eigenen Schwelle.
 
