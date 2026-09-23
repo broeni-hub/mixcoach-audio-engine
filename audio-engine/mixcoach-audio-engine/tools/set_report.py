@@ -48,13 +48,35 @@ import argparse, json, statistics, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app.coach.uebungen import baue as uebungen_bauen, ueberschreitung  # noqa: E402
+from app.coach.uebungen import (  # noqa: E402
+    SCHWELLE_CAMELOT_SCHRITTE,
+    SCHWELLE_ENERGIELOCH_PCT,
+    _camelot_abstand,
+    baue as uebungen_bauen,
+    ueberschreitung,
+)
 from app.paths import RESULTS_DIR  # noqa: E402
 
 SCHWELLE_PEGEL, ZIEL_PEGEL = 3.0, 1.0
 SCHWELLE_JIT,  ZIEL_JIT    = 15.0, 10.0
 # Referenz: die sechs fremden Profi-Sets im Bestand, gerechnet am 07.09.2026
-PROFI_PEGEL_P50, PROFI_JIT_P50 = 1.35, 10.0
+# Die sechs fremden Profi-Sets als SPANNE, nicht als Mittelwert.
+#
+# Bis zum 23.09.2026 stand hier nur der Median (Pegel 1,35 dB, Jitter 10,0 ms),
+# und die Skala zeichnete ihr Band von 0 bis dorthin. Alles darueber sah nach
+# "schlechter als die Profis" aus. Das ist falsch: die sechs Sets streuen beim
+# Jitter von 5,8 bis 11,9 ms.
+#
+# Ein Test-DJ schrieb dazu: "maybe I'm not a machine but I believe 10ms is
+# fucking amazing". Er hatte recht. Sein Set liegt bei 11,2 ms - innerhalb der
+# Spanne, besser als Dixon bei Tomorrowland (11,9). Nachgerechnet am
+# 23.09.2026: der Standardfehler des Set-Medians ist ±1,8 ms, groesser als der
+# angezeigte Rueckstand von 1,2 ms, und gegen KEIN einziges Referenz-Set ist
+# ein Unterschied nachweisbar (Mann-Whitney, alle p > 0,09; gegen alle
+# zusammen p = 0,49). Der Report zeigte also einen Rueckstand, den er nicht
+# gemessen hatte.
+PROFI_PEGEL_MIN, PROFI_PEGEL_MAX = 0.50, 2.00     # Joris Voorn .. RUEFUES DU SOL
+PROFI_JIT_MIN, PROFI_JIT_MAX = 5.8, 11.9          # Joris Voorn .. Dixon WE2
 PROFI_DICHTE_MIN, PROFI_DICHTE_MAX = 1.83, 2.94   # Be Svendsen .. Joris Voorn
 
 # Die Uebungstexte kommen aus der Engine (app/coach/uebungen.py), nicht aus
@@ -204,6 +226,15 @@ td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
   border-radius:0 4px 4px 0; padding:13px 16px; margin-bottom:14px;
   font-size:13.5px; color:var(--ink-2); line-height:1.55;}
 .muster b{color:var(--ink)}
+.gut{background:var(--blatt); border:1px solid var(--linie); border-left:3px solid var(--gut);
+  border-radius:0 4px 4px 0; padding:18px 22px; box-shadow:var(--schatten);}
+.gut p{font-size:15px; color:var(--ink-2); line-height:1.55; max-width:68ch}
+.gut p b{color:var(--ink)}
+.beobachtungen{display:flex; flex-direction:column; gap:1px; border:1px solid var(--linie);
+  border-radius:4px; overflow:hidden; background:var(--linie)}
+.beob{display:grid; grid-template-columns:auto auto 1fr; gap:14px; align-items:baseline;
+  padding:10px 16px; background:var(--blatt); font-size:13.5px; color:var(--ink-2)}
+.beob .zeit{color:var(--akzent); font-weight:600; font-size:12.5px; white-space:nowrap}
 .uebungen{display:flex; flex-direction:column; gap:11px}
 .uebung{background:var(--blatt); border:1px solid var(--linie); border-radius:4px;
   padding:15px 17px; display:grid; grid-template-columns:auto 1fr; gap:3px 15px;
@@ -244,8 +275,20 @@ TEXTE = {
     "Über 23 Aufnahmen gemessen, hängt die Dichte nicht mit der Qualität zusammen "
     "(ρ&nbsp;=&nbsp;−0,09, p&nbsp;=&nbsp;0,67). Die Vergleichs-Sets reichen von {dmin} "
     "(Four Tet, Be Svendsen) bis {dmax} (Joris Voorn) — beide Enden sind Weltklasse."),
-  "skala_pegel_l": "Vergleichs-Sets 1,35 dB", "skala_pegel_r": "Schwelle 3 dB",
-  "skala_jitter_l": "Vergleichs-Sets 10,0 ms", "skala_jitter_r": "Schwelle 15 ms",
+  "skala_pegel_l": "Vergleichs-Sets 0,5–2,0 dB", "skala_pegel_r": "Schwelle 3 dB",
+  "skala_jitter_l": "Vergleichs-Sets 5,8–11,9 ms", "skala_jitter_r": "Schwelle 15 ms",
+  "h_gut": "Was schon sitzt",
+  "gut_satz": ("<b>{a} von {b}</b> Übergängen liegen bei beiden Größen innerhalb ihrer Linie — "
+    "kein Pegelsprung über 3&nbsp;dB, kein Jitter über 15&nbsp;ms."),
+  "gut_bester": ("Am saubersten ist {name} im Fenster {fenster}: {pegel}&nbsp;dB Pegelunterschied "
+    "und {jitter}&nbsp;ms Streuung. Das ist die Stelle, an der du hören kannst, wie es klingt, "
+    "wenn es sitzt."),
+  "h_beob": "Aufgefallen, aber nicht bewertet",
+  "beob_satz": ("Diese Stellen sind gemessen, aber es ist <b>nicht belegt</b>, dass sie stören — "
+    "der Zusammenhang mit dem Höreindruck ist zu schwach (ρ&nbsp;=&nbsp;+0,05). Sie stehen hier "
+    "als Beobachtung, nicht als Aufgabe."),
+  "beob_camelot": "{schritte} Schritte auf dem Camelot-Rad",
+  "beob_energie": "Energie fällt um {wert}&nbsp;%",
   "h2": "Wo im Set du hinhören musst",
   "hinweis2": ("Jeder Balken ist ein Übergang — als <b>Zeitfenster</b>, nicht als Sekundenangabe. "
     "Das ist Absicht: Die Erkennung trifft den exakten Punkt nur selten, das Fenster von "
@@ -315,8 +358,20 @@ TEXTE = {
     "Measured across 23 recordings, change rate does not correlate with quality "
     "(ρ&nbsp;=&nbsp;−0.09, p&nbsp;=&nbsp;0.67). The reference sets range from {dmin} "
     "(Four Tet, Be Svendsen) to {dmax} (Joris Voorn) — both ends are world class."),
-  "skala_pegel_l": "Reference sets 1.35 dB", "skala_pegel_r": "Line at 3 dB",
-  "skala_jitter_l": "Reference sets 10.0 ms", "skala_jitter_r": "Line at 15 ms",
+  "skala_pegel_l": "Reference sets 0.5–2.0 dB", "skala_pegel_r": "Line at 3 dB",
+  "skala_jitter_l": "Reference sets 5.8–11.9 ms", "skala_jitter_r": "Line at 15 ms",
+  "h_gut": "What already works",
+  "gut_satz": ("<b>{a} of {b}</b> transitions sit inside the line on both measures — no level jump "
+    "over 3&nbsp;dB, no jitter over 15&nbsp;ms."),
+  "gut_bester": ("The cleanest is {name} in the window {fenster}: {pegel}&nbsp;dB of level "
+    "difference and {jitter}&nbsp;ms of spread. That is the one to listen back to when you want "
+    "to hear what it sounds like when it lands."),
+  "h_beob": "Noticed, but not rated",
+  "beob_satz": ("These places are measured, but it is <b>not established</b> that they bother "
+    "anyone — the link to how a mix is heard is too weak (ρ&nbsp;=&nbsp;+0.05). They are here as "
+    "observations, not as tasks."),
+  "beob_camelot": "{schritte} steps on the Camelot wheel",
+  "beob_energie": "energy drops by {wert}&nbsp;%",
   "h2": "Where in the set to listen",
   "hinweis2": ("Every bar is one transition — shown as a <b>time window</b>, not as a timestamp. "
     "That is deliberate: detection rarely hits the exact point, and this 110-second window "
@@ -411,12 +466,19 @@ def _energie_pfad(d, breite=1000, hoehe=66):
     linie = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
     return linie, linie + f" L{breite},{hoehe} L0,{hoehe} Z"
 
-def _skala(wert, schwelle, profi, max_x, links, rechts):
+def _skala(wert, schwelle, ref_min, ref_max, max_x, links, rechts):
+    """Der Wert auf einer Skala, mit dem Referenzband der sechs Profi-Sets.
+
+    Das Band ist deren SPANNE, nicht ihr Mittelwert - sonst liest sich jeder
+    Wert oberhalb des Mittelwerts als Rueckstand, obwohl er zwischen den
+    Profis liegen kann (siehe PROFI_JIT_MIN/MAX).
+    """
     if wert is None: return ""
     farbe = {"gut":"var(--gut)","warnung":"#b07d0a","ernst":"#c05f34",
              "kritisch":"var(--kritisch)"}[stufe(wert, schwelle)]
+    von, breite = min(ref_min/max_x*100, 100), min((ref_max-ref_min)/max_x*100, 100)
     return (f'<div class="skala"><div class="spur">'
-            f'<div class="band" style="left:0;width:{min(profi/max_x*100,100):.1f}%"></div>'
+            f'<div class="band" style="left:{von:.1f}%;width:{breite:.1f}%"></div>'
             f'<div class="fuellung" style="width:{min(wert/max_x*100,100):.1f}%;background:{farbe}"></div>'
             f'<div class="schwelle" style="left:{min(schwelle/max_x*100,100):.1f}%"></div></div>'
             f'<div class="legende"><span>{links}</span><span>{rechts}</span></div></div>')
@@ -510,6 +572,50 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
           f'{zahl(abs(e["wert"]))} {eh} → {"Target" if sprache == "en" else "Ziel"} {zahl(e["ziel"])} {eh}</span></div>'
           f'<div class="wie">{txt}</div></div>')
 
+    # Was schon sitzt - gemessen, und im Report bis zum 23.09.2026 unsichtbar.
+    # Ein Test-DJ wuenschte sich "more tips" und einen ermutigenderen Ton; das
+    # Gute stand nirgends, obwohl es gemessen ist.
+    sauber = [t for t in ts
+              if isinstance(t.get("loudness_jump_db"), (int, float))
+              and abs(t["loudness_jump_db"]) < SCHWELLE_PEGEL
+              and isinstance(t.get("beat_jitter_ms"), (int, float))
+              and t["beat_jitter_ms"] < SCHWELLE_JIT]
+    gut_html = ""
+    if sauber:
+        bester = min(sauber, key=lambda t: abs(t["loudness_jump_db"]) + t["beat_jitter_ms"] / 5)
+        bw = bester.get("window") or {}
+        name = (bester.get("track_in") or bester.get("track_out")
+                or f'{"Transition" if sprache == "en" else "Übergang"} {bester.get("index")}')
+        bester_text = T["gut_bester"].format(
+            name=name, fenster=f'{z(bw.get("vonSec"))}–{z(bw.get("bisSec"))}',
+            pegel=zahl(abs(bester["loudness_jump_db"])), jitter=zahl(bester["beat_jitter_ms"]))
+        gut_html = (f'<p>{T["gut_satz"].format(a=len(sauber), b=len(ts))}</p>'
+                    f'<p style="margin-top:10px">{bester_text}</p>')
+
+    # Beobachtungen: gemessen, aber nicht belegt. Kompakt aus den Rohdaten,
+    # nicht aus den Engine-Saetzen - die gibt es nur auf Deutsch.
+    beob = []
+    for t in ts:
+        w = t.get("window") or {}
+        fenster = f'{z(w.get("vonSec"))}–{z(w.get("bisSec"))}'
+        d_cam = _camelot_abstand(t.get("camelot_before"), t.get("camelot_after"))
+        if d_cam is not None and d_cam >= SCHWELLE_CAMELOT_SCHRITTE:
+            beob.append((fenster, f'{t.get("camelot_before")} → {t.get("camelot_after")}',
+                         T["beob_camelot"].format(schritte=d_cam)))
+        loch = t.get("energy_dip_pct")
+        if isinstance(loch, (int, float)) and loch >= SCHWELLE_ENERGIELOCH_PCT:
+            beob.append((fenster, "", T["beob_energie"].format(wert=zahl(float(loch)))))
+    beob_html = ""
+    if beob:
+        zeilen_b = "".join(
+            f'<div class="beob"><span class="zeit mono">{f}</span>'
+            f'<span class="mono" style="color:var(--ink-3)">{was}</span>'
+            f'<span>{txt}</span></div>' for f, was, txt in beob)
+        beob_html = (f'<section><div class="sektionskopf"><span class="nr">06</span>'
+                     f'<h2>{T["h_beob"]}</h2></div>'
+                     f'<p class="hinweis">{T["beob_satz"]}</p>'
+                     f'<div class="beobachtungen" style="margin-top:16px">{zeilen_b}</div></section>')
+
     lage = ""
     for feld, nm in (("beat_jitter_ms", T["lage_jit"]), ("loudness_jump_db", T["lage_peg"])):
         stellen = [e for e in roh if e["feld"] == feld and isinstance(e.get("mid"), (int, float))]
@@ -541,6 +647,9 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     urteil_html = (f'<section class="urteil" style="margin-top:0"><p>{u1}</p>'
                    f'<p>{u2}</p></section>') if u1 else ""
 
+    gut_block = (f'<section><div class="sektionskopf"><span class="nr">02</span>'
+                 f'<h2>{T["h_gut"]}</h2></div><div class="gut" style="margin-top:14px">'
+                 f'{gut_html}</div></section>') if gut_html else ""
     korrektur_html = ""
     if korrektur:
         k_datum, k_text, k_liste = korrektur
@@ -577,7 +686,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
       <div class="unter">{T["u_pegel"].format(a=sum(1 for v in pj if v>=SCHWELLE_PEGEL), b=len(pj),
         p=round(sum(1 for v in pj if v>=SCHWELLE_PEGEL)/len(pj)*100) if pj else 0,
         m=zahl(max(pj) if pj else None))}</div>
-      {_skala(p50p, SCHWELLE_PEGEL, PROFI_PEGEL_P50, 4.0, T["skala_pegel_l"], T["skala_pegel_r"])}
+      {_skala(p50p, SCHWELLE_PEGEL, PROFI_PEGEL_MIN, PROFI_PEGEL_MAX, 4.0, T["skala_pegel_l"], T["skala_pegel_r"])}
     </div>
     <div class="kachel">
       <span class="marke">{T["k_jitter"]}</span>
@@ -585,7 +694,7 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
       <div class="unter">{T["u_jitter"].format(a=sum(1 for v in bj if v>=SCHWELLE_JIT), b=len(bj),
         p=round(sum(1 for v in bj if v>=SCHWELLE_JIT)/len(bj)*100) if bj else 0,
         m=zahl(max(bj) if bj else None))}</div>
-      {_skala(p50j, SCHWELLE_JIT, PROFI_JIT_P50, 20.0, T["skala_jitter_l"], T["skala_jitter_r"])}
+      {_skala(p50j, SCHWELLE_JIT, PROFI_JIT_MIN, PROFI_JIT_MAX, 20.0, T["skala_jitter_l"], T["skala_jitter_r"])}
     </div>
     <div class="kachel beschreibung">
       <span class="marke">{T["k_dichte"]}</span>
@@ -595,8 +704,8 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
     </div>
   </div>
 </section>
-<section>
-  <div class="sektionskopf"><span class="nr">02</span><h2>{T["h2"]}</h2></div>
+{gut_block}<section>
+  <div class="sektionskopf"><span class="nr">03</span><h2>{T["h2"]}</h2></div>
   <p class="hinweis">{T["hinweis2"]}</p>
   <div class="achse-rahmen" style="margin-top:18px">
     <div class="achse-innen">
@@ -618,18 +727,18 @@ def baue(report: dict, titel: str, datum: str, quelle: str, urteil=None,
   </div>
 </section>
 <section>
-  <div class="sektionskopf"><span class="nr">03</span><h2>{T["h3"]}</h2></div>
+  <div class="sektionskopf"><span class="nr">04</span><h2>{T["h3"]}</h2></div>
   <div class="tabellen-rahmen" style="margin-top:14px"><table>
     <thead><tr>{"".join(f"<th>{h}</th>" for h in T["th"])}</tr></thead>
     <tbody>{''.join(zeilen)}</tbody></table></div>
 </section>
 <section>
-  <div class="sektionskopf"><span class="nr">04</span><h2>{T["h4"]}</h2></div>
+  <div class="sektionskopf"><span class="nr">05</span><h2>{T["h4"]}</h2></div>
   <p class="hinweis">{T["hinweis4"]}</p>
   <div class="uebungen" style="margin-top:18px">{ue_html}</div>
 </section>
-<section>
-  <div class="sektionskopf"><span class="nr">05</span><h2>{T["h5"]}</h2></div>
+{beob_html}<section>
+  <div class="sektionskopf"><span class="nr">07</span><h2>{T["h5"]}</h2></div>
   <div class="grenzen" style="margin-top:14px">
     <p style="font-size:14px;color:var(--ink-2)">{T["grenzen_kopf"]}</p>
     <ul>
