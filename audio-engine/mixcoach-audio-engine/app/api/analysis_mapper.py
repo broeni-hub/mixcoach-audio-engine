@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional
 from uuid import uuid4
 
+from app.audio.coach_summary import LEER_VERBESSERUNG
 from app.audio.dramaturgie import bogen
 from app.audio.pipeline.scoring_version import scoring_stamp
 from app.audio.beat_jitter import radar_punkte
@@ -459,9 +460,37 @@ def _finding_severity(severity: str) -> str:
 
 
 def _build_exercise(coach: Dict) -> str:
-    improvements = coach.get("improvements", [])
+    """Der Satz, den das Frontend als "SET FLOW" zeigt (feedback.exercise).
 
-    if improvements:
-        return improvements[0]
+    WARUM DAS HIER STEHT UND NICHT LAENGER FREI LAEUFT (23.09.2026)
+    ---------------------------------------------------------------
+    Dieses Feld ist die VIERTE Kopie derselben Saetze - nach dem feedback je
+    Uebergang, nach strengths/weaknesses und nach feedback.worked/improve.
+    Gefunden wurde sie, wie schon die dritte, beim Oeffnen der laufenden App:
+    die Uebergangsliste war sauber, und unter "SET FLOW" stand weiter
 
-    return "Review the detected transition zones and compare them with your intended mix points."
+        "... liegt 8 Beats neben dem Phrasenstart ... ausserdem springt von
+         129 auf 136 BPM ... ausserdem wechselt harmonisch weit (D# Minor ->
+         G Minor, Camelot 2A -> 6A) - waehle einen Track im Nachbarfeld des
+         Camelot-Rads."
+
+    Drei Ratschlaege in einem Satz, alle drei auf Groessen ohne Beleg, und
+    zwei davon aus Fassungen, die es seit dem 14.08.2026 gar nicht mehr gibt.
+    Das Feld wurde nie nachgezogen, weil kein Backfill es angefasst hat.
+
+    ZWEI AENDERUNGEN
+    ----------------
+    1. Leersaetze zaehlen nicht. Stand improvements auf LEER_VERBESSERUNG,
+       gab dieses Feld den Leersatz weiter - und die Seite zeigte ihn zweimal,
+       einmal als "GROESSTES PROBLEM" und einmal als "SET FLOW".
+    2. Der Rueckfalltext ist weg. Er lautete "Review the detected transition
+       zones and compare them with your intended mix points" - eine Vorlage
+       ohne jede Zahl, also genau das, was am 14.08.2026 aus den Uebungen
+       entfernt wurde. Wo nichts Belegtes steht, steht jetzt nichts.
+
+    Der Backfill ruft dieselbe Funktion auf, damit es bei einer Kopie bleibt.
+    """
+    for satz in coach.get("improvements") or []:
+        if satz and satz != LEER_VERBESSERUNG:
+            return satz
+    return ""

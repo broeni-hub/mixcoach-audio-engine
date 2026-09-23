@@ -39,6 +39,7 @@ from pathlib import Path
 from app.audio.coach_summary import LEER_POSITIV, LEER_VERBESSERUNG
 from app.audio.pipeline.scoring_version import naechste_revision, revision_von
 from app.audio.segment_keys import camelot_compatibility_score
+from app.api.analysis_mapper import _build_exercise
 from app.audio.bass_overlap import saetze_fuer_overlap
 from app.audio.loudness import saetze_fuer_sprung
 from app.audio.transition_quality import _feedback, _feedback_en
@@ -118,11 +119,36 @@ def _saetze_neu(uebergaenge: list) -> int:
     return geaendert
 
 
+# Der Harmonie-Satz, so wie er im Bestand steht - beide Sprachen.
+#
+# Er gehoert NICHT in UNBELEGTE_SAETZE, obwohl er genau das ist. Grund: dort
+# fliegt der ganze Eintrag raus, und in weaknesses/feedback.improve steht der
+# Harmonie-Satz haeufig zusammen MIT einem belegten Pegel-Satz in einem
+# einzigen String ("... Camelot-Rads. Der neue Track ist 2.1 dB lauter ...").
+# Ihn mitzuverwerfen waere derselbe Fehler wie beim ersten Backfill-Lauf am
+# 23.09.2026, der die vier belegten Saetze des Bestands geloescht hat.
+#
+# Deshalb: herausschneiden, Rest behalten. Bleibt nichts uebrig, faellt der
+# Eintrag ohnehin.
+HARMONIE_SATZ = re.compile(
+    r"Uebergang bei \d{1,3}:\d{2} wechselt harmonisch weit \([^)]*\)"
+    r"\s*-\s*waehle einen Track im Nachbarfeld des Camelot-Rads\.\s*"
+    r"|Transition at \d{1,3}:\d{2} makes a distant key change \([^)]*\)"
+    r"\s*-\s*pick a track from a neighbouring Camelot field\.\s*"
+)
+
+
+def ohne_harmoniesatz(text: str) -> str:
+    """Den unbelegten Harmonie-Satz aus einem Eintrag nehmen, Rest behalten."""
+    return HARMONIE_SATZ.sub("", text or "").strip()
+
+
 def _liste_saeubern(eintraege: list, leer_satz: str, auch_entfernen=None) -> list:
     """Unbelegte Saetze entfernen - und sagen, wenn nichts bleibt."""
-    behalten = [s for s in (eintraege or [])
-                if not any(m in s for m in UNBELEGTE_SAETZE)
-                and not (auch_entfernen and auch_entfernen(s))]
+    behalten = [g for g in (ohne_harmoniesatz(s) for s in (eintraege or []))
+                if g
+                and not any(m in g for m in UNBELEGTE_SAETZE)
+                and not (auch_entfernen and auch_entfernen(g))]
     return behalten or [leer_satz]
 
 
@@ -226,6 +252,20 @@ def nachziehen(report: dict) -> tuple[dict, list]:
                 aenderungen.append(
                     f"feedback.{feld}: {len(fb.get(feld) or [])} -> {len(gesaeubert)}")
                 neu_fb[feld] = gesaeubert
+        # feedback.exercise ist die VIERTE Kopie - das Frontend zeigt sie als
+        # "SET FLOW" (report-view.ts:setFlowFeedback). Kein Lauf hat sie je
+        # angefasst, deshalb stand dort am 23.09.2026 noch ein Satz aus der
+        # Zeit vor dem 14.08.: Phrasenstart, BPM-Sprung und Camelot-Ratschlag
+        # in einem. Gefunden beim Oeffnen der laufenden App, nicht im Test -
+        # dieselbe Lehre wie eine Kopie weiter oben.
+        #
+        # Gebildet wird sie mit DERSELBEN Funktion wie im Mapper, aus der
+        # bereits gesaeuberten Liste. Eine Regel, zwei Aufrufer.
+        neue_uebung = _build_exercise({"improvements": neu_fb.get("improve") or []})
+        if (fb.get("exercise") or "") != neue_uebung:
+            aenderungen.append("feedback.exercise: neu gebildet")
+            neu_fb["exercise"] = neue_uebung
+
         if neu_fb != fb:
             neu["feedback"] = neu_fb
 

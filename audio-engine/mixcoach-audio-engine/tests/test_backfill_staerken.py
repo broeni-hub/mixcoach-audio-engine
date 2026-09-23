@@ -1,6 +1,6 @@
 """backfill_uebungen: als Staerke eingeschobene Kritik faellt aus gespeicherten Reports."""
 
-from app.audio.coach_summary import LEER_POSITIV
+from app.audio.coach_summary import LEER_POSITIV, LEER_VERBESSERUNG
 from tools.backfill_uebungen import nachziehen
 
 HARMONIE = ("Uebergang bei 10:46 wechselt harmonisch weit (B Minor -> A Minor, "
@@ -49,11 +49,42 @@ def test_echte_staerken_bleiben_und_revision_zaehlt_nur_bei_aenderung():
     assert not [a for a in aenderungen if a.startswith(("strengths", "feedback.worked"))]
 
 
-def test_kritik_unter_schwaechen_bleibt():
+def test_harmonie_kritik_faellt_jetzt_auch_unter_schwaechen():
+    """Umgedreht am 23.09.2026 - eine Regel, die eine Messung widerlegt hat.
+
+    Bis heute hiess dieser Test "test_kritik_unter_schwaechen_bleibt" und
+    forderte das Gegenteil: unter weaknesses sei der Harmonie-Satz richtig,
+    denn dort gehoert Kritik hin. Das stimmte, solange man annahm, dass ein
+    weiter Tonartwechsel ein Mangel ist.
+
+    Gemessen ist er keiner: Camelot-Abstand gegen das menschliche Urteil
+    rho +0,063 (n=297, p 0,28); kompatible und inkompatible Wechsel werden
+    gleich bewertet, Median 4,0 gegen 4,0, Mann-Whitney p = 0,355
+    (tools/eval/harmonik.py). Eine Kritik ohne Beleg ist keine Kritik,
+    sondern eine Behauptung - und die faellt, egal unter welcher
+    Ueberschrift sie steht.
+    """
     r = _report([ECHT], [HARMONIE])
     r["weaknesses"] = [HARMONIE]
     neu, _ = nachziehen(r)
-    assert HARMONIE in neu["weaknesses"]
+    assert HARMONIE not in neu["weaknesses"]
+    assert neu["weaknesses"] == [LEER_VERBESSERUNG]
+
+
+def test_der_belegte_teil_desselben_eintrags_bleibt():
+    """Der Grund, warum geschnitten und nicht verworfen wird.
+
+    In weaknesses steht der Harmonie-Satz haeufig zusammen mit einem
+    Pegel-Satz in EINEM String. Den ganzen Eintrag zu verwerfen waere
+    derselbe Fehler wie beim ersten Backfill-Lauf desselben Tages, der die
+    vier belegten Saetze des Bestands geloescht hat.
+    """
+    r = _report([ECHT], [""])
+    r["weaknesses"] = [HARMONIE + PEGEL]
+    neu, _ = nachziehen(r)
+    assert len(neu["weaknesses"]) == 1
+    assert "Nachbarfeld" not in neu["weaknesses"][0]
+    assert "4.2 dB leiser" in neu["weaknesses"][0]
 
 
 def test_einschub_ohne_herkunft_wird_am_satzmuster_erkannt():
@@ -167,3 +198,55 @@ def test_kleiner_sprung_bekommt_weiter_keinen_satz():
 
     neu, _ = nachziehen(r)
     assert neu["setTransitions"][0]["feedback"] == ""
+
+
+# --- Die vierte Kopie: feedback.exercise ("SET FLOW") --------------------
+
+def test_set_flow_satz_wird_mit_nachgezogen():
+    """Gefunden am 23.09.2026 beim Oeffnen der laufenden App.
+
+    Die Uebergangsliste war sauber, strengths und feedback.worked auch - und
+    unter "SET FLOW" stand weiter ein Satz aus der Zeit vor dem 14.08.2026:
+    Phrasenstart, BPM-Sprung und Camelot-Ratschlag in einem. Kein Lauf hatte
+    feedback.exercise je angefasst.
+    """
+    alt = ("Uebergang bei 11:09 liegt 8 Beats neben dem Phrasenstart - starte "
+           "den Uebergang ca. 8 Beats frueher oder spaeter; ausserdem wechselt "
+           "harmonisch weit (D# Minor -> G Minor, Camelot 2A -> 6A) - waehle "
+           "einen Track im Nachbarfeld des Camelot-Rads.")
+    r = _report([], [""])
+    r["weaknesses"] = [alt]
+    r["feedback"] = {"worked": [], "improve": [alt], "exercise": alt}
+
+    neu, _ = nachziehen(r)
+    assert "Nachbarfeld" not in (neu["feedback"]["exercise"] or "")
+    assert "Phrasenstart" not in (neu["feedback"]["exercise"] or "")
+
+
+def test_set_flow_nimmt_den_belegten_satz_wenn_es_einen_gibt():
+    """Entfallen soll das Unbelegte, nicht der ganze Abschnitt."""
+    r = _report([], [""])
+    r["feedback"] = {"worked": [], "improve": [PEGEL.strip()], "exercise": ""}
+
+    neu, _ = nachziehen(r)
+    assert "Pegelsprung" in neu["feedback"]["exercise"]
+
+
+def test_set_flow_bleibt_leer_statt_den_leersatz_zu_wiederholen():
+    """Sonst stuende derselbe Satz zweimal auf der Seite - einmal als
+    'groesstes Problem', einmal als 'Set Flow'."""
+    from app.audio.coach_summary import LEER_VERBESSERUNG
+    r = _report([], [""])
+    r["feedback"] = {"worked": [], "improve": [LEER_VERBESSERUNG], "exercise": "irgendwas"}
+
+    neu, _ = nachziehen(r)
+    assert neu["feedback"]["exercise"] == ""
+
+
+def test_keine_vorlage_mehr_wenn_nichts_gemessen_ist():
+    """Der Rueckfalltext ('Review the detected transition zones ...') nannte
+    keine einzige Zahl - dieselbe Sorte Vorlage, die am 14.08.2026 aus den
+    Uebungen geflogen ist."""
+    from app.api.analysis_mapper import _build_exercise
+    assert _build_exercise({"improvements": []}) == ""
+    assert _build_exercise({}) == ""
