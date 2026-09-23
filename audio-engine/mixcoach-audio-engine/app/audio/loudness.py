@@ -95,6 +95,50 @@ def _window_loudness(times: np.ndarray, values: np.ndarray,
     return float(np.median(values[mask]))
 
 
+def saetze_fuer_sprung(jump: Optional[float]) -> Tuple[str, str]:
+    """Der Pegel-Satz (de, en) zu einem Sprung - oder zweimal "".
+
+    WARUM DAS EINE EIGENE FUNKTION IST (23.09.2026)
+    -----------------------------------------------
+    Der Wortlaut stand bis heute nur hier, mitten in annotate_transitions,
+    und war damit an die Audio-Analyse gebunden: Wer einen gespeicherten
+    Report nachzieht, hat die Lautheitskurve nicht mehr, wohl aber
+    loudness_jump_db. tools/backfill_uebungen.py baute das feedback-Feld
+    deshalb allein aus transition_quality._feedback neu - und warf den
+    Pegel-Satz dabei weg.
+
+    Aufgefallen ist es erst, als _feedback am 23.09.2026 verstummte: der
+    Backfill loeschte daraufhin ALLE Saetze, auch die vier belegten. Solange
+    _feedback selbst noch etwas schrieb, hat der Verlust nicht gestoert -
+    er war nur unsichtbar.
+
+    Der Pegelsprung ist die aelteste belegte Groesse des Projekts
+    (Spearman -0,377 gegen 146 eigene Bewertungen). Sein Satz darf an einem
+    Backfill nicht haengenbleiben. Deshalb: Wortlaut und Schwellen an genau
+    einer Stelle, aus der Zahl allein ableitbar, von beiden Aufrufern
+    benutzt.
+    """
+    if not isinstance(jump, (int, float)):
+        return "", ""
+    richtung = "lauter" if jump > 0 else "leiser"
+    direction = "louder" if jump > 0 else "quieter"
+    if abs(jump) >= JUMP_STRONG_DB:
+        return (
+            f"Achtung: Der neue Track kommt {abs(jump):.1f} dB {richtung} - "
+            f"deutlich hoerbarer Pegelsprung, Gain vorher angleichen.",
+            f"Warning: the new track comes in {abs(jump):.1f} dB {direction} - "
+            f"a clearly audible level jump, match gains beforehand.",
+        )
+    if abs(jump) >= JUMP_NOTICEABLE_DB:
+        return (
+            f"Der neue Track ist {abs(jump):.1f} dB {richtung} - "
+            f"leichter Pegelsprung.",
+            f"The new track is {abs(jump):.1f} dB {direction} - "
+            f"a slight level jump.",
+        )
+    return "", ""
+
+
 def annotate_transitions(transitions_detailed: List[Dict],
                          times: np.ndarray, values: np.ndarray,
                          duration: float) -> None:
@@ -119,30 +163,11 @@ def annotate_transitions(transitions_detailed: List[Dict],
             continue
         jump = round(after - before, 1)
         t["loudness_jump_db"] = jump
-        if abs(jump) >= JUMP_STRONG_DB:
-            richtung = "lauter" if jump > 0 else "leiser"
-            direction = "louder" if jump > 0 else "quieter"
-            t["feedback"] = (t.get("feedback") or "").rstrip() + (
-                f" Achtung: Der neue Track kommt {abs(jump):.1f} dB {richtung} - "
-                f"deutlich hoerbarer Pegelsprung, Gain vorher angleichen."
-            )
+        de, en = saetze_fuer_sprung(jump)
+        if de:
+            t["feedback"] = ((t.get("feedback") or "").rstrip() + " " + de).strip()
             if t.get("feedback_en") is not None:
-                t["feedback_en"] = t["feedback_en"].rstrip() + (
-                    f" Warning: the new track comes in {abs(jump):.1f} dB {direction} - "
-                    f"a clearly audible level jump, match gains beforehand."
-                )
-        elif abs(jump) >= JUMP_NOTICEABLE_DB:
-            richtung = "lauter" if jump > 0 else "leiser"
-            direction = "louder" if jump > 0 else "quieter"
-            t["feedback"] = (t.get("feedback") or "").rstrip() + (
-                f" Der neue Track ist {abs(jump):.1f} dB {richtung} - "
-                f"leichter Pegelsprung."
-            )
-            if t.get("feedback_en") is not None:
-                t["feedback_en"] = t["feedback_en"].rstrip() + (
-                    f" The new track is {abs(jump):.1f} dB {direction} - "
-                    f"a slight level jump."
-                )
+                t["feedback_en"] = (t["feedback_en"].rstrip() + " " + en).strip()
 
 
 def set_loudness_summary(times: np.ndarray, values: np.ndarray) -> Optional[Dict]:

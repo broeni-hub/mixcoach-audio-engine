@@ -56,7 +56,8 @@ def test_backfill_holt_die_erste_revision_auch_ohne_andere_korrektur():
     schon_ehrlich = {
         "createdAt": "2026-07-20T10:00:00Z", "scoringVersion": 3,
         "scores": {"beatmatching": None, "timing": None},
-        "notMeasured": ["eq", "creativity", "frequency", "beatmatching", "timing"],
+        "notMeasured": ["eq", "creativity", "frequency", "beatmatching",
+                        "timing", "harmonic"],
     }
     neu, aenderungen = nachziehen(schon_ehrlich)
 
@@ -70,7 +71,8 @@ def test_backfill_laesst_eine_vorhandene_revision_in_ruhe():
     fertig = {
         "createdAt": "2026-07-20T10:00:00Z", "scoringVersion": 3,
         "scores": {"beatmatching": None, "timing": None},
-        "notMeasured": ["eq", "creativity", "frequency", "beatmatching", "timing"],
+        "notMeasured": ["eq", "creativity", "frequency", "beatmatching",
+                        "timing", "harmonic"],
         "reportRevision": 1,
     }
     neu, aenderungen = nachziehen(fertig)

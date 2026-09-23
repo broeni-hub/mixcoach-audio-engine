@@ -21,7 +21,18 @@ VOLLE_SCORES = {"flow": 70, "musicality": 60, "overall": 65}
 
 def test_ohne_uebergaenge_traegt_der_report_nichts():
     assert bestimmen([], VOLLE_SCORES) == [
-        "beatmatching", "creativity", "eq", "frequency", "timing"]
+        "beatmatching", "creativity", "eq", "frequency", "harmonic", "timing"]
+
+
+def test_harmonik_steht_drin_auch_wenn_sie_befuellt_ist():
+    """Der Fall "befuellt ist nicht gemessen", aufgenommen am 23.09.2026.
+
+    harmonic_clash_score steht in 68 % der Uebergaenge. Trotzdem gehoert die
+    Dimension in notMeasured, weil der Beleg fehlt: der Camelot-Abstand
+    liegt bei rho +0,063 (p 0,28), kompatibel gegen inkompatibel bei
+    Mann-Whitney p = 0,355 (tools/eval/harmonik.py).
+    """
+    assert "harmonic" in bestimmen([{"harmonic_clash_score": 99}], VOLLE_SCORES)
 
 
 def test_beatmatching_faellt_heraus_sobald_der_jitter_da_ist():

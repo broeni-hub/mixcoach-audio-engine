@@ -67,13 +67,28 @@ def test_einschub_ohne_herkunft_wird_am_satzmuster_erkannt():
 
 # --- Das Muster ist an die echten Erzeuger gebunden ----------------------
 
-def test_muster_trifft_den_harmonie_satz_aus_der_quelle():
-    from app.audio.transition_quality import _feedback
+def test_muster_trifft_den_harmonie_satz_weiterhin():
+    """Der Harmonie-Satz hat seit dem 23.09.2026 keine Quelle mehr.
+
+    _feedback erzeugt ihn nicht laenger (er war eine Aufforderung ohne
+    Beleg, siehe dort). In den gespeicherten Reports steht er aber noch -
+    311 mal - und der Backfill muss ihn dort weiter finden. Deshalb haengt
+    dieser Test ab sofort am WORTLAUT AUS DEM BESTAND, nicht am Erzeuger.
+    Beide Zeitformen, mm:ss und mmm:ss.
+    """
     from tools.backfill_uebungen import KRITIK_MUSTER
-    for mid in (347.0, 6012.0):   # mm:ss und mmm:ss
-        satz = _feedback(mid, {"key": "G# Minor", "camelot": "1A"},
-                         {"key": "D Major", "camelot": "10B"}, 20)
-        assert satz and KRITIK_MUSTER.search(satz), satz
+    for at in ("05:47", "100:12"):
+        satz = (f"Uebergang bei {at} wechselt harmonisch weit "
+                "(G# Minor -> D Major, Camelot 1A -> 10B) - "
+                "waehle einen Track im Nachbarfeld des Camelot-Rads.")
+        assert KRITIK_MUSTER.search(satz), satz
+
+
+def test_der_erzeuger_bildet_den_satz_nicht_mehr():
+    """Gegenprobe zum Test darueber: die Quelle ist versiegt."""
+    from app.audio.transition_quality import _feedback
+    assert _feedback(347.0, {"key": "G# Minor", "camelot": "1A"},
+                     {"key": "D Major", "camelot": "10B"}, 20) == ""
 
 
 def test_muster_trifft_beide_pegelsaetze_aus_der_quelle():
@@ -106,3 +121,49 @@ def test_muster_trifft_keine_echte_staerke():
                              "dramaturgy": {"energy_trend": "rising"}})
     assert len(alle) == 3
     assert not [s for s in alle + [LEER_POSITIV] if KRITIK_MUSTER.search(s)]
+
+
+# --- Der Backfill darf die belegte Groesse nicht mitnehmen ----------------
+
+def test_backfill_behaelt_den_pegelsatz_wenn_die_harmonik_faellt():
+    """Der Fehler vom 23.09.2026, festgehalten.
+
+    _saetze_neu baute das feedback-Feld allein aus transition_quality.
+    _feedback neu und warf alles weg, was loudness/bass_overlap in der
+    Live-Kette angehaengt hatten. Solange _feedback selbst noch einen Satz
+    schrieb, sah der Verlust aus wie "dieser Uebergang hatte eben keinen
+    Pegelsprung". Als _feedback verstummte, loeschte ein einziger Lauf alle
+    311 Saetze des Bestands - darunter die vier belegten.
+
+    Der Pegelsprung ist die aelteste belegte Groesse des Projekts. Er muss
+    einen Backfill ueberleben, und zwar nachgerechnet aus loudness_jump_db,
+    nicht aus dem alten Text.
+    """
+    r = _report([], [HARMONIE + PEGEL])
+    r["setTransitions"][0]["loudness_jump_db"] = -4.2
+
+    neu, _ = nachziehen(r)
+    satz = neu["setTransitions"][0]["feedback"]
+
+    assert "Nachbarfeld" not in satz          # Harmonik: weg
+    assert "4.2 dB leiser" in satz            # Pegel: bleibt
+    assert satz == PEGEL.strip()              # und sonst nichts
+
+
+def test_backfill_baut_den_pegelsatz_auch_neu_wenn_er_fehlte():
+    """Aus der Zahl, nicht aus dem Text - deshalb repariert derselbe Lauf
+    auch Reports, denen ein frueherer Backfill den Satz genommen hat."""
+    r = _report([], [HARMONIE])               # kein Pegel-Satz im Text
+    r["setTransitions"][0]["loudness_jump_db"] = -4.2
+
+    neu, _ = nachziehen(r)
+    assert "4.2 dB leiser" in neu["setTransitions"][0]["feedback"]
+
+
+def test_kleiner_sprung_bekommt_weiter_keinen_satz():
+    """Unter der Schwelle bleibt es still - sonst waere jeder Uebergang ein Befund."""
+    r = _report([], [HARMONIE])
+    r["setTransitions"][0]["loudness_jump_db"] = -0.4
+
+    neu, _ = nachziehen(r)
+    assert neu["setTransitions"][0]["feedback"] == ""

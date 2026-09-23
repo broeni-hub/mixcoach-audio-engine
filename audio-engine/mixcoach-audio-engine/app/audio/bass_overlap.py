@@ -21,7 +21,7 @@ Kalibrierung existieren. Sonst bleibt der Wert null.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import soundfile as sf
@@ -151,6 +151,24 @@ def measure_transition_overlap(set_times: np.ndarray, set_energy: np.ndarray,
     return int(round(float(np.median(ratio)) * 100))
 
 
+def saetze_fuer_overlap(score: Optional[int]) -> Tuple[str, str]:
+    """Der Bass-Satz (de, en) zu einem Overlap-Wert - oder zweimal "".
+
+    Gleicher Grund wie app/audio/loudness.py:saetze_fuer_sprung, siehe dort:
+    Der Wortlaut muss aus der gespeicherten Zahl allein ableitbar sein, sonst
+    verliert ihn jeder Backfill. bass_overlap_score steht in 15 % der
+    Uebergaenge.
+    """
+    if not isinstance(score, (int, float)) or score < OVERLAP_BAD:
+        return "", ""
+    return (
+        f"Beide Baesse liefen im Blend uebereinander (Overlap {score}/100) - "
+        f"schneide den Bass des alten Tracks frueher raus (EQ/Kill).",
+        f"Both basslines ran on top of each other during the blend "
+        f"(overlap {score}/100) - cut the outgoing bass earlier (EQ/kill).",
+    )
+
+
 def annotate_bass_overlap(transitions_detailed: List[Dict], matches: List[Dict],
                           set_waveform: np.ndarray, sample_rate: int) -> None:
     """Haengt bass_overlap_score an Uebergaenge, die zwischen zwei sicher
@@ -181,14 +199,9 @@ def annotate_bass_overlap(transitions_detailed: List[Dict], matches: List[Dict],
             if score is None:
                 break
             t["bass_overlap_score"] = score
-            if score >= OVERLAP_BAD:
-                t["feedback"] = (t.get("feedback") or "").rstrip() + (
-                    f" Beide Baesse liefen im Blend uebereinander (Overlap {score}/100) - "
-                    f"schneide den Bass des alten Tracks frueher raus (EQ/Kill)."
-                )
+            de, en = saetze_fuer_overlap(score)
+            if de:
+                t["feedback"] = ((t.get("feedback") or "").rstrip() + " " + de).strip()
                 if t.get("feedback_en") is not None:
-                    t["feedback_en"] = t["feedback_en"].rstrip() + (
-                        f" Both basslines ran on top of each other during the blend "
-                        f"(overlap {score}/100) - cut the outgoing bass earlier (EQ/kill)."
-                    )
+                    t["feedback_en"] = (t["feedback_en"].rstrip() + " " + en).strip()
             break

@@ -39,6 +39,8 @@ from pathlib import Path
 from app.audio.coach_summary import LEER_POSITIV, LEER_VERBESSERUNG
 from app.audio.pipeline.scoring_version import naechste_revision, revision_von
 from app.audio.segment_keys import camelot_compatibility_score
+from app.audio.bass_overlap import saetze_fuer_overlap
+from app.audio.loudness import saetze_fuer_sprung
 from app.audio.transition_quality import _feedback, _feedback_en
 from app.audio.nicht_gemessen import aus_report as _nicht_gemessen
 from app.coach.uebungen import baue
@@ -66,29 +68,50 @@ UNBELEGTE_SAETZE = (
 def _saetze_neu(uebergaenge: list) -> int:
     """Feedback je Uebergang neu bilden. Liefert, wie viele sich aendern.
 
-    Faithful nachgerechnet, nicht per Textchirurgie: _feedback braucht die
-    Camelot-Kompatibilitaet, und die ist eine reine Funktion von
-    camelot_before/camelot_after - beides steht im Report. Achtung, das ist
-    NICHT harmonic_clash_score: der kommt aus dem Composite-Scoring und ist
-    eine andere Groesse, auch wenn der Name aehnlich klingt.
+    Faithful nachgerechnet, nicht per Textchirurgie: jeder der drei Saetze
+    ist eine reine Funktion einer Zahl, die im gespeicherten Report steht.
+
+        transition_quality._feedback   camelot_before/camelot_after
+        loudness.saetze_fuer_sprung    loudness_jump_db
+        bass_overlap.saetze_fuer_overlap  bass_overlap_score
+
+    Achtung bei der Harmonik: camelot_compatibility_score ist NICHT
+    harmonic_clash_score - der kommt aus dem Composite-Scoring und ist eine
+    andere Groesse, auch wenn der Name aehnlich klingt.
+
+    DASS HIER ALLE DREI QUELLEN STEHEN, IST NEU (23.09.2026). Vorher baute
+    diese Funktion das Feld allein aus _feedback und ueberschrieb damit,
+    was loudness und bass_overlap in der Live-Kette angehaengt hatten. Das
+    ist nie aufgefallen, weil _feedback selbst noch einen Satz schrieb -
+    der Verlust sah aus wie ein Report ohne Pegelsprung. Als _feedback am
+    23.09. verstummte, loeschte derselbe Lauf auf einen Schlag ALLE Saetze,
+    auch die vier belegten im Bestand. Der Fehler war vorher da, nur
+    unsichtbar.
     """
     geaendert = 0
     for t in uebergaenge:
         if not isinstance(t, dict):
             continue
-        harmonisch = camelot_compatibility_score(t.get("camelot_before"),
-                                                 t.get("camelot_after"))
         mid = t.get("mid_sec")
         if not isinstance(mid, (int, float)):
             continue
+        harmonisch = camelot_compatibility_score(t.get("camelot_before"),
+                                                 t.get("camelot_after"))
         # Im gespeicherten Report sind key_before/key_after flache Strings
         # ("A# Major"), in der Live-Kette dagegen Dicts mit key+camelot.
         # _feedback erwartet die Dict-Form, also hier zusammensetzen.
         vor = {"key": t.get("key_before"), "camelot": t.get("camelot_before")}
         nach = {"key": t.get("key_after"), "camelot": t.get("camelot_after")}
 
-        de = _feedback(float(mid), vor, nach, harmonisch)
-        en = _feedback_en(float(mid), vor, nach, harmonisch)
+        teile_de = [_feedback(float(mid), vor, nach, harmonisch)]
+        teile_en = [_feedback_en(float(mid), vor, nach, harmonisch)]
+        for pegel_de, pegel_en in (saetze_fuer_sprung(t.get("loudness_jump_db")),
+                                   saetze_fuer_overlap(t.get("bass_overlap_score"))):
+            teile_de.append(pegel_de)
+            teile_en.append(pegel_en)
+
+        de = " ".join(x for x in teile_de if x).strip()
+        en = " ".join(x for x in teile_en if x).strip()
         if t.get("feedback") != de or t.get("feedback_en") != en:
             t["feedback"], t["feedback_en"] = de, en
             geaendert += 1
@@ -103,14 +126,19 @@ def _liste_saeubern(eintraege: list, leer_satz: str, auch_entfernen=None) -> lis
     return behalten or [leer_satz]
 
 
-# Die drei Saetze, die seit dem 14.08.2026 in das feedback eines Uebergangs
-# gelangen - alle drei Kritik, alle maschinell erzeugt. Gebunden an die
-# Quellen in tests/test_backfill_staerken.py: aendert jemand den Wortlaut
-# dort, schlaegt der Test an, bevor dieses Muster stillschweigend nichts mehr
-# findet.
-#     app/audio/transition_quality.py  _feedback
+# Saetze, die in das feedback eines Uebergangs gelangt sind - alles Kritik,
+# alles maschinell erzeugt. Gebunden an die Quellen in
+# tests/test_backfill_staerken.py: aendert jemand den Wortlaut dort, schlaegt
+# der Test an, bevor dieses Muster stillschweigend nichts mehr findet.
 #     app/audio/loudness.py            annotate_transitions
 #     app/audio/bass_overlap.py        annotate_bass_overlap
+#
+# Die erste Alternative - der Harmonie-Satz - hat seit dem 23.09.2026 KEINE
+# Quelle mehr (transition_quality._feedback erzeugt ihn nicht laenger, weil
+# er eine Aufforderung ohne Beleg war). Sie bleibt trotzdem stehen: der Satz
+# liegt 311 mal in den gespeicherten Reports, und dieses Muster ist das
+# Werkzeug, das ihn dort findet. Sie ist ab jetzt historisch, nicht aktuell -
+# gegengeprueft von test_der_erzeuger_bildet_den_satz_nicht_mehr.
 KRITIK_MUSTER = re.compile(
     r"Uebergang bei \d{2,3}:\d{2} wechselt harmonisch weit \("
     r"|Achtung: Der neue Track kommt \d+\.\d dB (lauter|leiser)"

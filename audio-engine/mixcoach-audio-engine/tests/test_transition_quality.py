@@ -133,21 +133,46 @@ def test_evaluate_transitions_full():
     assert t["phrase_beats_off"] is not None
 
 
-def test_weiter_harmonischer_wechsel_bekommt_einen_satz():
-    """Die eine Aussage, die bleibt - sie nennt Tonart und Camelot-Feld."""
+def test_weiter_harmonischer_wechsel_bekommt_KEINEN_satz():
+    """Seit dem 23.09.2026 - und das ist der Kern der Aenderung.
+
+    Bis dahin stand hier der Gegentest: ein weiter Wechsel BEKOMMT einen
+    Satz, naemlich "waehle einen Track im Nachbarfeld des Camelot-Rads".
+    Dieser Satz stand in 311 von 313 Feedback-Saetzen des Bestands und war
+    eine Handlungsaufforderung ohne Beleg - gemessen liegt der
+    Camelot-Abstand bei rho +0,063 (n=297, p 0,28), kompatible und
+    inkompatible Wechsel werden gleich bewertet (Mann-Whitney p = 0,355).
+    Nachzurechnen mit tools/eval/harmonik.py.
+
+    Egal wie weit der Wechsel ist: kein Satz. Auch nicht bei 0.
+    """
     from app.audio.transition_quality import _feedback, _feedback_en
 
     vor = {"key": "C major", "camelot": "8B"}
     nach = {"key": "F# minor", "camelot": "11A"}
 
-    de = _feedback(50.0, vor, nach, harmonic_score=20)
-    en = _feedback_en(50.0, vor, nach, harmonic_score=20)
-    assert "00:50" in de and "8B" in de and "11A" in de
-    assert "00:50" in en and "8B" in en and "11A" in en
+    for score in (0, 20, 40, 41, 95, None):
+        assert _feedback(50.0, vor, nach, harmonic_score=score) == ""
+        assert _feedback_en(50.0, vor, nach, harmonic_score=score) == ""
 
-    # Enger Wechsel -> kein Satz.
-    assert _feedback(50.0, vor, nach, harmonic_score=95) == ""
-    assert _feedback_en(50.0, vor, nach, harmonic_score=95) == ""
+
+def test_die_tatsache_bleibt_als_beobachtung():
+    """Entfallen ist die Aufforderung, nicht der Tonartwechsel.
+
+    Die Stelle, die ihn jetzt allein traegt, besitzt auch die Schwelle -
+    genau eine Fassung, genau ein Ort.
+    """
+    from app.coach.uebungen import _beobachtungen
+
+    beob = _beobachtungen("a1", {"index": 3, "mid_sec": 50.0,
+                                 "camelot_before": "8B", "camelot_after": "11A"})
+    camelot = [b for b in beob if b.get("metric") == "camelot_distance"]
+    assert len(camelot) == 1
+    assert "8B" in camelot[0]["text"] and "11A" in camelot[0]["text"]
+    # Eine Feststellung, keine Aufgabe.
+    assert "nicht ablesbar" in camelot[0]["text"]
+    assert "waehle" not in camelot[0]["text"].lower()
+    assert "wähle" not in camelot[0]["text"].lower()
 
 
 def test_unmeasurable_parts_stay_none():

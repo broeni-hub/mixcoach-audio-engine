@@ -218,11 +218,8 @@ def _label(quality: Optional[int]) -> str:
 
 
 # ---------- Feedback-Texte ----------
-
-
-def _mmss(seconds: float) -> str:
-    s = int(seconds)
-    return f"{s // 60:02d}:{s % 60:02d}"
+#
+# Dieser Kanal ist seit dem 23.09.2026 LEER. Der Grund steht in _feedback().
 
 
 def _feedback(
@@ -231,10 +228,13 @@ def _feedback(
     key_after: Dict,
     harmonic_score: Optional[int],
 ) -> str:
-    """Ein konkreter Satz pro Uebergang - oder gar keiner.
+    """Ein konkreter Satz pro Uebergang - seit dem 23.09.2026 gar keiner mehr.
 
-    Am 14.08.2026 sind zwei Zweige entfallen, und mit ihnen zwei
-    Abschlusssaetze:
+    DREI ZWEIGE SIND HIER NACHEINANDER ENTFALLEN, immer aus demselben Grund:
+    die Groesse, ueber die der Satz urteilte, hat keinen belegten
+    Zusammenhang mit dem menschlichen Urteil.
+
+    Am 14.08.2026 die ersten beiden:
 
     * phrase_beats_off ("liegt N Beats neben dem Phrasenstart"). Das Raster
       wird am ersten Beat des erkannten Segments verankert, und genau diese
@@ -245,27 +245,49 @@ def _feedback(
       0,0, weil die Tempo-Schaetzung fuer benachbarte Segmente denselben
       Wert liefert.
 
-    "Uebergang bei MM:SS sitzt: Timing, Tempo und Energie passen zusammen"
-    ist damit ebenfalls weg - der Satz hat den DJ fuer genau diese zwei
-    Zahlen gelobt. Und "ist solide, aber nicht herausragend" nannte gar
-    keine Zahl.
+    Am 23.09.2026 der dritte und letzte: die HARMONIK.
 
-    Bleibt nichts Belegtes, kommt ein LEERER Text zurueck. Das ist gewollt:
-    coach_summary uebernimmt nur nicht-leere Saetze, und wo nichts steht,
-    sagt der Report das lieber, als etwas zu behaupten. Der Pegelsprung -
-    die einzige belegte Groesse - wird nicht hier verdoppelt, er traegt die
-    Uebungen (app/coach/uebungen.py).
+        "Uebergang bei 11:28 wechselt harmonisch weit (F Minor -> A Minor,
+         Camelot 4A -> 8A) - waehle einen Track im Nachbarfeld des
+         Camelot-Rads."
+
+    Dieser Satz stand in 311 von 313 Feedback-Saetzen des Bestands - 99 %.
+    Er ist eine Handlungsaufforderung, also eine Behauptung ueber Qualitaet.
+    Gemessen (tools/eval/harmonik.py, 23.09.2026, gegen dieselben
+    Bewertungen wie der Beat-Jitter, mit dessen Zahl als Kontrolle):
+
+        Camelot-Abstand        n=297   rho +0,063   p 0,28
+        harmonic_clash_score   n=237   rho -0,138   p 0,034
+        kompatibel (n=121) Median 4,0 gegen inkompatibel (n=176) Median 4,0
+                                       Mann-Whitney p = 0,355
+
+    Kein Zusammenhang, und das Vorzeichen des Abstands ist sogar positiv.
+    Es liegt auch nicht an einer wackligen Tonarterkennung: ueber
+    Wiederholungsanalysen derselben Aufnahme behalten 89 von 96 Uebergaengen
+    ihre Tonart (93 %). Die Tonart wird zuverlaessig gemessen - sie sagt nur
+    nichts ueber die Qualitaet des Uebergangs. Genau der Fall, den
+    app/audio/nicht_gemessen.py "befuellt ist nicht gemessen" nennt; dort
+    steht die Harmonik seit demselben Tag als unbelegte Dimension.
+
+    DIE TATSACHE GEHT NICHT VERLOREN, nur die Aufforderung. Der weite
+    Tonartwechsel steht weiter im Report - als Beobachtung, mit dem Zusatz
+    "Ob dich das stoert, ist an deinen Bewertungen nicht ablesbar"
+    (app/coach/uebungen.py:_beobachtungen). Diese Stelle hat die Regel
+    bereits befolgt, als hier noch der Ratschlag stand; sie besitzt auch die
+    Schwelle (SCHWELLE_CAMELOT_SCHRITTE). Hier eine zweite Fassung mit einer
+    zweiten Schwelle (harmonic_score <= 40) zu halten, waere genau die
+    Doppelung, an der dieses Projekt schon zweimal Tage verloren hat.
+
+    Bleibt: ein LEERER Text. Das ist gewollt. coach_summary uebernimmt nur
+    nicht-leere Saetze - und uebernahm bis zum 14.09. den Harmonik-Satz in
+    12 von 59 Reports unter der Ueberschrift "das lief gut". Der
+    Pegelsprung und der Bass-Overlap haengen ihre Saetze weiterhin an
+    (app/audio/loudness.py, app/audio/bass_overlap.py); der Pegelsprung ist
+    belegt, und diese Funktion verdoppelt ihn nicht.
+
+    Die Signatur bleibt unveraendert, damit die Aufrufstelle und die
+    Nachbarmodule nichts merken.
     """
-    at = _mmss(center)
-
-    if harmonic_score is not None and harmonic_score <= 40:
-        return (
-            f"Uebergang bei {at} wechselt harmonisch weit "
-            f"({key_before.get('key')} -> {key_after.get('key')}, "
-            f"Camelot {key_before.get('camelot')} -> {key_after.get('camelot')}) - "
-            "waehle einen Track im Nachbarfeld des Camelot-Rads."
-        )
-
     return ""
 
 
@@ -275,15 +297,9 @@ def _feedback_en(
     key_after: Dict,
     harmonic_score: Optional[int],
 ) -> str:
-    """Englische Variante von _feedback - identische Logik, siehe dort."""
-    at = _mmss(center)
+    """Englische Variante von _feedback - identische Logik, siehe dort.
 
-    if harmonic_score is not None and harmonic_score <= 40:
-        return (
-            f"Transition at {at} makes a distant key change "
-            f"({key_before.get('key')} -> {key_after.get('key')}, "
-            f"Camelot {key_before.get('camelot')} -> {key_after.get('camelot')}) - "
-            "pick a track from a neighbouring Camelot field."
-        )
-
+    Wichtig: auch hier "" und nicht None. loudness.py und bass_overlap.py
+    haengen ihren englischen Satz nur an, wenn das Feld nicht None ist.
+    """
     return ""

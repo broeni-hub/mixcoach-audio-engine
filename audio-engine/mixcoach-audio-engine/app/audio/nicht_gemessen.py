@@ -61,6 +61,28 @@ DIMENSIONEN: Dict[str, Dict] = {
                   "menschliche Urteil, und bpm_drift ist in 89 % der "
                   "Uebergaenge exakt 0,0. Befuellt ist nicht gemessen."),
     },
+    # Aufgenommen am 23.09.2026. Harmonik stand bis dahin in KEINER der
+    # beiden Richtungen in diesem Modul - sie war nie eine Note im Kopf des
+    # Reports, also fiel sie durch das Raster. Gleichzeitig urteilten 311 von
+    # 313 Feedback-Saetzen im Bestand (99 %) ueber genau sie, mit einer
+    # Handlungsaufforderung: "waehle einen Track im Nachbarfeld des
+    # Camelot-Rads". Die Ehrlichkeitslinie deckte die Kacheln ab und die
+    # Saetze nicht. Der Satz ist seit demselben Tag weg
+    # (app/audio/transition_quality.py:_feedback); die Tatsache steht als
+    # Beobachtung weiter im Report (app/coach/uebungen.py:_beobachtungen).
+    "harmonic": {
+        "feld": "harmonic_clash_score",
+        "belegt": False,
+        "beleg": ("befuellt in 68 % der Uebergaenge, aber ohne Zusammenhang: "
+                  "der Camelot-Abstand, auf dem die Empfehlung beruhte, liegt "
+                  "bei rho +0,063 (n=297, p 0,28), harmonic_clash_score bei "
+                  "-0,138 (n=237, p 0,034); kompatible und inkompatible "
+                  "Wechsel werden gleich bewertet (Median 4,0 gegen 4,0, "
+                  "Mann-Whitney p = 0,355). Nicht die Tonarterkennung ist "
+                  "unsicher - sie ist ueber Wiederholungsanalysen zu 93 % "
+                  "stabil. Sie sagt nur nichts ueber die Qualitaet. "
+                  "(tools/eval/harmonik.py, 23.09.2026)"),
+    },
     "eq": {
         "feld": None,
         "belegt": False,
