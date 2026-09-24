@@ -53,12 +53,32 @@ WORKDIR /engine
 COPY requirements-server.txt ./
 RUN pip install --no-cache-dir -r requirements-server.txt
 
-# STEM-TRENNUNG IST AN (Entscheidung Sebastian, 24.09.2026).
+# STEM-TRENNUNG: Werkzeug an Bord, Schalter aus (Entscheidung 24.09.2026).
 #
-# Der Vorbehalt bleibt im Protokoll: der Composite gewichtet die
-# stem-basierten Groessen mit 0,000, und weder harmonic_clash_score noch
-# vocal_overlap_score haben einen belegten Zusammenhang mit dem menschlichen
-# Urteil. Wer das Image klein will:  --build-arg MIT_STEMS=0
+# torch, demucs und die htdemucs-Gewichte liegen im Image - aber
+# MIXCOACH_ENABLE_STEM_SCORING steht auf 0 (weiter unten). Umlegen geht
+# damit zur Laufzeit, ohne neues Image:
+#
+#     docker run -e MIXCOACH_ENABLE_STEM_SCORING=1 ...
+#
+# WARUM AUS. Am 24.09.2026 an einem echten 44,5-Minuten-Set nachgemessen
+# (Apple M5, Demucs auf CPU - nicht MPS, nachgeprueft):
+#
+#     ohne Stems    64,3 s
+#     mit Stems    130,5 s     10 von 10 Uebergaengen mit Stem-Werten
+#     Anteil Demucs           51 % der Rechenzeit
+#
+# Und der einzige Abnehmer dieser Werte ist composite_quality_score, den das
+# Frontend nirgends ausliest. Am selben Tag nachgezaehlt unter Frontend/src:
+# harmonic_clash 0 Treffer, vocal_overlap 0, exit_quality 0,
+# composite_quality_score 2 - beide in Kommentaren. Derselbe Befund steht
+# seit dem 30.07.2026 in app/audio/pipeline/pipeline.py, der den Schalter
+# damals ausgeschaltet hat.
+#
+# Rechenzeit ist der Kostentreiber beim Hosting, nicht der Speicher: auf
+# einer dreimal langsameren Cloud-CPU sind das rund 3 min je Set statt 6,5.
+#
+# Wer das Image ganz ohne die 530 MB will:  --build-arg MIT_STEMS=0
 ARG MIT_STEMS=1
 
 # torch aus dem CPU-Index. Das Standard-Rad zieht auf linux/amd64 die
@@ -79,10 +99,17 @@ RUN if [ "$MIT_STEMS" = "1" ]; then \
 # Neustart, solange nichts zwischengespeichert ist. Ein DJ wuerde beim ersten
 # Set minutenlang warten, und ohne Netz schlaegt die Trennung still fehl.
 #
-# Deshalb liegen die Gewichte im Image. TORCH_HOME zeigt auf einen Pfad
-# innerhalb von /engine, damit sie dem Nutzer unten gehoeren und nicht auf
-# dem Datenvolume landen.
-ENV TORCH_HOME=/engine/.torch
+# Deshalb liegen die Gewichte im Image.
+#
+# ACHTUNG, HIER STAND ZUERST DAS FALSCHE: TORCH_HOME. Demucs 4.1 holt
+# htdemucs nicht aus dem torch-Hub, sondern vom HuggingFace Hub - am
+# 24.09.2026 nachgesehen, die Dateien liegen unter
+# ~/.cache/huggingface/hub/models--adefossez--HTDemucs. Mit TORCH_HOME haette
+# der Build die Gewichte zwar geladen, aber an eine Stelle, die zur Laufzeit
+# niemand liest - und jeder Container haette sie doch wieder heruntergeladen.
+# Beide Variablen stehen jetzt da; die wirksame ist HF_HOME.
+ENV TORCH_HOME=/engine/.torch \
+    HF_HOME=/engine/.cache/huggingface
 RUN if [ "$MIT_STEMS" = "1" ]; then \
       python -c "from demucs.api import Separator; Separator(model='htdemucs', progress=False)" ; \
     fi
@@ -97,6 +124,10 @@ USER mixcoach
 # PFLICHT, kein Standardwert im Code - siehe Kopf.
 ENV MIXCOACH_DATA_DIR=/daten
 VOLUME ["/daten"]
+
+# Stem-Scoring aus - siehe die lange Begruendung bei MIT_STEMS. Das Werkzeug
+# ist da, nur der Schalter steht auf 0. Zur Laufzeit umlegbar.
+ENV MIXCOACH_ENABLE_STEM_SCORING=0
 
 # Vorgabe ist AUS und nur fuer 127.0.0.1 gedacht. Wer den Container ins Netz
 # stellt, setzt MIXCOACH_AUTH=an und SUPABASE_URL - sonst steht die Engine

@@ -15,10 +15,18 @@
 #   torch, demucs   - Stem-Trennung. Beide werden LAZY und in try/except
 #                     importiert (app/audio/scoring/stems.py), die Engine
 #                     laeuft also auch ohne sie - deshalb stehen sie nicht
-#                     hier, sondern im Dockerfile (MIT_STEMS, seit dem
-#                     24.09.2026 standardmaessig AN, Entscheidung Sebastian).
-#                     Wer lokal mit Stems arbeitet, installiert sie dazu:
+#                     hier, sondern im Dockerfile (MIT_STEMS).
+#
+#                     Und sie werden ohnehin nur benutzt, wenn
+#                     MIXCOACH_ENABLE_STEM_SCORING=1 gesetzt ist. Vorgabe ist
+#                     0, seit dem 30.07.2026 und am 24.09.2026 bestaetigt:
+#                     Demucs kostet 51 % der Analysezeit, und der einzige
+#                     Abnehmer (composite_quality_score) wird im Frontend
+#                     nirgends ausgelesen.
+#
+#                     Wer lokal mit Stems arbeitet:
 #                       pip install torch==2.13.0 demucs==4.1.0
+#                       MIXCOACH_ENABLE_STEM_SCORING=1 python -m uvicorn ...
 #   scikit-learn    - nur fuers Nachtrainieren (app/calibration/) und
 #                     tools/eval/. Die INFERENZ braucht sie nicht: das Modell
 #                     liegt als JSON im Repo, die Baum-Traversierung ist
