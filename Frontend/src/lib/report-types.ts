@@ -84,6 +84,38 @@ export interface ExerciseRecommendation {
  * aufforderung. Wer sie in dieselbe Liste kippt, macht aus einer
  * Beobachtung eine Behauptung.
  */
+/**
+ * Der Vergleich dieses Sets mit den sechs fremden Profi-Sets — als SPANNE.
+ *
+ * Die Zahlen kommen aus `app/coach/referenz.py` und stehen im Report; im
+ * Frontend steht keine einzige davon. Das ist Absicht: am 23.09.2026 lagen
+ * fünf Kopien derselben Coach-Sätze im Produkt, und jede davon hat einmal
+ * Tage gekostet. Wer hier einen Wert hinschreibt, baut die sechste.
+ *
+ * `innerhalb` ist die EINZIGE Aussage, die sich daraus belegen lässt. Ein
+ * Rückstand steht bewusst nicht drin — "1,2 ms schlechter als die Profis"
+ * war der Satz, den ein Test-DJ beanstandet hat, und er hatte recht: der
+ * Standardfehler des Set-Medians ist größer als der angezeigte Abstand.
+ */
+export interface ReferenzVergleich {
+  /** Feldname der Messgröße, z.B. "beat_jitter_ms". */
+  metrik: string;
+  /** Median dieses Sets. Beim Pegelsprung der Betrag. */
+  wert: number;
+  einheit: string;
+  /** Untere und obere Grenze der sechs Vergleichs-Sets. */
+  min: number;
+  max: number;
+  /** Liegt der Wert zwischen min und max? */
+  innerhalb: boolean | null;
+  /** Ab hier entsteht eine Übung (app/coach/uebungen.py:GROESSEN). */
+  schwelle: number;
+  /** Wie viele Übergänge dieses Sets den Wert tragen. */
+  uebergaenge: number;
+  /** Wie viele Referenz-Sets die Spanne bilden. */
+  referenzSets: number;
+}
+
 export interface Observation {
   text: string;
   atSec?: number;
@@ -169,6 +201,8 @@ export interface AnalysisResult {
   exercises?: ExerciseRecommendation[];
   /** Beobachtungen - getrennt von den Uebungen, siehe Observation. */
   observations?: Observation[];
+  /** Vergleich gegen die sechs Profi-Sets, siehe ReferenzVergleich. */
+  referenz?: ReferenzVergleich[];
   /** Provider name — "local", "remote", "mock". Used for diagnostics. */
   source?: "local" | "remote" | "mock" | "cache";
 }

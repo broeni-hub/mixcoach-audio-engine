@@ -3,6 +3,7 @@ from typing import Dict, List, Optional
 from uuid import uuid4
 
 from app.audio.coach_summary import LEER_VERBESSERUNG
+from app.coach.referenz import vergleich as referenz_vergleich
 from app.audio.dramaturgie import bogen
 from app.audio.pipeline.scoring_version import scoring_stamp
 from app.audio.beat_jitter import radar_punkte
@@ -117,6 +118,20 @@ def map_set_analysis_to_frontend_result(filename: str, analysis: Dict) -> Dict:
         "energyArc": bogen(verlauf, round(float(analysis.get("duration", 0))) or None),
 
         "frequency": None,
+
+        # Der Vergleich gegen die sechs fremden Profi-Sets - als SPANNE.
+        #
+        # Bis zum 24.09.2026 gab es ihn nur in tools/set_report.py, also in
+        # der Seite, die ein fremder DJ per Mail bekommt. Die App kannte ihn
+        # nicht. Damit war die verschickte Seite kein Bild des Produkts,
+        # sondern ein zweites Produkt - und genau das hat die erste
+        # DJ-Runde teuer gemacht.
+        #
+        # Die Zahlen stehen NICHT hier, sondern in app/coach/referenz.py,
+        # und sie sind dort aus dem Datenstamm nachrechenbar. Diese Zeile
+        # holt sie nur ab. Eine Kopie in TypeScript waere die sechste
+        # Fassung derselben Zahl gewesen.
+        "referenz": referenz_vergleich(uebergaenge),
 
         "scores": {
             # v2: echte Messwerte aus der Uebergangs-Bewertung.

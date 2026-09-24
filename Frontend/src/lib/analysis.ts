@@ -102,6 +102,14 @@ export interface AnalysisResult {
     text: string; atSec?: number; transitionIndex?: number;
     metric?: string; value?: number;
   }[];
+  /** Vergleich gegen die sechs fremden Profi-Sets (app/coach/referenz.py).
+   *  Fehlt bei Reports von vor dem 24.09.2026 - dort gab es den Vergleich
+   *  nur in der per Mail verschickten Seite, nicht in der App. */
+  referenz?: {
+    metrik: string; wert: number; einheit: string;
+    min: number; max: number; innerhalb: boolean | null;
+    schwelle: number; uebergaenge: number; referenzSets: number;
+  }[];
   // Optional 2-track transition data
   trackB?: { fileName: string; bpm: number; key: string };
   transition?: TransitionMetrics;

@@ -60,7 +60,7 @@ from __future__ import annotations
 import json
 import statistics
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 # Erkannt am Dateinamen der Aufnahme. Bewusst Teilstrings - die vollen Namen
 # tragen Schreibweisen, die sich je Quelle unterscheiden.
@@ -100,6 +100,58 @@ SPANNEN: Dict[str, Dict] = {
         "belegt": False,
     },
 }
+
+
+def vergleich(uebergaenge: Optional[Sequence[Dict]]) -> List[Dict]:
+    """Der Vergleich dieses Sets mit den sechs - je BELEGTER Groesse ein Eintrag.
+
+    Das ist die Form, in der die App und die verschickte Seite denselben
+    Massstab zeigen koennen: Median des Sets, Spanne der sechs, und die
+    Antwort auf die einzige Frage, die sich daraus belegen laesst - liegt der
+    Wert innerhalb oder ausserhalb.
+
+    WAS HIER BEWUSST FEHLT
+    ----------------------
+    Ein Rueckstand. "1,2 ms schlechter als die Profis" war genau der Satz,
+    den ein Test-DJ am 23.09.2026 beanstandet hat, und er hatte recht: der
+    Standardfehler des Set-Medians ist groesser als der angezeigte Abstand.
+    Ein Wert innerhalb der Spanne ist nicht schlechter, er ist dieselbe
+    Gegend. Ausserhalb ist eine Feststellung, kein Urteil - das Urteil
+    haengt an der Schwelle, und die steht daneben.
+
+    Die DICHTE fehlt ebenfalls. Sie hat keinen belegten Zusammenhang
+    (rho -0,094, p 0,67) und gehoert deshalb nicht neben zwei Groessen, die
+    einen haben. In der verschickten Seite steht sie als Kachel mit
+    ausdruecklichem Hinweis; in der App gibt es diese Kachel nicht, und sie
+    kommt auch nicht dazu.
+
+    Leere Liste, wenn nichts gemessen ist. Kein Platzhalter.
+    """
+    from app.coach.uebungen import GROESSEN, wert_von  # spaet: Zyklus vermeiden
+
+    raus: List[Dict] = []
+    for metrik, regel in SPANNEN.items():
+        if not regel.get("belegt") or metrik not in GROESSEN:
+            continue
+        werte = [w for w in (wert_von(t, metrik) for t in (uebergaenge or []))
+                 if w is not None]
+        if metrik == "loudness_jump_db":
+            werte = [abs(w) for w in werte]
+        if not werte:
+            continue
+        median = statistics.median(werte)
+        raus.append({
+            "metrik": metrik,
+            "wert": round(median, 2),
+            "einheit": regel["einheit"],
+            "min": regel["min"],
+            "max": regel["max"],
+            "innerhalb": innerhalb(metrik, median),
+            "schwelle": GROESSEN[metrik]["schwelle"],
+            "uebergaenge": len(werte),
+            "referenzSets": len(PROFI_SETS),
+        })
+    return raus
 
 
 def spanne(metrik: str) -> Optional[Tuple[float, float]]:

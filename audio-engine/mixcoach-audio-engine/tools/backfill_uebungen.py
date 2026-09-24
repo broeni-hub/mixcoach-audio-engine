@@ -40,6 +40,7 @@ from app.audio.coach_summary import LEER_POSITIV, LEER_VERBESSERUNG
 from app.audio.pipeline.scoring_version import naechste_revision, revision_von
 from app.audio.segment_keys import camelot_compatibility_score
 from app.api.analysis_mapper import _build_exercise
+from app.coach.referenz import vergleich as referenz_vergleich
 from app.audio.bass_overlap import saetze_fuer_overlap
 from app.audio.loudness import saetze_fuer_sprung
 from app.audio.transition_quality import _feedback, _feedback_en
@@ -268,6 +269,15 @@ def nachziehen(report: dict) -> tuple[dict, list]:
 
         if neu_fb != fb:
             neu["feedback"] = neu_fb
+
+    # Der Vergleich gegen die sechs Profi-Sets. Gespeicherte Reports kennen
+    # ihn bis zum 24.09.2026 nicht - ohne diese Zeile bekaemen ihn nur neue
+    # Analysen, und der Bestand bliebe beim alten Massstab.
+    neuer_vergleich = referenz_vergleich(uebergaenge)
+    if (report.get("referenz") or []) != neuer_vergleich:
+        aenderungen.append(
+            f"referenz: {len(report.get('referenz') or [])} -> {len(neuer_vergleich)}")
+        neu["referenz"] = neuer_vergleich
 
     uebungen, beobachtungen = baue(aid, uebergaenge)
 

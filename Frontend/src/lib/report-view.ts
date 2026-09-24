@@ -80,6 +80,20 @@ export function toReportView(a: LegacyAnalysisResult): ReportView {
       value: numOpt(e.value),
       target: numOpt(e.target),
     })),
+    // Durchgereicht, nicht nachgerechnet: die Spanne der sechs Profi-Sets
+    // steht in app/coach/referenz.py und ist dort aus dem Datenstamm
+    // nachrechenbar. Hier entstehen keine Zahlen.
+    referenz: (a.referenz ?? []).map((r) => ({
+      metrik: r.metrik,
+      wert: r.wert,
+      einheit: r.einheit,
+      min: r.min,
+      max: r.max,
+      innerhalb: r.innerhalb ?? null,
+      schwelle: r.schwelle,
+      uebergaenge: r.uebergaenge,
+      referenzSets: r.referenzSets,
+    })),
     // Getrennte Liste, nicht dieselbe: "das ist so" ist keine Aufgabe.
     observations: (a.observations ?? []).map((o) => ({
       text: o.text,

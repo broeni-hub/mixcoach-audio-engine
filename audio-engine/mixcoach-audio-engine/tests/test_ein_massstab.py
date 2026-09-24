@@ -216,3 +216,61 @@ def test_sauberkeit_vergleicht_einheitenfrei():
     halb_pegel = {"loudness_jump_db": 1.5, "beat_jitter_ms": 0.0}
     halb_jitter = {"loudness_jump_db": 0.0, "beat_jitter_ms": 7.5}
     assert sauberkeit(halb_pegel) == pytest.approx(sauberkeit(halb_jitter))
+
+
+# --- Der Vergleich, wie ihn der Report traegt ----------------------------
+
+def test_vergleich_nennt_spanne_und_lage():
+    ts = [{"loudness_jump_db": -1.4, "beat_jitter_ms": 11.2},
+          {"loudness_jump_db": 2.0, "beat_jitter_ms": 9.0},
+          {"loudness_jump_db": 1.5, "beat_jitter_ms": 13.0}]
+    v = {e["metrik"]: e for e in referenz.vergleich(ts)}
+
+    assert set(v) == {"loudness_jump_db", "beat_jitter_ms"}
+    jit = v["beat_jitter_ms"]
+    assert jit["wert"] == 11.2
+    assert (jit["min"], jit["max"]) == (5.8, 11.9)
+    assert jit["innerhalb"] is True
+    assert jit["schwelle"] == GROESSEN["beat_jitter_ms"]["schwelle"]
+
+
+def test_vergleich_rechnet_den_pegel_im_betrag():
+    """-4 dB ist ein Sprung von 4 dB, nicht von -4."""
+    ts = [{"loudness_jump_db": -4.0}, {"loudness_jump_db": -4.0}]
+    v = referenz.vergleich(ts)[0]
+    assert v["wert"] == 4.0
+    assert v["innerhalb"] is False
+
+
+def test_vergleich_enthaelt_die_dichte_nicht():
+    """Sie hat keinen belegten Zusammenhang (rho -0,094, p 0,67) und gehoert
+    deshalb nicht neben zwei Groessen, die einen haben."""
+    ts = [{"loudness_jump_db": 1.0, "beat_jitter_ms": 9.0}]
+    assert referenz.DICHTE not in {e["metrik"] for e in referenz.vergleich(ts)}
+
+
+def test_ohne_messwerte_kein_vergleich():
+    """Kein Platzhalter, keine Null - die Zeile faellt weg."""
+    assert referenz.vergleich([]) == []
+    assert referenz.vergleich([{"quality_score": 80}]) == []
+    assert referenz.vergleich(None) == []
+
+
+def test_nur_die_gemessene_groesse_erscheint():
+    ts = [{"beat_jitter_ms": 9.0}]
+    assert [e["metrik"] for e in referenz.vergleich(ts)] == ["beat_jitter_ms"]
+
+
+def test_der_report_traegt_den_vergleich():
+    """Gegenprobe am Mapper: das Feld kommt wirklich im Report an."""
+    from app.api.analysis_mapper import map_set_analysis_to_frontend_result
+
+    r = map_set_analysis_to_frontend_result("probe.wav", {
+        "duration": 600.0,
+        "transitions_detailed": [
+            {"index": 1, "mid_sec": 100.0, "start_sec": 90.0, "end_sec": 110.0,
+             "loudness_jump_db": 1.2, "beat_jitter_ms": 9.0, "scores": {}},
+        ],
+    })
+    metriken = {e["metrik"] for e in (r.get("referenz") or [])}
+    assert "beat_jitter_ms" in metriken

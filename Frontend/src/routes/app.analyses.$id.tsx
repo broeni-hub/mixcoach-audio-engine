@@ -16,6 +16,7 @@ import { Waveform } from "@/components/Waveform";
 import { CoachFeedbackCard } from "@/components/CoachFeedbackCard";
 import { SetTransitionsExplorer } from "@/components/SetTransitionsExplorer";
 import { AnalysisFeedbackForm } from "@/components/AnalysisFeedbackForm";
+import { ReferenzVergleichCard } from "@/components/ReferenzVergleichCard";
 import { EmptyBlock, Placeholder, ValueOr } from "@/components/report/Placeholder";
 import { toReportView, formatTime, formatDuration } from "@/lib/report-view";
 import { getEngineBaseUrl } from "@/lib/api/remoteProvider";
@@ -583,6 +584,13 @@ function AnalysisDetail() {
             Energieloch ist kein Zusammenhang mit dem menschlichen Urteil
             belegt (Spearman +0,05 / +0,07). Als Aufgabe formuliert waeren
             sie eine Behauptung. */}
+        {/* Der Vergleich gegen die sechs Profi-Sets. Steht VOR den
+            Beobachtungen: erst was belegt ist, dann was nur aufgefallen
+            ist. Bis zum 24.09.2026 gab es ihn nur in der per Mail
+            verschickten Seite - die App kannte ihren eigenen Massstab
+            nicht. Zahlen: app/coach/referenz.py, nachrechenbar. */}
+        <ReferenzVergleichCard eintraege={view.referenz ?? []} lang={lang} />
+
         {observations.length > 0 && (
           <Card className="glass">
             <CardHeader>
