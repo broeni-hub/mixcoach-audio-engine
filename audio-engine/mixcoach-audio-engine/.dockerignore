@@ -1,0 +1,40 @@
+# Ohne diese Datei waere der Build-Kontext 8,6 GB. Mit ihr rund 15 MB.
+#
+# Gemessen am 24.09.2026:
+#   datasets/          7,5 GB  synthetische Trainingsdaten - laut CLAUDE.md
+#                              gemessen verworfen ("Keine Synthetik im
+#                              Training"), im Betrieb ohne Bedeutung
+#   _archiv_2026-08-13 628 MB  der alte Ground-Truth-Stamm
+#   .cache             211 MB
+#   sample_audio       199 MB
+#   app + tools        10 MB   das, was tatsaechlich ins Image gehoert
+
+datasets/
+sample_audio/
+_archiv_*/
+.cache/
+dd/
+
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Die Daten gehoeren auf ein Volume, nicht ins Image: allein
+# daten/analysis_results ist 15 GB, daten/library 1,7 GB.
+daten/
+*.wav
+*.WAV
+*.mp3
+*.npy
+*.npz
+
+# Tests und Auswertung laufen nicht im Betriebs-Image.
+tests/
+*.csv
+analyses.json
+
+.git/
+.venv/

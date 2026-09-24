@@ -1,0 +1,10 @@
+# Zusaetzlich zu requirements-server.txt - fuer Tests und Auswertung.
+#
+# scikit-learn steht hier und nicht beim Server: die Inferenz kommt ohne aus
+# (Modell als JSON, Traversierung in numpy). Gebraucht wird sie von
+# app/calibration/retrain_model.py und den Werkzeugen in tools/eval/.
+
+-r requirements-server.txt
+
+pytest==8.3.4
+scikit-learn==1.7.2

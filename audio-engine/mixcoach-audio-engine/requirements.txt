@@ -1,3 +1,18 @@
+# ACHTUNG - DIESE DATEI IST KEINE ABHAENGIGKEITSLISTE.
+#
+# Sie ist ein pip freeze eines ganzen Rechners (30.07.2026, fuer den
+# Umzug). Darin stehen 140 Pakete, von denen die Engine 10 benutzt -
+# der Rest ist fremd: ccxt, yfinance, Scrapy, python-telegram-bot,
+# duckdb, tika, pdfminer. Die Versionen stimmen ausserdem nicht mit der
+# laufenden Umgebung ueberein.
+#
+# Wer installieren will, nimmt requirements-server.txt (Betrieb) oder
+# requirements-dev.txt (Tests). Beide sind am 24.09.2026 aus dem
+# Quelltext ermittelt und in einer frischen Umgebung belegt worden.
+#
+# Diese Datei bleibt nur stehen, weil LIESMICH-GitHub.md und
+# PROJEKTSTAND-CLAUDE.md auf sie verweisen.
+
 aiodns==4.0.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.13.5

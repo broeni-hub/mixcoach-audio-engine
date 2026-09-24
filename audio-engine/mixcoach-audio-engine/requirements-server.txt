@@ -1,0 +1,44 @@
+# Was die Engine im Betrieb WIRKLICH braucht.
+#
+# Ermittelt am 24.09.2026 aus dem Quelltext (jeder import in app/ und tools/),
+# nicht aus einem pip freeze. Belegt: eine frische Umgebung nur aus dieser
+# Liste startet die Engine, liefert /health, /analysis und einen vollstaendigen
+# Report - und traegt alle 488 Tests (mit requirements-dev.txt dazu).
+#
+# NICHT MIT requirements.txt VERWECHSELN. Die Datei ist ein pip freeze eines
+# ganzen Rechners: 140 Pakete, darunter ccxt (Krypto-Boersen), yfinance
+# (Aktienkurse), Scrapy, python-telegram-bot, duckdb und tika. Nichts davon
+# gehoert zu MixCoach, und ihre Versionen stimmen nicht einmal mit der
+# laufenden Umgebung ueberein (numpy 2.2.6 dort gegen 2.4.6 installiert).
+#
+# NICHT ENTHALTEN, mit Absicht:
+#   torch, demucs   - Stem-Trennung. Beide werden LAZY und in try/except
+#                     importiert (app/audio/scoring/stems.py), die Engine
+#                     laeuft ohne sie. Kosten: rund 530 MB im Image.
+#                     Nutzen laut eigener Messung: der Composite gewichtet
+#                     die Stem-Groessen mit 0,000 (CLAUDE.md, "was gemessen
+#                     erledigt ist"). Ohne sie bleiben harmonic_clash_score
+#                     und vocal_overlap_score bei NEUEN Analysen None.
+#                     Wer sie doch will: --build-arg MIT_STEMS=1.
+#   scikit-learn    - nur fuers Nachtrainieren (app/calibration/) und
+#                     tools/eval/. Die INFERENZ braucht sie nicht: das Modell
+#                     liegt als JSON im Repo, die Baum-Traversierung ist
+#                     pures numpy (app/audio/ml_classifier.py).
+#   pydantic-settings - app/core/config.py ist toter Code. Niemand importiert
+#                     es, und das Paket fehlt sogar im laufenden venv. CORS
+#                     macht laengst app/auth.py:cors_urspruenge().
+#   ffmpeg          - nicht noetig. soundfile bringt libsndfile 1.2.2 mit,
+#                     und die kann MP3 (nachgeprueft). Die DJs laden .mp3
+#                     und .wav hoch, beides deckt sie ab.
+
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.4
+PyJWT[crypto]==2.10.1
+httpx==0.28.1
+
+numpy==2.2.6
+scipy==1.15.3
+librosa==0.11.0
+soundfile==0.14.0
