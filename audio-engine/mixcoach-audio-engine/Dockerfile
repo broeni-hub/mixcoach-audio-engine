@@ -16,11 +16,16 @@
 # --------------
 # Der Quelltext ist winzig (app 8,7 MB, tools 1,7 MB). Die 8,6 GB im Ordner
 # sind synthetische Datensaetze, Archive und Beispiel-Audio - alles in
-# .dockerignore. Und die schweren Abhaengigkeiten fallen weg:
-#   torch + demucs   rund 530 MB, lazy importiert, Composite-Gewicht 0,000
+# .dockerignore. Zwei schwere Abhaengigkeiten fallen weg:
 #   scikit-learn     nur fuers Nachtrainieren, Inferenz laeuft in numpy
 #   ffmpeg           nicht noetig, soundfile bringt libsndfile 1.2.2 mit,
 #                    die MP3 kann (nachgeprueft)
+# torch und demucs bleiben drin - siehe MIT_STEMS weiter unten.
+#
+# ARCHITEKTUR: dieser Mac ist arm64 (Apple M5), die meisten Hoster laufen
+# amd64. Ein hier gebautes Image passt nicht ohne Weiteres dorthin. Entweder
+# beim Hoster bauen lassen (fly deploy, Render, Cloud Run bauen selbst) oder
+# lokal mit  --platform linux/amd64  - dann emuliert, also langsam.
 #
 # DIE DATEN GEHOEREN NICHT INS IMAGE.
 # daten/analysis_results ist 15 GB, daten/library 1,7 GB. Beides kommt als
@@ -48,14 +53,38 @@ WORKDIR /engine
 COPY requirements-server.txt ./
 RUN pip install --no-cache-dir -r requirements-server.txt
 
-# Stem-Trennung ist AUS, weil sie laut eigener Messung nichts beitraegt
-# (Composite-Gewicht 0,000). Wer sie will:  docker build --build-arg MIT_STEMS=1
-# Kosten: rund 530 MB. Nutzen: harmonic_clash_score und vocal_overlap_score
-# tragen bei neuen Analysen wieder Werte - beide ohne belegten Zusammenhang
-# mit dem menschlichen Urteil.
-ARG MIT_STEMS=0
+# STEM-TRENNUNG IST AN (Entscheidung Sebastian, 24.09.2026).
+#
+# Der Vorbehalt bleibt im Protokoll: der Composite gewichtet die
+# stem-basierten Groessen mit 0,000, und weder harmonic_clash_score noch
+# vocal_overlap_score haben einen belegten Zusammenhang mit dem menschlichen
+# Urteil. Wer das Image klein will:  --build-arg MIT_STEMS=0
+ARG MIT_STEMS=1
+
+# torch aus dem CPU-Index. Das Standard-Rad zieht auf linux/amd64 die
+# CUDA-Bibliotheken mit - rund 2,5 GB fuer eine GPU, die kein Container hier
+# hat. Die CPU-Fassung ist ein Bruchteil davon.
 RUN if [ "$MIT_STEMS" = "1" ]; then \
-      pip install --no-cache-dir torch==2.13.0 demucs==4.1.0 ; \
+      pip install --no-cache-dir \
+        --index-url https://download.pytorch.org/whl/cpu \
+        --extra-index-url https://pypi.org/simple \
+        torch==2.13.0 demucs==4.1.0 ; \
+    fi
+
+# Die Modell-Gewichte JETZT holen, nicht beim ersten Nutzer.
+#
+# app/audio/scoring/stems.py sagt es selbst: "Der ALLERERSTE Aufruf laedt
+# zusaetzlich die Modell-Gewichte aus dem Internet (einmalig, mehrere hundert
+# MB)". In einem Container heisst "einmalig pro Prozess" = bei JEDEM
+# Neustart, solange nichts zwischengespeichert ist. Ein DJ wuerde beim ersten
+# Set minutenlang warten, und ohne Netz schlaegt die Trennung still fehl.
+#
+# Deshalb liegen die Gewichte im Image. TORCH_HOME zeigt auf einen Pfad
+# innerhalb von /engine, damit sie dem Nutzer unten gehoeren und nicht auf
+# dem Datenvolume landen.
+ENV TORCH_HOME=/engine/.torch
+RUN if [ "$MIT_STEMS" = "1" ]; then \
+      python -c "from demucs.api import Separator; Separator(model='htdemucs', progress=False)" ; \
     fi
 
 COPY app  ./app

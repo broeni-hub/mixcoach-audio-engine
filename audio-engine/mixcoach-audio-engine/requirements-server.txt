@@ -14,12 +14,11 @@
 # NICHT ENTHALTEN, mit Absicht:
 #   torch, demucs   - Stem-Trennung. Beide werden LAZY und in try/except
 #                     importiert (app/audio/scoring/stems.py), die Engine
-#                     laeuft ohne sie. Kosten: rund 530 MB im Image.
-#                     Nutzen laut eigener Messung: der Composite gewichtet
-#                     die Stem-Groessen mit 0,000 (CLAUDE.md, "was gemessen
-#                     erledigt ist"). Ohne sie bleiben harmonic_clash_score
-#                     und vocal_overlap_score bei NEUEN Analysen None.
-#                     Wer sie doch will: --build-arg MIT_STEMS=1.
+#                     laeuft also auch ohne sie - deshalb stehen sie nicht
+#                     hier, sondern im Dockerfile (MIT_STEMS, seit dem
+#                     24.09.2026 standardmaessig AN, Entscheidung Sebastian).
+#                     Wer lokal mit Stems arbeitet, installiert sie dazu:
+#                       pip install torch==2.13.0 demucs==4.1.0
 #   scikit-learn    - nur fuers Nachtrainieren (app/calibration/) und
 #                     tools/eval/. Die INFERENZ braucht sie nicht: das Modell
 #                     liegt als JSON im Repo, die Baum-Traversierung ist
