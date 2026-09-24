@@ -36,13 +36,33 @@ eine gewöhnliche Vite/TanStack-Anwendung; jeder Static-Host trägt sie.
 **A ist nicht falsch**, wenn du bei Lovable weiterentwickeln willst. Dann
 aber getrennt entscheiden, und dieser Plan gilt nur für den Datenbank-Teil.
 
+### Nachgemessen am 24.09.2026: B ist beim Frontend fast umsonst
+
+Die Sorge war, dass die Build-Kette an Lovable hängt — `vite.config.ts`
+besteht aus genau einer Zeile: `@lovable.dev/vite-tanstack-config`. Das ist
+aber ein **veröffentlichtes npm-Paket, kein Dienst**.
+
+`npm run build` läuft hier durch, Exit 0, ohne jede Verbindung zu Lovable.
+Und was dabei herauskommt, ist bereits ein fertiges Deployment:
+
+```
+.output/public    2,0 MB     statische Dateien
+.output/server    4,9 MB     Nitro-Worker
+.output/server/wrangler.json           ← Cloudflare-Worker, Name gesetzt
+[nitro] You can deploy this build using npx nitro deploy --prebuilt
+```
+
+Das Frontend selbst zu hosten heißt also: **denselben Befehl laufen lassen
+und das Ergebnis hochladen.** Kein Umbau der Build-Kette. Die beiden
+Lovable-Pakete bleiben gewöhnliche Abhängigkeiten.
+
 ---
 
 ## 1 · Was umzieht — und was nicht
 
 | | in der Cloud | kommt mit |
 |---|---|---|
-| Schema: 16 Tabellen, 22 Policies, 12 Trigger, 11 Indizes | ✓ | **14 Migrationen im Repo** |
+| Schema: 16 Tabellen, 22 Policies, 12 Trigger, 11 Indizes, 3 Funktionen | ✓ | **14 Migrationen im Repo** |
 | Saatdaten (`coaching_rules`, `exercises`) | ✓ | in 3 der Migrationen als `INSERT` |
 | 60 Analysen | ✓ | **aus der Engine** — der Import ist erprobt |
 | 45 Korrekturen (Ground Truth) | — | lagen **nie** in der Cloud |
@@ -83,8 +103,23 @@ cat Frontend/supabase/migrations/*.sql | pbcopy
 Dann im Dashboard: **SQL Editor** → einfügen → **Run**.
 
 Läuft es durch, stehen 16 Tabellen mit Policies, Triggern und Saatdaten.
-Bricht es ab, sag mir die Fehlermeldung — die Migrationen sind für ein leeres
-Projekt geschrieben, aber das ist nicht erprobt (*geschätzt*).
+
+**Was am 24.09.2026 geprüft ist — und was nicht.** Auf diesem Mac gibt es
+kein Postgres, der echte Lauf ist also erst Schritt 2 selbst. Geprüft habe
+ich stattdessen den Inhalt:
+
+- **Reihenfolge: sauber.** Keine Datei benutzt eine Tabelle oder einen Typ,
+  der erst später entsteht (16 Tabellen, 3 Typen, 0 Fundstellen).
+- **Selbsttragend.** Alle drei Trigger-Funktionen (`handle_new_user`,
+  `update_updated_at_column`, `log_user_rule_override_change`) werden in den
+  Migrationen selbst angelegt.
+- **Keine Sonderwünsche.** Kein `CREATE EXTENSION`, kein `CREATE SCHEMA`,
+  kein `OWNER TO`, kein Zugriff auf `storage.`. Benutzt werden nur Dinge,
+  die jedes Supabase-Projekt mitbringt: `auth.users`, `auth.uid()`,
+  `gen_random_uuid()`, die Rollen `authenticated` und `service_role`.
+
+Das Risiko ist damit klein, aber nicht null — eine statische Prüfung ist
+kein Lauf. Bricht es ab, schick mir die Fehlermeldung.
 
 ### Schritt 3 — Export als Sicherheitsnetz · du · ~5 min
 
@@ -183,7 +218,8 @@ Und wenn, dann bewusst: es nimmt über `ON DELETE CASCADE` alles mit.
 |---|---|
 | Schritte 1–6 (Datenbank, Anmeldung, Daten zurück) | **~1 Stunde**, davon ~45 min bei dir |
 | Schritt 7 (Google) | *geschätzt ein halber Tag* |
-| Frontend-Hosting, falls Form B | zusammen mit dem Engine-Hosting, Wochen 3–4 |
+| Frontend-Hosting (Form B) | **`npm run build` + hochladen** — nachgemessen, kein Umbau |
+| Engine-Hosting | der eigentliche Brocken, Wochen 3–4 |
 
 ---
 
