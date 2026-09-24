@@ -69,14 +69,45 @@ Lovable-Pakete bleiben gewöhnliche Abhängigkeiten.
 | 6113 Fingerprints, Library | — | lagen **nie** in der Cloud |
 | `profiles`: XP, Level, Streak, Genres | ✓ | **nein** — neu, oder aus dem Export nachtragen |
 | `coach_feedback`, `feedback_ratings`, `beta_feedback` | ✓ | nur über den Export |
-| **Auth-Konten** | ✓ | **nein.** Supabase exportiert keine Passwort-Hashes |
+| **Auth-Konten** | ✓ | **doch** — siehe Korrektur unten |
 
 **Nicht genutzt und deshalb egal:** `coaching_rules` und `user_rule_overrides`
 kommen im Anwendungscode gar nicht vor — nur in der generierten `types.ts`.
 Sie ziehen als leeres Schema mit.
 
 **Betroffene Konten heute: eins.** Fabi und der zweite DJ haben Seiten per
-Mail bekommen und die App nie benutzt. Billiger wird es nie.
+Mail bekommen und die App nie benutzt.
+
+### Korrektur vom 24.09.2026: Konten sind migrierbar
+
+In diesem Plan stand zuerst, Auth-Konten könnten nicht mitkommen, weil
+Supabase keine Passwort-Hashes exportiert. **Das gilt für den Nutzer-Export
+im Dashboard (CSV) — nicht für den vollständigen Export.**
+
+Nachgesehen im tatsächlichen Lovable-Export
+(`mixcoach-ai-mentor_260924.backup`, PostgreSQL custom dump, 859 KB):
+
+```
+Schema-Einträge    auth 289 · public 178 · storage 89
+TABLE DATA         55 Einträge, darunter COPY auth.users
+encrypted_password kommt vor
+```
+
+Der Dump enthält also das komplette `auth`-Schema samt Nutzerzeilen **mit
+Passwort-Hashes**. Ein Konto hätte mitkommen können.
+
+**Für heute ist das folgenlos** — es ging um ein Konto, und es ist längst neu
+angelegt. **Für später ist es wichtig:** Wenn irgendwann echte Nutzer in der
+Datenbank sitzen, ist ein Umzug keine Zumutung mehr. Der Plan war an dieser
+Stelle zu pessimistisch.
+
+**Zwei Vorbehalte, die bleiben.** Das `auth`-Schema gehört Supabase; eine
+Rückspielung dorthin ist heikler als eine gewöhnliche Tabelle und nicht
+erprobt. Und um den Dump überhaupt zu lesen, braucht es `pg_restore` — auf
+diesem Mac ist weder das noch Homebrew vorhanden.
+
+**Die Datei gehört NICHT ins Repo.** Sie enthält Passwort-Hashes des alten
+Projekts. Außerhalb aufbewahren, nicht committen.
 
 ---
 
@@ -134,6 +165,19 @@ nächsten Schritt machen**, nicht danach.
 Zwei Werte in `Frontend/.env`: `VITE_SUPABASE_URL` und
 `VITE_SUPABASE_PUBLISHABLE_KEY`. Mehr ist es lokal nicht.
 
+**Und danach den Dev-Server NEU STARTEN.** Vite liest `.env` beim Start.
+Am 24.09.2026 habe ich das vergessen: die App lief weiter gegen das alte
+Projekt, Sebastian registrierte sich dort, und der Fehler sah aus wie ein
+kaputter Token (`PGRST301 - No suitable key was found to decode the JWT`).
+Zehn Minuten Umweg für einen Neustart.
+
+Gegenprobe, die ich stattdessen hätte machen sollen — sie zeigt, worauf die
+laufende App wirklich zeigt:
+
+```js
+await fetch("/src/integrations/supabase/client.ts").then(r => r.text())
+```
+
 ### Schritt 5 — Anmeldung einrichten · du · ~20 min
 
 **Achtung, hier lauert ein bekannter Fallstrick:** Das jetzige Projekt hat
@@ -187,7 +231,8 @@ Das Fehler-Reporting (`lovable-error-reporting.ts`) ist folgenlos.
 
 ## 3 · Was dabei kaputtgeht — vollständig
 
-- **Das Konto.** Einmal neu registrieren.
+- **Das Konto.** Einmal neu registrieren — *der bequeme Weg. Mitnehmen wäre
+  über den vollständigen Dump möglich gewesen, siehe Korrektur oben.*
 - **XP, Level, Streak, Genres** aus `profiles`. Kosmetik, aus dem Export
   nachtragbar.
 - **Deine Beta-Bewertungen** („War dieses Feedback nützlich?"). Nur im Export.
